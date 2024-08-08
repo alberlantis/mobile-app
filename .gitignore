@@ -1,6 +1,5 @@
 # Expo
 .expo
-.expo/devices.json
 
 # VS Config
 .vscode
@@ -13,36 +12,3 @@ dist
 
 # Node
 node_modules/
-
-# IOS
-## Don't Add Bundle output to repo
-ios/main.jsbundle
-ios/main.jsbundle.meta
-ios/DerivedData
-ios/satlantis.xcworkspace/xcuserdata
-ios/satlantis.xcodeproj/xcuserdata
-ios/satlantis.xcodeproj/project.xcworkspace/xcuserdata
-ios/.xcode.env.local
-
-## Ruby / CocoaPods
-/ios/Pods/
-/ios/Podfile.lock
-
-# Android
-## Android/IntelliJ
-android/.project
-android/.settings
-android/app/bin/
-android/app/.classpath
-android/app/.project
-android/app/.settings/
-build/
-.idea
-.idea/misc.xml
-.idea/workspace.xml
-.gradle
-local.properties
-*.iml
-*.hprof
-*.aab
-*.apk

@@ -1,7 +1,11 @@
 {
+  "cli": {
+    "appVersionSource": "remote"
+  },
   "build": {
     "release": {},
     "development": {
+      "autoIncrement": true,
       "distribution": "internal",
       "android": {
         "gradleCommand": ":app:assembleDebug"

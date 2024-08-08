@@ -4,10 +4,14 @@
   "main": "index.ts",
   "license": "UNLICENSED",
   "repository": "git@github.com:satlantis-dev/mobile-app.git",
+  "engines": {
+    "node": "20.9.0"
+  },
   "scripts": {
     "android": "expo run:android",
     "ios": "expo run:ios",
     "start": "expo start --reset-cache",
+    "expo:go": "eas update --auto",
     "build:ios:dev": "eas build --platform ios --profile development",
     "build:android:dev": "eas build --platform android --profile development",
     "check:type": "tsc",
