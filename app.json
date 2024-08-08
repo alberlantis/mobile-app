@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Satlantis",
+    "slug": "satlantis",
+    "owner": "satlantis",
+    "runtimeVersion": "0.0.1",
+    "jsEngine": "hermes",
+    "updates": {
+      "url": "https://u.expo.dev/8dccd390-753b-40d9-b945-5d7722569c17"
+    },
+    "android": {},
+    "ios": {
+      "jsEngine": "jsc"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8dccd390-753b-40d9-b945-5d7722569c17"
+      }
+    }
+  }
+}

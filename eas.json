@@ -1,0 +1,18 @@
+{
+  "build": {
+    "release": {},
+    "development": {
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "simulator": true
+      }
+    }
+  },
+  "submit": {
+    "release": {}
+  }
+}
