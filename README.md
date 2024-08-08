@@ -2,6 +2,17 @@
 
 ## Setup
 
+### Modules
+- install node_modules (check engine version in package json):
+  ```console
+    yarn
+  ```
+
+- run clean install project:
+  ```console
+    yarn clean:install
+  ```
+
 ### Expo
 - install eas global:
   ```console
@@ -11,6 +22,17 @@
 - sign in to expo (ask username and password):
   ```console
     eas login
+  ```
+
+### Run App
+- Run Android:
+  ```console
+    yarn android
+  ```
+
+- Run IOS:
+  ```console
+    yarn ios
   ```
 
 ### Issues

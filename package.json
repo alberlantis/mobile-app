@@ -19,7 +19,12 @@
     "check:fix": "yarn check:lint --fix",
     "check:project": "expo-doctor",
     "test": "jest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "clean:modules": "rm -rf node_modules && yarn --clear-cache",
+    "clean:watchman": "watchman watch-del-all",
+    "clean:android": "cd android && ./gradlew clean && cd ..",
+    "clean:ios": "cd ios && xcodebuild clean && rm -rf build Podfile.lock Pods && pod install --repo-update && cd ..",
+    "clean:install": "yarn clean:modules && yarn clean:android && yarn clean:ios && yarn clean:watchman"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
