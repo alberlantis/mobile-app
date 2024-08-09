@@ -11,6 +11,11 @@ jest.mock("./navigation", () => {
   };
 });
 
+jest.mock("./store", () => ({
+  getState: jest.fn(),
+  subscribe: jest.fn(),
+}));
+
 describe("App", () => {
   beforeEach(() => {
     render(<App />);

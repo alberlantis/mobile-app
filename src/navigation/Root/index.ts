@@ -1,5 +1,5 @@
-export {
-  default,
+export { default } from "./Root";
+export type {
   RootScreenProps,
   RootNavigationProps,
   RootRouteProps,

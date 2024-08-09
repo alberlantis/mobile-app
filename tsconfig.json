@@ -4,7 +4,8 @@
     "baseUrl": "./src",
     "paths": {            
       "@navigation": [ "./navigation/*" ],
-      "@screens": [ "./screens/*" ]
+      "@screens": [ "./screens/*" ],
+      "@store": ["./store/*"]
     }
   },
   "extends": "expo/tsconfig.base"
