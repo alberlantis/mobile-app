@@ -1,12 +1,9 @@
 import React from "react";
-import { Text, SafeAreaView } from "react-native";
+
+import Root from "./navigation";
 
 const App: React.FC = () => {
-  return (
-    <SafeAreaView>
-      <Text>Hola Mundo</Text>
-    </SafeAreaView>
-  );
+  return <Root />;
 };
 
 export default App;

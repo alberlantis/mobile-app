@@ -1,6 +1,15 @@
+import React from "react";
 import { render, screen } from "@testing-library/react-native";
 
 import App from "./App";
+
+jest.mock("./navigation", () => {
+  const { Text } =
+    jest.requireActual<typeof import("react-native")>("react-native");
+  return function Root() {
+    return <Text>Root</Text>;
+  };
+});
 
 describe("App", () => {
   beforeEach(() => {
@@ -11,7 +20,7 @@ describe("App", () => {
     expect(screen.toJSON()).toMatchSnapshot();
   });
 
-  it('should render "Hola Mundo" on the screen', () => {
-    expect(screen.getByText("Hola Mundo")).toBeOnTheScreen();
+  it("should render Root navigator", () => {
+    expect(screen.getByText("Root")).toBeOnTheScreen();
   });
 });
