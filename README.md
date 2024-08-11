@@ -2,6 +2,10 @@
 
 ## Setup
 
+### Configure local env:
+  follow this guide depending on your OS and the device you want to run:
+  https://reactnative.dev/docs/set-up-your-environment?platform=android
+
 ### Modules
 - install node_modules (check engine version in package json):
   ```console
@@ -25,14 +29,23 @@
   ```
 
 ### Run App
-- Run Android:
-  ```console
-    yarn android
-  ```
 
-- Run IOS:
+  #### Local:
+  - Run Android:
+    ```console
+      yarn android
+    ```
+
+  - Run IOS:
+    ```console
+      yarn ios
+    ```
+  
+  #### Expo-go
+  - 1 Install Expo-go app in a mobile devile
+  - 2 Run command:
   ```console
-    yarn ios
+    expo:start
   ```
 
 ### Issues
