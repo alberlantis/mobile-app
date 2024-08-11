@@ -24,7 +24,7 @@
     "clean:modules": "rm -rf node_modules && yarn --clear-cache",
     "clean:watchman": "watchman watch-del-all",
     "clean:android": "cd android && ./gradlew clean && cd ..",
-    "clean:ios": "cd ios && xcodebuild clean && rm -rf build Podfile.lock Pods && pod install --repo-update && cd ..",
+    "clean:ios": "cd ios && rm -rf build && xcodebuild clean && rm -rf Podfile.lock Pods && pod install --repo-update && cd ..",
     "clean:install": "yarn clean:modules && yarn clean:android && yarn clean:ios && yarn clean:watchman"
   },
   "devDependencies": {
