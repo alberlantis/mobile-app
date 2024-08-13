@@ -23,6 +23,11 @@
     npm install -g eas-cli
   ```
 
+- install ngrok global:
+  ```console
+    npm install -g @expo/ngrok
+  ```
+
 - sign in to expo (ask username and password):
   ```console
     eas login

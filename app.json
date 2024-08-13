@@ -1,33 +1,3 @@
 {
-  "expo": {
-    "name": "satlantis",
-    "slug": "satlantis",
-    "owner": "satlantis",
-    "runtimeVersion": "0.0.1",
-    "version": "0.0.1",
-    "sdkVersion": "51.0.0",
-    "splash": {
-      "backgroundColor": "#ffffff"
-    },
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "android": {
-      "package": "com.satlantis.satlantis",
-      "versionCode": 1
-    },
-    "ios": {
-      "bundleIdentifier": "com.satlantis.satlantis",
-      "buildNumber": "1"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "8dccd390-753b-40d9-b945-5d7722569c17"
-      }
-    },
-    "updates": {
-      "url": "https://u.expo.dev/8dccd390-753b-40d9-b945-5d7722569c17"
-    }
-  }
+  "name": "satlantis"
 }

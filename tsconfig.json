@@ -5,7 +5,8 @@
     "paths": {            
       "@navigation": [ "./navigation/*" ],
       "@screens": [ "./screens/*" ],
-      "@store": ["./store/*"]
+      "@store": ["./store/*"],
+      "@shared": ["./shared/*"]
     }
   },
   "extends": "expo/tsconfig.base"

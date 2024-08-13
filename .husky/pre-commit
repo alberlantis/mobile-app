@@ -1,4 +1,6 @@
-yarn check:project
-yarn check:type
+yarn check:fix
 yarn check:lint
+git add .
+yarn check:type
+yarn check:project
 yarn test

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VersionLabel when is bare should match snapshot 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "transparent",
+      "bottom": 0,
+      "left": 0,
+      "paddingVertical": 5,
+      "position": "absolute",
+      "right": 0,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "textAlign": "center",
+      }
+    }
+  >
+    1.5.24 (23)
+  </Text>
+</View>
+`;
+
+exports[`VersionLabel when is expo go should match snapshot 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "transparent",
+      "bottom": 0,
+      "left": 0,
+      "paddingVertical": 5,
+      "position": "absolute",
+      "right": 0,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "textAlign": "center",
+      }
+    }
+  >
+    EXPO_PUBLIC_APP_VERSION (EXPO_PUBLIC_BUILD_VERSION)
+  </Text>
+</View>
+`;
