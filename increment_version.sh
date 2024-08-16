@@ -1,10 +1,26 @@
-#!/bin/zsh
+#!/bin/sh
 
 # Give permissions
 chmod +x increment_version.zsh
 
-# File
-ENV_FILE=".env"
+if [[ -z "$2" ]]; then
+  echo "Usage: $0 {major|minor|patch} {dev|prod}"
+  exit 1
+fi
+
+# Selecciona el archivo .env según el entorno
+case $2 in
+  dev)
+    ENV_FILE=".env.dev"
+    ;;
+  prod)
+    ENV_FILE=".env.prod"
+    ;;
+  *)
+    echo "Invalid environment. Use 'dev' or 'prod'."
+    exit 1
+    ;;
+esac
 
 # Verifica que el archivo .env existe
 if [[ ! -f ${ENV_FILE} ]]; then
@@ -45,11 +61,8 @@ case $1 in
     minor=$((minor + 1))
     patch=0
     ;;
-  patch)
+  patch|""|*)
     patch=$((patch + 1))
-    ;;
-  *)
-    usage
     ;;
 esac
 
@@ -60,8 +73,13 @@ new_app_version="$major.$minor.$patch"
 new_build_version=$((current_build_version + 1))
 
 # Reemplaza la versión build y la app version en el archivo .env
-sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" ${ENV_FILE}
-sed -i '' "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" ${ENV_FILE}
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" ${ENV_FILE}
+  sed -i '' "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" ${ENV_FILE}
+else
+  sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" ${ENV_FILE}
+  sed -i "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" ${ENV_FILE}
+fi
 
 # Opción de eliminar el archivo de respaldo
 rm "${ENV_FILE}.bak"

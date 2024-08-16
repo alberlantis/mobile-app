@@ -12,3 +12,5 @@ dist
 
 # Node
 node_modules/
+
+eas.json

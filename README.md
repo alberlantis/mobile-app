@@ -36,22 +36,37 @@
 ### Run App
 
   #### Local:
-  - Run Android:
+  - Run Android DEV with METRO:
     ```console
-      yarn android
+      yarn android:dev:debug:
     ```
-
-  - Run IOS:
+  - Build and Install Android DEV:
+    ```console
+      yarn android:dev:release:
+    ```
+  - Run Android PROD with METRO:
+    ```console
+      yarn android:prod:debug:
+    ```
+  - Build and Install Android PRDO:
+    ```console
+      yarn android:prod:release:
+    ```
+  - Run IOS with METRO:
     ```console
       yarn ios
     ```
   
   #### Expo-go
   - 1 Install Expo-go app in a mobile devile
-  - 2 Run command:
-  ```console
-    expo:start
-  ```
+  - 2 Run dev:
+    ```console
+      expo:start:dev
+    ```
+  - 3 Run prod:
+    ```console
+      expo:start:prod
+    ```
 
 ### Issues
 
