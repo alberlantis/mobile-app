@@ -1,0 +1,50 @@
+name: Validate PR Labels
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited, labeled, unlabeled]
+    branches:
+      - dev
+
+jobs:
+  check-label:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Ajusta la versión de Node.js según tus necesidades
+
+      - name: Validate label
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')
+          
+          echo "Fetched Labels: $labels"  # Debugging line
+
+          major=$(echo "$labels" | jq -r '.[] | select(.name == "major") | if .name then 1 else empty end' | head -n 1)
+          minor=$(echo "$labels" | jq -r '.[] | select(.name == "minor") | if .name then 1 else empty end' | head -n 1)
+          patch=$(echo "$labels" | jq -r '.[] | select(.name == "patch") | if .name then 1 else empty end' | head -n 1)
+          chore=$(echo "$labels" | jq -r '.[] | select(.name == "chore") | if .name then 1 else empty end' | head -n 1)
+
+          count=$((major + minor + patch + chore))
+          echo "Major: $major"  # Debugging line
+          echo "Minor: $minor"  # Debugging line
+          echo "Patch: $patch"  # Debugging line
+          echo "Chore: $chore"  # Debugging line
+          echo "Count: $count"  # Debugging line
+
+          if [ $count -eq 0 ]; then
+            echo "❌ No label found. Please add exactly one label: major, minor, patch, or chore."
+            exit 1
+          elif [ $count -gt 1 ]; then
+            echo "❌ Multiple labels found. Please only add one label: major, minor, patch, or chore."
+            exit 1
+          else
+            echo "✅ Exactly one label is present."
+          fi
