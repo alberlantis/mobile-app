@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       is-commit: ${{ steps.commit_changes.outputs.IS_COMMIT }}
+      sha: ${{ steps.commit_changes.outputs.SHA }}
   
     steps:
       - name: 🏎️ Check out code
@@ -48,6 +49,7 @@ jobs:
             git commit -m "chore: bump version to $(jq -r .version < package.json)" --no-verify
             git push origin HEAD:${{ github.ref }}
             echo "IS_COMMIT=true" >> $GITHUB_OUTPUT
+            echo "SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,6 +61,9 @@ jobs:
     steps:
       - name: 🏎️ Check out code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prebuild-app.outputs.sha }}
+          fetch-depth: 0
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
@@ -88,6 +93,9 @@ jobs:
     steps:
       - name: 🏎️ Check out code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prebuild-app.outputs.sha }}
+          fetch-depth: 0
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
@@ -120,6 +128,9 @@ jobs:
       steps:
         - name: 🏎️ Check out code
           uses: actions/checkout@v4
+          with:
+            ref: ${{ needs.prebuild-app.outputs.sha }}
+            fetch-depth: 0
 
         - name: 🏗 Setup Node
           uses: actions/setup-node@v3
