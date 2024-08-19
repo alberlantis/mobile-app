@@ -2,11 +2,12 @@ name: Run Linter
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize, edited]
     branches:
       - dev
 
 jobs:
-  test:
+  check-code:
     runs-on: ubuntu-latest
 
     steps:
