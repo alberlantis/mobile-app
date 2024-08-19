@@ -1,6 +1,6 @@
 {
   "name": "satlantis",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "main": "index.ts",
   "license": "UNLICENSED",
   "repository": "git@github.com:satlantis-dev/mobile-app.git",
@@ -57,9 +57,7 @@
     "bump:major:dev": "yarn bump:package:major && yarn increment:version:major:dev && yarn prebuild:dev",
     "bump:patch:prod": "yarn bump:package:patch && yarn increment:version:patch:prod && yarn prebuild:prod",
     "bump:minor:prod": "yarn bump:package:minor && yarn increment:version:minor:prod && yarn prebuild:prod",
-    "bump:major:prod": "yarn bump:package:major && yarn increment:version:major:prod && yarn prebuild:prod",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "bump:major:prod": "yarn bump:package:major && yarn increment:version:major:prod && yarn prebuild:prod"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

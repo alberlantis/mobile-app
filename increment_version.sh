@@ -1,8 +1,7 @@
-#!/bin/bash
-echo "🚨 BUMPING RUNNING 🚨"
+#!/bin/sh
 
 # Give permissions
-chmod +x increment_version.sh
+chmod +x increment_version.zsh
 
 if [[ -z "$2" ]]; then
   echo "Usage: $0 {major|minor|patch} {dev|prod}"
@@ -45,8 +44,8 @@ if [[ -z "$app_version_line" ]]; then
 fi
 
 # Extrae el valor actual de la versión build
-current_build_version=$(echo "$build_version_line" | cut -d '=' -f 2)
-current_app_version=$(echo "$app_version_line" | cut -d '=' -f 2)
+current_build_version=$(echo $build_version_line | cut -d '=' -f 2)
+current_app_version=$(echo $app_version_line | cut -d '=' -f2)
 
 # Divide la versión en major, minor y patch
 IFS='.' read -r major minor patch <<< "$current_app_version"
@@ -75,11 +74,11 @@ new_build_version=$((current_build_version + 1))
 
 # Reemplaza la versión build y la app version en el archivo .env
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" "${ENV_FILE}"
-  sed -i '' "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" "${ENV_FILE}"
+  sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" ${ENV_FILE}
+  sed -i '' "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" ${ENV_FILE}
 else
-  sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" "${ENV_FILE}"
-  sed -i "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" "${ENV_FILE}"
+  sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" ${ENV_FILE}
+  sed -i "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" ${ENV_FILE}
 fi
 
 # Opción de eliminar el archivo de respaldo

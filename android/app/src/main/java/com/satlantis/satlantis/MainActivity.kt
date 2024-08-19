@@ -1,4 +1,4 @@
-package com.satlantis.satlantis.dev
+package com.satlantis.satlantis
 
 import android.os.Build
 import android.os.Bundle
