@@ -7,11 +7,11 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - test
+      - main
 
 jobs:
   prebuild-app:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     outputs:
       is-commit: ${{ steps.commit_changes.outputs.IS_COMMIT }}
@@ -55,7 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   upload-ios-build:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && needs.prebuild-app.outputs.is-commit == 'true'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && needs.prebuild-app.outputs.is-commit == 'true'
     needs: prebuild-app
     runs-on: macos-latest
     steps:
@@ -87,7 +87,7 @@ jobs:
         run: yarn ios:build:prod --non-interactive
   
   upload-android-build:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && needs.prebuild-app.outputs.is-commit == 'true'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && needs.prebuild-app.outputs.is-commit == 'true'
     needs: prebuild-app
     runs-on: ubuntu-latest
     steps:
@@ -122,7 +122,7 @@ jobs:
         run: yarn android:build:prod --non-interactive
 
   publish-expo:
-      if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && needs.prebuild-app.outputs.is-commit == 'true'
+      if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && needs.prebuild-app.outputs.is-commit == 'true'
       needs: prebuild-app
       runs-on: ubuntu-latest
       steps:
