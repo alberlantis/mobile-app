@@ -96,7 +96,7 @@
   ```
 - create new branch:
   ```console
-    git checkout -b [author]/[feature|bugfix|hotfix]/[description-no-spaces]
+    git checkout -b [author]/[ticket-number]/[feature|bugfix|hotfix]/[description-no-spaces]
   ```
 - develop the new feature or fix the related bug
 - before commit the changes, check linter, types and tests (commit will failed)

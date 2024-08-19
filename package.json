@@ -52,12 +52,12 @@
     "increment:version:patch:prod": "./increment_version.sh patch prod",
     "increment:version:minor:prod": "./increment_version.sh minor prod",
     "increment:version:major:prod": "./increment_version.sh major prod",
-    "bump:patch:dev": "yarn bump:package:patch && yarn increment:version:patch:dev && yarn prebuild:dev",
-    "bump:minor:dev": "yarn bump:package:minor && yarn increment:version:minor:dev && yarn prebuild:dev",
-    "bump:major:dev": "yarn bump:package:major && yarn increment:version:major:dev && yarn prebuild:dev",
-    "bump:patch:prod": "yarn bump:package:patch && yarn increment:version:patch:prod && yarn prebuild:prod",
-    "bump:minor:prod": "yarn bump:package:minor && yarn increment:version:minor:prod && yarn prebuild:prod",
-    "bump:major:prod": "yarn bump:package:major && yarn increment:version:major:prod && yarn prebuild:prod"
+    "bump:patch:dev": "yarn increment:version:patch:dev && yarn prebuild:dev",
+    "bump:minor:dev": "yarn increment:version:minor:dev && yarn prebuild:dev",
+    "bump:major:dev": "yarn increment:version:major:dev && yarn prebuild:dev",
+    "bump:patch:prod": "yarn increment:version:patch:prod && yarn prebuild:prod",
+    "bump:minor:prod": "yarn increment:version:minor:prod && yarn prebuild:prod",
+    "bump:major:prod": "yarn increment:version:major:prod && yarn prebuild:prod"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

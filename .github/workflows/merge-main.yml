@@ -1,4 +1,4 @@
-name: Bump Version and Upload Build on Merge to Dev
+name: Bump Version and Upload Build on Merge to Main
 
 permissions:
   contents: write
@@ -7,11 +7,11 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - dev
+      - test
 
 jobs:
-  bump-version:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev'
+  prebuild-app:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test'
     runs-on: ubuntu-latest
     outputs:
       is-commit: ${{ steps.commit_changes.outputs.IS_COMMIT }}
@@ -29,30 +29,9 @@ jobs:
 
       - name: 📦 Install dependencies
         run: yarn install
-
-      - name: ⬆️ Apply version bump (major)
-        if: contains(github.event.pull_request.labels.*.name, 'major')
-        run: |
-          echo "running major ✅..."
-          yarn bump:package:major
-          yarn increment:version:major:prod
-          yarn bump:major:dev
-
-      - name: ⬆️ Apply version bump (minor)
-        if: contains(github.event.pull_request.labels.*.name, 'minor')
-        run: |
-          echo "running minor ✅..."
-          yarn bump:package:minor
-          yarn increment:version:minor:prod
-          yarn bump:minor:dev
           
-      - name: ⬆️ Apply version bump (patch)
-        if: contains(github.event.pull_request.labels.*.name, 'patch')
-        run: |
-          echo "running patch ✅..."
-          yarn bump:package:patch
-          yarn increment:version:patch:prod
-          yarn bump:patch:dev
+      - name: 📲 Prebuild App (prod)
+        run: yarn prebuild:prod
 
       - name: 🚀 Commit & Push changes
         id: commit_changes
@@ -74,8 +53,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   upload-ios-build:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' && needs.bump-version.outputs.is-commit == 'true'
-    needs: bump-version
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && needs.prebuild-app.outputs.is-commit == 'true'
+    needs: prebuild-app
     runs-on: macos-latest
     steps:
       - name: 🏎️ Check out code
@@ -99,12 +78,12 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: 📲 Build iOS (DEV)
-        run: yarn ios:build:dev --non-interactive
+      - name: 📲 Build iOS (PROD)
+        run: yarn ios:build:prod --non-interactive
   
   upload-android-build:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' && needs.bump-version.outputs.is-commit == 'true'
-    needs: bump-version
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && needs.prebuild-app.outputs.is-commit == 'true'
+    needs: prebuild-app
     runs-on: ubuntu-latest
     steps:
       - name: 🏎️ Check out code
@@ -131,12 +110,12 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: 📲 Build Android (DEV)
-        run: yarn android:build:dev --non-interactive
+      - name: 📲 Build Android (PROD)
+        run: yarn android:build:prod --non-interactive
 
   publish-expo:
-      if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' && needs.bump-version.outputs.is-commit == 'true'
-      needs: bump-version
+      if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && needs.prebuild-app.outputs.is-commit == 'true'
+      needs: prebuild-app
       runs-on: ubuntu-latest
       steps:
         - name: 🏎️ Check out code
@@ -158,37 +137,4 @@ jobs:
           run: yarn install
 
         - name: 🚀 Create update
-          run: yarn expo:update:dev
-  
-  delete-expo-branch:
-      if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev'
-      runs-on: ubuntu-latest
-      steps:
-        - name: 🏎️ Check out code
-          uses: actions/checkout@v4
-
-        - name: 🏗 Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: 18.x
-            cache: yarn
-
-        - name: 🏗 Setup EAS
-          uses: expo/expo-github-action@v8
-          with:
-            eas-version: latest
-            token: ${{ secrets.EXPO_TOKEN }}
-
-        - name: 📦 Install dependencies
-          run: yarn install
-
-        - name: 📎 View and potentially delete EAS branch
-          run: |
-            DELETE_BRANCH="${{ github.event.pull_request.head.ref }}"
-            if eas branch:view "$DELETE_BRANCH" > /dev/null 2>&1; then
-              echo "Proceeding to delete '$DELETE_BRANCH' branch..."
-              eas branch:delete "$DELETE_BRANCH" --non-interactive
-            else
-              echo "Branch '$DELETE_BRANCH' doesn't exist, skipping deletion..."
-              exit 0
-            fi
+          run: yarn expo:update:prod
