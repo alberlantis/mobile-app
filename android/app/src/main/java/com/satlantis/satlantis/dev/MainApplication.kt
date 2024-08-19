@@ -1,4 +1,4 @@
-package com.satlantis.satlantis
+package com.satlantis.satlantis.dev
 
 import android.app.Application
 import android.content.res.Configuration

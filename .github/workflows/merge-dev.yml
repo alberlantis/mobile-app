@@ -1,0 +1,92 @@
+name: Bump Version and Tag on Merge to Dev
+
+permissions:
+  contents: write
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - test
+
+jobs:
+  bump-version:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false # We'll re-authenticate for the commit
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x' # or the version you're using
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Apply version bump (major)
+        if: contains(github.event.pull_request.labels.*.name, 'major')
+        run: |
+          echo "running major ✅..."
+          yarn bump:major:dev
+
+      - name: Apply version bump (minor)
+        if: contains(github.event.pull_request.labels.*.name, 'minor')
+        run: |
+          echo "running minor ✅..."
+          yarn bump:minor:dev
+          
+      - name: Apply version bump (patch)
+        if: contains(github.event.pull_request.labels.*.name, 'patch')
+        run: |
+          echo "running patch ✅..."
+          yarn bump:patch:dev
+
+      - name: Commit & Push changes
+        id: commit_changes
+        run: |
+          if git diff-index --quiet HEAD --; then
+            echo "Working tree is clean. Nothing to commit ✅..."
+            echo "commit=false" >> $GITHUB_ENV
+            exit 0
+          else
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+            git add .
+            git commit -m "chore: bump version to $(jq -r .version < package.json)" --no-verify
+            git push origin HEAD:${{ github.ref }}
+            echo "commit=true" >> $GITHUB_ENV
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  delete-expo-branch:
+      if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'test' && && steps.commit_changes.outputs.commit == 'true'
+      needs: bump-version
+      runs-on: ubuntu-latest
+      steps:
+        - name: 🏗 Setup repo
+          uses: actions/checkout@v4
+
+        - name: 🏗 Setup Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18.x
+            cache: yarn
+
+        - name: 🏗 Setup EAS
+          uses: expo/expo-github-action@v8
+          with:
+            eas-version: latest
+            token: ${{ secrets.EXPO_TOKEN }}
+
+        - name: 📦 Install dependencies
+          run: yarn install
+
+        - name: 🚀 Create update
+          run: eas branch:delete ${{ github.event.pull_request.head.ref }} --non-interactive
