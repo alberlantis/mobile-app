@@ -178,10 +178,11 @@ jobs:
 
         - name: 📎 View and potentially delete EAS branch
           run: |
-            if eas branch:view ${{ github.event.pull_request.head_ref }} > /dev/null 2>&1; then
-              echo "Branch view succeeded, proceeding to delete branch..."
-              eas branch:delete ${{ github.event.pull_request.head_ref }} --non-interactive
+            DELETE_BRANCH="${{ github.event.pull_request.head_ref }}"
+            if eas branch:view "$DELETE_BRANCH" > /dev/null 2>&1; then
+              echo "Proceeding to delete '$DELETE_BRANCH' branch..."
+              eas branch:delete "$DELETE_BRANCH" --non-interactive
             else
-              echo "Pull Request Branch doesn't exist, skipping deletion..."
+              echo "Branch '$DELETE_BRANCH' doesn't exist, skipping deletion..."
               exit 0
             fi
