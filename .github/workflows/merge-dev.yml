@@ -178,7 +178,7 @@ jobs:
 
         - name: 📎 View and potentially delete EAS branch
           run: |
-            DELETE_BRANCH="${{ github.event.pull_request.head_ref }}"
+            DELETE_BRANCH="${{ github.event.pull_request.head.ref }}"
             if eas branch:view "$DELETE_BRANCH" > /dev/null 2>&1; then
               echo "Proceeding to delete '$DELETE_BRANCH' branch..."
               eas branch:delete "$DELETE_BRANCH" --non-interactive
