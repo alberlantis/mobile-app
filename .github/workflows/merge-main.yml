@@ -46,7 +46,7 @@ jobs:
             git config --global user.email "actions@github.com"
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
             git add .
-            git commit -m "chore: bump version to $(jq -r .version < package.json)" --no-verify
+            git commit -m "chore: bump version to $(jq -r .version < package.json)(prod)" --no-verify
             git push origin HEAD:${{ github.ref }}
             echo "IS_COMMIT=true" >> $GITHUB_OUTPUT
             echo "SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
