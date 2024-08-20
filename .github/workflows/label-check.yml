@@ -5,6 +5,7 @@ on:
     types: [opened, reopened, synchronize, edited, labeled, unlabeled]
     branches:
       - dev
+      - release
 
 jobs:
   check-label:
@@ -19,7 +20,8 @@ jobs:
         with:
           node-version: '20'  # Ajusta la versión de Node.js según tus necesidades
 
-      - name: Validate label
+      - name: Validate Version labels
+        if: github.event.pull_request.base.ref == 'dev'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -44,6 +46,32 @@ jobs:
             exit 1
           elif [ $count -gt 1 ]; then
             echo "❌ Multiple labels found. Please only add one label: major, minor, patch, or chore."
+            exit 1
+          else
+            echo "✅ Exactly one label is present."
+          fi
+
+      - name: Validate Bundle labels
+        if: github.event.pull_request.base.ref == 'release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')
+          
+          echo "Fetched Labels: $labels"  # Debugging line
+
+          release=$(echo "$labels" | jq -r '.[] | select(.name == "release") | if .name then 1 else empty end' | head -n 1)
+          codepush=$(echo "$labels" | jq -r '.[] | select(.name == "codepush") | if .name then 1 else empty end' | head -n 1)
+          
+          count=$((release + codepush))
+          echo "Release: $release"  # Debugging line
+          echo "Codepush: $codepush"  # Debugging line
+
+          if [ $count -eq 0 ]; then
+            echo "❌ No label found. Please add exactly one label: release or codepush."
+            exit 1
+          elif [ $count -gt 1 ]; then
+            echo "❌ Multiple labels found. Please only add one label: release or codepush."
             exit 1
           else
             echo "✅ Exactly one label is present."
