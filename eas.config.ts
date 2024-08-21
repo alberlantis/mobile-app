@@ -22,18 +22,27 @@ const expoVariables =
 // you can write type-safe config
 export default defineEasConfig({
   build: {
-    dev: {
+    development: {
       ...!isProd && {env: expoVariables},
       distribution: "internal",
       channel: "development",
-      ios: {
-        simulator: true
-      },
     },
-    prod: {
+    production: {
       distribution: "internal",
       channel: "production",
       ...isProd && {env: expoVariables},
-    }
+    },
+    release: {
+      distribution: "store",
+      channel: "release",
+      ...isProd && {env: expoVariables},
+    },
   },
+  submit: {
+    release: {
+      ios: {
+        ascAppId: "6648819135"
+      }
+    },
+  }
 });
