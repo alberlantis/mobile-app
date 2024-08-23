@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppInitializer should render null initially and then should render children 1`] = `null`;
+
+exports[`AppInitializer should render null initially and then should render children 2`] = `
+<RCTSafeAreaView
+  onLayout={[Function]}
+  style={
+    {
+      "flex": 1,
+    }
+  }
+  testID="app-initializer-container-id"
+>
+  <Text>
+    App
+  </Text>
+</RCTSafeAreaView>
+`;

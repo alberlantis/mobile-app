@@ -18,14 +18,20 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     runtimeVersion: version,
     version: process.env.EXPO_PUBLIC_APP_VERSION,
     sdkVersion: "51.0.0",
+    icon: './assets/icon/icon.png',
     splash: {
-      backgroundColor: "#ffffff"
+      image: './assets/splash/splash.png',
+      resizeMode: 'cover',
+      backgroundColor: '#000000'
     },
     platforms: [
       'ios',
       'android'
     ],
     android: {
+      adaptiveIcon: {
+        foregroundImage: './assets/icon/android-adaptive-icon.png',
+      },
       package: process.env.EXPO_PUBLIC_APP_IDENTIFIER,
       versionCode: isNaN(Number(process.env.EXPO_PUBLIC_BUILD_VERSION)) ?
         config.android?.versionCode :

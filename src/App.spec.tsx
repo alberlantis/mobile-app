@@ -11,6 +11,12 @@ jest.mock("./navigation", () => {
   };
 });
 
+jest.mock("./shared/wrappers", () => ({
+  AppInitializer: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+}));
+
 jest.mock("./store", () => ({
   getState: jest.fn(),
   subscribe: jest.fn(),
