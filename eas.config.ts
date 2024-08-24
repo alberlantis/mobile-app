@@ -42,6 +42,10 @@ export default defineEasConfig({
     release: {
       ios: {
         ascAppId: "6648819135"
+      },
+      android: {
+        track: "internal",
+        releaseStatus: 'draft'
       }
     },
   }
