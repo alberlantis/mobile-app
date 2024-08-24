@@ -32,6 +32,7 @@ fi
 # Busca la línea que contiene EXPO_PUBLIC_APP_VERSION y EXPO_PUBLIC_BUILD_VERSION
 build_version_line=$(grep "^EXPO_PUBLIC_BUILD_VERSION=" ${ENV_FILE})
 app_version_line=$(grep "^EXPO_PUBLIC_APP_VERSION=" ${ENV_FILE})
+runtime_version_line=$(grep "^EXPO_PUBLIC_RUNTIME_VERSION=" ${ENV_FILE})
 
 # Si no encuentra alguna de las líneas, muestra un mensaje y sale del script
 if [[ -z "$build_version_line" ]]; then
@@ -44,12 +45,19 @@ if [[ -z "$app_version_line" ]]; then
   exit 1
 fi
 
+if [[ -z "$runtime_version_line" ]]; then
+  echo "EXPO_PUBLIC_RUNTIME_VERSION not found in ${ENV_FILE}!"
+  exit 1
+fi
+
 # Extrae el valor actual de la versión build
 current_build_version=$(echo "$build_version_line" | cut -d '=' -f 2)
 current_app_version=$(echo "$app_version_line" | cut -d '=' -f 2)
+current_runtime_version=$(echo "$runtime_version_line" | cut -d '=' -f 2)
 
 # Divide la versión en major, minor y patch
 IFS='.' read -r major minor patch <<< "$current_app_version"
+IFS='.' read -r runtime_major runtime_minor runtime_patch <<< "$current_runtime_version"
 
 # Incrementa la versión basada en el parámetro proporcionado
 case $1 in
@@ -57,18 +65,25 @@ case $1 in
     major=$((major + 1))
     minor=0
     patch=0
+    runtime_major=$((runtime_major + 1))
+    runtime_minor=0
+    runtime_patch=0
     ;;
   minor)
     minor=$((minor + 1))
     patch=0
+    runtime_minor=$((runtime_minor + 1))
+    runtime_patch=0
     ;;
   patch|""|*)
     patch=$((patch + 1))
+    runtime_patch=0
     ;;
 esac
 
 # Construye la nueva versión
 new_app_version="$major.$minor.$patch"
+new_runtime_version="$runtime_major.$runtime_minor.$runtime_patch"
 
 # Incrementa la versión build
 new_build_version=$((current_build_version + 1))
@@ -77,13 +92,21 @@ new_build_version=$((current_build_version + 1))
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" "${ENV_FILE}"
   sed -i '' "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" "${ENV_FILE}"
+  sed -i '' "s/^EXPO_PUBLIC_RUNTIME_VERSION=.*/EXPO_PUBLIC_RUNTIME_VERSION=$new_runtime_version/" "${ENV_FILE}"
 else
   sed -i.bak "s/^EXPO_PUBLIC_BUILD_VERSION=.*/EXPO_PUBLIC_BUILD_VERSION=$new_build_version/" "${ENV_FILE}"
   sed -i "s/^EXPO_PUBLIC_APP_VERSION=.*/EXPO_PUBLIC_APP_VERSION=$new_app_version/" "${ENV_FILE}"
+  sed -i "s/^EXPO_PUBLIC_RUNTIME_VERSION=.*/EXPO_PUBLIC_RUNTIME_VERSION=$new_runtime_version/" "${ENV_FILE}"
 fi
 
 # Opción de eliminar el archivo de respaldo
 rm "${ENV_FILE}.bak"
 
-# echo "Versión incrementada a: $new_app_version"
+# echo "Versión incrementada a: $new_build_version"
 echo "EXPO_PUBLIC_BUILD_VERSION incremented to $new_build_version"
+
+# echo "Versión incrementada a: $new_app_version"
+echo "EXPO_PUBLIC_APP_VERSION incremented to $new_app_version"
+
+# echo "Versión incrementada a: $new_runtime_version"
+echo "EXPO_PUBLIC_RUNTIME_VERSION incremented to $new_runtime_version"

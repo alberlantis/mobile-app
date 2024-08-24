@@ -51,6 +51,7 @@ jobs:
         if: contains(github.event.pull_request.labels.*.name, 'patch')
         run: |
           echo "running patch ✅..."
+          yarn bump:package:patch
           yarn increment:version:patch:prod
           yarn bump:patch:dev
 

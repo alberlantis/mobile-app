@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import { ExpoConfig, ConfigContext } from 'expo/config';
-import { version } from './package.json'
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const env = process.env.APP_ENV || 'dev';
@@ -15,7 +14,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     name: process.env.EXPO_PUBLIC_APP_NAME || 'Satlantis',
     slug: "satlantis",
     owner: "satlantis",
-    runtimeVersion: version,
+    runtimeVersion: process.env.EXPO_PUBLIC_RUNTIME_VERSION,
     version: process.env.EXPO_PUBLIC_APP_VERSION,
     sdkVersion: "51.0.0",
     icon: './assets/icon/icon.png',
