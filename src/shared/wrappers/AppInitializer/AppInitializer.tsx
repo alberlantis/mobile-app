@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { SafeAreaView } from "react-native";
-import * as SplashScreen from "expo-splash-screen";
 
+import { useSplash } from "src/shared/hooks";
 import s from "./AppInitializer.style";
 
 interface ISplashProps {
@@ -11,26 +11,25 @@ interface ISplashProps {
 const AppInitializer: React.FC<ISplashProps> = ({ children }) => {
   const [appIsReady, setAppIsReady] = useState(false);
 
+  const { prepareSplash, hideSplash } = useSplash();
+
   useEffect(() => {
-    async function prepare() {
+    async function initializeApp() {
       try {
-        await SplashScreen.preventAutoHideAsync();
         // Initialize all your assets/clients, fetch all your data here
-      } catch (e) {
-        console.error("App Initialize failed: ", e);
+        await prepareSplash();
       } finally {
         setAppIsReady(true);
       }
     }
-
-    prepare();
-  }, []);
+    initializeApp();
+  }, [prepareSplash]);
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      await SplashScreen.hideAsync();
+      await hideSplash();
     }
-  }, [appIsReady]);
+  }, [appIsReady, hideSplash]);
 
   if (!appIsReady) {
     return null;

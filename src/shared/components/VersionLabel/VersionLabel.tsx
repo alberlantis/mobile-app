@@ -2,11 +2,11 @@ import React from "react";
 import { View, Text } from "react-native";
 import * as Application from "expo-application";
 
-import { IS_EXPO_GO } from "shared/constants/platform";
+import { IS_EXPO_GO } from "src/shared/constants/platform";
 import {
   EXPO_PUBLIC_APP_VERSION,
   EXPO_PUBLIC_BUILD_VERSION,
-} from "shared/constants/env";
+} from "src/shared/constants/env";
 import s from "./VersionLabel.style";
 
 const VersionLabel = () => {

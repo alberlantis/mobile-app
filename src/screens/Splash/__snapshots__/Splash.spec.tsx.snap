@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Splash should render splash image 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "backgroundColor": "black",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={
+      {
+        "testUri": "../../../assets/splash/splash.png",
+      }
+    }
+    style={
+      {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+    testID="splash-screen-image-id"
+  />
+</RCTSafeAreaView>
+`;

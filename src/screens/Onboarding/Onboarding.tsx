@@ -1,18 +1,18 @@
 import React from "react";
-import { Text, Platform } from "react-native";
+import { Text, Platform, SafeAreaView } from "react-native";
 import Constants from "expo-constants";
 
 import {
   EXPO_PUBLIC_APP_IDENTIFIER,
   EXPO_PUBLIC_ENVIRONMENT,
-} from "shared/constants/env";
-import { SCREENS } from "navigation/routes";
-import { VersionLabel } from "shared/components";
-import type { RootScreenProps } from "navigation/Root";
+} from "src/shared/constants/env";
+import { SCREENS } from "src/navigation/routes";
+import { VersionLabel } from "src/shared/components";
+import type { RootScreenProps } from "src/navigation/Root";
 
 const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text onPress={() => navigation.navigate(SCREENS.HOME_TABS)}>
         Onboarding Screen
       </Text>
@@ -20,7 +20,7 @@ const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
       <Text>{EXPO_PUBLIC_ENVIRONMENT}</Text>
       <Text>{`${Platform.OS} / ${Constants.executionEnvironment}`}</Text>
       <VersionLabel />
-    </>
+    </SafeAreaView>
   );
 };
 

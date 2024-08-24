@@ -10,9 +10,9 @@ jest.mock("expo-application", () => ({
 const platform = {
   IS_EXPO_GO: false,
 };
-jest.mock("shared/constants/platform", () => platform);
+jest.mock("src/shared/constants/platform", () => platform);
 
-jest.mock("shared/constants/env", () => ({
+jest.mock("src/shared/constants/env", () => ({
   EXPO_PUBLIC_APP_VERSION: "EXPO_PUBLIC_APP_VERSION",
   EXPO_PUBLIC_BUILD_VERSION: "EXPO_PUBLIC_BUILD_VERSION",
 }));

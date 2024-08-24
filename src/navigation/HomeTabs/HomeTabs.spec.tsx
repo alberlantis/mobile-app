@@ -9,7 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import HomeTabs from "./HomeTabs";
 
-jest.mock("screens", () => {
+jest.mock("src/screens", () => {
   const { Text } =
     jest.requireActual<typeof import("react-native")>("react-native");
   return {

@@ -5,4 +5,5 @@ export const SCREENS = {
   ONBOARDING: "Onboarding",
   POSTING: "Posting",
   PROFILE: "Profile",
+  SPLASH: "Splash",
 } as const;

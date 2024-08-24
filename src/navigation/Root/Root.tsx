@@ -6,9 +6,10 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 
-import { SCREENS } from "navigation/routes";
-import HomeTabs from "navigation/HomeTabs";
-import { Onboarding } from "screens";
+import { IS_EXPO_GO } from "src/shared/constants/platform";
+import { SCREENS } from "src/navigation/routes";
+import HomeTabs from "src/navigation/HomeTabs";
+import { Onboarding, Splash } from "src/screens";
 
 export type HomeTabsParams = {
   screen:
@@ -20,13 +21,18 @@ export type HomeTabsParams = {
 type RootParamList = {
   [SCREENS.ONBOARDING]: undefined;
   [SCREENS.HOME_TABS]: HomeTabsParams | undefined;
+  [SCREENS.SPLASH]: undefined;
 };
 const Stack = createNativeStackNavigator<RootParamList>();
 
 const Root: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        initialRouteName={IS_EXPO_GO ? SCREENS.SPLASH : SCREENS.ONBOARDING}
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
         <Stack.Screen name={SCREENS.ONBOARDING} component={Onboarding} />
         <Stack.Screen name={SCREENS.HOME_TABS} component={HomeTabs} />
       </Stack.Navigator>

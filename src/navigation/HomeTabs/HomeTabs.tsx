@@ -6,8 +6,8 @@ import {
   BottomTabScreenProps,
 } from "@react-navigation/bottom-tabs";
 
-import { Home, Profile, Posting, Notifications } from "screens";
-import { SCREENS } from "navigation/routes";
+import { Home, Profile, Posting, Notifications } from "src/screens";
+import { SCREENS } from "src/navigation/routes";
 
 type HomeTabsParamList = {
   [SCREENS.HOME]: undefined;
