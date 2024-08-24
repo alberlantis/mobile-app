@@ -36,24 +36,24 @@ jobs:
         run: |
           echo "running major ✅..."
           yarn bump:package:major
+          yarn increment:version:major:dev
           yarn increment:version:major:prod
-          yarn bump:major:dev
 
       - name: ⬆️ Apply version bump (minor)
         if: contains(github.event.pull_request.labels.*.name, 'minor')
         run: |
           echo "running minor ✅..."
           yarn bump:package:minor
+          yarn increment:version:minor:dev
           yarn increment:version:minor:prod
-          yarn bump:minor:dev
           
       - name: ⬆️ Apply version bump (patch)
         if: contains(github.event.pull_request.labels.*.name, 'patch')
         run: |
           echo "running patch ✅..."
           yarn bump:package:patch
+          yarn increment:version:patch:dev
           yarn increment:version:patch:prod
-          yarn bump:patch:dev
 
       - name: 🚀 Commit & Push changes
         id: commit_changes
@@ -78,7 +78,7 @@ jobs:
   upload-ios-build:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'dev' && needs.bump-version.outputs.is-commit == 'true'
     needs: bump-version
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 🏎️ Check out code
         uses: actions/checkout@v4
@@ -97,9 +97,6 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: 💎 Install CocoaPods
-        run: sudo gem install cocoapods
 
       - name: 📦 Install dependencies
         run: yarn install
@@ -123,12 +120,6 @@ jobs:
         with:
             node-version: 18.x
             cache: yarn
-      
-      - name: ☕ Setup JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
       
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8

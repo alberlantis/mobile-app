@@ -1,8 +1,5 @@
 name: Submit/Update Android and iOS App
 
-permissions:
-  contents: write
-
 on:
   pull_request:
     types: [closed]
@@ -12,7 +9,7 @@ on:
 jobs:
   upload-ios-store-build:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'release' && contains(github.event.pull_request.labels.*.name, 'release')
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 🏎️ Check out code
         uses: actions/checkout@v4
@@ -28,9 +25,6 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: 💎 Install CocoaPods
-        run: sudo gem install cocoapods
 
       - name: 📦 Install dependencies
         run: yarn install
@@ -77,12 +71,6 @@ jobs:
         with:
             node-version: 18.x
             cache: yarn
-      
-      - name: ☕ Setup JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
       
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
