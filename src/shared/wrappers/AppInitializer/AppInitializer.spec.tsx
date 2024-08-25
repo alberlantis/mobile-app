@@ -3,19 +3,38 @@ import { render, waitFor, screen } from "@testing-library/react-native";
 import { Text } from "react-native";
 import AppInitializer from "./AppInitializer";
 
-let resolvePromise: (value?: boolean) => void;
-const mockPromise = new Promise((resolve: (value?: boolean) => void) => {
-  resolvePromise = resolve;
-});
+let resolveSplashPromise: (value?: boolean) => void;
+const mockPrepareSplashPromise = new Promise(
+  (resolve: (value?: boolean) => void) => {
+    resolveSplashPromise = resolve;
+  },
+);
+let resolvePreloadImageAssetsPromse: (value?: boolean) => void;
+const mockPreloadImageAssetsPromise = new Promise(
+  (resolve: (value?: boolean) => void) => {
+    resolvePreloadImageAssetsPromse = resolve;
+  },
+);
+const mockPreloadImageAssets = jest
+  .fn()
+  .mockResolvedValue(mockPreloadImageAssetsPromise);
+const mockPrepareSplash = jest.fn().mockResolvedValue(mockPrepareSplashPromise);
 const mockHidePlash = jest.fn();
 jest.mock("src/shared/hooks", () => ({
   useSplash: jest.fn(() => ({
-    prepareSplash: jest.fn().mockResolvedValue(mockPromise),
+    prepareSplash: mockPrepareSplash,
     hideSplash: mockHidePlash,
+  })),
+  useImageAssets: jest.fn(() => ({
+    preloadImagesAssets: mockPreloadImageAssets,
   })),
 }));
 
 describe("AppInitializer", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   const renderComponent = () => {
     render(
       <AppInitializer>
@@ -31,7 +50,8 @@ describe("AppInitializer", () => {
     expect(screen.toJSON()).toMatchSnapshot();
 
     await waitFor(async () => {
-      resolvePromise();
+      resolvePreloadImageAssetsPromse();
+      resolveSplashPromise();
     });
 
     await waitFor(() => {
@@ -40,11 +60,28 @@ describe("AppInitializer", () => {
     });
   });
 
+  it("should prepare splash when initialize app", async () => {
+    renderComponent();
+
+    await waitFor(() => {
+      expect(mockPrepareSplash).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it("should prepare image assets when initialize app", async () => {
+    renderComponent();
+
+    await waitFor(() => {
+      expect(mockPreloadImageAssets).toHaveBeenCalledTimes(1);
+    });
+  });
+
   it("should hide splash screen when all data is fetched and layout is ready", async () => {
     renderComponent();
 
     await waitFor(async () => {
-      resolvePromise();
+      resolvePreloadImageAssetsPromse();
+      resolveSplashPromise();
     });
 
     await waitFor(async () => {

@@ -6,6 +6,15 @@ import { SCREENS } from "src/navigation/routes";
 import Splash from "./Splash";
 
 jest.useFakeTimers();
+jest.mock("src/shared/hooks", () => ({
+  useImageAssets: jest.fn(() => ({
+    images: {
+      splash: {
+        testUri: "../../../assets/splash/splash.png",
+      },
+    },
+  })),
+}));
 
 const mockNavigation: any = {
   navigate: jest.fn(),

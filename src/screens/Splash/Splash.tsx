@@ -4,10 +4,13 @@ import { Image, SafeAreaView, StatusBar } from "react-native";
 import type { RootScreenProps } from "src/navigation/Root";
 import { SCREENS } from "src/navigation/routes";
 import s from "./Splash.style";
+import { useImageAssets } from "src/shared/hooks";
 
 type ISplashProps = RootScreenProps<"Splash">;
 
 const Splash = ({ navigation }: ISplashProps) => {
+  const { images } = useImageAssets();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate(SCREENS.ONBOARDING);
@@ -22,7 +25,7 @@ const Splash = ({ navigation }: ISplashProps) => {
     <SafeAreaView style={s.container}>
       <StatusBar hidden />
       <Image
-        source={require("assets/splash/splash.png")}
+        source={images.splash}
         style={s.image}
         resizeMode="cover"
         testID="splash-screen-image-id"

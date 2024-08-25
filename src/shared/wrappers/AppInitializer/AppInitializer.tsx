@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { SafeAreaView } from "react-native";
 
-import { useSplash } from "src/shared/hooks";
+import { useSplash, useImageAssets } from "src/shared/hooks";
 import s from "./AppInitializer.style";
 
 interface ISplashProps {
@@ -12,18 +12,20 @@ const AppInitializer: React.FC<ISplashProps> = ({ children }) => {
   const [appIsReady, setAppIsReady] = useState(false);
 
   const { prepareSplash, hideSplash } = useSplash();
+  const { preloadImagesAssets } = useImageAssets();
 
   useEffect(() => {
     async function initializeApp() {
       try {
         // Initialize all your assets/clients, fetch all your data here
         await prepareSplash();
+        await preloadImagesAssets();
       } finally {
         setAppIsReady(true);
       }
     }
     initializeApp();
-  }, [prepareSplash]);
+  }, [prepareSplash, preloadImagesAssets]);
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
