@@ -6,4 +6,6 @@ export const SCREENS = {
   POSTING: "Posting",
   PROFILE: "Profile",
   SPLASH: "Splash",
+  SIGN_UP: "SignUp",
+  NOSTR_UP: "NostrUp",
 } as const;

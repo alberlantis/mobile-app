@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp should match snapshot 1`] = `
+[
+  <Text>
+    Sign Up-title
+  </Text>,
+  <Text>
+    Username-label
+  </Text>,
+  <Text>
+    Enter username-placeholder
+  </Text>,
+  <Text>
+    Email-label
+  </Text>,
+  <Text>
+    Enter email address-placeholder
+  </Text>,
+  <Text>
+    Password-label
+  </Text>,
+  <Text>
+    Enter password-placeholder
+  </Text>,
+  <Text>
+    Confirm password-placeholder
+  </Text>,
+  <Text
+    onPress={[Function]}
+  >
+    Next-button
+  </Text>,
+  <Text
+    onPress={[Function]}
+  >
+    Already have an account?
+    Sign in
+  </Text>,
+]
+`;

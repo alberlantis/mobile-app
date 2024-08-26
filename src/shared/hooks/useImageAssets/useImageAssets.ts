@@ -3,6 +3,7 @@ import { Asset } from "expo-asset";
 const useImageAssets = () => {
   const images = {
     splash: require("assets/splash/splash.png"),
+    logo: require("assets/images/logo.png"),
     // preload more images here
   };
 

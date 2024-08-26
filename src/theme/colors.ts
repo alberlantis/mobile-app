@@ -1,0 +1,10 @@
+export default {
+  BLACK: "#000",
+  BLACK_INPUT: "#28292A",
+  WHITE: "#FFF",
+  WHITE_LIGHT: "rgba(255, 255, 255, 0.33)",
+  ORANGE_PRIMARY_DARK: "#FF7849",
+  ORANGE_PRIMARY_LIGHT: "#FF8D3B",
+  BLUE_PRIMARY: "#5466D8",
+  TRANSPARENT: "transparent",
+};

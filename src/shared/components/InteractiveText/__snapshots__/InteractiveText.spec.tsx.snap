@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InteractiveText general functionality should match snapshot 1`] = `
+<Text
+  style={
+    [
+      {
+        "fontSize": 14,
+        "fontWeight": "regular",
+      },
+      {
+        "color": "#FFF",
+      },
+    ]
+  }
+>
+  prefix-test 
+  <Text
+    onPress={[MockFunction]}
+    style={
+      {
+        "textDecorationLine": "underline",
+      }
+    }
+  >
+    text-test
+  </Text>
+</Text>
+`;
+
+exports[`InteractiveText when color prop is given should match snapshot 1`] = `
+<Text
+  style={
+    [
+      {
+        "fontSize": 14,
+        "fontWeight": "regular",
+      },
+      {
+        "color": "#000",
+      },
+    ]
+  }
+>
+  prefix-test 
+  <Text
+    onPress={
+      [MockFunction] {
+        "calls": [
+          [],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    style={
+      {
+        "textDecorationLine": "underline",
+      }
+    }
+  >
+    text-test
+  </Text>
+</Text>
+`;

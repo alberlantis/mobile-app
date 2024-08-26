@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 
 import { useSplash, useImageAssets } from "src/shared/hooks";
 import s from "./AppInitializer.style";
@@ -43,6 +43,7 @@ const AppInitializer: React.FC<ISplashProps> = ({ children }) => {
       onLayout={onLayoutRootView}
       testID="app-initializer-container-id"
     >
+      <StatusBar barStyle="light-content" />
       {children}
     </SafeAreaView>
   );

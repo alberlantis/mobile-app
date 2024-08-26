@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Onboarding should match snapshot 1`] = `
+[
+  <Text>
+    Sign Up-title
+  </Text>,
+  <Text
+    onPress={[Function]}
+  >
+    Sign Up-button
+  </Text>,
+  <Text
+    onPress={[Function]}
+  >
+    Instant Nostr Signup-button
+  </Text>,
+  <Text
+    onPress={[Function]}
+  >
+    Already have an account?
+    Sign in
+  </Text>,
+]
+`;

@@ -1,26 +1,40 @@
 import React from "react";
-import { Text, Platform, SafeAreaView } from "react-native";
-import Constants from "expo-constants";
 
-import {
-  EXPO_PUBLIC_APP_IDENTIFIER,
-  EXPO_PUBLIC_ENVIRONMENT,
-} from "src/shared/constants/env";
-import { SCREENS } from "src/navigation/routes";
-import { VersionLabel } from "src/shared/components";
 import type { RootScreenProps } from "src/navigation/Root";
+import {
+  DefaultBackground,
+  Button,
+  InteractiveText,
+  LogoTitle,
+} from "src/shared/components";
+import { SCREENS } from "src/navigation/routes";
+import s from "./Onboarding.style";
 
 const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Text onPress={() => navigation.navigate(SCREENS.HOME_TABS)}>
-        Onboarding Screen
-      </Text>
-      <Text>{EXPO_PUBLIC_APP_IDENTIFIER}</Text>
-      <Text>{EXPO_PUBLIC_ENVIRONMENT}</Text>
-      <Text>{`${Platform.OS} / ${Constants.executionEnvironment}`}</Text>
-      <VersionLabel />
-    </SafeAreaView>
+    <DefaultBackground style={s.container}>
+      <LogoTitle title="Sign Up" />
+      <Button
+        theme="primary"
+        size="large"
+        text="Sign Up"
+        marginBottom={15}
+        marginTop={20}
+        onPress={() => navigation.navigate(SCREENS.SIGN_UP)}
+      />
+      <Button
+        theme="secondary"
+        size="large"
+        text="Instant Nostr Signup"
+        marginBottom={20}
+        onPress={() => navigation.navigate(SCREENS.NOSTR_UP)}
+      />
+      <InteractiveText
+        text="Sign in"
+        prefix="Already have an account?"
+        onPress={() => navigation.navigate(SCREENS.HOME_TABS)}
+      />
+    </DefaultBackground>
   );
 };
 

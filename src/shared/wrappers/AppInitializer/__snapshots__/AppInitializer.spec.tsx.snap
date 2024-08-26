@@ -7,6 +7,7 @@ exports[`AppInitializer should render null initially and then should render chil
   onLayout={[Function]}
   style={
     {
+      "backgroundColor": "#000",
       "flex": 1,
     }
   }

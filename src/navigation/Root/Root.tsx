@@ -9,7 +9,8 @@ import {
 import { IS_EXPO_GO } from "src/shared/constants/platform";
 import { SCREENS } from "src/navigation/routes";
 import HomeTabs from "src/navigation/HomeTabs";
-import { Onboarding, Splash } from "src/screens";
+import { BackButton } from "src/shared/components";
+import { Onboarding, Splash, SignUp, NostrUp } from "src/screens";
 
 export type HomeTabsParams = {
   screen:
@@ -22,6 +23,8 @@ type RootParamList = {
   [SCREENS.ONBOARDING]: undefined;
   [SCREENS.HOME_TABS]: HomeTabsParams | undefined;
   [SCREENS.SPLASH]: undefined;
+  [SCREENS.SIGN_UP]: undefined;
+  [SCREENS.NOSTR_UP]: undefined;
 };
 const Stack = createNativeStackNavigator<RootParamList>();
 
@@ -30,10 +33,37 @@ const Root: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={IS_EXPO_GO ? SCREENS.SPLASH : SCREENS.ONBOARDING}
-        screenOptions={{ headerShown: false }}
       >
-        <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
-        <Stack.Screen name={SCREENS.ONBOARDING} component={Onboarding} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name={SCREENS.SPLASH}
+          component={Splash}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name={SCREENS.ONBOARDING}
+          component={Onboarding}
+        />
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            headerBackVisible: false,
+            title: "",
+            headerLeft: () => <BackButton />,
+          }}
+          name={SCREENS.SIGN_UP}
+          component={SignUp}
+        />
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            headerBackVisible: false,
+            title: "",
+            headerLeft: () => <BackButton />,
+          }}
+          name={SCREENS.NOSTR_UP}
+          component={NostrUp}
+        />
         <Stack.Screen name={SCREENS.HOME_TABS} component={HomeTabs} />
       </Stack.Navigator>
     </NavigationContainer>
