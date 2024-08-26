@@ -62,6 +62,7 @@ const Button: React.FC<IButtonProps> = ({
   const clipGradientID = "clipGrad";
   const buttonColor = getColors(theme);
   const width = getSize(size);
+  const height = 50;
 
   return (
     <Pressable
@@ -72,7 +73,7 @@ const Button: React.FC<IButtonProps> = ({
       onPress={onPress}
       testID="button-pressable-id"
     >
-      <Svg>
+      <Svg width={width} height={height}>
         <Defs>
           <LinearGradient
             id={linearGradientID}
@@ -85,14 +86,14 @@ const Button: React.FC<IButtonProps> = ({
             <Stop offset="100%" stopColor={buttonColor[1]} />
           </LinearGradient>
           <ClipPath id={clipGradientID}>
-            <Rect x="0" y="0" width={width} height={50} rx="25" ry="50" />
+            <Rect x="0" y="0" width={width} height={height} rx="25" ry="50" />
           </ClipPath>
         </Defs>
         <Rect
           x="0"
           y="0%"
           width={width}
-          height={50}
+          height={height}
           clipPath={`url(#${clipGradientID})`}
           fill={`url(#${linearGradientID})`}
         />

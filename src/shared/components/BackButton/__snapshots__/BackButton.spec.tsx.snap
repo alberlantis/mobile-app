@@ -37,7 +37,6 @@ exports[`BackButton should render back button 1`] = `
       "backgroundColor": "#000",
       "borderRadius": 100,
       "justifyContent": "center",
-      "marginTop": 10,
       "padding": 10,
     }
   }

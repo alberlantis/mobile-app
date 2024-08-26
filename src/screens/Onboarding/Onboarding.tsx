@@ -32,7 +32,7 @@ const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
       <InteractiveText
         text="Sign in"
         prefix="Already have an account?"
-        onPress={() => navigation.navigate(SCREENS.HOME_TABS)}
+        onPress={() => navigation.navigate(SCREENS.LOGIN)}
       />
     </DefaultBackground>
   );

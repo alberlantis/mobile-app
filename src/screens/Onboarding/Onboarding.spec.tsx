@@ -85,10 +85,10 @@ describe("Onboarding", () => {
     ).toBeOnTheScreen();
   });
 
-  it("should navigate to HomeTabs when tapped", () => {
+  it("should navigate to Login when tapped", () => {
     const button = screen.getByText("Already have an account?Sign in");
     fireEvent.press(button);
     expect(mockNavigation.navigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigation.navigate).toHaveBeenCalledWith(SCREENS.HOME_TABS);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith(SCREENS.LOGIN);
   });
 });

@@ -28,10 +28,13 @@ describe("InteractiveText", () => {
       expect(prefixAndMain).toBeOnTheScreen();
       expect(prefixAndMain).toHaveStyle({
         ...s.container,
-        color: colors.WHITE,
+        color: colors.WHITE_BOLD,
       });
       expect(mainText).toBeOnTheScreen();
-      expect(mainText).toHaveStyle(s.interactiveText);
+      expect(mainText).toHaveStyle({
+        ...s.interactiveText,
+        color: colors.WHITE,
+      });
     });
 
     it("should trigger onPress when tapped", () => {
@@ -62,7 +65,7 @@ describe("InteractiveText", () => {
       expect(prefixAndMain).toBeOnTheScreen();
       expect(prefixAndMain).toHaveStyle({
         ...s.container,
-        color: colors.BLACK,
+        color: colors.WHITE_BOLD,
       });
     });
   });

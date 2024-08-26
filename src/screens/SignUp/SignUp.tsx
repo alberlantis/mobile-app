@@ -60,7 +60,7 @@ const SignUp = ({ navigation }: RootScreenProps<"SignUp">) => {
         size="extra-large"
       />
       <InteractiveText
-        onPress={() => navigation.navigate(SCREENS.HOME_TABS)}
+        onPress={() => navigation.navigate(SCREENS.LOGIN)}
         prefix="Already have an account?"
         text="Sign in"
       />

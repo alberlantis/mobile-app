@@ -1,13 +1,18 @@
 import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
-
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.BLACK,
-    padding: 10,
-    borderRadius: 100,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  line: {
+    height: 1,
+    width: "100%",
+    position: "absolute",
+  },
+  label: {
+    padding: 15,
+    borderRadius: 30,
   },
 });

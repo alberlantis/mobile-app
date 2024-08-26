@@ -8,4 +8,6 @@ export const SCREENS = {
   SPLASH: "Splash",
   SIGN_UP: "SignUp",
   NOSTR_UP: "NostrUp",
+  LOGIN: "Login",
+  NOSTR_IN: "NostrIn",
 } as const;

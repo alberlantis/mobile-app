@@ -32,6 +32,8 @@ jest.mock("src/screens", () => {
     ),
     SignUp: () => <Text>SignUp Screen</Text>,
     NostrUp: () => <Text>NostrUp Screen</Text>,
+    Login: () => <Text>Login Screen</Text>,
+    NostrIn: () => <Text>NostrIn Screen</Text>,
   };
 });
 const platform = {
@@ -86,6 +88,26 @@ describe("Root", () => {
       fireEvent.press(screen.getByText("Onboarding Screen"), SCREENS.NOSTR_UP);
       expect(screen.toJSON()).toMatchSnapshot();
       expect(screen.getByText("NostrUp Screen")).toBeOnTheScreen();
+      expect(screen.getByText("Back Button")).toBeOnTheScreen();
+    });
+  });
+
+  describe("when navigate to Login", () => {
+    it("should render Login with Back button", () => {
+      render(<Root />);
+      fireEvent.press(screen.getByText("Onboarding Screen"), SCREENS.LOGIN);
+      expect(screen.toJSON()).toMatchSnapshot();
+      expect(screen.getByText("Login Screen")).toBeOnTheScreen();
+      expect(screen.getByText("Back Button")).toBeOnTheScreen();
+    });
+  });
+
+  describe("when navigate to Nostr In", () => {
+    it("should render Login with Back button", () => {
+      render(<Root />);
+      fireEvent.press(screen.getByText("Onboarding Screen"), SCREENS.NOSTR_IN);
+      expect(screen.toJSON()).toMatchSnapshot();
+      expect(screen.getByText("NostrIn Screen")).toBeOnTheScreen();
       expect(screen.getByText("Back Button")).toBeOnTheScreen();
     });
   });

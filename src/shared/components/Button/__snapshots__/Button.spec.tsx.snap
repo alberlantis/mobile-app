@@ -44,9 +44,10 @@ exports[`Button should render primary extra-large button 1`] = `
   testID="button-pressable-id"
 >
   <RNSVGSvgView
-    bbHeight="100%"
+    bbHeight={50}
     bbWidth="100%"
     focusable={false}
+    height={50}
     style={
       [
         {
@@ -55,11 +56,12 @@ exports[`Button should render primary extra-large button 1`] = `
         },
         {
           "flex": 0,
-          "height": "100%",
+          "height": 50,
           "width": "100%",
         },
       ]
     }
+    width="100%"
   >
     <RNSVGGroup
       fill={
@@ -204,9 +206,10 @@ exports[`Button should render primary large button 1`] = `
   testID="button-pressable-id"
 >
   <RNSVGSvgView
-    bbHeight="100%"
-    bbWidth="100%"
+    bbHeight={50}
+    bbWidth={300}
     focusable={false}
+    height={50}
     style={
       [
         {
@@ -215,11 +218,12 @@ exports[`Button should render primary large button 1`] = `
         },
         {
           "flex": 0,
-          "height": "100%",
-          "width": "100%",
+          "height": 50,
+          "width": 300,
         },
       ]
     }
+    width={300}
   >
     <RNSVGGroup
       fill={
@@ -364,9 +368,10 @@ exports[`Button should render secondary extra-large button 1`] = `
   testID="button-pressable-id"
 >
   <RNSVGSvgView
-    bbHeight="100%"
+    bbHeight={50}
     bbWidth="100%"
     focusable={false}
+    height={50}
     style={
       [
         {
@@ -375,11 +380,12 @@ exports[`Button should render secondary extra-large button 1`] = `
         },
         {
           "flex": 0,
-          "height": "100%",
+          "height": 50,
           "width": "100%",
         },
       ]
     }
+    width="100%"
   >
     <RNSVGGroup
       fill={
@@ -524,9 +530,10 @@ exports[`Button should render secondary large button 1`] = `
   testID="button-pressable-id"
 >
   <RNSVGSvgView
-    bbHeight="100%"
-    bbWidth="100%"
+    bbHeight={50}
+    bbWidth={300}
     focusable={false}
+    height={50}
     style={
       [
         {
@@ -535,11 +542,12 @@ exports[`Button should render secondary large button 1`] = `
         },
         {
           "flex": 0,
-          "height": "100%",
-          "width": "100%",
+          "height": 50,
+          "width": 300,
         },
       ]
     }
+    width={300}
   >
     <RNSVGGroup
       fill={

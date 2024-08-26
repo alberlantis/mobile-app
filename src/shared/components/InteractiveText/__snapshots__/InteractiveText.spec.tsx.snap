@@ -2,6 +2,7 @@
 
 exports[`InteractiveText general functionality should match snapshot 1`] = `
 <Text
+  onPress={[MockFunction]}
   style={
     [
       {
@@ -9,18 +10,22 @@ exports[`InteractiveText general functionality should match snapshot 1`] = `
         "fontWeight": "regular",
       },
       {
-        "color": "#FFF",
+        "color": "rgba(255, 255, 255, 0.66)",
       },
     ]
   }
 >
   prefix-test 
   <Text
-    onPress={[MockFunction]}
     style={
-      {
-        "textDecorationLine": "underline",
-      }
+      [
+        {
+          "textDecorationLine": "underline",
+        },
+        {
+          "color": "#FFF",
+        },
+      ]
     }
   >
     text-test
@@ -30,6 +35,19 @@ exports[`InteractiveText general functionality should match snapshot 1`] = `
 
 exports[`InteractiveText when color prop is given should match snapshot 1`] = `
 <Text
+  onPress={
+    [MockFunction] {
+      "calls": [
+        [],
+      ],
+      "results": [
+        {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   style={
     [
       {
@@ -37,30 +55,22 @@ exports[`InteractiveText when color prop is given should match snapshot 1`] = `
         "fontWeight": "regular",
       },
       {
-        "color": "#000",
+        "color": "rgba(255, 255, 255, 0.66)",
       },
     ]
   }
 >
   prefix-test 
   <Text
-    onPress={
-      [MockFunction] {
-        "calls": [
-          [],
-        ],
-        "results": [
-          {
-            "type": "return",
-            "value": undefined,
-          },
-        ],
-      }
-    }
     style={
-      {
-        "textDecorationLine": "underline",
-      }
+      [
+        {
+          "textDecorationLine": "underline",
+        },
+        {
+          "color": "#000",
+        },
+      ]
     }
   >
     text-test

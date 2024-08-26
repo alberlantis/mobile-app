@@ -93,17 +93,18 @@ exports[`Root when navigate to Home tabs should render Home tabs 1`] = `
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
         backTitleVisible={true}
-        backgroundColor="rgb(255, 255, 255)"
+        backgroundColor="transparent"
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
         hidden={true}
-        hideBackButton={false}
+        hideBackButton={true}
+        hideShadow={true}
         largeTitleHideShadow={false}
-        title="Onboarding"
+        title=""
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
-        translucent={false}
+        translucent={true}
       />
     </RNSScreen>
     <RNSScreen
@@ -178,18 +179,449 @@ exports[`Root when navigate to Home tabs should render Home tabs 1`] = `
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
         backTitleVisible={true}
-        backgroundColor="rgb(255, 255, 255)"
+        backgroundColor="transparent"
+        color="rgb(0, 122, 255)"
+        direction="ltr"
+        disableBackButtonMenu={false}
+        hidden={true}
+        hideBackButton={true}
+        hideShadow={true}
+        largeTitleHideShadow={false}
+        title=""
+        titleColor="rgb(28, 28, 30)"
+        topInsetEnabled={false}
+        translucent={true}
+      />
+    </RNSScreen>
+  </RNSScreenStack>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Root when navigate to Login should render Login with Back button 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RNSScreenStack
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <RNSScreen
+      collapsable={false}
+      fullScreenSwipeShadowEnabled={false}
+      gestureResponseDistance={
+        {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
+      }
+      hasLargeHeader={false}
+      nativeBackButtonDismissalEnabled={false}
+      onAppear={[Function]}
+      onDisappear={[Function]}
+      onDismissed={[Function]}
+      onGestureCancel={[Function]}
+      onHeaderBackButtonClicked={[Function]}
+      onNativeDismissCancelled={[Function]}
+      onTransitionProgress={[Function]}
+      onWillAppear={[Function]}
+      onWillDisappear={[Function]}
+      replaceAnimation="push"
+      sheetAllowedDetents="large"
+      sheetCornerRadius={-1}
+      sheetExpandsWhenScrolledToEdge={true}
+      sheetGrabberVisible={false}
+      sheetLargestUndimmedDetent="all"
+      stackPresentation="push"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      swipeDirection="horizontal"
+    >
+      <View
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          {
+            "flex": 1,
+            "flexDirection": "column-reverse",
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "backgroundColor": "rgb(242, 242, 242)",
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            onPress={[Function]}
+          >
+            Onboarding Screen
+          </Text>
+        </View>
+      </View>
+      <RNSScreenStackHeaderConfig
+        backButtonInCustomView={false}
+        backTitleVisible={true}
+        backgroundColor="transparent"
+        color="rgb(0, 122, 255)"
+        direction="ltr"
+        disableBackButtonMenu={false}
+        hidden={true}
+        hideBackButton={true}
+        hideShadow={true}
+        largeTitleHideShadow={false}
+        title=""
+        titleColor="rgb(28, 28, 30)"
+        topInsetEnabled={false}
+        translucent={true}
+      />
+    </RNSScreen>
+    <RNSScreen
+      collapsable={false}
+      fullScreenSwipeShadowEnabled={false}
+      gestureResponseDistance={
+        {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
+      }
+      hasLargeHeader={false}
+      nativeBackButtonDismissalEnabled={false}
+      onAppear={[Function]}
+      onDisappear={[Function]}
+      onDismissed={[Function]}
+      onGestureCancel={[Function]}
+      onHeaderBackButtonClicked={[Function]}
+      onNativeDismissCancelled={[Function]}
+      onTransitionProgress={[Function]}
+      onWillAppear={[Function]}
+      onWillDisappear={[Function]}
+      replaceAnimation="push"
+      sheetAllowedDetents="large"
+      sheetCornerRadius={-1}
+      sheetExpandsWhenScrolledToEdge={true}
+      sheetGrabberVisible={false}
+      sheetLargestUndimmedDetent="all"
+      stackPresentation="push"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      swipeDirection="horizontal"
+    >
+      <View
+        accessibilityElementsHidden={false}
+        importantForAccessibility="auto"
+        style={
+          {
+            "flex": 1,
+            "flexDirection": "column-reverse",
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "backgroundColor": "rgb(242, 242, 242)",
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text>
+            Login Screen
+          </Text>
+        </View>
+      </View>
+      <RNSScreenStackHeaderConfig
+        backButtonInCustomView={false}
+        backTitleVisible={true}
+        backgroundColor="transparent"
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
         hidden={false}
-        hideBackButton={false}
+        hideBackButton={true}
+        hideShadow={true}
         largeTitleHideShadow={false}
-        title="HomeTabs"
+        title=""
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
-        translucent={false}
+        translucent={true}
+      >
+        <RNSScreenStackHeaderSubview
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+          type="left"
+        >
+          <Text>
+            Back Button
+          </Text>
+        </RNSScreenStackHeaderSubview>
+      </RNSScreenStackHeaderConfig>
+    </RNSScreen>
+  </RNSScreenStack>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Root when navigate to Nostr In should render Login with Back button 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RNSScreenStack
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <RNSScreen
+      collapsable={false}
+      fullScreenSwipeShadowEnabled={false}
+      gestureResponseDistance={
+        {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
+      }
+      hasLargeHeader={false}
+      nativeBackButtonDismissalEnabled={false}
+      onAppear={[Function]}
+      onDisappear={[Function]}
+      onDismissed={[Function]}
+      onGestureCancel={[Function]}
+      onHeaderBackButtonClicked={[Function]}
+      onNativeDismissCancelled={[Function]}
+      onTransitionProgress={[Function]}
+      onWillAppear={[Function]}
+      onWillDisappear={[Function]}
+      replaceAnimation="push"
+      sheetAllowedDetents="large"
+      sheetCornerRadius={-1}
+      sheetExpandsWhenScrolledToEdge={true}
+      sheetGrabberVisible={false}
+      sheetLargestUndimmedDetent="all"
+      stackPresentation="push"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      swipeDirection="horizontal"
+    >
+      <View
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          {
+            "flex": 1,
+            "flexDirection": "column-reverse",
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "backgroundColor": "rgb(242, 242, 242)",
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            onPress={[Function]}
+          >
+            Onboarding Screen
+          </Text>
+        </View>
+      </View>
+      <RNSScreenStackHeaderConfig
+        backButtonInCustomView={false}
+        backTitleVisible={true}
+        backgroundColor="transparent"
+        color="rgb(0, 122, 255)"
+        direction="ltr"
+        disableBackButtonMenu={false}
+        hidden={true}
+        hideBackButton={true}
+        hideShadow={true}
+        largeTitleHideShadow={false}
+        title=""
+        titleColor="rgb(28, 28, 30)"
+        topInsetEnabled={false}
+        translucent={true}
       />
+    </RNSScreen>
+    <RNSScreen
+      collapsable={false}
+      fullScreenSwipeShadowEnabled={false}
+      gestureResponseDistance={
+        {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
+      }
+      hasLargeHeader={false}
+      nativeBackButtonDismissalEnabled={false}
+      onAppear={[Function]}
+      onDisappear={[Function]}
+      onDismissed={[Function]}
+      onGestureCancel={[Function]}
+      onHeaderBackButtonClicked={[Function]}
+      onNativeDismissCancelled={[Function]}
+      onTransitionProgress={[Function]}
+      onWillAppear={[Function]}
+      onWillDisappear={[Function]}
+      replaceAnimation="push"
+      sheetAllowedDetents="large"
+      sheetCornerRadius={-1}
+      sheetExpandsWhenScrolledToEdge={true}
+      sheetGrabberVisible={false}
+      sheetLargestUndimmedDetent="all"
+      stackPresentation="push"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      swipeDirection="horizontal"
+    >
+      <View
+        accessibilityElementsHidden={false}
+        importantForAccessibility="auto"
+        style={
+          {
+            "flex": 1,
+            "flexDirection": "column-reverse",
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "backgroundColor": "rgb(242, 242, 242)",
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text>
+            NostrIn Screen
+          </Text>
+        </View>
+      </View>
+      <RNSScreenStackHeaderConfig
+        backButtonInCustomView={false}
+        backTitleVisible={true}
+        backgroundColor="transparent"
+        color="rgb(0, 122, 255)"
+        direction="ltr"
+        disableBackButtonMenu={false}
+        hidden={false}
+        hideBackButton={true}
+        hideShadow={true}
+        largeTitleHideShadow={false}
+        title=""
+        titleColor="rgb(28, 28, 30)"
+        topInsetEnabled={false}
+        translucent={true}
+      >
+        <RNSScreenStackHeaderSubview
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+          type="left"
+        >
+          <Text>
+            Back Button
+          </Text>
+        </RNSScreenStackHeaderSubview>
+      </RNSScreenStackHeaderConfig>
     </RNSScreen>
   </RNSScreenStack>
 </RNCSafeAreaProvider>
@@ -288,17 +720,18 @@ exports[`Root when navigate to Nostr Up should render Nostr Up with Back button 
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
         backTitleVisible={true}
-        backgroundColor="rgb(255, 255, 255)"
+        backgroundColor="transparent"
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
         hidden={true}
-        hideBackButton={false}
+        hideBackButton={true}
+        hideShadow={true}
         largeTitleHideShadow={false}
-        title="Onboarding"
+        title=""
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
-        translucent={false}
+        translucent={true}
       />
     </RNSScreen>
     <RNSScreen
@@ -502,17 +935,18 @@ exports[`Root when navigate to Sign Up should render Sign Up with Back button 1`
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
         backTitleVisible={true}
-        backgroundColor="rgb(255, 255, 255)"
+        backgroundColor="transparent"
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
         hidden={true}
-        hideBackButton={false}
+        hideBackButton={true}
+        hideShadow={true}
         largeTitleHideShadow={false}
-        title="Onboarding"
+        title=""
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
-        translucent={false}
+        translucent={true}
       />
     </RNSScreen>
     <RNSScreen
@@ -716,17 +1150,18 @@ exports[`Root when not running in expo go should render initial route Onboarding
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
         backTitleVisible={true}
-        backgroundColor="rgb(255, 255, 255)"
+        backgroundColor="transparent"
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
         hidden={true}
-        hideBackButton={false}
+        hideBackButton={true}
+        hideShadow={true}
         largeTitleHideShadow={false}
-        title="Onboarding"
+        title=""
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
-        translucent={false}
+        translucent={true}
       />
     </RNSScreen>
   </RNSScreenStack>
@@ -826,17 +1261,18 @@ exports[`Root when running in expo go should render initial route Onboarding scr
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
         backTitleVisible={true}
-        backgroundColor="rgb(255, 255, 255)"
+        backgroundColor="transparent"
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
         hidden={true}
-        hideBackButton={false}
+        hideBackButton={true}
+        hideShadow={true}
         largeTitleHideShadow={false}
-        title="Splash"
+        title=""
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
-        translucent={false}
+        translucent={true}
       />
     </RNSScreen>
   </RNSScreenStack>
