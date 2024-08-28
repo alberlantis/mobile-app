@@ -4,10 +4,9 @@ export default StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
   },
   contentContainer: {
-    ...StyleSheet.absoluteFillObject,
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },

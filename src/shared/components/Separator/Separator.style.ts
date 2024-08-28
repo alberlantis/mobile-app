@@ -7,7 +7,6 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   line: {
-    height: 1,
     width: "100%",
     position: "absolute",
   },

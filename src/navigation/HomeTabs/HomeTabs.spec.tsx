@@ -9,12 +9,26 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import HomeTabs from "./HomeTabs";
 
+jest.mock("./TabIcon", () => {
+  const { Text } =
+    jest.requireActual<typeof import("react-native")>("react-native");
+  return function MockTabIcon({ route }: { route: string }) {
+    return <Text>{`TabIcon-${route}`}</Text>;
+  };
+});
+jest.mock("./TabLabel", () => {
+  const { Text } =
+    jest.requireActual<typeof import("react-native")>("react-native");
+  return function MockTabLabel({ route }: { route: string }) {
+    return <Text>{route}</Text>;
+  };
+});
 jest.mock("src/screens", () => {
   const { Text } =
     jest.requireActual<typeof import("react-native")>("react-native");
   return {
     Home: () => <Text>Home Screen</Text>,
-    Profile: () => <Text>Profile Screen</Text>,
+    ProfileHome: () => <Text>ProfileHome Screen</Text>,
     Posting: () => <Text>Posting Screen</Text>,
     Notifications: () => <Text>Notifications Screen</Text>,
   };
@@ -46,7 +60,7 @@ describe("Root", () => {
     });
   });
 
-  describe("when navigate to Profile", () => {
+  describe("when navigate to ProfileHome", () => {
     beforeEach(() => {
       waitFor(() => {
         render(
@@ -54,7 +68,7 @@ describe("Root", () => {
             <HomeTabs />
           </NavigationContainer>,
         );
-        const button = screen.getByText("Profile");
+        const button = screen.getByText("ProfileHome");
         fireEvent.press(button);
       });
     });
@@ -63,8 +77,8 @@ describe("Root", () => {
       expect(screen.toJSON()).toMatchSnapshot();
     });
 
-    it("should render Profile screen", () => {
-      expect(screen.getByText("Profile Screen")).toBeOnTheScreen();
+    it("should render ProfileHome screen", () => {
+      expect(screen.getByText("ProfileHome Screen")).toBeOnTheScreen();
     });
   });
 

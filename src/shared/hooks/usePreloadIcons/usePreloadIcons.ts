@@ -1,5 +1,11 @@
 import * as Font from "expo-font";
-import { Entypo, Feather } from "@expo/vector-icons";
+import {
+  Entypo,
+  Feather,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 const usePreloadIcons = () => {
   const preloadIcons = async () => {
@@ -7,6 +13,9 @@ const usePreloadIcons = () => {
       // Add other icon fonts here as needed
       ...Entypo.font,
       ...Feather.font,
+      ...FontAwesome.font,
+      ...Ionicons.font,
+      ...MaterialCommunityIcons.font,
     });
   };
 

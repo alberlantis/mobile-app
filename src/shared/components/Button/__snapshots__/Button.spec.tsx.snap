@@ -34,9 +34,12 @@ exports[`Button should render primary extra-large button 1`] = `
   style={
     {
       "alignItems": "center",
+      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
       "marginTop": undefined,
       "width": "100%",
     }
@@ -53,6 +56,13 @@ exports[`Button should render primary extra-large button 1`] = `
         {
           "backgroundColor": "transparent",
           "borderWidth": 0,
+        },
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         },
         {
           "flex": 0,
@@ -135,15 +145,12 @@ exports[`Button should render primary extra-large button 1`] = `
     </RNSVGGroup>
   </RNSVGSvgView>
   <View
+    onLayout={[Function]}
     style={
       {
         "alignItems": "center",
-        "bottom": 0,
+        "flexDirection": "row",
         "justifyContent": "center",
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
       }
     }
   >
@@ -196,9 +203,12 @@ exports[`Button should render primary large button 1`] = `
   style={
     {
       "alignItems": "center",
+      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
       "marginTop": undefined,
       "width": 300,
     }
@@ -215,6 +225,13 @@ exports[`Button should render primary large button 1`] = `
         {
           "backgroundColor": "transparent",
           "borderWidth": 0,
+        },
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         },
         {
           "flex": 0,
@@ -297,15 +314,12 @@ exports[`Button should render primary large button 1`] = `
     </RNSVGGroup>
   </RNSVGSvgView>
   <View
+    onLayout={[Function]}
     style={
       {
         "alignItems": "center",
-        "bottom": 0,
+        "flexDirection": "row",
         "justifyContent": "center",
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
       }
     }
   >
@@ -358,9 +372,12 @@ exports[`Button should render secondary extra-large button 1`] = `
   style={
     {
       "alignItems": "center",
+      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
       "marginTop": undefined,
       "width": "100%",
     }
@@ -377,6 +394,13 @@ exports[`Button should render secondary extra-large button 1`] = `
         {
           "backgroundColor": "transparent",
           "borderWidth": 0,
+        },
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         },
         {
           "flex": 0,
@@ -459,15 +483,12 @@ exports[`Button should render secondary extra-large button 1`] = `
     </RNSVGGroup>
   </RNSVGSvgView>
   <View
+    onLayout={[Function]}
     style={
       {
         "alignItems": "center",
-        "bottom": 0,
+        "flexDirection": "row",
         "justifyContent": "center",
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
       }
     }
   >
@@ -520,9 +541,12 @@ exports[`Button should render secondary large button 1`] = `
   style={
     {
       "alignItems": "center",
+      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
       "marginTop": undefined,
       "width": 300,
     }
@@ -539,6 +563,13 @@ exports[`Button should render secondary large button 1`] = `
         {
           "backgroundColor": "transparent",
           "borderWidth": 0,
+        },
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         },
         {
           "flex": 0,
@@ -621,15 +652,12 @@ exports[`Button should render secondary large button 1`] = `
     </RNSVGGroup>
   </RNSVGSvgView>
   <View
+    onLayout={[Function]}
     style={
       {
         "alignItems": "center",
-        "bottom": 0,
+        "flexDirection": "row",
         "justifyContent": "center",
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
       }
     }
   >

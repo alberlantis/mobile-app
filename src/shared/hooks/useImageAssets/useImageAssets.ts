@@ -2,9 +2,11 @@ import { Asset } from "expo-asset";
 
 const useImageAssets = () => {
   const images = {
+    // preload more images here
     splash: require("assets/splash/splash.png"),
     logo: require("assets/images/logo.png"),
-    // preload more images here
+    mockLandscape: require("mock/profile/landscape-mock.png"),
+    mockProfile: require("mock/profile/profile-mock.png"),
   };
 
   const preloadImagesAssets = async () => {

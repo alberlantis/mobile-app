@@ -16,6 +16,7 @@ interface ISeparatorProps {
   labelColor?: ColorValue;
   lineColor?: ColorValue;
   label?: string;
+  span?: number;
 }
 
 const Separator: React.FC<ISeparatorProps> = ({
@@ -23,12 +24,14 @@ const Separator: React.FC<ISeparatorProps> = ({
   textColor = colors.WHITE,
   labelColor = colors.BLACK,
   lineColor = colors.GRAY,
+  span = 1,
   label,
 }) => {
   return (
     <View style={StyleSheet.compose(s.container, { marginVertical })}>
       <View
         style={StyleSheet.compose(s.line, {
+          height: span,
           backgroundColor: lineColor,
         })}
       />

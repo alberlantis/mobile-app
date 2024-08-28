@@ -17,6 +17,21 @@ jest.mock("@expo/vector-icons", () => ({
       featherIcons: "feather",
     },
   },
+  FontAwesome: {
+    font: {
+      fontAwesomeIcons: "fontAwesome",
+    },
+  },
+  Ionicons: {
+    font: {
+      inonicIcons: "ionic",
+    },
+  },
+  MaterialCommunityIcons: {
+    font: {
+      materialCommunityIconsIcons: "materialCommunity",
+    },
+  },
 }));
 
 describe("usePreloadIcons", () => {
@@ -39,6 +54,9 @@ describe("usePreloadIcons", () => {
     expect(Font.loadAsync).toHaveBeenCalledWith({
       entypoIcons: "entypo_font",
       featherIcons: "feather",
+      fontAwesomeIcons: "fontAwesome",
+      inonicIcons: "ionic",
+      materialCommunityIconsIcons: "materialCommunity",
     });
   });
 });

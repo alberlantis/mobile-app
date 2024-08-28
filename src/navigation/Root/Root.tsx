@@ -23,7 +23,7 @@ export type HomeTabsParams = {
   screen:
     | (typeof SCREENS)["HOME"]
     | (typeof SCREENS)["NOTIFICATIONS"]
-    | (typeof SCREENS)["PROFILE"]
+    | (typeof SCREENS)["PROFILE_HOME"]
     | (typeof SCREENS)["POSTING"];
 };
 type RootParamList = {

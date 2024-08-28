@@ -78,129 +78,6 @@ exports[`Root general functionality should match snapshot 1`] = `
             Home Screen
           </Text>
         </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Home
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
       </View>
     </RNSScreen>
   </RNSScreenNavigationContainer>
@@ -210,9 +87,9 @@ exports[`Root general functionality should match snapshot 1`] = `
     pointerEvents="auto"
     style={
       {
-        "backgroundColor": "rgb(255, 255, 255)",
+        "backgroundColor": "#000",
         "borderTopColor": "rgb(216, 216, 216)",
-        "borderTopWidth": 0.5,
+        "borderTopWidth": 0,
         "bottom": 0,
         "elevation": 8,
         "height": 49,
@@ -251,7 +128,6 @@ exports[`Root general functionality should match snapshot 1`] = `
       }
     >
       <View
-        accessibilityLabel="Home, tab, 1 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -332,21 +208,8 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
           <View
@@ -367,47 +230,16 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "rgb(0, 122, 255)",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Home
         </Text>
       </View>
       <View
-        accessibilityLabel="Profile, tab, 2 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -484,21 +316,8 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
           <View
@@ -519,47 +338,16 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
-          Profile
+        <Text>
+          ProfileHome
         </Text>
       </View>
       <View
-        accessibilityLabel="Posting, tab, 3 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -636,21 +424,8 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
           <View
@@ -671,47 +446,16 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Posting
         </Text>
       </View>
       <View
-        accessibilityLabel="Notifications, tab, 4 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -788,21 +532,8 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
           <View
@@ -823,42 +554,12 @@ exports[`Root general functionality should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Notifications
         </Text>
       </View>
@@ -945,129 +646,6 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             Home Screen
           </Text>
         </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Home
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
       </View>
     </RNSScreen>
     <RNSScreen
@@ -1128,129 +706,6 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             Notifications Screen
           </Text>
         </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Notifications
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
       </View>
     </RNSScreen>
   </RNSScreenNavigationContainer>
@@ -1260,9 +715,9 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
     pointerEvents="auto"
     style={
       {
-        "backgroundColor": "rgb(255, 255, 255)",
+        "backgroundColor": "#000",
         "borderTopColor": "rgb(216, 216, 216)",
-        "borderTopWidth": 0.5,
+        "borderTopWidth": 0,
         "bottom": 0,
         "elevation": 8,
         "height": 49,
@@ -1301,7 +756,6 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
       }
     >
       <View
-        accessibilityLabel="Home, tab, 1 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1378,21 +832,8 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
           <View
@@ -1413,47 +854,16 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Home
         </Text>
       </View>
       <View
-        accessibilityLabel="Profile, tab, 2 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1530,21 +940,8 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
           <View
@@ -1565,47 +962,16 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
-          Profile
+        <Text>
+          ProfileHome
         </Text>
       </View>
       <View
-        accessibilityLabel="Posting, tab, 3 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1682,21 +1048,8 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
           <View
@@ -1717,47 +1070,16 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Posting
         </Text>
       </View>
       <View
-        accessibilityLabel="Notifications, tab, 4 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1838,21 +1160,8 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
           <View
@@ -1873,42 +1182,12 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "rgb(0, 122, 255)",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Notifications
         </Text>
       </View>
@@ -1995,129 +1274,6 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             Home Screen
           </Text>
         </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Home
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
       </View>
     </RNSScreen>
     <RNSScreen
@@ -2178,129 +1334,6 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             Posting Screen
           </Text>
         </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Posting
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
       </View>
     </RNSScreen>
   </RNSScreenNavigationContainer>
@@ -2310,9 +1343,9 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
     pointerEvents="auto"
     style={
       {
-        "backgroundColor": "rgb(255, 255, 255)",
+        "backgroundColor": "#000",
         "borderTopColor": "rgb(216, 216, 216)",
-        "borderTopWidth": 0.5,
+        "borderTopWidth": 0,
         "bottom": 0,
         "elevation": 8,
         "height": 49,
@@ -2351,7 +1384,6 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
       }
     >
       <View
-        accessibilityLabel="Home, tab, 1 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -2428,21 +1460,8 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
           <View
@@ -2463,47 +1482,16 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Home
         </Text>
       </View>
       <View
-        accessibilityLabel="Profile, tab, 2 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -2580,21 +1568,8 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
           <View
@@ -2615,47 +1590,16 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
-          Profile
+        <Text>
+          ProfileHome
         </Text>
       </View>
       <View
-        accessibilityLabel="Posting, tab, 3 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -2736,21 +1680,8 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
           <View
@@ -2771,47 +1702,16 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "rgb(0, 122, 255)",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Posting
         </Text>
       </View>
       <View
-        accessibilityLabel="Notifications, tab, 4 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -2888,21 +1788,8 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
           <View
@@ -2923,42 +1810,12 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Notifications
         </Text>
       </View>
@@ -2967,7 +1824,7 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
 </RNCSafeAreaProvider>
 `;
 
-exports[`Root when navigate to Profile should match snapshot 1`] = `
+exports[`Root when navigate to ProfileHome should match snapshot 1`] = `
 <RNCSafeAreaProvider
   onInsetsChange={[Function]}
   style={
@@ -3045,129 +1902,6 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
             Home Screen
           </Text>
         </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Home
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
       </View>
     </RNSScreen>
     <RNSScreen
@@ -3225,131 +1959,8 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
           }
         >
           <Text>
-            Profile Screen
+            ProfileHome Screen
           </Text>
-        </View>
-        <View
-          onLayout={[Function]}
-          style={null}
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "zIndex": 0,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "backgroundColor": "rgb(255, 255, 255)",
-                  "borderBottomColor": "rgb(216, 216, 216)",
-                  "flex": 1,
-                  "shadowColor": "rgb(216, 216, 216)",
-                  "shadowOffset": {
-                    "height": 0.5,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0.85,
-                  "shadowRadius": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
-              {
-                "height": 44,
-                "maxHeight": undefined,
-                "minHeight": undefined,
-                "opacity": undefined,
-                "transform": undefined,
-              }
-            }
-          >
-            <View
-              pointerEvents="none"
-              style={
-                {
-                  "height": 0,
-                }
-              }
-            />
-            <View
-              pointerEvents="box-none"
-              style={
-                {
-                  "alignItems": "stretch",
-                  "flex": 1,
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-start",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginStart": 0,
-                  }
-                }
-              />
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "justifyContent": "center",
-                    "marginHorizontal": 16,
-                    "maxWidth": 718,
-                  }
-                }
-              >
-                <Text
-                  accessibilityRole="header"
-                  aria-level="1"
-                  collapsable={false}
-                  numberOfLines={1}
-                  style={
-                    {
-                      "color": "rgb(28, 28, 30)",
-                      "fontSize": 17,
-                      "fontWeight": "600",
-                    }
-                  }
-                >
-                  Profile
-                </Text>
-              </View>
-              <View
-                collapsable={false}
-                pointerEvents="box-none"
-                style={
-                  {
-                    "alignItems": "flex-end",
-                    "flexBasis": 0,
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                    "marginEnd": 0,
-                  }
-                }
-              />
-            </View>
-          </View>
         </View>
       </View>
     </RNSScreen>
@@ -3360,9 +1971,9 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
     pointerEvents="auto"
     style={
       {
-        "backgroundColor": "rgb(255, 255, 255)",
+        "backgroundColor": "#000",
         "borderTopColor": "rgb(216, 216, 216)",
-        "borderTopWidth": 0.5,
+        "borderTopWidth": 0,
         "bottom": 0,
         "elevation": 8,
         "height": 49,
@@ -3401,7 +2012,6 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
       }
     >
       <View
-        accessibilityLabel="Home, tab, 1 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -3478,21 +2088,8 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
           <View
@@ -3513,47 +2110,16 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Home
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Home
         </Text>
       </View>
       <View
-        accessibilityLabel="Profile, tab, 2 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -3634,21 +2200,8 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
           <View
@@ -3669,47 +2222,16 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-ProfileHome
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "rgb(0, 122, 255)",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
-          Profile
+        <Text>
+          ProfileHome
         </Text>
       </View>
       <View
-        accessibilityLabel="Posting, tab, 3 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -3786,21 +2308,8 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
           <View
@@ -3821,47 +2330,16 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Posting
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Posting
         </Text>
       </View>
       <View
-        accessibilityLabel="Notifications, tab, 4 of 4"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -3938,21 +2416,8 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "rgb(0, 122, 255)",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
           <View
@@ -3973,42 +2438,12 @@ exports[`Root when navigate to Profile should match snapshot 1`] = `
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                  {
-                    "color": "#8E8E8F",
-                    "fontSize": 25,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              ⏷
+            <Text>
+              TabIcon-Notifications
             </Text>
           </View>
         </View>
-        <Text
-          numberOfLines={1}
-          style={
-            [
-              {
-                "backgroundColor": "transparent",
-                "textAlign": "center",
-              },
-              {
-                "color": "#8E8E8F",
-              },
-              {
-                "fontSize": 10,
-              },
-              undefined,
-            ]
-          }
-        >
+        <Text>
           Notifications
         </Text>
       </View>

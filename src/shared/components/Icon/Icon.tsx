@@ -1,5 +1,11 @@
 import React from "react";
-import { Entypo, Feather } from "@expo/vector-icons";
+import {
+  Entypo,
+  Feather,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { ColorValue, StyleProp, TextStyle } from "react-native";
 
 import colors from "src/theme/colors";
@@ -7,6 +13,9 @@ import colors from "src/theme/colors";
 export type IconNames = {
   Entypo: keyof typeof Entypo.glyphMap;
   Feather: keyof typeof Feather.glyphMap;
+  FontAwesome: keyof typeof FontAwesome.glyphMap;
+  Ionicons: keyof typeof Ionicons.glyphMap;
+  MaterialCommunityIcons: keyof typeof MaterialCommunityIcons.glyphMap;
 };
 
 interface IBaseIconProps {
@@ -20,6 +29,9 @@ export type IconProps<T extends keyof IconNames> = IBaseIconProps & {
   name: IconNames[T];
 };
 
+export type IconType = keyof IconNames;
+export type IconName = IconNames[keyof IconNames];
+
 const Icon = <T extends keyof IconNames>({
   type,
   name,
@@ -30,6 +42,9 @@ const Icon = <T extends keyof IconNames>({
   const iconMap = {
     Entypo,
     Feather,
+    FontAwesome,
+    Ionicons,
+    MaterialCommunityIcons,
   };
   const IconComponent = iconMap[type] as React.ComponentType<any>;
   return <IconComponent name={name} size={size} color={color} style={style} />;
