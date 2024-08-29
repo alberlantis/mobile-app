@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useAppSelector, ProfileState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
 import colors from "src/theme/colors";
 import { Icon } from "src/shared/components";
@@ -11,6 +12,10 @@ interface ITabIconProps {
 }
 
 const TabIcon: React.FC<ITabIconProps> = ({ route, focused = false }) => {
+  const isBusiness = useAppSelector(
+    ProfileState.selectors.selectIsProfileBusiness,
+  );
+
   let icon: {
     name: IconName;
     type: IconType;
@@ -18,8 +23,8 @@ const TabIcon: React.FC<ITabIconProps> = ({ route, focused = false }) => {
   switch (route) {
     case SCREENS.PROFILE_HOME:
       icon = {
-        name: "user-circle-o",
-        type: "FontAwesome",
+        name: isBusiness ? "store" : "user-circle-o",
+        type: isBusiness ? "MaterialCommunityIcons" : "FontAwesome",
       };
       break;
     case SCREENS.POSTING:

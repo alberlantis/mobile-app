@@ -1,3 +1,4 @@
+export const IS_DEV = process.env.EXPO_PUBLIC_ENVIRONMENT === "development";
 export const EXPO_PUBLIC_APP_VERSION = process.env.EXPO_PUBLIC_APP_VERSION;
 export const EXPO_PUBLIC_RUNTIME_VERSION =
   process.env.EXPO_PUBLIC_RUNTIME_VERSION;

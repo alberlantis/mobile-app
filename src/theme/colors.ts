@@ -12,5 +12,6 @@ export default {
   ORANGE_PRIMARY_LIGHT: "#FF8D3B",
   BLUE_PRIMARY: "#5466D8",
   BLUE_SECONDARY: "#307DF0",
+  GREEN: "#17B278",
   TRANSPARENT: "transparent",
 };

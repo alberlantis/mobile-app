@@ -5,11 +5,14 @@ export default StyleSheet.create({
     width: "100%",
   },
   followingButtonContainer: {
-    alignItems: "flex-end",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
     marginRight: 15,
   },
   editButtonContainer: {
-    alignItems: "flex-start",
+    flexDirection: "row",
+    justifyContent: "flex-start",
     marginLeft: 15,
   },
   followingIconCheck: { marginRight: 5 },

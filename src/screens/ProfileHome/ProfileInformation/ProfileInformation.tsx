@@ -1,28 +1,11 @@
 import React from "react";
-import { Image, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
+import { ProfileState, useAppSelector } from "src/store";
 import { Icon } from "src/shared/components";
-import { useImageAssets } from "src/shared/hooks";
-import s from "./ProfileData.style";
+import ProfileAvatar from "../ProfileAvatar";
+import s from "./ProfileInformation.style";
 import colors from "src/theme/colors";
-
-const ProfileImage = () => {
-  const { images } = useImageAssets();
-  return (
-    <View style={s.profilePhotoOutterContainer}>
-      <View style={s.profilePhotoInnerContainer}>
-        <Image
-          resizeMode="cover"
-          source={images.mockProfile}
-          style={s.profilePhoto}
-        />
-        <View style={s.profilePhotoCheckIcon}>
-          <Icon type="Feather" size={16} name="check" color={colors.WHITE} />
-        </View>
-      </View>
-    </View>
-  );
-};
 
 interface IProfileFollowersProps {
   marginRight?: number;
@@ -42,13 +25,19 @@ const ProfileFollowers: React.FC<IProfileFollowersProps> = ({
   );
 };
 
-const ProfileData = () => {
+const ProfileInformation = () => {
+  const isBusiness = useAppSelector(
+    ProfileState.selectors.selectIsProfileBusiness,
+  );
+
   return (
     <View style={s.container}>
-      <ProfileImage />
+      <ProfileAvatar />
       <View style={s.profileDataContainer}>
         <View style={s.profileDataNameContainer}>
-          <Text style={s.profileDataName}>Monkey D. Luffy</Text>
+          <Text style={s.profileDataName}>
+            {isBusiness ? "Starbucks" : "Monkey D. Luffy"}
+          </Text>
           <Icon
             type="MaterialCommunityIcons"
             size={16}
@@ -56,7 +45,7 @@ const ProfileData = () => {
             color={colors.ORANGE_PRIMARY}
           />
         </View>
-        <Text style={s.profileDataTitle}>@ambassador</Text>
+        {!isBusiness && <Text style={s.profileDataTitle}>@ambassador</Text>}
         <View style={s.followersSection}>
           <ProfileFollowers
             followCant={2100}
@@ -70,4 +59,4 @@ const ProfileData = () => {
   );
 };
 
-export default ProfileData;
+export default ProfileInformation;

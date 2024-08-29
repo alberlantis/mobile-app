@@ -11,9 +11,9 @@ import ProfilePosts from "./ProfilePosts";
 const ProfileHome = () => {
   const dispatch = useAppDispatch();
   const posts: SanitizePosts[] =
-    useAppSelector(ProfileState.selectors.getSanitizePosts) || [];
+    useAppSelector(ProfileState.selectors.selectSanitizePosts) || [];
   const postsLoading = useAppSelector(
-    ProfileState.selectors.getProfilePostsLoading,
+    ProfileState.selectors.selectProfilePostsLoading,
   );
 
   const handleRenderItem = useCallback(

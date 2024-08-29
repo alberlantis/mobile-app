@@ -19,16 +19,18 @@ import {
   NostrIn,
 } from "src/screens";
 
-export type HomeTabsParams = {
-  screen:
-    | (typeof SCREENS)["HOME"]
-    | (typeof SCREENS)["NOTIFICATIONS"]
-    | (typeof SCREENS)["PROFILE_HOME"]
-    | (typeof SCREENS)["POSTING"];
-};
+export type HomeTabsParams =
+  | {
+      screen?:
+        | (typeof SCREENS)["HOME"]
+        | (typeof SCREENS)["NOTIFICATIONS"]
+        | (typeof SCREENS)["PROFILE_HOME"]
+        | (typeof SCREENS)["POSTING"];
+    }
+  | undefined;
 type RootParamList = {
   [SCREENS.ONBOARDING]: undefined;
-  [SCREENS.HOME_TABS]: HomeTabsParams | undefined;
+  [SCREENS.HOME_TABS]: HomeTabsParams;
   [SCREENS.SPLASH]: undefined;
   [SCREENS.SIGN_UP]: undefined;
   [SCREENS.NOSTR_UP]: undefined;

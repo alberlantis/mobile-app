@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
+import { ProfileState, useAppSelector } from "src/store";
 import { Icon } from "src/shared/components";
 import { Button } from "src/shared/components";
 import s from "./ProfileActions.style";
 import colors from "src/theme/colors";
 
-const isOwnProfile = true;
-
 const ProfileActions = () => {
   const [toggleFollow, setToggleFollow] = useState(false);
-  const setCheckIcon = () => (
+  const isOwnProfile = useAppSelector(
+    ProfileState.selectors.selectIsOwnProfile,
+  );
+
+  const followIcon = () => (
     <Icon
-      type="MaterialCommunityIcons"
+      type={toggleFollow ? "MaterialCommunityIcons" : "Entypo"}
       style={s.followingIconCheck}
-      name="check-bold"
+      name={toggleFollow ? "check-bold" : "plus"}
       color={colors.WHITE}
     />
   );
-  const setEditIcon = () => (
+  const editIcon = () => (
     <Icon
       type="Entypo"
       size={18}
@@ -33,24 +36,25 @@ const ProfileActions = () => {
       {isOwnProfile ? (
         <View style={s.editButtonContainer}>
           <Button
-            size="regular"
+            size="auto"
             text="Edit Profile"
             theme="primary"
             marginTop={10}
             marginBottom={10}
-            buttonIcon={setEditIcon}
+            prefixElement={editIcon}
             onPress={() => {}}
           />
         </View>
       ) : (
         <View style={s.followingButtonContainer}>
           <Button
-            size="regular"
+            size="auto"
             text={toggleFollow ? "Following" : "Follow"}
+            extraPadding={20}
             theme="primary"
             marginTop={10}
             marginBottom={10}
-            buttonIcon={toggleFollow ? setCheckIcon : undefined}
+            prefixElement={followIcon}
             onPress={() => setToggleFollow(!toggleFollow)}
           />
         </View>

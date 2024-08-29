@@ -5,8 +5,10 @@ const useImageAssets = () => {
     // preload more images here
     splash: require("assets/splash/splash.png"),
     logo: require("assets/images/logo.png"),
-    mockLandscape: require("mock/profile/landscape-mock.png"),
-    mockProfile: require("mock/profile/profile-mock.png"),
+    mockUserLandscape: require("mock/profile/landscape-user-profile.png"),
+    mockBusinessLandscape: require("mock/profile/landscape-business-profile.png"),
+    mockUserAvatar: require("mock/profile/avatar-user.png"),
+    mockBusinessAvatar: require("mock/profile/avatar-business.png"),
   };
 
   const preloadImagesAssets = async () => {

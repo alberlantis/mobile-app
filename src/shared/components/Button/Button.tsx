@@ -8,6 +8,7 @@ import {
   Text,
   View,
   LayoutChangeEvent,
+  TextStyle,
 } from "react-native";
 import Svg, {
   Defs,
@@ -17,7 +18,6 @@ import Svg, {
   Rect,
 } from "react-native-svg";
 
-import type { IconProps, IconType } from "../Icon";
 import s from "./Button.style";
 import colors from "src/theme/colors";
 
@@ -37,7 +37,10 @@ export interface IButtonProps {
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
-  buttonIcon?(): React.ComponentElement<IconProps<IconType>, any>;
+  extraPadding?: number;
+  textStyle?: TextStyle;
+  prefixElement?(): React.ComponentElement<any, any>;
+  subfixElement?(): React.ComponentElement<any, any>;
   onPress(event?: GestureResponderEvent): void;
 }
 
@@ -86,7 +89,10 @@ const Button: React.FC<IButtonProps> = ({
   marginBottom,
   marginLeft,
   marginRight,
-  buttonIcon,
+  extraPadding = 40,
+  textStyle,
+  subfixElement,
+  prefixElement,
   onPress,
 }) => {
   const linearGradientID = "linGrad";
@@ -102,12 +108,10 @@ const Button: React.FC<IButtonProps> = ({
   const handleLayout = useCallback(
     (event: LayoutChangeEvent) => {
       if (isAutoSize) {
-        setDynamicWidth(
-          event.nativeEvent.layout.width + (buttonIcon ? 60 : 40),
-        );
+        setDynamicWidth(event.nativeEvent.layout.width + extraPadding);
       }
     },
-    [isAutoSize, buttonIcon, setDynamicWidth],
+    [isAutoSize, extraPadding, setDynamicWidth],
   );
 
   return (
@@ -166,8 +170,11 @@ const Button: React.FC<IButtonProps> = ({
         </Svg>
       )}
       <View style={s.contentContainer} onLayout={handleLayout}>
-        {!!buttonIcon && buttonIcon()}
-        <Text style={s.defaultText}>{text}</Text>
+        {!!prefixElement && prefixElement()}
+        <Text style={StyleSheet.flatten([s.defaultText, textStyle])}>
+          {text}
+        </Text>
+        {!!subfixElement && subfixElement()}
       </View>
     </Pressable>
   );
