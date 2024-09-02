@@ -4,8 +4,19 @@
     "baseUrl": "./",
     "paths": {     
       "@src": ["./src/*"],
-      "@assets": ["./assets/*"]
-    }
+      "@assets": ["./assets/*"],
+      "@blowater/nostr-sdk": ["node_modules/@blowater/nostr-sdk/nostr.ts"],
+      "@jsr/std__encoding": ["node_modules/@jsr/std__encoding/mod.ts"],
+      "@jsr/blowater__collections": ["node_modules/@jsr/blowater__collections/mod.ts"],
+      "@jsr/blowater__csp": ["node_modules/@jsr/blowater__csp/csp.ts"],
+      "@jsr/std__assert": ["node_modules/@jsr/std__assert/mod.ts"],
+      "@jsr/std__internal": ["node_modules/@jsr/std__internal/mod.ts"],
+      "@jsr/std__datetime": ["node_modules/@jsr/std__datetime/mod.ts"],
+      "@satlantis/api-client": ["node_modules/@satlantis/api-client/sdk.ts"],
+      "@jsr/blowater__nostr-sdk": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"],
+      "jsr:@blowater/nostr-sdk@^0.0.15": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"]
+    },
+    "useUnknownInCatchVariables": false
   },
   "extends": "expo/tsconfig.base"
 }

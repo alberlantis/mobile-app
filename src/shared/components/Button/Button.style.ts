@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import colors from "src/theme/colors";
+
 export default StyleSheet.create({
   container: {
     justifyContent: "center",
@@ -11,7 +13,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   defaultText: {
-    color: "#FFF",
+    color: colors.WHITE,
     fontSize: 16,
     fontWeight: "medium",
   },

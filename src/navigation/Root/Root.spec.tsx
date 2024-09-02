@@ -4,6 +4,15 @@ import { fireEvent, render, screen } from "@testing-library/react-native";
 import { SCREENS } from "src/navigation/routes";
 import Root, { RootScreenProps } from "./Root";
 
+let mockIsLogged = false;
+jest.mock("src/store", () => ({
+  useAppSelector: jest.fn((selector) => selector()),
+  AuthState: {
+    selectors: {
+      selectIsLogged: jest.fn(() => mockIsLogged),
+    },
+  },
+}));
 jest.mock("src/shared/components", () => {
   const { Text } =
     jest.requireActual<typeof import("react-native")>("react-native");
@@ -65,10 +74,11 @@ describe("Root", () => {
 
   describe("when navigate to Home tabs", () => {
     it("should render Home tabs", () => {
+      mockIsLogged = true;
       render(<Root />);
-      fireEvent.press(screen.getByText("Onboarding Screen"), SCREENS.HOME_TABS);
       expect(screen.toJSON()).toMatchSnapshot();
       expect(screen.getByText("HomeTabs")).toBeOnTheScreen();
+      mockIsLogged = false;
     });
   });
 

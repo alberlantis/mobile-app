@@ -9,6 +9,7 @@ import {
   View,
   LayoutChangeEvent,
   TextStyle,
+  ActivityIndicator,
 } from "react-native";
 import Svg, {
   Defs,
@@ -22,7 +23,7 @@ import s from "./Button.style";
 import colors from "src/theme/colors";
 
 type ButtonSize = "large" | "extra-large" | "regular" | "auto";
-type ButtonTheme = "primary" | "secondary" | "disabled";
+type ButtonTheme = "primary" | "secondary" | "disabled" | "off";
 type NumberProp = string | number;
 type ButtonDimensions = {
   width?: NumberProp & DimensionValue;
@@ -39,6 +40,7 @@ export interface IButtonProps {
   marginRight?: number;
   extraPadding?: number;
   textStyle?: TextStyle;
+  loading?: boolean;
   prefixElement?(): React.ComponentElement<any, any>;
   subfixElement?(): React.ComponentElement<any, any>;
   onPress(event?: GestureResponderEvent): void;
@@ -50,6 +52,8 @@ const getColors = (theme: ButtonTheme): ColorValue[] => {
       return [colors.BLUE_PRIMARY, colors.BLUE_PRIMARY];
     case "disabled":
       return [colors.GRAY_BOLD, colors.GRAY_BOLD];
+    case "off":
+      return [colors.WHITE_GRAY, colors.WHITE_GRAY];
     case "primary":
     default:
       return [colors.ORANGE_PRIMARY_DARK, colors.ORANGE_PRIMARY_LIGHT];
@@ -91,6 +95,7 @@ const Button: React.FC<IButtonProps> = ({
   marginRight,
   extraPadding = 40,
   textStyle,
+  loading,
   subfixElement,
   prefixElement,
   onPress,
@@ -125,7 +130,6 @@ const Button: React.FC<IButtonProps> = ({
           marginRight,
           height,
           width: buttonWidth,
-          alignSelf: isAutoSize ? "flex-start" : "auto",
         },
       ])}
       onPress={onPress}
@@ -171,9 +175,16 @@ const Button: React.FC<IButtonProps> = ({
       )}
       <View style={s.contentContainer} onLayout={handleLayout}>
         {!!prefixElement && prefixElement()}
-        <Text style={StyleSheet.flatten([s.defaultText, textStyle])}>
-          {text}
-        </Text>
+        {loading ? (
+          <ActivityIndicator
+            color={textStyle?.color || colors.WHITE}
+            size={textStyle?.fontSize || 16}
+          />
+        ) : (
+          <Text style={StyleSheet.flatten([s.defaultText, textStyle])}>
+            {text}
+          </Text>
+        )}
         {!!subfixElement && subfixElement()}
       </View>
     </Pressable>

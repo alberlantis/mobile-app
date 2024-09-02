@@ -3,17 +3,17 @@
 exports[`Onboarding should match snapshot 1`] = `
 [
   <Text>
-    Sign Up-title
+    Sign Up
   </Text>,
   <Text
     onPress={[Function]}
   >
-    Sign Up-button
+    Using Email
   </Text>,
   <Text
     onPress={[Function]}
   >
-    Instant Nostr Signup-button
+    Using Nostr
   </Text>,
   <Text
     onPress={[Function]}

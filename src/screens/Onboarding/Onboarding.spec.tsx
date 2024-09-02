@@ -11,7 +11,7 @@ jest.mock("src/shared/components", () => {
       <>{children}</>
     ),
     Button: ({ text, onPress }: { text: string; onPress(): void }) => (
-      <Text onPress={onPress}>{`${text}-button`}</Text>
+      <Text onPress={onPress}>{text}</Text>
     ),
     InteractiveText: ({
       text,
@@ -27,9 +27,7 @@ jest.mock("src/shared/components", () => {
         {text}
       </Text>
     ),
-    LogoTitle: ({ title }: { title: string }) => (
-      <Text>{`${title}-title`}</Text>
-    ),
+    LogoTitle: ({ title }: { title: string }) => <Text>{title}</Text>,
   };
 });
 
@@ -54,26 +52,26 @@ describe("Onboarding", () => {
   });
 
   it("should render logo title", () => {
-    expect(screen.getByText("Sign Up-title")).toBeOnTheScreen();
+    expect(screen.getByText("Sign Up")).toBeOnTheScreen();
   });
 
-  it("should render sign up button", () => {
-    expect(screen.getByText("Sign Up-button")).toBeOnTheScreen();
+  it("should render Using Email button", () => {
+    expect(screen.getByText("Using Email")).toBeOnTheScreen();
   });
 
   it("should navigate to Sign Up when tapped", () => {
-    const button = screen.getByText("Sign Up-button");
+    const button = screen.getByText("Using Email");
     fireEvent.press(button);
     expect(mockNavigation.navigate).toHaveBeenCalledTimes(1);
     expect(mockNavigation.navigate).toHaveBeenCalledWith(SCREENS.SIGN_UP);
   });
 
   it("should render nsec button", () => {
-    expect(screen.getByText("Instant Nostr Signup-button")).toBeOnTheScreen();
+    expect(screen.getByText("Using Nostr")).toBeOnTheScreen();
   });
 
   it("should navigate to NostrUp when tapped", () => {
-    const button = screen.getByText("Instant Nostr Signup-button");
+    const button = screen.getByText("Using Nostr");
     fireEvent.press(button);
     expect(mockNavigation.navigate).toHaveBeenCalledTimes(1);
     expect(mockNavigation.navigate).toHaveBeenCalledWith(SCREENS.NOSTR_UP);

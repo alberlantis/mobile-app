@@ -10,6 +10,7 @@ import { IS_EXPO_GO } from "src/shared/constants/platform";
 import { SCREENS } from "src/navigation/routes";
 import HomeTabs from "src/navigation/HomeTabs";
 import { BackButton } from "src/shared/components";
+import { useAppSelector, AuthState } from "src/store";
 import {
   Onboarding,
   Splash,
@@ -40,6 +41,7 @@ type RootParamList = {
 const Stack = createNativeStackNavigator<RootParamList>();
 
 const Root: React.FC = () => {
+  const isLogged = useAppSelector(AuthState.selectors.selectIsLogged);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -50,49 +52,54 @@ const Root: React.FC = () => {
         }}
         initialRouteName={IS_EXPO_GO ? SCREENS.SPLASH : SCREENS.ONBOARDING}
       >
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name={SCREENS.SPLASH}
-          component={Splash}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name={SCREENS.ONBOARDING}
-          component={Onboarding}
-        />
-        <Stack.Screen
-          options={{
-            headerLeft: () => <BackButton />,
-          }}
-          name={SCREENS.SIGN_UP}
-          component={SignUp}
-        />
-        <Stack.Screen
-          options={{
-            headerLeft: () => <BackButton />,
-          }}
-          name={SCREENS.NOSTR_UP}
-          component={NostrUp}
-        />
-        <Stack.Screen
-          options={{
-            headerLeft: () => <BackButton />,
-          }}
-          name={SCREENS.LOGIN}
-          component={Login}
-        />
-        <Stack.Screen
-          options={{
-            headerLeft: () => <BackButton />,
-          }}
-          name={SCREENS.NOSTR_IN}
-          component={NostrIn}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name={SCREENS.HOME_TABS}
-          component={HomeTabs}
-        />
+        {isLogged ? (
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={SCREENS.HOME_TABS}
+            component={HomeTabs}
+          />
+        ) : (
+          <Stack.Group>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={SCREENS.SPLASH}
+              component={Splash}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={SCREENS.ONBOARDING}
+              component={Onboarding}
+            />
+            <Stack.Screen
+              options={{
+                headerLeft: () => <BackButton />,
+              }}
+              name={SCREENS.SIGN_UP}
+              component={SignUp}
+            />
+            <Stack.Screen
+              options={{
+                headerLeft: () => <BackButton />,
+              }}
+              name={SCREENS.NOSTR_UP}
+              component={NostrUp}
+            />
+            <Stack.Screen
+              options={{
+                headerLeft: () => <BackButton />,
+              }}
+              name={SCREENS.LOGIN}
+              component={Login}
+            />
+            <Stack.Screen
+              options={{
+                headerLeft: () => <BackButton />,
+              }}
+              name={SCREENS.NOSTR_IN}
+              component={NostrIn}
+            />
+          </Stack.Group>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -34,7 +34,6 @@ exports[`Button should render primary extra-large button 1`] = `
   style={
     {
       "alignItems": "center",
-      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
@@ -203,7 +202,6 @@ exports[`Button should render primary large button 1`] = `
   style={
     {
       "alignItems": "center",
-      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
@@ -372,7 +370,6 @@ exports[`Button should render secondary extra-large button 1`] = `
   style={
     {
       "alignItems": "center",
-      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,
@@ -541,7 +538,6 @@ exports[`Button should render secondary large button 1`] = `
   style={
     {
       "alignItems": "center",
-      "alignSelf": "auto",
       "height": 50,
       "justifyContent": "center",
       "marginBottom": undefined,

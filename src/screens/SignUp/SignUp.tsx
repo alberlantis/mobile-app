@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { SerializedError } from "@reduxjs/toolkit";
+import { Alert } from "react-native";
 
 import {
   DefaultBackground,
@@ -10,16 +12,42 @@ import {
 import { SCREENS } from "src/navigation/routes";
 import type { RootScreenProps } from "src/navigation/Root";
 import s from "./SignUp.style";
+import { AuthState, useAppDispatch, useAppSelector } from "src/store";
 
 const SignUp = ({ navigation }: RootScreenProps<"SignUp">) => {
+  const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const isLoadingCreateAccount = useAppSelector(
+    AuthState.selectors.selectIsCreateAccountLoading,
+  );
+  const isLoadingLoginAccount = useAppSelector(
+    AuthState.selectors.selectIsLoginAccountLoading,
+  );
+  const isLoading = isLoadingCreateAccount || isLoadingLoginAccount;
+  const isButtonEnabled =
+    !!username && !!username && !!password && !!confirmPass && !isLoading;
+
+  const handleCreateAccount = () => {
+    if (isLoading || !isButtonEnabled) return;
+    dispatch(
+      AuthState.thunks.shouldCreateAccount({
+        email,
+        password,
+        username,
+      }),
+    )
+      .unwrap()
+      .catch((e: SerializedError) => {
+        Alert.alert("Create Account", e.message);
+      });
+  };
 
   return (
     <DefaultBackground style={s.container} blurPos="top">
-      <LogoTitle title="Sign Up" />
+      <LogoTitle title="Email Sign Up" />
       <Input
         type="username"
         placeholder="Enter username"
@@ -54,10 +82,11 @@ const SignUp = ({ navigation }: RootScreenProps<"SignUp">) => {
       <Button
         marginTop={20}
         marginBottom={20}
-        onPress={() => navigation.navigate(SCREENS.HOME_TABS)}
+        onPress={handleCreateAccount}
         text="Next"
-        theme="primary"
         size="extra-large"
+        loading={isLoading}
+        theme={isButtonEnabled ? "primary" : "disabled"}
       />
       <InteractiveText
         onPress={() => navigation.navigate(SCREENS.LOGIN)}

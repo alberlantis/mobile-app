@@ -3,6 +3,9 @@ import { render, screen } from "@testing-library/react-native";
 
 import App from "./App";
 
+jest.mock("redux-persist/integration/react", () => ({
+  PersistGate: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
 jest.mock("./navigation", () => {
   const { Text } =
     jest.requireActual<typeof import("react-native")>("react-native");
@@ -18,8 +21,11 @@ jest.mock("./shared/wrappers", () => ({
 }));
 
 jest.mock("./store", () => ({
-  getState: jest.fn(),
-  subscribe: jest.fn(),
+  store: {
+    getState: jest.fn(),
+    subscribe: jest.fn(),
+  },
+  persistor: {},
 }));
 
 describe("App", () => {

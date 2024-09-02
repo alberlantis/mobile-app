@@ -17,7 +17,7 @@ const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
       <Button
         theme="primary"
         size="large"
-        text="Sign Up"
+        text="Using Email"
         marginBottom={15}
         marginTop={20}
         onPress={() => navigation.navigate(SCREENS.SIGN_UP)}
@@ -25,7 +25,7 @@ const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
       <Button
         theme="secondary"
         size="large"
-        text="Instant Nostr Signup"
+        text="Using Nostr"
         marginBottom={20}
         onPress={() => navigation.navigate(SCREENS.NOSTR_UP)}
       />

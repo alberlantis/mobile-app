@@ -3,13 +3,15 @@ import { createSelector } from "@reduxjs/toolkit";
 import type { ImagePool } from "mock/profile/image-pool-client";
 import type { RootState } from "../tools";
 
-export const selectProfilePosts = (store: RootState) => store.profile.posts;
+const selectProfile = (store: RootState) => store.regular.profile;
+export const selectProfilePosts = (store: RootState) =>
+  selectProfile(store).posts;
 export const selectProfilePostsLoading = (store: RootState) =>
-  store.profile.postsLoading;
+  selectProfile(store).postsLoading;
 export const selectProfileType = (store: RootState) =>
-  store.profile.profileType; // @tech only for test
+  selectProfile(store).profileType; // @tech only for test
 export const selectIsOwnProfile = (store: RootState) =>
-  store.profile.isOwnProfile; // @tech only for test
+  selectProfile(store).isOwnProfile; // @tech only for test
 export const selectIsProfileBusiness = createSelector(
   selectProfileType,
   (type) => type === "business",
