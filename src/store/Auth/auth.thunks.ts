@@ -20,13 +20,11 @@ export const shouldLoginAccount = createAppAsyncThunk(
 export const shouldCreateAccount = createAppAsyncThunk(
   "post/createAccount",
   async (signUpData: SignUp, { extra: { satlantisApi }, dispatch }) => {
-    const isAccountCreated = await satlantisApi.createAccount(
+    await satlantisApi.createAccount(
       signUpData.email || "",
       signUpData.password,
       signUpData.username,
     );
-    if (!isAccountCreated) return;
-    await dispatch(shouldLoginAccount(signUpData));
   },
 );
 

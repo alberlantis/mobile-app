@@ -1,7 +1,8 @@
 import React from "react";
-import { Image, Text, View, Platform, StyleSheet } from "react-native";
+import { Image, View, Platform, StyleSheet } from "react-native";
 
 import { useImageAssets } from "src/shared/hooks";
+import Title from "../Title";
 import s from "./LogoTitle.style";
 
 interface ILogoTitleProps {
@@ -23,7 +24,7 @@ const LogoTitle: React.FC<ILogoTitleProps> = ({ title }) => {
         style={s.image}
         testID="logo-title-image-id"
       />
-      <Text style={s.title}>{title}</Text>
+      <Title title={title} />
     </View>
   );
 };

@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { Image, SafeAreaView, StatusBar } from "react-native";
 
-import type { RootScreenProps } from "src/navigation/Root";
+import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
 import { SCREENS } from "src/navigation/routes";
 import s from "./Splash.style";
 import { useImageAssets } from "src/shared/hooks";
 
-type ISplashProps = RootScreenProps<"Splash">;
-
-const Splash = ({ navigation }: ISplashProps) => {
+const Splash: React.FC<UnsignedScreenProps<"Splash">> = ({ navigation }) => {
   const { images } = useImageAssets();
 
   useEffect(() => {

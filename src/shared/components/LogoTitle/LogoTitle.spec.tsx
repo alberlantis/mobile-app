@@ -30,12 +30,6 @@ describe("LogoTitle", () => {
       expect(image).toHaveStyle(s.image);
     });
 
-    it("should render title text", () => {
-      const title = screen.getByText("test-title");
-      expect(title).toBeOnTheScreen();
-      expect(title).toHaveStyle(s.title);
-    });
-
     it("should render logo without top margin when iOS", () => {
       const container = screen.getByTestId("logo-title-container-id");
       expect(container).toBeOnTheScreen();

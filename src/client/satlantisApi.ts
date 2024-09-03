@@ -84,10 +84,10 @@ export class SatlantisClient {
     if (typeof response === "string") {
       throw new Error(response);
     }
-    if (response instanceof Error) {
+    if (response instanceof Error || !response) {
       throw new Error("Error creating new account", response);
     }
-    return !!response;
+    return response;
   }
 
   public async login(username: string, password: string) {

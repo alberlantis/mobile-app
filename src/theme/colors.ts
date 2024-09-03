@@ -8,6 +8,7 @@ export default {
   WHITE_GRAY: "#434343",
   GRAY: "rgba(255, 255, 255, 0.12)",
   GRAY_BOLD: "rgba(51, 51, 51, 0.66)",
+  GRAY_2: "#373737",
   GRAY_LIGHT: "#3F3F3F",
   ORANGE_PRIMARY_DARK: "#FF7849",
   ORANGE_PRIMARY: "#FF7D47",

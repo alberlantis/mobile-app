@@ -1,117 +1,17 @@
 import * as React from "react";
-import { NavigationContainer, RouteProp } from "@react-navigation/native";
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import { IS_EXPO_GO } from "src/shared/constants/platform";
-import { SCREENS } from "src/navigation/routes";
-import HomeTabs from "src/navigation/HomeTabs";
-import { BackButton } from "src/shared/components";
 import { useAppSelector, AuthState } from "src/store";
-import {
-  Onboarding,
-  Splash,
-  SignUp,
-  NostrUp,
-  Login,
-  NostrIn,
-} from "src/screens";
-
-export type HomeTabsParams =
-  | {
-      screen?:
-        | (typeof SCREENS)["HOME"]
-        | (typeof SCREENS)["NOTIFICATIONS"]
-        | (typeof SCREENS)["PROFILE_HOME"]
-        | (typeof SCREENS)["POSTING"];
-    }
-  | undefined;
-type RootParamList = {
-  [SCREENS.ONBOARDING]: undefined;
-  [SCREENS.HOME_TABS]: HomeTabsParams;
-  [SCREENS.SPLASH]: undefined;
-  [SCREENS.SIGN_UP]: undefined;
-  [SCREENS.NOSTR_UP]: undefined;
-  [SCREENS.LOGIN]: undefined;
-  [SCREENS.NOSTR_IN]: undefined;
-};
-const Stack = createNativeStackNavigator<RootParamList>();
+import UnsignedStack from "../UnsignedStack";
+import SignedStack from "../SignedStack";
 
 const Root: React.FC = () => {
   const isLogged = useAppSelector(AuthState.selectors.selectIsLogged);
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerBackVisible: false,
-          headerTransparent: true,
-          title: "",
-        }}
-        initialRouteName={IS_EXPO_GO ? SCREENS.SPLASH : SCREENS.ONBOARDING}
-      >
-        {isLogged ? (
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name={SCREENS.HOME_TABS}
-            component={HomeTabs}
-          />
-        ) : (
-          <Stack.Group>
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name={SCREENS.SPLASH}
-              component={Splash}
-            />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name={SCREENS.ONBOARDING}
-              component={Onboarding}
-            />
-            <Stack.Screen
-              options={{
-                headerLeft: () => <BackButton />,
-              }}
-              name={SCREENS.SIGN_UP}
-              component={SignUp}
-            />
-            <Stack.Screen
-              options={{
-                headerLeft: () => <BackButton />,
-              }}
-              name={SCREENS.NOSTR_UP}
-              component={NostrUp}
-            />
-            <Stack.Screen
-              options={{
-                headerLeft: () => <BackButton />,
-              }}
-              name={SCREENS.LOGIN}
-              component={Login}
-            />
-            <Stack.Screen
-              options={{
-                headerLeft: () => <BackButton />,
-              }}
-              name={SCREENS.NOSTR_IN}
-              component={NostrIn}
-            />
-          </Stack.Group>
-        )}
-      </Stack.Navigator>
+      {isLogged ? <SignedStack /> : <UnsignedStack />}
     </NavigationContainer>
   );
 };
-
-export type RootNavigationProps<T extends keyof RootParamList> =
-  NativeStackNavigationProp<RootParamList, T>;
-export type RootRouteProps<T extends keyof RootParamList> = RouteProp<
-  RootParamList,
-  T
->;
-export type RootScreenProps<T extends keyof RootParamList> =
-  NativeStackScreenProps<RootParamList, T>;
 
 export default Root;

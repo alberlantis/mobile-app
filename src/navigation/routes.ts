@@ -10,4 +10,5 @@ export const SCREENS = {
   NOSTR_UP: "NostrUp",
   LOGIN: "Login",
   NOSTR_IN: "NostrIn",
+  INTERESTS: "Interests",
 } as const;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { RootScreenProps } from "src/navigation/Root";
+import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
 import {
   DefaultBackground,
   Button,
@@ -10,7 +10,9 @@ import {
 import { SCREENS } from "src/navigation/routes";
 import s from "./Onboarding.style";
 
-const Onboarding = ({ navigation }: RootScreenProps<"Onboarding">) => {
+const Onboarding: React.FC<UnsignedScreenProps<"Onboarding">> = ({
+  navigation,
+}) => {
   return (
     <DefaultBackground style={s.container}>
       <LogoTitle title="Sign Up" />

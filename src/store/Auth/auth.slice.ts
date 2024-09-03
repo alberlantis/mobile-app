@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Account } from "@satlantis/api-client";
 
 import {
@@ -12,6 +12,7 @@ interface AuthState {
   loginAccountLoading: boolean;
   loginSignerLoading: boolean;
   isLogged: boolean;
+  isAccountCreation: boolean;
   account: Account | undefined;
 }
 
@@ -21,12 +22,17 @@ const initialState: AuthState = {
   loginSignerLoading: false,
   isLogged: false,
   account: undefined,
+  isAccountCreation: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setAccountCreation: (state, action: PayloadAction<boolean>) => {
+      state.isAccountCreation = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(shouldCreateAccount.fulfilled, (state) => {
       state.createAccountLoading = false;

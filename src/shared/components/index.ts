@@ -8,3 +8,5 @@ export { default as Icon } from "./Icon";
 export { default as Input } from "./Input";
 export { default as Separator } from "./Separator";
 export { default as EyeIcon } from "./EyeIcon";
+export { default as ScreenProgressIndicator } from "./ScreenProgressIndicator";
+export { default as Title } from "./Title";

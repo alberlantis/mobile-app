@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react-native";
 import { StyleSheet } from "react-native";
 
 import s from "./Button.style";
-import Button, { IButtonProps } from "./Button";
+import Button, { type IButtonProps } from "./Button";
 
 const renderComponent = (props: IButtonProps) => {
   render(<Button {...props} />);

@@ -9,3 +9,5 @@ export const selectIsLoginAccountLoading = (store: RootState) =>
 export const selectIsLogged = (store: RootState) => selectAuth(store).isLogged;
 export const selectIsLoginSignerLoading = (store: RootState) =>
   selectAuth(store).loginSignerLoading;
+export const selectIsAccountCreation = (store: RootState) =>
+  selectAuth(store).isAccountCreation;

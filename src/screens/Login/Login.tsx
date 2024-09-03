@@ -12,15 +12,15 @@ import {
   EyeIcon,
 } from "src/shared/components";
 import { SCREENS } from "src/navigation/routes";
-import type { RootScreenProps } from "src/navigation/Root";
+import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
 import { useAppDispatch, useAppSelector, AuthState } from "src/store";
 import s from "./Login.style";
 
-const Login = ({ navigation }: RootScreenProps<"Login">) => {
+const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isSecure, setIsSecure] = useState(false);
+  const [isSecure, setIsSecure] = useState(true);
   const isLoading = useAppSelector(
     AuthState.selectors.selectIsLoginAccountLoading,
   );
@@ -68,10 +68,7 @@ const Login = ({ navigation }: RootScreenProps<"Login">) => {
           }
         />
         <View style={s.forgotPassword}>
-          <InteractiveText
-            prefix="Forgot Password?"
-            onPress={() => navigation.navigate(SCREENS.HOME_TABS)}
-          />
+          <InteractiveText prefix="Forgot Password?" onPress={() => {}} />
         </View>
         <Button
           marginTop={20}

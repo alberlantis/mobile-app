@@ -11,6 +11,7 @@ exports[`InteractiveText general functionality should match snapshot 1`] = `
       },
       {
         "color": "rgba(255, 255, 255, 0.66)",
+        "marginBottom": undefined,
       },
     ]
   }
@@ -56,6 +57,7 @@ exports[`InteractiveText when color prop is given should match snapshot 1`] = `
       },
       {
         "color": "rgba(255, 255, 255, 0.66)",
+        "marginBottom": undefined,
       },
     ]
   }
