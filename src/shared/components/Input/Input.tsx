@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { TextInput, Text, View, Pressable, StyleSheet } from "react-native";
+import { TextInput, Text, View, StyleSheet } from "react-native";
 
 import colors from "src/theme/colors";
-import Icon from "../Icon";
 import s from "./Input.style";
 
 /**
@@ -10,8 +9,7 @@ import s from "./Input.style";
  *
  * Unit-Test
  */
-
-type InputType = "username" | "password" | "emailAddress";
+type InputType = "username" | "password" | "emailAddress" | "none";
 
 interface IInputProps {
   label?: string;
@@ -21,6 +19,7 @@ interface IInputProps {
   marginBottom?: number;
   marginTop?: number;
   type?: InputType;
+  icon?: React.ComponentElement<any, any>;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -31,17 +30,20 @@ const Input: React.FC<IInputProps> = ({
   placeholder,
   marginTop,
   type,
+  icon,
 }) => {
   const isPassword = type === "password";
   const [selection, setSelection] = useState({ start: 0, end: 0 });
-  const [isSecure, setIsSecure] = useState(isPassword);
+  const hasIcon = !!icon;
 
   return (
     <View style={StyleSheet.compose(s.container, { marginBottom, marginTop })}>
       {!!label && <Text style={s.label}>{label}</Text>}
       <View style={s.inputContainer}>
         <TextInput
-          style={s.input}
+          style={StyleSheet.compose(s.input, {
+            width: hasIcon ? "85%" : "100%",
+          })}
           onSelectionChange={({ nativeEvent: { selection } }) =>
             setSelection({ start: selection.start, end: selection.start })
           }
@@ -56,21 +58,9 @@ const Input: React.FC<IInputProps> = ({
           value={value}
           onChangeText={onChangeText}
           textContentType={type}
-          secureTextEntry={isSecure}
+          secureTextEntry={isPassword}
         />
-        {isPassword && (
-          <Pressable
-            disabled={!value}
-            onPress={() => setIsSecure(!isSecure)}
-            style={s.icon}
-          >
-            <Icon
-              type="Feather"
-              name={isSecure ? "eye" : "eye-off"}
-              color={value ? colors.WHITE : colors.WHITE_LIGHT}
-            />
-          </Pressable>
-        )}
+        {icon}
       </View>
     </View>
   );

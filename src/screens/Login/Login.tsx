@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
+import { SerializedError } from "@reduxjs/toolkit";
 
 import {
   DefaultBackground,
@@ -8,14 +9,36 @@ import {
   Button,
   InteractiveText,
   Separator,
+  EyeIcon,
 } from "src/shared/components";
 import { SCREENS } from "src/navigation/routes";
 import type { RootScreenProps } from "src/navigation/Root";
+import { useAppDispatch, useAppSelector, AuthState } from "src/store";
 import s from "./Login.style";
 
 const Login = ({ navigation }: RootScreenProps<"Login">) => {
+  const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isSecure, setIsSecure] = useState(false);
+  const isLoading = useAppSelector(
+    AuthState.selectors.selectIsLoginAccountLoading,
+  );
+  const isButtonEnabled = !!username && !!password && !isLoading;
+
+  const handleLoginAccount = () => {
+    if (!isButtonEnabled) return;
+    dispatch(
+      AuthState.thunks.shouldLoginAccount({
+        password,
+        username,
+      }),
+    )
+      .unwrap()
+      .catch((e: SerializedError) => {
+        Alert.alert("Login Account", e.message);
+      });
+  };
 
   return (
     <DefaultBackground blurPos="top">
@@ -30,12 +53,19 @@ const Login = ({ navigation }: RootScreenProps<"Login">) => {
           marginTop={20}
         />
         <Input
-          type="password"
+          type={isSecure ? "password" : "none"}
           placeholder="Enter password"
           label="Password"
           onChangeText={setPassword}
           value={password}
           marginTop={20}
+          icon={
+            <EyeIcon
+              isSecure={isSecure}
+              password={password}
+              setIsSecure={setIsSecure}
+            />
+          }
         />
         <View style={s.forgotPassword}>
           <InteractiveText
@@ -46,10 +76,11 @@ const Login = ({ navigation }: RootScreenProps<"Login">) => {
         <Button
           marginTop={20}
           marginBottom={20}
-          onPress={() => navigation.navigate(SCREENS.HOME_TABS)}
+          onPress={handleLoginAccount}
           text="Sign In"
-          theme="primary"
+          theme={isButtonEnabled ? "primary" : "disabled"}
           size="extra-large"
+          loading={isLoading}
         />
         <InteractiveText
           onPress={() => navigation.navigate(SCREENS.SIGN_UP)}

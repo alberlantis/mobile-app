@@ -46,8 +46,8 @@ const NostrUp = () => {
       });
   };
   const handleSignUp = () => {
-    if (isLoading) return;
-    dispatch(AuthState.thunks.shouldLoginSigner())
+    if (isLoading || !nostrNsecKey) return;
+    dispatch(AuthState.thunks.shouldLoginSigner(nostrNsecKey))
       .unwrap()
       .catch((e: SerializedError) => {
         Alert.alert("Login Account", e.message);

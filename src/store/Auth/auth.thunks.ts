@@ -32,15 +32,8 @@ export const shouldCreateAccount = createAppAsyncThunk(
 
 export const shouldLoginSigner = createAppAsyncThunk(
   "post/loginSigner",
-  async (
-    ...[
-      ,
-      {
-        extra: { satlantisApi },
-      },
-    ]
-  ) => {
-    const account = await satlantisApi.loginNostr();
+  async (nsec: string, { extra: { satlantisApi } }) => {
+    const account = await satlantisApi.loginNostr(nsec);
     return account;
   },
 );

@@ -7,3 +7,4 @@ export { default as BackButton } from "./BackButton";
 export { default as Icon } from "./Icon";
 export { default as Input } from "./Input";
 export { default as Separator } from "./Separator";
+export { default as EyeIcon } from "./EyeIcon";

@@ -8,6 +8,7 @@ import {
   LogoTitle,
   Button,
   InteractiveText,
+  EyeIcon,
 } from "src/shared/components";
 import { SCREENS } from "src/navigation/routes";
 import type { RootScreenProps } from "src/navigation/Root";
@@ -20,6 +21,7 @@ const SignUp = ({ navigation }: RootScreenProps<"SignUp">) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [isSecure, setIsSecure] = useState(false);
   const isLoadingCreateAccount = useAppSelector(
     AuthState.selectors.selectIsCreateAccountLoading,
   );
@@ -31,7 +33,7 @@ const SignUp = ({ navigation }: RootScreenProps<"SignUp">) => {
     !!username && !!username && !!password && !!confirmPass && !isLoading;
 
   const handleCreateAccount = () => {
-    if (isLoading || !isButtonEnabled) return;
+    if (!isButtonEnabled) return;
     dispatch(
       AuthState.thunks.shouldCreateAccount({
         email,
@@ -65,12 +67,19 @@ const SignUp = ({ navigation }: RootScreenProps<"SignUp">) => {
         marginTop={20}
       />
       <Input
-        type="password"
+        type={isSecure ? "password" : "none"}
         placeholder="Enter password"
         label="Password"
         onChangeText={setPassword}
         value={password}
         marginTop={20}
+        icon={
+          <EyeIcon
+            isSecure={isSecure}
+            password={password}
+            setIsSecure={setIsSecure}
+          />
+        }
       />
       <Input
         type="password"

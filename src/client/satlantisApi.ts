@@ -1,6 +1,5 @@
 import {
   getPubkeyByNip05,
-  func_GetJwt,
   Client,
   func_GetNostrSigner,
 } from "@satlantis/api-client";
@@ -16,21 +15,15 @@ export class SatlantisClient {
   private nostrSigner: InMemoryAccountContext | undefined;
   private client: Client | undefined;
 
-  private setJwt(value: string) {
-    this.jwt = value;
-  }
   private getNostrSigner: func_GetNostrSigner = async () => {
     if (!this.nostrSigner) return new Error("No signer exist");
     return this.nostrSigner;
   };
-  private setSigner(signer: InMemoryAccountContext) {
-    this.nostrSigner = signer;
-  }
 
   constructor(baseUrl: string) {
     const newClient = Client.New({
       baseURL: new URL(baseUrl),
-      getJwt: this.getJwt.bind(this),
+      getJwt: () => this.jwt,
       getNostrSigner: this.getNostrSigner.bind(this),
     });
     if (newClient instanceof Error) {
@@ -41,36 +34,26 @@ export class SatlantisClient {
     this.client = newClient;
   }
 
-  public getJwt: func_GetJwt = () => {
-    return this.jwt;
-  };
-
   public generateSigner() {
     const newSigner = InMemoryAccountContext.Generate();
-    this.setSigner(newSigner);
+    this.nostrSigner = newSigner;
     return newSigner;
   }
 
-  public getSigner(priKey?: string) {
-    const newSigner = InMemoryAccountContext.FromString(priKey || "");
-    if (newSigner instanceof Error) {
-      console.log("Error getting existing signer from memory", newSigner);
-      return this.nostrSigner;
+  public async loginNostr(nsec: string) {
+    const signer = InMemoryAccountContext.FromString(nsec);
+    if (signer instanceof Error) {
+      throw new Error("Error getting existing signer from memory", signer);
     }
-    this.setSigner(newSigner);
-    return newSigner;
-  }
-
-  public async loginNostr() {
-    if (!this.nostrSigner) return;
-    const response = await this.client?.loginNostr(this.nostrSigner);
+    this.nostrSigner = signer;
+    const response = await this.client?.loginNostr(signer);
     if (response instanceof Error) {
       throw new Error(
-        "Something happend when login nostr account on satlantis",
+        "Error trying to login nostr account on satlantis",
         response,
       );
     }
-    this.setJwt(response?.token || "");
+    this.jwt = response?.token || "";
     return response?.account;
   }
 
@@ -101,10 +84,10 @@ export class SatlantisClient {
     if (typeof response === "string") {
       throw new Error(response);
     }
-    if (!response || response instanceof Error) {
+    if (response instanceof Error) {
       throw new Error("Error creating new account", response);
     }
-    return response;
+    return !!response;
   }
 
   public async login(username: string, password: string) {
@@ -118,7 +101,7 @@ export class SatlantisClient {
     if (!loggedIn || loggedIn instanceof Error) {
       throw new Error("Error logged in to the account", loggedIn);
     }
-    this.setJwt(loggedIn.token);
+    this.jwt = loggedIn.token;
     return loggedIn.account;
   }
 }
