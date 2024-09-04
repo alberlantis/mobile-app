@@ -57,6 +57,7 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({ route }) => {
   const isButtonEnabled = selectedOptions.length > 2;
   const itemSize = screenHeight * 0.17;
   const iconCheckSize = itemSize / 5;
+  const secondRowMargin = itemSize / 1.9;
 
   const handleOptionsSelection = (option: string, isSelected: boolean) => {
     setSelectedOptions((prevState) => {
@@ -88,7 +89,7 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({ route }) => {
                 <View
                   key={`interests-options-${rowIndex}`}
                   style={StyleSheet.compose(s.rowContainer, {
-                    paddingLeft: isSecondRow ? 65 : 0,
+                    paddingLeft: isSecondRow ? secondRowMargin : 0,
                   })}
                 >
                   {row.map((value, colIndex) => {
