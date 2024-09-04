@@ -26,6 +26,7 @@ jest.mock("./Nostr", () => ({
 jest.mock("./Auth", () => ({
   reducer: "auth-reducer",
 }));
+jest.mock("src/client", () => ({}));
 
 describe("store", () => {
   it("should call configureStore once with correct store configuration", () => {

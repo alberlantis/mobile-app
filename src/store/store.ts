@@ -10,7 +10,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import createSecureStore from "redux-persist-expo-securestore";
 
-import satlantisApi from "src/client/satlantisApi";
+import { AuthClient } from "src/client";
 import { reducer as nostrReducer } from "./Nostr";
 import { reducer as profileReducer } from "./Profile";
 import { reducer as authReducer } from "./Auth";
@@ -83,7 +83,9 @@ const store = configureStore({
     const middlewares = getDefaultMiddleware({
       thunk: {
         extraArgument: {
-          satlantisApi,
+          api: {
+            AuthClient,
+          },
         },
       },
       immutableCheck: false,

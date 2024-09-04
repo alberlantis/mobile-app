@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
+import { InMemoryAccountContext } from "@blowater/nostr-sdk";
+import { Account } from "@satlantis/api-client";
 
-import { SatlantisClient } from "src/client/satlantisApi";
 import { store } from "./store";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -13,5 +14,19 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   state: RootState;
   dispatch: AppDispatch;
-  extra: { satlantisApi: SatlantisClient };
+  extra: {
+    api: {
+      AuthClient: {
+        generateNewNostrSigner(): InMemoryAccountContext;
+        getIsUserAvailability(username: string): Promise<boolean>;
+        login(username: string, password: string): Promise<Account>;
+        loginNostr(nsec: string): Promise<Account>;
+        createAccount(
+          email: string,
+          password: string,
+          username: string,
+        ): Promise<boolean>;
+      };
+    };
+  };
 }>();

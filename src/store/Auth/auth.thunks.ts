@@ -8,8 +8,15 @@ interface SignUp {
 
 export const shouldLoginAccount = createAppAsyncThunk(
   "post/loginAccount",
-  async (signUpData: SignUp, { extra: { satlantisApi } }) => {
-    const account = await satlantisApi.login(
+  async (
+    signUpData: SignUp,
+    {
+      extra: {
+        api: { AuthClient },
+      },
+    },
+  ) => {
+    const account = await AuthClient.login(
       signUpData.username,
       signUpData.password,
     );
@@ -19,8 +26,16 @@ export const shouldLoginAccount = createAppAsyncThunk(
 
 export const shouldCreateAccount = createAppAsyncThunk(
   "post/createAccount",
-  async (signUpData: SignUp, { extra: { satlantisApi }, dispatch }) => {
-    await satlantisApi.createAccount(
+  async (
+    signUpData: SignUp,
+    {
+      extra: {
+        api: { AuthClient },
+      },
+      dispatch,
+    },
+  ) => {
+    await AuthClient.createAccount(
       signUpData.email || "",
       signUpData.password,
       signUpData.username,
@@ -30,8 +45,15 @@ export const shouldCreateAccount = createAppAsyncThunk(
 
 export const shouldLoginSigner = createAppAsyncThunk(
   "post/loginSigner",
-  async (nsec: string, { extra: { satlantisApi } }) => {
-    const account = await satlantisApi.loginNostr(nsec);
+  async (
+    nsec: string,
+    {
+      extra: {
+        api: { AuthClient },
+      },
+    },
+  ) => {
+    const account = await AuthClient.loginNostr(nsec);
     return account;
   },
 );
