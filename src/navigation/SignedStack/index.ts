@@ -3,4 +3,5 @@ export type {
   SignedNavigationProps,
   SignedRouteProps,
   SignedScreenProps,
+  SignedParamList,
 } from "./SignedStack";

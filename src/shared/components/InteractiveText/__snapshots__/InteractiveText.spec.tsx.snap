@@ -6,7 +6,7 @@ exports[`InteractiveText general functionality should match snapshot 1`] = `
   style={
     [
       {
-        "fontSize": 14,
+        "fontSize": 28,
         "fontWeight": "regular",
       },
       {
@@ -52,7 +52,7 @@ exports[`InteractiveText when color prop is given should match snapshot 1`] = `
   style={
     [
       {
-        "fontSize": 14,
+        "fontSize": 28,
         "fontWeight": "regular",
       },
       {

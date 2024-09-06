@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from "react";
 import {
-  ColorValue,
-  DimensionValue,
   GestureResponderEvent,
   Pressable,
   StyleSheet,
@@ -19,16 +17,15 @@ import Svg, {
   Rect,
 } from "react-native-svg";
 
+import {
+  getColors,
+  getRadius,
+  getSize,
+  type ButtonSize,
+  type ButtonTheme,
+} from "./tools";
 import s from "./Button.style";
 import colors from "src/theme/colors";
-
-type ButtonSize = "large" | "extra-large" | "regular" | "auto";
-type ButtonTheme = "primary" | "secondary" | "disabled" | "off";
-type NumberProp = string | number;
-type ButtonDimensions = {
-  width?: NumberProp & DimensionValue;
-  height: NumberProp & DimensionValue;
-};
 
 export interface IButtonProps {
   size?: ButtonSize;
@@ -45,45 +42,6 @@ export interface IButtonProps {
   subfixElement?(): React.ComponentElement<any, any>;
   onPress(event?: GestureResponderEvent): void;
 }
-
-const getColors = (theme: ButtonTheme): ColorValue[] => {
-  switch (theme) {
-    case "secondary":
-      return [colors.BLUE_PRIMARY, colors.BLUE_PRIMARY];
-    case "disabled":
-      return [colors.GRAY_BOLD, colors.GRAY_BOLD];
-    case "off":
-      return [colors.WHITE_GRAY, colors.WHITE_GRAY];
-    case "primary":
-    default:
-      return [colors.ORANGE_PRIMARY_DARK, colors.ORANGE_PRIMARY_LIGHT];
-  }
-};
-const getSize = (size?: ButtonSize): ButtonDimensions => {
-  switch (size) {
-    case "regular": {
-      return {
-        width: 130,
-        height: 40,
-      };
-    }
-    case "extra-large": {
-      return {
-        width: "100%",
-        height: 50,
-      };
-    }
-    case "large":
-      return {
-        width: 300,
-        height: 50,
-      };
-    default:
-      return {
-        height: 40,
-      };
-  }
-};
 
 const Button: React.FC<IButtonProps> = ({
   size,
@@ -103,12 +61,13 @@ const Button: React.FC<IButtonProps> = ({
   const linearGradientID = "linGrad";
   const clipGradientID = "clipGrad";
   const buttonColor = getColors(theme);
-  const { width: staticWidth, height } = getSize(size);
+  const { width: staticWidth, height: buttonHeight } = getSize(size);
   const [dynamicWidth, setDynamicWidth] = useState<number | undefined>(
     undefined,
   );
   const buttonWidth = staticWidth ?? dynamicWidth;
   const isAutoSize = size === "auto";
+  const buttonRadius = getRadius(buttonWidth);
 
   const handleLayout = useCallback(
     (event: LayoutChangeEvent) => {
@@ -128,7 +87,7 @@ const Button: React.FC<IButtonProps> = ({
           marginBottom,
           marginLeft,
           marginRight,
-          height,
+          height: buttonHeight,
           width: buttonWidth,
         },
       ])}
@@ -136,11 +95,7 @@ const Button: React.FC<IButtonProps> = ({
       testID="button-pressable-id"
     >
       {!!buttonWidth && (
-        <Svg
-          width={buttonWidth}
-          height={height}
-          style={StyleSheet.absoluteFillObject}
-        >
+        <Svg width={buttonWidth} style={StyleSheet.absoluteFillObject}>
           <Defs>
             <LinearGradient
               id={linearGradientID}
@@ -157,9 +112,9 @@ const Button: React.FC<IButtonProps> = ({
                 x="0"
                 y="0"
                 width={buttonWidth}
-                height={height}
-                rx="25"
-                ry="50"
+                height={buttonHeight}
+                rx={buttonRadius}
+                ry={buttonRadius}
               />
             </ClipPath>
           </Defs>
@@ -167,7 +122,7 @@ const Button: React.FC<IButtonProps> = ({
             x="0"
             y="0%"
             width={buttonWidth}
-            height={height}
+            height={buttonHeight}
             clipPath={`url(#${clipGradientID})`}
             fill={`url(#${linearGradientID})`}
           />
@@ -178,7 +133,7 @@ const Button: React.FC<IButtonProps> = ({
         {loading ? (
           <ActivityIndicator
             color={textStyle?.color || colors.WHITE}
-            size={textStyle?.fontSize || 16}
+            size={16}
           />
         ) : (
           <Text style={StyleSheet.flatten([s.defaultText, textStyle])}>

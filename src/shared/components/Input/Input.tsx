@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextInput, Text, View, StyleSheet } from "react-native";
 
 import colors from "src/theme/colors";
-import s from "./Input.style";
+import s, { getInputContainer, getInputStyle } from "./Input.style";
 
 /**
  * @tech
@@ -20,6 +20,8 @@ interface IInputProps {
   marginTop?: number;
   type?: InputType;
   icon?: React.ComponentElement<any, any>;
+  customHeight?: number;
+  multiline?: number;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -31,19 +33,19 @@ const Input: React.FC<IInputProps> = ({
   marginTop,
   type,
   icon,
+  customHeight,
+  multiline,
 }) => {
-  const isPassword = type === "password";
-  const [selection, setSelection] = useState({ start: 0, end: 0 });
+  const isTextArea = !!multiline;
   const hasIcon = !!icon;
+  const [selection, setSelection] = useState({ start: 0, end: 0 });
 
   return (
     <View style={StyleSheet.compose(s.container, { marginBottom, marginTop })}>
       {!!label && <Text style={s.label}>{label}</Text>}
-      <View style={s.inputContainer}>
+      <View style={getInputContainer(customHeight)}>
         <TextInput
-          style={StyleSheet.compose(s.input, {
-            width: hasIcon ? "85%" : "100%",
-          })}
+          style={getInputStyle(hasIcon, isTextArea)}
           onSelectionChange={({ nativeEvent: { selection } }) =>
             setSelection({ start: selection.start, end: selection.start })
           }
@@ -58,9 +60,12 @@ const Input: React.FC<IInputProps> = ({
           value={value}
           onChangeText={onChangeText}
           textContentType={type}
-          secureTextEntry={isPassword}
+          secureTextEntry={type === "password"}
+          numberOfLines={multiline}
+          multiline={isTextArea}
+          textAlignVertical={isTextArea ? "top" : "center"}
         />
-        {icon}
+        {hasIcon && <View style={s.iconInput}>{icon}</View>}
       </View>
     </View>
   );

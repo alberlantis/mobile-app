@@ -20,15 +20,15 @@ const Onboarding: React.FC<UnsignedScreenProps<"Onboarding">> = ({
         theme="primary"
         size="large"
         text="Using Email"
-        marginBottom={15}
-        marginTop={20}
+        marginBottom={s.emailButton.marginBottom}
+        marginTop={s.emailButton.marginTop}
         onPress={() => navigation.navigate(SCREENS.SIGN_UP)}
       />
       <Button
         theme="secondary"
         size="large"
         text="Using Nostr"
-        marginBottom={20}
+        marginBottom={s.nostrButton.marginBottom}
         onPress={() => navigation.navigate(SCREENS.NOSTR_UP)}
       />
       <InteractiveText

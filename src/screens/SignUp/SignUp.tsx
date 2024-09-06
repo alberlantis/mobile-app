@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SerializedError } from "@reduxjs/toolkit";
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 
 import {
   DefaultBackground,
@@ -10,6 +10,7 @@ import {
   InteractiveText,
   EyeIcon,
   ScreenProgressIndicator,
+  Header,
 } from "src/shared/components";
 import { SCREENS } from "src/navigation/routes";
 import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
@@ -58,16 +59,18 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
   };
 
   return (
-    <>
-      <DefaultBackground style={s.container} blurPos="top">
+    <DefaultBackground style={s.container} blurPos="top">
+      <Header />
+      <View style={s.logoContainer}>
         <LogoTitle title="Email Sign Up" />
+      </View>
+      <View style={s.inputsContainer}>
         <Input
           type="username"
           placeholder="Enter username"
           label="Username"
           onChangeText={setUsername}
           value={username}
-          marginTop={20}
         />
         <Input
           type="emailAddress"
@@ -75,7 +78,6 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           label="Email"
           onChangeText={setEmail}
           value={email}
-          marginTop={20}
         />
         <Input
           type={isSecure ? "password" : "none"}
@@ -83,7 +85,6 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           label="Password"
           onChangeText={setPassword}
           value={password}
-          marginTop={20}
           icon={
             <EyeIcon
               isSecure={isSecure}
@@ -97,14 +98,14 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           placeholder="Confirm password"
           onChangeText={setConfirmPass}
           value={confirmPass}
-          marginTop={10}
         />
+      </View>
+      <View style={s.buttonContainer}>
         <Button
-          marginTop={20}
-          marginBottom={20}
+          marginBottom={s.button.marginBottom}
           onPress={handleCreateAccount}
           text="Next"
-          size="extra-large"
+          size="fill"
           loading={isLoading}
           theme={isButtonEnabled ? "primary" : "disabled"}
         />
@@ -114,9 +115,11 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           text="Sign in"
           marginBottom={15}
         />
-      </DefaultBackground>
-      <ScreenProgressIndicator screenName={route.name} />
-    </>
+      </View>
+      <View style={s.bottomContainer}>
+        <ScreenProgressIndicator screenName={route.name} />
+      </View>
+    </DefaultBackground>
   );
 };
 

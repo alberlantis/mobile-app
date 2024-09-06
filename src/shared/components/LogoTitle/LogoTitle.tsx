@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, Platform, StyleSheet } from "react-native";
+import { Image, View } from "react-native";
 
 import { useImageAssets } from "src/shared/hooks";
 import Title from "../Title";
@@ -13,12 +13,7 @@ const LogoTitle: React.FC<ILogoTitleProps> = ({ title }) => {
   const { images } = useImageAssets();
 
   return (
-    <View
-      testID="logo-title-container-id"
-      style={StyleSheet.compose(s.container, {
-        marginTop: Platform.OS === "android" ? 56 : 0,
-      })}
-    >
+    <View testID="logo-title-container-id" style={s.container}>
       <Image
         source={images.logo}
         style={s.image}

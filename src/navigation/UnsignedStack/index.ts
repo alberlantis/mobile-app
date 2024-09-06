@@ -3,4 +3,5 @@ export type {
   UnsignedScreenProps,
   UnsignedNavigationProps,
   UnsignedRouteProps,
+  UnsignedGroupParamList,
 } from "./UnsignedStack";

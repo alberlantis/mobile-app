@@ -11,4 +11,5 @@ export const SCREENS = {
   LOGIN: "Login",
   NOSTR_IN: "NostrIn",
   INTERESTS: "Interests",
+  COMPLETE_PROFILE: "CompleteProfile",
 } as const;

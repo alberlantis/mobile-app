@@ -2,6 +2,7 @@ export default {
   BLACK: "#000",
   BLACK_INPUT: "#28292A",
   BLACK_MEDIUM: "rgba(0, 0, 0, 0.5)",
+  BLACK_LIGHT: "#1C1C1C",
   WHITE: "#FFF",
   WHITE_BOLD: "rgba(255, 255, 255, 0.66)",
   WHITE_LIGHT: "rgba(255, 255, 255, 0.33)",

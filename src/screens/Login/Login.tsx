@@ -10,6 +10,7 @@ import {
   InteractiveText,
   Separator,
   EyeIcon,
+  Header,
 } from "src/shared/components";
 import { SCREENS } from "src/navigation/routes";
 import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
@@ -41,16 +42,18 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
   };
 
   return (
-    <DefaultBackground blurPos="top">
-      <View style={s.container}>
+    <DefaultBackground style={s.container} blurPos="top">
+      <Header />
+      <View style={s.logoContainer}>
         <LogoTitle title="Sign In" />
+      </View>
+      <View style={s.inputsContainer}>
         <Input
           type="username"
           placeholder="Enter username"
           label="Username"
           onChangeText={setUsername}
           value={username}
-          marginTop={20}
         />
         <Input
           type={isSecure ? "password" : "none"}
@@ -58,7 +61,6 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           label="Password"
           onChangeText={setPassword}
           value={password}
-          marginTop={20}
           icon={
             <EyeIcon
               isSecure={isSecure}
@@ -71,12 +73,10 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           <InteractiveText prefix="Forgot Password?" onPress={() => {}} />
         </View>
         <Button
-          marginTop={20}
-          marginBottom={20}
           onPress={handleLoginAccount}
           text="Sign In"
           theme={isButtonEnabled ? "primary" : "disabled"}
-          size="extra-large"
+          size="fill"
           loading={isLoading}
         />
         <InteractiveText
@@ -85,13 +85,13 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           text="Sign Up"
         />
       </View>
-      <Separator label="or" />
-      <View style={s.container}>
+      <Separator label="or" marginVertical={15} />
+      <View style={s.buttonContainer}>
         <Button
           onPress={() => navigation.navigate(SCREENS.NOSTR_IN)}
           text="Sign In with nSec key"
           theme="secondary"
-          size="extra-large"
+          size="fill"
         />
       </View>
     </DefaultBackground>

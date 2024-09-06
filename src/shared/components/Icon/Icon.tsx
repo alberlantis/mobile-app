@@ -5,12 +5,14 @@ import {
   FontAwesome,
   Ionicons,
   MaterialCommunityIcons,
+  AntDesign,
 } from "@expo/vector-icons";
 import { ColorValue, StyleProp, TextStyle } from "react-native";
 
 import colors from "src/theme/colors";
 
 export type IconNames = {
+  AntDesign: keyof typeof Entypo.glyphMap;
   Entypo: keyof typeof Entypo.glyphMap;
   Feather: keyof typeof Feather.glyphMap;
   FontAwesome: keyof typeof FontAwesome.glyphMap;
@@ -45,6 +47,7 @@ const Icon = <T extends keyof IconNames>({
     FontAwesome,
     Ionicons,
     MaterialCommunityIcons,
+    AntDesign,
   };
   const IconComponent = iconMap[type] as React.ComponentType<any>;
   return <IconComponent name={name} size={size} color={color} style={style} />;

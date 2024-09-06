@@ -1,42 +1,44 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
+import fonts from "src/theme/fonts";
 import colors from "src/theme/colors";
+
+const screenHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
   container: {
-    marginHorizontal: 10,
+    marginHorizontal: "2%",
     alignItems: "center",
     flex: 1,
+  },
+  headerContainer: {
+    width: "100%",
+    height: "20%",
+    alignItems: "center",
   },
   textDescription: {
     color: colors.WHITE_BOLD,
     textAlign: "center",
-    fontSize: 14,
-    marginTop: 14,
+    fontSize: fonts[14],
+    marginTop: "5%",
+    width: "90%",
   },
-  listContainer: {
+  optionsListContainer: {
     width: "100%",
-    paddingVertical: 20,
-    marginBottom: 15,
-    justifyContent: "center",
+    height: "55%",
   },
-  rowContainer: {
-    flexDirection: "row",
+  buttonContainer: {
+    width: "100%",
+    height: "17%",
+    justifyContent: "flex-end",
   },
-  interestItem: {
-    borderRadius: 100,
-    borderCurve: "circular",
-    borderWidth: 1,
+  bottomContainer: {
+    width: "100%",
+    height: "2%",
     justifyContent: "center",
     alignItems: "center",
   },
-  selectedIcon: {
-    backgroundColor: colors.BLACK,
-    position: "absolute",
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    top: 5,
-    right: 5,
+  buttomMargin: {
+    marginBottom: screenHeight * 0.02,
   },
 });

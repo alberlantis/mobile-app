@@ -12,7 +12,7 @@ import TabLabel from "./TabLabel";
 import { SCREENS } from "src/navigation/routes";
 import s from "./HomeTabs.style";
 
-type HomeTabsParamList = {
+export type HomeTabsParamList = {
   [SCREENS.HOME]: undefined;
   [SCREENS.PROFILE_HOME]: undefined;
   [SCREENS.POSTING]: undefined;

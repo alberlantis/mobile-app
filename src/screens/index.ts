@@ -9,3 +9,4 @@ export { default as NostrUp } from "./NostrUp";
 export { default as Login } from "./Login";
 export { default as NostrIn } from "./NostrIn";
 export { default as Interests } from "./Interests";
+export { default as CompleteProfile } from "./CompleteProfile";

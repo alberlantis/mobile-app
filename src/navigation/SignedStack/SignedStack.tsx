@@ -8,7 +8,9 @@ import {
 
 import { useAppSelector, AuthState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
-import { Interests } from "src/screens";
+import AccountCreationGroup, {
+  type AccountCreationParamList,
+} from "src/navigation/AccountCreationGroup";
 import HomeTabs from "src/navigation/HomeTabs";
 
 export type HomeTabsParams =
@@ -20,10 +22,9 @@ export type HomeTabsParams =
         | (typeof SCREENS)["POSTING"];
     }
   | undefined;
-type SignedParamList = {
+export type SignedParamList = {
   [SCREENS.HOME_TABS]: HomeTabsParams;
-  [SCREENS.INTERESTS]: undefined;
-};
+} & AccountCreationParamList;
 const Stack = createNativeStackNavigator<SignedParamList>();
 
 const SignedStack: React.FC = () => {
@@ -39,13 +40,7 @@ const SignedStack: React.FC = () => {
       }}
     >
       {isAccountCreation ? (
-        <Stack.Group>
-          <Stack.Screen
-            options={{ title: "", headerBackVisible: false }}
-            name={SCREENS.INTERESTS}
-            component={Interests}
-          />
-        </Stack.Group>
+        AccountCreationGroup()
       ) : (
         <Stack.Group>
           <Stack.Screen

@@ -3,4 +3,5 @@ export type {
   HomeTabsRouteProps,
   HomeTabsNavigationProps,
   HomeTabsScreenProps,
+  HomeTabsParamList,
 } from "./HomeTabs";

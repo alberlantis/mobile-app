@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Alert } from "react-native";
+import { Text, Alert, View } from "react-native";
 import { SerializedError } from "@reduxjs/toolkit";
 
 import {
@@ -7,6 +7,7 @@ import {
   Input,
   LogoTitle,
   Button,
+  Header,
 } from "src/shared/components";
 import {
   useAppSelector,
@@ -15,7 +16,6 @@ import {
   AuthState,
 } from "src/store";
 import s from "./NostrIn.style";
-import colors from "src/theme/colors";
 
 const NostrIn = () => {
   const dispatch = useAppDispatch();
@@ -37,28 +37,33 @@ const NostrIn = () => {
 
   return (
     <DefaultBackground style={s.container} blurPos="top">
-      <LogoTitle title="Sign In" />
-      <Input
-        type="username"
-        placeholder="Enter your nsec key"
-        label="Nsec"
-        onChangeText={setNsecKey}
-        value={nsecKey}
-        marginTop={20}
-      />
-      <Button
-        loading={isLoading}
-        marginTop={20}
-        marginBottom={20}
-        onPress={handleLoginNostr}
-        text="Sign In"
-        theme={isButtonEnabled ? "primary" : "disabled"}
-        size="extra-large"
-      />
-      <Text style={{ color: colors.WHITE_BOLD, textAlign: "center" }}>
-        An nSec key is exclusive from the Nostr protocol. If you don’t have an
-        nsec key, please sign-in using your email and password.
-      </Text>
+      <Header />
+      <View style={s.logoContainer}>
+        <LogoTitle title="Sign In" />
+      </View>
+      <View style={s.inputContainer}>
+        <Input
+          type="username"
+          placeholder="Enter your nsec key"
+          label="Nsec"
+          onChangeText={setNsecKey}
+          value={nsecKey}
+        />
+      </View>
+      <View style={s.buttonContainer}>
+        <Button
+          loading={isLoading}
+          marginBottom={15}
+          onPress={handleLoginNostr}
+          text="Sign In"
+          theme={isButtonEnabled ? "primary" : "disabled"}
+          size="fill"
+        />
+        <Text style={s.textDescription}>
+          An nSec key is exclusive from the Nostr protocol. If you don’t have an
+          nsec key, please sign-in using your email and password.
+        </Text>
+      </View>
     </DefaultBackground>
   );
 };

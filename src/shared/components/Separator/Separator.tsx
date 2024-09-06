@@ -7,7 +7,7 @@ import {
   ColorValue,
 } from "react-native";
 
-import s from "./Separator.style";
+import s, { getLine, getLabel, getLabelText } from "./Separator.style";
 import colors from "src/theme/colors";
 
 interface ISeparatorProps {
@@ -29,19 +29,10 @@ const Separator: React.FC<ISeparatorProps> = ({
 }) => {
   return (
     <View style={StyleSheet.compose(s.container, { marginVertical })}>
-      <View
-        style={StyleSheet.compose(s.line, {
-          height: span,
-          backgroundColor: lineColor,
-        })}
-      />
+      <View style={getLine(span, lineColor)} />
       {!!label && (
-        <View
-          style={StyleSheet.compose(s.label, {
-            backgroundColor: labelColor,
-          })}
-        >
-          <Text style={{ color: textColor }}>{label}</Text>
+        <View style={getLabel(labelColor)}>
+          <Text style={getLabelText(textColor)}>{label}</Text>
         </View>
       )}
     </View>

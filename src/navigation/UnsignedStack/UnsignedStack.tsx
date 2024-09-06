@@ -7,7 +7,6 @@ import {
 } from "@react-navigation/native-stack";
 
 import { SCREENS } from "src/navigation/routes";
-import { BackButton } from "src/shared/components";
 import {
   Onboarding,
   Splash,
@@ -18,7 +17,7 @@ import {
 } from "src/screens";
 import { IS_EXPO_GO } from "src/shared/constants/platform";
 
-type UnsignedGroupParamList = {
+export type UnsignedGroupParamList = {
   [SCREENS.ONBOARDING]: undefined;
   [SCREENS.SPLASH]: undefined;
   [SCREENS.SIGN_UP]: undefined;
@@ -31,51 +30,15 @@ const Stack = createNativeStackNavigator<UnsignedGroupParamList>();
 const UnsignedStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerBackVisible: false,
-        headerTransparent: true,
-        title: "",
-      }}
+      screenOptions={{ headerShown: false }}
       initialRouteName={IS_EXPO_GO ? SCREENS.SPLASH : SCREENS.ONBOARDING}
     >
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name={SCREENS.SPLASH}
-        component={Splash}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name={SCREENS.ONBOARDING}
-        component={Onboarding}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <BackButton />,
-        }}
-        name={SCREENS.SIGN_UP}
-        component={SignUp}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <BackButton />,
-        }}
-        name={SCREENS.NOSTR_UP}
-        component={NostrUp}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <BackButton />,
-        }}
-        name={SCREENS.LOGIN}
-        component={Login}
-      />
-      <Stack.Screen
-        options={{
-          headerLeft: () => <BackButton />,
-        }}
-        name={SCREENS.NOSTR_IN}
-        component={NostrIn}
-      />
+      <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
+      <Stack.Screen name={SCREENS.ONBOARDING} component={Onboarding} />
+      <Stack.Screen name={SCREENS.SIGN_UP} component={SignUp} />
+      <Stack.Screen name={SCREENS.NOSTR_UP} component={NostrUp} />
+      <Stack.Screen name={SCREENS.LOGIN} component={Login} />
+      <Stack.Screen name={SCREENS.NOSTR_IN} component={NostrIn} />
     </Stack.Navigator>
   );
 };

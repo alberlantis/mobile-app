@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
 
+import fonts from "src/theme/fonts";
+
 export default StyleSheet.create({
   container: {
-    fontSize: 14,
+    fontSize: fonts[14],
     fontWeight: "regular",
   },
   interactiveText: {

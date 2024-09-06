@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+import fonts from "src/theme/fonts";
 import colors from "src/theme/colors";
 
 export default StyleSheet.create({
@@ -14,7 +15,7 @@ export default StyleSheet.create({
   },
   defaultText: {
     color: colors.WHITE,
-    fontSize: 16,
     fontWeight: "medium",
+    fontSize: fonts[16],
   },
 });

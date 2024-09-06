@@ -10,8 +10,9 @@ import {
   Button,
   Icon,
   ScreenProgressIndicator,
+  Header,
 } from "src/shared/components";
-import s from "./NostrUp.style";
+import s, { getButtonContainer, copyIconSize } from "./NostrUp.style";
 import colors from "src/theme/colors";
 import {
   NostrState,
@@ -63,56 +64,61 @@ const NostrUp: React.FC<UnsignedScreenProps<"NostrUp">> = ({ route }) => {
   };
 
   return (
-    <>
-      <DefaultBackground style={s.container} blurPos="top">
+    <DefaultBackground style={s.container} blurPos="top">
+      <Header />
+      <View style={s.logoContainer}>
         <LogoTitle title="Nostr Sign Up" />
+      </View>
+      <View style={s.inputContainer}>
         <Input
           type="username"
           placeholder="Enter your username"
           label="Username"
           onChangeText={setUsername}
           value={username}
-          marginTop={20}
         />
-        {showKey && (
-          <>
-            <Text style={s.textDescription}>
-              Find your private key (nsec) below. Store this securely and do not
-              share with anyone.
-            </Text>
-            <View style={s.nsecKeyContainer}>
-              <Text style={s.nsecTitle}>nsec</Text>
-              <Text style={s.nsecKey}>{nostrNsecKey}</Text>
-              <Button
-                onPress={handleCopyKeyToClipboard}
-                text={isCopyKey ? "Copied!" : "Copy"}
-                theme="off"
-                size="auto"
-                extraPadding={30}
-                textStyle={s.copyButton}
-                prefixElement={() => (
-                  <Icon
-                    color={colors.WHITE_LIGHT}
-                    type="Feather"
-                    name="copy"
-                    size={16}
-                  />
-                )}
-              />
-            </View>
-          </>
-        )}
+      </View>
+      {showKey && (
+        <View style={s.privateKeyContainer}>
+          <Text style={s.textDescription}>
+            Find your private key (nsec) below. Store this securely and do not
+            share with anyone.
+          </Text>
+          <View style={s.nsecKeyContainer}>
+            <Text style={s.nsecTitle}>nsec</Text>
+            <Text style={s.nsecKey}>{nostrNsecKey}</Text>
+            <Button
+              onPress={handleCopyKeyToClipboard}
+              text={isCopyKey ? "Copied!" : "Copy"}
+              theme="off"
+              size="auto"
+              textStyle={s.copyButton}
+              prefixElement={() => (
+                <Icon
+                  color={colors.WHITE_LIGHT}
+                  type="Feather"
+                  name="copy"
+                  size={copyIconSize}
+                />
+              )}
+            />
+          </View>
+        </View>
+      )}
+      <View style={getButtonContainer(showKey)}>
         <Button
-          marginTop={30}
           loading={isLoading}
           onPress={showKey ? handleSignUp : handleGenerateKey}
           text={showKey ? "Next" : "Generate Key"}
           theme={!!username && !isLoading ? "primary" : "disabled"}
-          size="extra-large"
+          size="fill"
+          marginBottom={showKey ? s.button.marginBottom : 0}
         />
-      </DefaultBackground>
-      <ScreenProgressIndicator screenName={route.name} />
-    </>
+      </View>
+      <View style={s.bottomContainer}>
+        <ScreenProgressIndicator screenName={route.name} />
+      </View>
+    </DefaultBackground>
   );
 };
 
