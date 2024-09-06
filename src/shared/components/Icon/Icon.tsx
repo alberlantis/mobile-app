@@ -29,6 +29,7 @@ interface IBaseIconProps {
 export type IconProps<T extends keyof IconNames> = IBaseIconProps & {
   type: T;
   name: IconNames[T];
+  onPress?(): void;
 };
 
 export type IconType = keyof IconNames;
@@ -40,6 +41,7 @@ const Icon = <T extends keyof IconNames>({
   size = 24,
   color = colors.BLACK,
   style,
+  onPress,
 }: IconProps<T>) => {
   const iconMap = {
     Entypo,
@@ -50,7 +52,15 @@ const Icon = <T extends keyof IconNames>({
     AntDesign,
   };
   const IconComponent = iconMap[type] as React.ComponentType<any>;
-  return <IconComponent name={name} size={size} color={color} style={style} />;
+  return (
+    <IconComponent
+      onPress={onPress}
+      name={name}
+      size={size}
+      color={color}
+      style={style}
+    />
+  );
 };
 
 export default Icon;

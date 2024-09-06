@@ -47,6 +47,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     updates: {
       url: "https://u.expo.dev/8dccd390-753b-40d9-b945-5d7722569c17"
-    }
+    },
+    plugins: [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+        }
+      ]
+    ]
   }
 };

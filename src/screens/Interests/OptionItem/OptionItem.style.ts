@@ -10,7 +10,7 @@ import fonts from "src/theme/fonts";
 import colors from "src/theme/colors";
 
 const screenHeight = Dimensions.get("window").height;
-const itemSize = screenHeight * 0.17;
+const itemSize = screenHeight * 0.15;
 const iconCheckSizeContainer = itemSize / 5;
 
 export const getItemTextStyle = (

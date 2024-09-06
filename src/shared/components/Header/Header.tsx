@@ -11,12 +11,21 @@ import s, { iconSize } from "./Header.style";
 
 type Params = UnsignedGroupParamList & SignedParamList & HomeTabsParamList;
 
-const Header = () => {
+interface IHeaderProps {
+  onPress?(): void;
+}
+
+const Header: React.FC<IHeaderProps> = ({ onPress }) => {
   const navigation = useNavigation<NavigationProp<Params>>();
+
+  const handleOnPress = () => {
+    if (!!onPress) onPress();
+    else navigation.goBack();
+  };
 
   return (
     <View style={s.container}>
-      <Pressable onPress={navigation.goBack} style={s.button}>
+      <Pressable onPress={handleOnPress} style={s.button}>
         <Icon
           size={iconSize}
           type="Entypo"

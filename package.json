@@ -88,6 +88,7 @@
     "expo": "~51.0.31",
     "expo-application": "~5.9.1",
     "expo-asset": "~10.0.10",
+    "expo-camera": "~15.0.15",
     "expo-clipboard": "~6.0.3",
     "expo-constants": "~16.0.2",
     "expo-secure-store": "^13.0.2",
