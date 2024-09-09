@@ -12,10 +12,14 @@ import s, { iconSize } from "./Header.style";
 type Params = UnsignedGroupParamList & SignedParamList & HomeTabsParamList;
 
 interface IHeaderProps {
+  hideBackButton?: boolean;
   onPress?(): void;
 }
 
-const Header: React.FC<IHeaderProps> = ({ onPress }) => {
+const Header: React.FC<IHeaderProps> = ({
+  onPress,
+  hideBackButton = false,
+}) => {
   const navigation = useNavigation<NavigationProp<Params>>();
 
   const handleOnPress = () => {
@@ -25,14 +29,16 @@ const Header: React.FC<IHeaderProps> = ({ onPress }) => {
 
   return (
     <View style={s.container}>
-      <Pressable onPress={handleOnPress} style={s.button}>
-        <Icon
-          size={iconSize}
-          type="Entypo"
-          name="chevron-thin-left"
-          color={colors.WHITE}
-        />
-      </Pressable>
+      {!hideBackButton && (
+        <Pressable onPress={handleOnPress} style={s.button}>
+          <Icon
+            size={iconSize}
+            type="Entypo"
+            name="chevron-thin-left"
+            color={colors.WHITE}
+          />
+        </Pressable>
+      )}
     </View>
   );
 };

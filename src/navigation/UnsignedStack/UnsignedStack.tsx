@@ -7,24 +7,20 @@ import {
 } from "@react-navigation/native-stack";
 
 import { SCREENS } from "src/navigation/routes";
-import {
-  Onboarding,
-  Splash,
-  SignUp,
-  NostrUp,
-  Login,
-  NostrIn,
-} from "src/screens";
+import { Onboarding, Splash } from "src/screens";
 import { IS_EXPO_GO } from "src/shared/constants/platform";
+import LoginGroup, { type LoginGroupParamList } from "../LoginGroup";
+import SignUpGroup, { type SignUpGroupParamList } from "../SignUpGroup";
+import ResetPasswordGroup, {
+  type ResetPasswordGroupParamList,
+} from "../ResetPasswordGroup";
 
 export type UnsignedGroupParamList = {
   [SCREENS.ONBOARDING]: undefined;
   [SCREENS.SPLASH]: undefined;
-  [SCREENS.SIGN_UP]: undefined;
-  [SCREENS.NOSTR_UP]: undefined;
-  [SCREENS.LOGIN]: undefined;
-  [SCREENS.NOSTR_IN]: undefined;
-};
+} & LoginGroupParamList &
+  SignUpGroupParamList &
+  ResetPasswordGroupParamList;
 const Stack = createNativeStackNavigator<UnsignedGroupParamList>();
 
 const UnsignedStack = () => {
@@ -35,10 +31,9 @@ const UnsignedStack = () => {
     >
       <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
       <Stack.Screen name={SCREENS.ONBOARDING} component={Onboarding} />
-      <Stack.Screen name={SCREENS.SIGN_UP} component={SignUp} />
-      <Stack.Screen name={SCREENS.NOSTR_UP} component={NostrUp} />
-      <Stack.Screen name={SCREENS.LOGIN} component={Login} />
-      <Stack.Screen name={SCREENS.NOSTR_IN} component={NostrIn} />
+      {LoginGroup()}
+      {SignUpGroup()}
+      {ResetPasswordGroup()}
     </Stack.Navigator>
   );
 };

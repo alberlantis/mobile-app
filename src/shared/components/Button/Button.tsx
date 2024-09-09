@@ -21,6 +21,7 @@ import {
   getColors,
   getRadius,
   getSize,
+  getOutline,
   type ButtonSize,
   type ButtonTheme,
 } from "./tools";
@@ -68,6 +69,7 @@ const Button: React.FC<IButtonProps> = ({
   const buttonWidth = staticWidth ?? dynamicWidth;
   const isAutoSize = size === "auto";
   const buttonRadius = getRadius(buttonWidth);
+  const outlineStyle = getOutline(theme, buttonRadius);
 
   const handleLayout = useCallback(
     (event: LayoutChangeEvent) => {
@@ -82,6 +84,7 @@ const Button: React.FC<IButtonProps> = ({
     <Pressable
       style={StyleSheet.flatten([
         s.container,
+        outlineStyle,
         {
           marginTop,
           marginBottom,

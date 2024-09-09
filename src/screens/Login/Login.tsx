@@ -70,7 +70,10 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           }
         />
         <View style={s.forgotPassword}>
-          <InteractiveText prefix="Forgot Password?" onPress={() => {}} />
+          <InteractiveText
+            prefix="Forgot Password?"
+            onPress={() => navigation.navigate(SCREENS.RECOVERY_EMAIL)}
+          />
         </View>
         <Button
           onPress={handleLoginAccount}

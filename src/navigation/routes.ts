@@ -12,4 +12,6 @@ export const SCREENS = {
   NOSTR_IN: "NostrIn",
   INTERESTS: "Interests",
   COMPLETE_PROFILE: "CompleteProfile",
+  RECOVERY_EMAIL: "RecoveryEmail",
+  RESET_PASSWORD: "ResetPassword",
 } as const;

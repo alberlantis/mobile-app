@@ -6,6 +6,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
   AntDesign,
+  Fontisto,
 } from "@expo/vector-icons";
 import { ColorValue, StyleProp, TextStyle } from "react-native";
 
@@ -18,6 +19,7 @@ export type IconNames = {
   FontAwesome: keyof typeof FontAwesome.glyphMap;
   Ionicons: keyof typeof Ionicons.glyphMap;
   MaterialCommunityIcons: keyof typeof MaterialCommunityIcons.glyphMap;
+  Fontisto: keyof typeof Fontisto.glyphMap;
 };
 
 interface IBaseIconProps {
@@ -50,6 +52,7 @@ const Icon = <T extends keyof IconNames>({
     Ionicons,
     MaterialCommunityIcons,
     AntDesign,
+    Fontisto,
   };
   const IconComponent = iconMap[type] as React.ComponentType<any>;
   return (

@@ -1,14 +1,32 @@
-import { DimensionValue, Dimensions, ColorValue } from "react-native";
+import {
+  DimensionValue,
+  Dimensions,
+  ColorValue,
+  StyleProp,
+  ViewStyle,
+  Animated,
+} from "react-native";
 
 import colors from "src/theme/colors";
 
 export type ButtonSize = "large" | "fill" | "regular" | "auto";
-export type ButtonTheme = "primary" | "secondary" | "disabled" | "off";
+export type ButtonTheme =
+  | "primary"
+  | "secondary"
+  | "disabled"
+  | "off"
+  | "primary-outline";
 type NumberProp = string | number;
 type ButtonDimensions = {
   width?: NumberProp & DimensionValue;
   height: NumberProp & DimensionValue;
 };
+type RadiusValue =
+  | number
+  | "auto"
+  | `${number}%`
+  | (string & Animated.AnimatedNode)
+  | undefined;
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
@@ -20,6 +38,8 @@ export const getColors = (theme: ButtonTheme): ColorValue[] => {
       return [colors.GRAY_BOLD, colors.GRAY_BOLD];
     case "off":
       return [colors.WHITE_GRAY, colors.WHITE_GRAY];
+    case "primary-outline":
+      return [colors.TRANSPARENT, colors.TRANSPARENT];
     case "primary":
     default:
       return [colors.ORANGE_PRIMARY_DARK, colors.ORANGE_PRIMARY_LIGHT];
@@ -54,9 +74,28 @@ export const getSize = (size?: ButtonSize): ButtonDimensions => {
   }
 };
 
-export const getRadius = (value: (NumberProp & DimensionValue) | undefined) => {
+export const getRadius = (
+  value: (NumberProp & DimensionValue) | undefined,
+): RadiusValue => {
   const sanitizeValue: (NumberProp & DimensionValue) | undefined =
     typeof value === "string" ? parseInt(value, 10) : value;
   if (!sanitizeValue) return value;
   return sanitizeValue / (sanitizeValue * 0.04);
+};
+
+export const getOutline = (
+  theme: ButtonTheme,
+  radius: RadiusValue,
+): StyleProp<ViewStyle> => {
+  if (!theme.includes("outline")) return {};
+  switch (theme) {
+    case "primary-outline":
+    default: {
+      return {
+        borderRadius: (radius as number) - 5,
+        borderColor: colors.ORANGE_PRIMARY,
+        borderWidth: 1,
+      };
+    }
+  }
 };

@@ -6,6 +6,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
   AntDesign,
+  Fontisto,
 } from "@expo/vector-icons";
 
 const usePreloadIcons = () => {
@@ -18,6 +19,7 @@ const usePreloadIcons = () => {
       ...Ionicons.font,
       ...MaterialCommunityIcons.font,
       ...AntDesign.font,
+      ...Fontisto.font,
     });
   };
 
