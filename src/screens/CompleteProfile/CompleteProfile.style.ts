@@ -11,11 +11,15 @@ export default StyleSheet.create({
     flex: 1,
     marginHorizontal: "2%",
   },
+  keyboardContainer: {
+    flex: 1,
+    alignItems: "center",
+    height: "75%",
+  },
   titleContainer: {
     width: "100%",
-    height: "10%",
+    height: "15%",
     alignItems: "center",
-    justifyContent: "center",
   },
   titleDescription: {
     color: colors.WHITE_BOLD,
@@ -25,13 +29,13 @@ export default StyleSheet.create({
   },
   uploadAvataContainer: {
     width: "100%",
-    height: "35%",
+    height: "42.5%",
     alignItems: "center",
     justifyContent: "center",
   },
   inputsContainer: {
     width: "100%",
-    height: "30%",
+    height: "42.5%",
     alignItems: "center",
   },
   input: {

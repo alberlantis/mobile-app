@@ -26,7 +26,7 @@ export default StyleSheet.create({
     width: "100%",
     position: "absolute",
     bottom: 0,
-    marginBottom: "10%",
+    marginBottom: "5%",
   },
   retakeIcon: {
     position: "absolute",

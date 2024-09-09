@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Pressable, Image } from "react-native";
-import { CameraCapturedPicture } from "expo-camera";
+import { View, Pressable, Image, Alert, Linking } from "react-native";
+import { type CameraCapturedPicture, useCameraPermissions } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
 
 import { Icon, Camera } from "src/shared/components";
 import colors from "src/theme/colors";
@@ -8,7 +9,60 @@ import s, { cameraIconSize, userIconSize } from "./UploadAvatar.style";
 
 const UploadAvatar = () => {
   const [toggleCamera, setToggleCamera] = useState(false);
-  const [avatar, setAvatar] = useState<CameraCapturedPicture | undefined>();
+  const [permission, requestPermission] = useCameraPermissions();
+  const [avatar, setAvatar] = useState<
+    CameraCapturedPicture | ImagePicker.ImagePickerAsset | undefined
+  >();
+
+  const handleImageGallery = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setAvatar(result.assets[0]);
+    }
+  };
+  const handleCamera = async () => {
+    if (permission?.granted) {
+      setToggleCamera(true);
+      return;
+    }
+    if (!!permission?.canAskAgain) {
+      const permissionResponse = await requestPermission();
+      setToggleCamera(permissionResponse.granted);
+      return;
+    }
+    Alert.alert(
+      "Permissions Denied!",
+      "Please go to you app settings and grant camera permission",
+      [
+        {
+          text: "Go to settings",
+          onPress: Linking.openSettings,
+        },
+      ],
+    );
+    setToggleCamera(false);
+  };
+  const handleSelectAvatar = () => {
+    Alert.alert("Upload Photo", "", [
+      {
+        text: "Take Photo",
+        onPress: handleCamera,
+      },
+      {
+        text: "Choose Existing",
+        onPress: handleImageGallery,
+      },
+      {
+        text: "Cancel",
+      },
+    ]);
+  };
 
   return (
     <View style={s.container}>
@@ -23,10 +77,7 @@ const UploadAvatar = () => {
             size={userIconSize}
           />
         )}
-        <Pressable
-          style={s.buttonOuterContainer}
-          onPress={() => setToggleCamera(true)}
-        >
+        <Pressable style={s.buttonOuterContainer} onPress={handleSelectAvatar}>
           <View style={s.buttonInnerContainer}>
             <Icon
               type="Feather"
@@ -40,7 +91,11 @@ const UploadAvatar = () => {
       <Camera
         toggleCamera={toggleCamera}
         setToggleCamera={setToggleCamera}
-        savePhoto={setAvatar}
+        savePhoto={
+          setAvatar as React.Dispatch<
+            React.SetStateAction<CameraCapturedPicture | undefined>
+          >
+        }
       />
     </View>
   );

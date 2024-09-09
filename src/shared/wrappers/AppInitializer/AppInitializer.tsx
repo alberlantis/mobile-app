@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaView, StatusBar, Pressable, Keyboard } from "react-native";
 
 import { useSplash, useImageAssets } from "src/shared/hooks";
 import s from "./AppInitializer.style";
@@ -44,7 +44,13 @@ const AppInitializer: React.FC<ISplashProps> = ({ children }) => {
       testID="app-initializer-container-id"
     >
       <StatusBar barStyle="light-content" />
-      {children}
+      <Pressable
+        style={s.container}
+        accessible={false}
+        onPress={Keyboard.dismiss}
+      >
+        {children}
+      </Pressable>
     </SafeAreaView>
   );
 };

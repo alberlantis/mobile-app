@@ -1,10 +1,6 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { SafeAreaView, View, Alert, Linking, Modal, Image } from "react-native";
-import {
-  CameraView,
-  useCameraPermissions,
-  CameraCapturedPicture,
-} from "expo-camera";
+import React, { useRef, useState } from "react";
+import { SafeAreaView, View, Alert, Modal, Image } from "react-native";
+import { CameraView, CameraCapturedPicture } from "expo-camera";
 
 import Icon from "../Icon";
 import Header from "../Header";
@@ -25,11 +21,8 @@ const Camera: React.FC<ICameraProps> = ({
   setToggleCamera,
   savePhoto,
 }) => {
-  const [permission, requestPermission] = useCameraPermissions();
   const [photo, setPhoto] = useState<CameraCapturedPicture | undefined>();
   const cameraRef = useRef<CameraView>(null);
-  const showCamera = !!permission?.granted && toggleCamera;
-
   const handleGoBack = () => {
     if (!photo) {
       setToggleCamera(false);
@@ -63,33 +56,9 @@ const Camera: React.FC<ICameraProps> = ({
     }
     setPhoto(data);
   };
-  const handleCamera = useCallback(async () => {
-    if (!!permission?.canAskAgain) {
-      const permissionResponse = await requestPermission();
-      setToggleCamera(permissionResponse.granted);
-      return;
-    }
-
-    setToggleCamera(false);
-    Alert.alert(
-      "Permissions Denied!",
-      "Please go to you app settings and grant camera permission",
-      [
-        {
-          text: "Go to settings",
-          onPress: Linking.openSettings,
-        },
-      ],
-    );
-  }, [permission, setToggleCamera, requestPermission]);
-
-  useEffect(() => {
-    if (!toggleCamera) return;
-    handleCamera();
-  }, [toggleCamera, handleCamera]);
 
   return (
-    <Modal visible={showCamera}>
+    <Modal visible={toggleCamera}>
       <SafeAreaView style={s.container}>
         <View style={s.headerContainer}>
           <Header onPress={handleGoBack} />
