@@ -57,3 +57,35 @@ export const shouldLoginSigner = createAppAsyncThunk(
     return account;
   },
 );
+
+export const shouldPostInitializeResetPassword = createAppAsyncThunk(
+  "post/initializeResetPassword",
+  async (
+    username: string,
+    {
+      extra: {
+        api: { AuthClient },
+      },
+    },
+  ) => {
+    const isInitializeResetPasswordSuccessfull =
+      await AuthClient.postInitializeResetPassword(username);
+    return isInitializeResetPasswordSuccessfull;
+  },
+);
+
+export const shouldPostResetPassword = createAppAsyncThunk(
+  "post/resetPassword",
+  async (
+    password: string,
+    {
+      extra: {
+        api: { AuthClient },
+      },
+    },
+  ) => {
+    const isResetPasswordSuccessfull =
+      await AuthClient.postResetPassword(password);
+    return isResetPasswordSuccessfull;
+  },
+);

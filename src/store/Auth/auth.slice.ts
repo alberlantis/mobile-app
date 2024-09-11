@@ -5,6 +5,8 @@ import {
   shouldCreateAccount,
   shouldLoginAccount,
   shouldLoginSigner,
+  shouldPostInitializeResetPassword,
+  shouldPostResetPassword,
 } from "./auth.thunks";
 
 interface AuthState {
@@ -14,6 +16,10 @@ interface AuthState {
   isLogged: boolean;
   isAccountCreation: boolean;
   account: Account | undefined;
+  isInitiateResetPasswordSuccess: boolean;
+  initiateResetPasswordLoading: boolean;
+  isResetPasswordSuccess: boolean;
+  resetPasswordLoading: boolean;
 }
 
 const initialState: AuthState = {
@@ -23,6 +29,10 @@ const initialState: AuthState = {
   isLogged: false,
   account: undefined,
   isAccountCreation: false,
+  isInitiateResetPasswordSuccess: false,
+  initiateResetPasswordLoading: false,
+  isResetPasswordSuccess: false,
+  resetPasswordLoading: false,
 };
 
 const authSlice = createSlice({
@@ -32,6 +42,12 @@ const authSlice = createSlice({
     shouldLogout: (state) => {
       state.isAccountCreation = false;
       state.isLogged = false;
+    },
+    shouldResetInitiateResetPassword: (state) => {
+      state.isInitiateResetPasswordSuccess = false;
+    },
+    shouldResetResetPassword: (state) => {
+      state.isResetPasswordSuccess = false;
     },
     setAccountCreation: (state, action: PayloadAction<boolean>) => {
       state.isAccountCreation = action.payload;
@@ -72,6 +88,29 @@ const authSlice = createSlice({
       state.loginSignerLoading = false;
       state.isLogged = false;
       state.account = undefined;
+    });
+    builder.addCase(
+      shouldPostInitializeResetPassword.fulfilled,
+      (state, action) => {
+        state.initiateResetPasswordLoading = false;
+        state.isInitiateResetPasswordSuccess = action.payload;
+      },
+    );
+    builder.addCase(shouldPostInitializeResetPassword.pending, (state) => {
+      state.initiateResetPasswordLoading = true;
+    });
+    builder.addCase(shouldPostInitializeResetPassword.rejected, (state) => {
+      state.initiateResetPasswordLoading = false;
+    });
+    builder.addCase(shouldPostResetPassword.fulfilled, (state, action) => {
+      state.resetPasswordLoading = false;
+      state.isResetPasswordSuccess = action.payload;
+    });
+    builder.addCase(shouldPostResetPassword.pending, (state) => {
+      state.resetPasswordLoading = true;
+    });
+    builder.addCase(shouldPostResetPassword.rejected, (state) => {
+      state.resetPasswordLoading = false;
     });
   },
 });

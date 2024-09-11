@@ -21,10 +21,6 @@ export class SatlantisClient {
     return this.nostrSigner;
   };
 
-  private getJwt: func_GetJwt = () => {
-    return this.jwt;
-  };
-
   private initClient(baseUrl: string): void {
     if (!this.client) {
       const newClient = Client.New({
@@ -64,6 +60,10 @@ export class SatlantisClient {
     }
     return this.client;
   }
+
+  public getJwt: func_GetJwt = () => {
+    return this.jwt;
+  };
 
   public setJwt(newJwt: string) {
     this.jwt = newJwt;

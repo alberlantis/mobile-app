@@ -101,3 +101,36 @@ export const createAccount = async (
   }
   return response;
 };
+
+export const postInitializeResetPassword = async (username: string) => {
+  const client = satlantisApi.getClient();
+  const response = await client.initiatePasswordReset({ username });
+  if (response instanceof Error) {
+    console.error(
+      `Initiate password reset failed: ${response.message}`,
+      response.cause,
+    );
+    throw new Error(
+      `Error trying to initiate password reset. Reason: ${response.message}`,
+    );
+  }
+
+  return response.success;
+};
+
+export const postResetPassword = async (password: string) => {
+  const client = satlantisApi.getClient();
+  const token = satlantisApi.getJwt();
+  const response = await client.resetPassword({
+    password,
+    token,
+  });
+  if (response instanceof Error) {
+    console.error(`Password reset failed: ${response.message}`, response.cause);
+    throw new Error(
+      `Error trying to reset password. Reason: ${response.message}`,
+    );
+  }
+
+  return response.success;
+};

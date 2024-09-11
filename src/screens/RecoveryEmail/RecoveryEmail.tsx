@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 
+import { useAppDispatch, useAppSelector, AuthState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
 import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
 import {
@@ -13,18 +14,44 @@ import {
 } from "src/shared/components";
 import s, { emailIconSize } from "./RecoveryEmail.style";
 import colors from "src/theme/colors";
+import { SerializedError } from "@reduxjs/toolkit";
 
 const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
   navigation,
 }) => {
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    AuthState.selectors.selectInitiateResetPasswordLoading,
+  );
+  const isEmailSended = useAppSelector(
+    AuthState.selectors.selectInitiateResetPasswordSuccess,
+  );
   const [recoveryEmail, setRecoveryEmail] = useState("");
-  const [emailSended, setEmailSended] = useState(false);
-  const isButtonEnabled = !!recoveryEmail;
+  const isButtonEnabled = !!recoveryEmail && !isLoading;
+
+  const handleResetPassword = () => {
+    if (!isButtonEnabled) return;
+    dispatch(AuthState.thunks.shouldPostInitializeResetPassword(recoveryEmail))
+      .unwrap()
+      .catch((e: SerializedError) =>
+        Alert.alert("Error when trying to send email", e.message),
+      );
+  };
+
+  /**
+   * @tech-debt
+   *
+   * should navigate back to login
+   */
+  const handleClose = () => {
+    dispatch(AuthState.actions.shouldResetInitiateResetPassword());
+    navigation.navigate(SCREENS.RESET_PASSWORD);
+  };
 
   return (
     <DefaultBackground blurPos="top" style={s.container}>
-      <Header hideBackButton={emailSended} />
-      {emailSended ? (
+      <Header hideBackButton={isEmailSended} />
+      {isEmailSended ? (
         <>
           <View style={s.emailIconContainer}>
             <Icon
@@ -42,7 +69,7 @@ const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
             size="fill"
             text="Close"
             theme="primary-outline"
-            onPress={() => navigation.navigate(SCREENS.RESET_PASSWORD)}
+            onPress={handleClose}
           />
         </>
       ) : (
@@ -60,8 +87,9 @@ const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
             theme={isButtonEnabled ? "primary" : "disabled"}
             size="fill"
             text="Reset Password"
+            loading={isLoading}
             marginTop={s.button.marginTop}
-            onPress={() => isButtonEnabled && setEmailSended(true)}
+            onPress={handleResetPassword}
           />
         </>
       )}

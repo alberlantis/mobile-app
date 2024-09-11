@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { InMemoryAccountContext } from "@blowater/nostr-sdk";
-import { Account, Interest } from "@satlantis/api-client";
+import { AuthClient, UserClient } from "src/client";
 
 import { store } from "./store";
 
@@ -16,20 +15,8 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   dispatch: AppDispatch;
   extra: {
     api: {
-      AuthClient: {
-        generateNewNostrSigner(): InMemoryAccountContext;
-        getIsUserAvailability(username: string): Promise<boolean>;
-        login(username: string, password: string): Promise<Account>;
-        loginNostr(nsec: string): Promise<Account>;
-        createAccount(
-          email: string,
-          password: string,
-          username: string,
-        ): Promise<boolean>;
-      };
-      UserClient: {
-        getInterestsPool(): Promise<Interest[]>;
-      };
+      AuthClient: typeof AuthClient;
+      UserClient: typeof UserClient;
     };
   };
 }>();

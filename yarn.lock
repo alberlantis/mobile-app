@@ -2513,10 +2513,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@satlantis/api-client@npm:@jsr/satlantis__api-client@^0.0.38":
-  version "0.0.38"
-  resolved "https://npm.jsr.io/~/11/@jsr/satlantis__api-client/0.0.38.tgz#B1F9B24DD41006E16DE893177597CDD1EB54971B"
-  integrity sha512-yA+sKF0vk1Xtab3cceHkh6+ztAv+7kKIVLJwxNrhP2A8WRKPJ0PerZ/cOxOG+OH4w3wIz7Et/h2pIG0dC3C+Hg==
+"@satlantis/api-client@npm:@jsr/satlantis__api-client@^0.0.39":
+  version "0.0.39"
+  resolved "https://npm.jsr.io/~/11/@jsr/satlantis__api-client/0.0.39.tgz#3715522EA89F7AC86EAE60FF64D7A091E6159F06"
+  integrity sha512-JKk0+JzzWc8wWatdF2t3CsTex5nQSq2FxvcMlJIFZENahCDW10UWMZfHK0C5RZ+NrnNHkFiRCMD/itoVencoNg==
   dependencies:
     "@jsr/blowater__nostr-sdk" "^0.0.16"
 
