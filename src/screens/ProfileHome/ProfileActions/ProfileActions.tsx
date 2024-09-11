@@ -28,14 +28,13 @@ const ProfileActions = () => {
           <Button
             size="auto"
             text={toggleFollow ? "Following" : "Follow"}
-            extraPadding={20}
             theme="primary"
             prefixElement={followIcon}
             onPress={() => setToggleFollow(!toggleFollow)}
           />
         </View>
       </View>
-      <Separator span={2} marginBottom="2%" marginTop="2%" />
+      <Separator span={2} marginBottom="3%" marginTop="3%" />
     </>
   ) : null;
 };

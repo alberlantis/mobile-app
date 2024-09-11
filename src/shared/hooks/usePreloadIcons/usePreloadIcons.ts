@@ -7,6 +7,8 @@ import {
   MaterialCommunityIcons,
   AntDesign,
   Fontisto,
+  Octicons,
+  SimpleLineIcons,
 } from "@expo/vector-icons";
 
 const usePreloadIcons = () => {
@@ -20,6 +22,8 @@ const usePreloadIcons = () => {
       ...MaterialCommunityIcons.font,
       ...AntDesign.font,
       ...Fontisto.font,
+      ...Octicons.font,
+      ...SimpleLineIcons.font,
     });
   };
 

@@ -36,7 +36,8 @@ export interface IButtonProps {
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
-  extraPadding?: number;
+  extraPaddingVertical?: number;
+  extraPaddingHorizontal?: number;
   textStyle?: TextStyle;
   loading?: boolean;
   prefixElement?(): React.ComponentElement<any, any>;
@@ -52,7 +53,8 @@ const Button: React.FC<IButtonProps> = ({
   marginBottom,
   marginLeft,
   marginRight,
-  extraPadding = 40,
+  extraPaddingVertical = 15,
+  extraPaddingHorizontal = 40,
   textStyle,
   loading,
   subfixElement,
@@ -62,11 +64,12 @@ const Button: React.FC<IButtonProps> = ({
   const linearGradientID = "linGrad";
   const clipGradientID = "clipGrad";
   const buttonColor = getColors(theme);
-  const { width: staticWidth, height: buttonHeight } = getSize(size);
-  const [dynamicWidth, setDynamicWidth] = useState<number | undefined>(
-    undefined,
-  );
-  const buttonWidth = staticWidth ?? dynamicWidth;
+  const { width: staticWidth, height: staticHeight } = getSize(size);
+  const [dynamicSize, setDynamicSize] = useState<
+    { width: number; height: number } | undefined
+  >(undefined);
+  const buttonWidth = staticWidth || dynamicSize?.width;
+  const buttonHeight = staticHeight || dynamicSize?.height;
   const isAutoSize = size === "auto";
   const buttonRadius = getRadius(buttonWidth);
   const outlineStyle = getOutline(theme, buttonRadius);
@@ -74,10 +77,13 @@ const Button: React.FC<IButtonProps> = ({
   const handleLayout = useCallback(
     (event: LayoutChangeEvent) => {
       if (isAutoSize) {
-        setDynamicWidth(event.nativeEvent.layout.width + extraPadding);
+        setDynamicSize({
+          width: event.nativeEvent.layout.width + extraPaddingHorizontal,
+          height: event.nativeEvent.layout.height + extraPaddingVertical,
+        });
       }
     },
-    [isAutoSize, extraPadding, setDynamicWidth],
+    [isAutoSize, extraPaddingVertical, extraPaddingHorizontal, setDynamicSize],
   );
 
   return (
@@ -97,7 +103,7 @@ const Button: React.FC<IButtonProps> = ({
       onPress={onPress}
       testID="button-pressable-id"
     >
-      {!!buttonWidth && (
+      {!!buttonWidth && !!buttonHeight && (
         <Svg width={buttonWidth} style={StyleSheet.absoluteFillObject}>
           <Defs>
             <LinearGradient

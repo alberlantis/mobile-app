@@ -14,5 +14,6 @@ export default {
   20: responsiveFontSize(20),
   22: responsiveFontSize(22),
   24: responsiveFontSize(24),
+  26: responsiveFontSize(26),
   28: responsiveFontSize(28),
 };

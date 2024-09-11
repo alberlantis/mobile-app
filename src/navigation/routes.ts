@@ -15,4 +15,5 @@ export const SCREENS = {
   RECOVERY_EMAIL: "RecoveryEmail",
   RESET_PASSWORD: "ResetPassword",
   EDIT_USER: "EditUser",
+  LOCATION: "Location",
 } as const;

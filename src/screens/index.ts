@@ -13,3 +13,4 @@ export { default as CompleteProfile } from "./CompleteProfile";
 export { default as RecoveryEmail } from "./RecoveryEmail";
 export { default as ResetPassword } from "./ResetPassword";
 export { default as EditUser } from "./EditUser";
+export { default as Location } from "./Location";

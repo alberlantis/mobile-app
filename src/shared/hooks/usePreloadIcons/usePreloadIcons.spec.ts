@@ -42,6 +42,16 @@ jest.mock("@expo/vector-icons", () => ({
       fontistoIcons: "fontisto",
     },
   },
+  Octicons: {
+    font: {
+      octiconsIcons: "octicons",
+    },
+  },
+  SimpleLineIcons: {
+    font: {
+      simpleLineIcons: "simpleLineIcons",
+    },
+  },
 }));
 
 describe("usePreloadIcons", () => {
@@ -69,6 +79,8 @@ describe("usePreloadIcons", () => {
       materialCommunityIconsIcons: "materialCommunity",
       antDesignIcons: "antDesign",
       fontistoIcons: "fontisto",
+      octiconsIcons: "octicons",
+      simpleLineIcons: "simpleLineIcons",
     });
   });
 });

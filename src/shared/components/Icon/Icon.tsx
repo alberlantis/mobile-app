@@ -7,12 +7,16 @@ import {
   MaterialCommunityIcons,
   AntDesign,
   Fontisto,
+  Octicons,
+  SimpleLineIcons,
 } from "@expo/vector-icons";
 import { ColorValue, StyleProp, TextStyle } from "react-native";
 
 import colors from "src/theme/colors";
 
 export type IconNames = {
+  SimpleLineIcons: keyof typeof SimpleLineIcons.glyphMap;
+  Octicons: keyof typeof Octicons.glyphMap;
   AntDesign: keyof typeof AntDesign.glyphMap;
   Entypo: keyof typeof Entypo.glyphMap;
   Feather: keyof typeof Feather.glyphMap;
@@ -53,6 +57,8 @@ const Icon = <T extends keyof IconNames>({
     MaterialCommunityIcons,
     AntDesign,
     Fontisto,
+    Octicons,
+    SimpleLineIcons,
   };
   const IconComponent = iconMap[type] as React.ComponentType<any>;
   return (

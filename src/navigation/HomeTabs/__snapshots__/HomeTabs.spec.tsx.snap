@@ -128,6 +128,7 @@ exports[`Root general functionality should match snapshot 1`] = `
       }
     >
       <View
+        accessibilityLabel="Home, tab, 1 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -235,11 +236,9 @@ exports[`Root general functionality should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Home
-        </Text>
       </View>
       <View
+        accessibilityLabel="Location, tab, 2 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -317,7 +316,7 @@ exports[`Root general functionality should match snapshot 1`] = `
             }
           >
             <Text>
-              TabIcon-ProfileHome
+              TabIcon-Location
             </Text>
           </View>
           <View
@@ -339,15 +338,13 @@ exports[`Root general functionality should match snapshot 1`] = `
             }
           >
             <Text>
-              TabIcon-ProfileHome
+              TabIcon-Location
             </Text>
           </View>
         </View>
-        <Text>
-          ProfileHome
-        </Text>
       </View>
       <View
+        accessibilityLabel="Posting, tab, 3 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -451,11 +448,9 @@ exports[`Root general functionality should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Posting
-        </Text>
       </View>
       <View
+        accessibilityLabel="Notifications, tab, 4 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -559,9 +554,838 @@ exports[`Root general functionality should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Notifications
-        </Text>
+      </View>
+      <View
+        accessibilityLabel="ProfileHome, tab, 5 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Root when navigate to Location should match snapshot 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RNSScreenNavigationContainer
+    style={
+      {
+        "flex": 1,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <RNSScreen
+      activityState={0}
+      collapsable={false}
+      gestureResponseDistance={
+        {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
+      }
+      onGestureCancel={[Function]}
+      sheetAllowedDetents="large"
+      sheetCornerRadius={-1}
+      sheetExpandsWhenScrolledToEdge={true}
+      sheetGrabberVisible={false}
+      sheetLargestUndimmedDetent="all"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": -1,
+        }
+      }
+    >
+      <View
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          [
+            {
+              "backgroundColor": "rgb(242, 242, 242)",
+              "flex": 1,
+            },
+            [
+              {
+                "flex": 1,
+                "flexDirection": "column-reverse",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "flex": 1,
+            }
+          }
+        >
+          <Text>
+            Home Screen
+          </Text>
+        </View>
+      </View>
+    </RNSScreen>
+    <RNSScreen
+      activityState={2}
+      collapsable={false}
+      gestureResponseDistance={
+        {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
+      }
+      onGestureCancel={[Function]}
+      sheetAllowedDetents="large"
+      sheetCornerRadius={-1}
+      sheetExpandsWhenScrolledToEdge={true}
+      sheetGrabberVisible={false}
+      sheetLargestUndimmedDetent="all"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 0,
+        }
+      }
+    >
+      <View
+        accessibilityElementsHidden={false}
+        importantForAccessibility="auto"
+        style={
+          [
+            {
+              "backgroundColor": "rgb(242, 242, 242)",
+              "flex": 1,
+            },
+            [
+              {
+                "flex": 1,
+                "flexDirection": "column-reverse",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "flex": 1,
+            }
+          }
+        >
+          <Text>
+            Location Screen
+          </Text>
+        </View>
+      </View>
+    </RNSScreen>
+  </RNSScreenNavigationContainer>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    pointerEvents="auto"
+    style={
+      {
+        "backgroundColor": "#000",
+        "borderTopColor": "rgb(216, 216, 216)",
+        "borderTopWidth": 0,
+        "bottom": 0,
+        "elevation": 8,
+        "height": 49,
+        "left": 0,
+        "paddingBottom": 0,
+        "paddingHorizontal": 0,
+        "position": null,
+        "right": 0,
+        "transform": [
+          {
+            "translateY": 0,
+          },
+        ],
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+    <View
+      accessibilityRole="tablist"
+      style={
+        {
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityLabel="Home, tab, 1 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Home
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Home
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="Location, tab, 2 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": true,
+          }
+        }
+        accessibilityStates={
+          [
+            "selected",
+          ]
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Location
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Location
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="Posting, tab, 3 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Posting
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Posting
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="Notifications, tab, 4 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Notifications
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Notifications
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="ProfileHome, tab, 5 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -756,6 +1580,7 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
       }
     >
       <View
+        accessibilityLabel="Home, tab, 1 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -859,11 +1684,9 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Home
-        </Text>
       </View>
       <View
+        accessibilityLabel="Location, tab, 2 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -941,7 +1764,7 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             }
           >
             <Text>
-              TabIcon-ProfileHome
+              TabIcon-Location
             </Text>
           </View>
           <View
@@ -963,15 +1786,13 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             }
           >
             <Text>
-              TabIcon-ProfileHome
+              TabIcon-Location
             </Text>
           </View>
         </View>
-        <Text>
-          ProfileHome
-        </Text>
       </View>
       <View
+        accessibilityLabel="Posting, tab, 3 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1075,11 +1896,9 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Posting
-        </Text>
       </View>
       <View
+        accessibilityLabel="Notifications, tab, 4 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1187,9 +2006,112 @@ exports[`Root when navigate to Notifications should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Notifications
-        </Text>
+      </View>
+      <View
+        accessibilityLabel="ProfileHome, tab, 5 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -1384,6 +2306,7 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
       }
     >
       <View
+        accessibilityLabel="Home, tab, 1 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1487,11 +2410,9 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Home
-        </Text>
       </View>
       <View
+        accessibilityLabel="Location, tab, 2 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1569,7 +2490,7 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             }
           >
             <Text>
-              TabIcon-ProfileHome
+              TabIcon-Location
             </Text>
           </View>
           <View
@@ -1591,15 +2512,13 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             }
           >
             <Text>
-              TabIcon-ProfileHome
+              TabIcon-Location
             </Text>
           </View>
         </View>
-        <Text>
-          ProfileHome
-        </Text>
       </View>
       <View
+        accessibilityLabel="Posting, tab, 3 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1707,11 +2626,9 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Posting
-        </Text>
       </View>
       <View
+        accessibilityLabel="Notifications, tab, 4 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -1815,9 +2732,112 @@ exports[`Root when navigate to Posting should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Notifications
-        </Text>
+      </View>
+      <View
+        accessibilityLabel="ProfileHome, tab, 5 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-ProfileHome
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -2012,6 +3032,7 @@ exports[`Root when navigate to ProfileHome should match snapshot 1`] = `
       }
     >
       <View
+        accessibilityLabel="Home, tab, 1 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -2115,11 +3136,327 @@ exports[`Root when navigate to ProfileHome should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          Home
-        </Text>
       </View>
       <View
+        accessibilityLabel="Location, tab, 2 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Location
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Location
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="Posting, tab, 3 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Posting
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Posting
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="Notifications, tab, 4 of 5"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": false,
+          }
+        }
+        accessibilityStates={[]}
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Notifications
+            </Text>
+          </View>
+          <View
+            style={
+              [
+                {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                {
+                  "opacity": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              TabIcon-Notifications
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityLabel="ProfileHome, tab, 5 of 5"
         accessibilityRole="button"
         accessibilityState={
           {
@@ -2227,225 +3564,6 @@ exports[`Root when navigate to ProfileHome should match snapshot 1`] = `
             </Text>
           </View>
         </View>
-        <Text>
-          ProfileHome
-        </Text>
-      </View>
-      <View
-        accessibilityRole="button"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": false,
-          }
-        }
-        accessibilityStates={[]}
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flex": 1,
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-            {
-              "flexDirection": "column",
-              "justifyContent": "flex-end",
-            },
-            undefined,
-          ]
-        }
-      >
-        <View
-          style={
-            [
-              {
-                "flex": 1,
-              },
-              undefined,
-            ]
-          }
-        >
-          <View
-            style={
-              [
-                {
-                  "alignItems": "center",
-                  "alignSelf": "center",
-                  "height": "100%",
-                  "justifyContent": "center",
-                  "minWidth": 25,
-                  "position": "absolute",
-                  "width": "100%",
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          >
-            <Text>
-              TabIcon-Posting
-            </Text>
-          </View>
-          <View
-            style={
-              [
-                {
-                  "alignItems": "center",
-                  "alignSelf": "center",
-                  "height": "100%",
-                  "justifyContent": "center",
-                  "minWidth": 25,
-                  "position": "absolute",
-                  "width": "100%",
-                },
-                {
-                  "opacity": 1,
-                },
-              ]
-            }
-          >
-            <Text>
-              TabIcon-Posting
-            </Text>
-          </View>
-        </View>
-        <Text>
-          Posting
-        </Text>
-      </View>
-      <View
-        accessibilityRole="button"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": false,
-          }
-        }
-        accessibilityStates={[]}
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flex": 1,
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-            {
-              "flexDirection": "column",
-              "justifyContent": "flex-end",
-            },
-            undefined,
-          ]
-        }
-      >
-        <View
-          style={
-            [
-              {
-                "flex": 1,
-              },
-              undefined,
-            ]
-          }
-        >
-          <View
-            style={
-              [
-                {
-                  "alignItems": "center",
-                  "alignSelf": "center",
-                  "height": "100%",
-                  "justifyContent": "center",
-                  "minWidth": 25,
-                  "position": "absolute",
-                  "width": "100%",
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          >
-            <Text>
-              TabIcon-Notifications
-            </Text>
-          </View>
-          <View
-            style={
-              [
-                {
-                  "alignItems": "center",
-                  "alignSelf": "center",
-                  "height": "100%",
-                  "justifyContent": "center",
-                  "minWidth": 25,
-                  "position": "absolute",
-                  "width": "100%",
-                },
-                {
-                  "opacity": 1,
-                },
-              ]
-            }
-          >
-            <Text>
-              TabIcon-Notifications
-            </Text>
-          </View>
-        </View>
-        <Text>
-          Notifications
-        </Text>
       </View>
     </View>
   </View>

@@ -12,10 +12,10 @@ const ProfileHeader = () => {
     <>
       <ProfilePortrait />
       <ProfileInformation />
-      <Separator span={2} marginBottom="2%" marginTop="2%" />
+      <Separator span={2} marginBottom="3%" marginTop="2%" />
       <ProfileActions />
       <ProfileDetails />
-      <Separator span={2} marginBottom="2%" marginTop="2%" />
+      <Separator span={2} marginBottom="3%" marginTop="3%" />
       <ProfileOptions />
     </>
   );

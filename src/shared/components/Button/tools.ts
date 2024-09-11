@@ -69,7 +69,8 @@ export const getSize = (size?: ButtonSize): ButtonDimensions => {
       };
     default:
       return {
-        height: defaultHeight,
+        width: 0,
+        height: 0,
       };
   }
 };
@@ -80,7 +81,7 @@ export const getRadius = (
   const sanitizeValue: (NumberProp & DimensionValue) | undefined =
     typeof value === "string" ? parseInt(value, 10) : value;
   if (!sanitizeValue) return value;
-  return sanitizeValue / (sanitizeValue * 0.04);
+  return sanitizeValue / (sanitizeValue * 0.05);
 };
 
 export const getOutline = (

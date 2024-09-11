@@ -16,13 +16,6 @@ jest.mock("./TabIcon", () => {
     return <Text>{`TabIcon-${route}`}</Text>;
   };
 });
-jest.mock("./TabLabel", () => {
-  const { Text } =
-    jest.requireActual<typeof import("react-native")>("react-native");
-  return function MockTabLabel({ route }: { route: string }) {
-    return <Text>{route}</Text>;
-  };
-});
 jest.mock("src/screens", () => {
   const { Text } =
     jest.requireActual<typeof import("react-native")>("react-native");
@@ -31,6 +24,7 @@ jest.mock("src/screens", () => {
     ProfileHome: () => <Text>ProfileHome Screen</Text>,
     Posting: () => <Text>Posting Screen</Text>,
     Notifications: () => <Text>Notifications Screen</Text>,
+    Location: () => <Text>Location Screen</Text>,
   };
 });
 
@@ -50,9 +44,9 @@ describe("Root", () => {
       expect(screen.toJSON()).toMatchSnapshot();
     });
 
-    it("should render 4 bottom buttons", () => {
+    it("should render 5 bottom buttons", () => {
       const buttons = screen.getAllByRole("button");
-      expect(buttons).toHaveLength(4);
+      expect(buttons).toHaveLength(5);
     });
 
     it("should render initial route Home screen", () => {
@@ -68,7 +62,7 @@ describe("Root", () => {
             <HomeTabs />
           </NavigationContainer>,
         );
-        const button = screen.getByText("ProfileHome");
+        const button = screen.getAllByRole("button")[4];
         fireEvent.press(button);
       });
     });
@@ -90,7 +84,7 @@ describe("Root", () => {
             <HomeTabs />
           </NavigationContainer>,
         );
-        const button = screen.getByText("Posting");
+        const button = screen.getAllByRole("button")[2];
         fireEvent.press(button);
       });
     });
@@ -104,6 +98,28 @@ describe("Root", () => {
     });
   });
 
+  describe("when navigate to Location", () => {
+    beforeEach(() => {
+      waitFor(() => {
+        render(
+          <NavigationContainer>
+            <HomeTabs />
+          </NavigationContainer>,
+        );
+        const button = screen.getAllByRole("button")[1];
+        fireEvent.press(button);
+      });
+    });
+
+    it("should match snapshot", () => {
+      expect(screen.toJSON()).toMatchSnapshot();
+    });
+
+    it("should render Location screen", () => {
+      expect(screen.getByText("Location Screen")).toBeOnTheScreen();
+    });
+  });
+
   describe("when navigate to Notifications", () => {
     beforeEach(() => {
       waitFor(() => {
@@ -112,7 +128,7 @@ describe("Root", () => {
             <HomeTabs />
           </NavigationContainer>,
         );
-        const button = screen.getByText("Notifications");
+        const button = screen.getAllByRole("button")[3];
         fireEvent.press(button);
       });
     });
