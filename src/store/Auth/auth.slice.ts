@@ -29,6 +29,10 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    shouldLogout: (state) => {
+      state.isAccountCreation = false;
+      state.isLogged = false;
+    },
     setAccountCreation: (state, action: PayloadAction<boolean>) => {
       state.isAccountCreation = action.payload;
     },

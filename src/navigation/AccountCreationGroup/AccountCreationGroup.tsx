@@ -6,7 +6,9 @@ import { Interests, CompleteProfile } from "src/screens";
 
 export type AccountCreationParamList = {
   [SCREENS.INTERESTS]: undefined;
-  [SCREENS.COMPLETE_PROFILE]: undefined;
+  [SCREENS.COMPLETE_PROFILE]: {
+    selectedInterests: string[];
+  };
 };
 const Stack = createNativeStackNavigator<AccountCreationParamList>();
 

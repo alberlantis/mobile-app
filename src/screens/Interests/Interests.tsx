@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 
+import { useAppDispatch, AuthState } from "src/store";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import {
   DefaultBackground,
@@ -17,12 +18,13 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   route,
   navigation,
 }) => {
+  const dispatch = useAppDispatch();
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const isButtonEnabled = selectedOptions.length > 2;
 
   return (
     <DefaultBackground blurPos="top" style={s.container}>
-      <Header />
+      <Header onPress={() => dispatch(AuthState.actions.shouldLogout())} />
       <View style={s.headerContainer}>
         <Title title="Interests" />
         <Text style={s.textDescription}>
@@ -43,7 +45,10 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
           theme={isButtonEnabled ? "primary" : "disabled"}
           marginBottom={s.buttomMargin.marginBottom}
           onPress={() =>
-            isButtonEnabled && navigation.navigate(SCREENS.COMPLETE_PROFILE)
+            isButtonEnabled &&
+            navigation.navigate(SCREENS.COMPLETE_PROFILE, {
+              selectedInterests: selectedOptions,
+            })
           }
         />
       </View>

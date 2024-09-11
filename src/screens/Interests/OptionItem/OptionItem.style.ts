@@ -19,6 +19,8 @@ export const getItemTextStyle = (
   color: isOptionSelected ? colors.WHITE : colors.WHITE_BOLD,
   fontWeight: isOptionSelected ? "semibold" : "regular",
   fontSize: fonts[14],
+  textAlign: "center",
+  width: "85%",
 });
 export const getButtonContainer = (
   isOptionSelected: boolean,

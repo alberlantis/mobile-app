@@ -1972,10 +1972,10 @@
   resolved "https://npm.jsr.io/~/11/@jsr/blowater__csp/1.0.0.tgz#C305949C041A9648003CEA6512D5D7BEA0954EC1"
   integrity sha512-Ytq2ojgjgrMxOaikAgvNP9UWNk9vrz9+wRGh/TAzDde0bxiD3TJgEbBMNJchGcAaLgqHBEOPe2ctCNKOMBpk0w==
 
-"@jsr/blowater__nostr-sdk@^0.0.15":
-  version "0.0.15"
-  resolved "https://npm.jsr.io/~/11/@jsr/blowater__nostr-sdk/0.0.15.tgz#BA95E40B374544412DEC0675E1A2F37B810D1D7B"
-  integrity sha512-9erEt4yva9YhE78klagb8SShTQMasjaGKgWrDp5d3c2W6Van6aQQaRWzXBkuH3HEEjA/+EzVPtZt2MA+3DpIfg==
+"@jsr/blowater__nostr-sdk@^0.0.16":
+  version "0.0.16"
+  resolved "https://npm.jsr.io/~/11/@jsr/blowater__nostr-sdk/0.0.16.tgz#A6622083A6A5A42DC721459E43B9D086C22E339D"
+  integrity sha512-tAC9ULLFwdJihWDpAt8oqCIqwy3fGSCPiW3DOAmeyieiWn76Om75vCEK8Nuv499Y/R3ydqvJWbQ/F36PAvoJ2w==
   dependencies:
     "@jsr/blowater__collections" "^0.0.0-rc1"
     "@jsr/blowater__csp" "1.0.0"
@@ -2513,12 +2513,12 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@satlantis/api-client@npm:@jsr/satlantis__api-client@^0.0.37":
-  version "0.0.37"
-  resolved "https://npm.jsr.io/~/11/@jsr/satlantis__api-client/0.0.37.tgz#25EBD2AEF4E459B4F0BA33F45FA0E5F76445F688"
-  integrity sha512-3fuCedxcM4cjGkna9yS+jRZFXqTTFnb2ToUndTHycCObS/+ghT0YIfrHem8QRfQkBmbqZH/QS+6ErVLvC8uX6A==
+"@satlantis/api-client@npm:@jsr/satlantis__api-client@^0.0.38":
+  version "0.0.38"
+  resolved "https://npm.jsr.io/~/11/@jsr/satlantis__api-client/0.0.38.tgz#B1F9B24DD41006E16DE893177597CDD1EB54971B"
+  integrity sha512-yA+sKF0vk1Xtab3cceHkh6+ztAv+7kKIVLJwxNrhP2A8WRKPJ0PerZ/cOxOG+OH4w3wIz7Et/h2pIG0dC3C+Hg==
   dependencies:
-    "@jsr/blowater__nostr-sdk" "^0.0.15"
+    "@jsr/blowater__nostr-sdk" "^0.0.16"
 
 "@scure/base@~1.1.0", "@scure/base@~1.1.2":
   version "1.1.7"
