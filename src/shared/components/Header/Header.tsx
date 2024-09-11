@@ -1,15 +1,8 @@
 import React from "react";
-import { Pressable, View } from "react-native";
-import { useNavigation, type NavigationProp } from "@react-navigation/native";
+import { View } from "react-native";
 
-import type { UnsignedGroupParamList } from "src/navigation/UnsignedStack";
-import type { SignedParamList } from "src/navigation/SignedStack";
-import type { HomeTabsParamList } from "src/navigation/HomeTabs";
-import Icon from "../Icon";
-import colors from "src/theme/colors";
-import s, { iconSize } from "./Header.style";
-
-type Params = UnsignedGroupParamList & SignedParamList & HomeTabsParamList;
+import s from "./Header.style";
+import BackButton from "../BackButton";
 
 interface IHeaderProps {
   hideBackButton?: boolean;
@@ -20,24 +13,12 @@ const Header: React.FC<IHeaderProps> = ({
   onPress,
   hideBackButton = false,
 }) => {
-  const navigation = useNavigation<NavigationProp<Params>>();
-
-  const handleOnPress = () => {
-    if (!!onPress) onPress();
-    else navigation.goBack();
-  };
+  const headerHeight = 0.06;
 
   return (
     <View style={s.container}>
       {!hideBackButton && (
-        <Pressable onPress={handleOnPress} style={s.button}>
-          <Icon
-            size={iconSize}
-            type="Entypo"
-            name="chevron-thin-left"
-            color={colors.WHITE}
-          />
-        </Pressable>
+        <BackButton onPress={onPress} containerHeight={headerHeight} />
       )}
     </View>
   );

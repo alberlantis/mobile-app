@@ -11,3 +11,8 @@ export { default as EyeIcon } from "./EyeIcon";
 export { default as ScreenProgressIndicator } from "./ScreenProgressIndicator";
 export { default as Title } from "./Title";
 export { default as Camera } from "./Camera";
+export { default as BackButton } from "./BackButton";
+export { default as ImagePortrait } from "./ImagePortrait";
+export { default as Avatar } from "./Avatar";
+export { default as BasePanelText } from "./BasePanelText";
+export { default as CheckboxItem } from "./CheckboxItem";

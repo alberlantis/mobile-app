@@ -1,7 +1,2 @@
 export { default } from "./HomeTabs";
-export type {
-  HomeTabsRouteProps,
-  HomeTabsNavigationProps,
-  HomeTabsScreenProps,
-  HomeTabsParamList,
-} from "./HomeTabs";
+export type { HomeTabsParamList } from "./HomeTabs";

@@ -12,3 +12,4 @@ export { default as Interests } from "./Interests";
 export { default as CompleteProfile } from "./CompleteProfile";
 export { default as RecoveryEmail } from "./RecoveryEmail";
 export { default as ResetPassword } from "./ResetPassword";
+export { default as EditUser } from "./EditUser";

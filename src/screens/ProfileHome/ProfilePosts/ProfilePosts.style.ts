@@ -11,6 +11,6 @@ export default StyleSheet.create({
   },
   postRow: {
     flexDirection: "row",
-    marginVertical: 1,
+    marginBottom: 1,
   },
 });

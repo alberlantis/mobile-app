@@ -1,11 +1,20 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  LayoutChangeEvent,
+  Pressable,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
+import { SCREENS } from "src/navigation/routes";
+import type { SignedNavigationProps } from "src/navigation/SignedStack";
 import { ProfileState, useAppSelector } from "src/store";
-import { Icon } from "src/shared/components";
-import ProfileAvatar from "../ProfileAvatar";
-import s from "./ProfileInformation.style";
+import { Icon, Avatar } from "src/shared/components";
+import s, { getEditContainer, getIconSize } from "./ProfileInformation.style";
 import colors from "src/theme/colors";
+import fonts from "src/theme/fonts";
 
 interface IProfileFollowersProps {
   marginRight?: number;
@@ -26,34 +35,59 @@ const ProfileFollowers: React.FC<IProfileFollowersProps> = ({
 };
 
 const ProfileInformation = () => {
+  const navigation = useNavigation<SignedNavigationProps<"ProfileHome">>();
+  const [infoContainerHeight, setInfoContainerHeight] = useState(0);
   const isBusiness = useAppSelector(
     ProfileState.selectors.selectIsProfileBusiness,
   );
+  const isOwnProfile = useAppSelector(
+    ProfileState.selectors.selectIsOwnProfile,
+  );
+  const handleContainerLayout = (e: LayoutChangeEvent) => {
+    const newHeight = e.nativeEvent?.layout.height;
+    if (infoContainerHeight === newHeight) return;
+    setInfoContainerHeight(newHeight);
+  };
 
   return (
-    <View style={s.container}>
-      <ProfileAvatar />
-      <View style={s.profileDataContainer}>
-        <View style={s.profileDataNameContainer}>
-          <Text style={s.profileDataName}>
-            {isBusiness ? "Starbucks" : "Monkey D. Luffy"}
-          </Text>
-          <Icon
-            type="MaterialCommunityIcons"
-            size={16}
-            name="crown"
-            color={colors.ORANGE_PRIMARY}
-          />
+    <View style={s.container} onLayout={handleContainerLayout}>
+      <Avatar />
+      <View style={s.innerContainer}>
+        <View style={s.profileDataContainer}>
+          <View style={s.profileDataNameContainer}>
+            <Text style={s.profileDataName}>
+              {isBusiness ? "Starbucks" : "Monkey D. Luffy"}
+            </Text>
+            <Icon
+              type="MaterialCommunityIcons"
+              size={fonts[18]}
+              name="crown"
+              color={colors.ORANGE_PRIMARY}
+            />
+          </View>
+          {!isBusiness && <Text style={s.profileDataTitle}>@ambassador</Text>}
+          <View style={s.followersSection}>
+            <ProfileFollowers
+              followCant={2100}
+              followLabel="Following"
+              marginRight={10}
+            />
+            <ProfileFollowers followCant={210} followLabel="Followers" />
+          </View>
         </View>
-        {!isBusiness && <Text style={s.profileDataTitle}>@ambassador</Text>}
-        <View style={s.followersSection}>
-          <ProfileFollowers
-            followCant={2100}
-            followLabel="Following"
-            marginRight={10}
-          />
-          <ProfileFollowers followCant={210} followLabel="Followers" />
-        </View>
+        {isOwnProfile && (
+          <Pressable
+            style={getEditContainer(infoContainerHeight)}
+            onPress={() => navigation.navigate(SCREENS.EDIT_USER)}
+          >
+            <Icon
+              type="Entypo"
+              size={getIconSize(infoContainerHeight)}
+              name="edit"
+              color={colors.WHITE}
+            />
+          </Pressable>
+        )}
       </View>
     </View>
   );

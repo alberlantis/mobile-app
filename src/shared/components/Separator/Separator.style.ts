@@ -37,7 +37,6 @@ export const getLabelText = (textColor: ColorValue): StyleProp<TextStyle> => ({
 export default StyleSheet.create({
   container: {
     width: "100%",
-    height: "5%",
     justifyContent: "center",
     alignItems: "center",
   },

@@ -43,6 +43,8 @@ const ProfileHome = () => {
       renderItem={handleRenderItem}
       showsVerticalScrollIndicator={false}
       style={s.container}
+      contentContainerStyle={s.contentContainer}
+      ListFooterComponentStyle={s.listFooter}
     />
   );
 };

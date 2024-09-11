@@ -88,7 +88,12 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           text="Sign Up"
         />
       </View>
-      <Separator label="or" marginVertical={15} />
+      <Separator
+        label="or"
+        marginBottom={15}
+        marginTop={15}
+        customHeight="5%"
+      />
       <View style={s.buttonContainer}>
         <Button
           onPress={() => navigation.navigate(SCREENS.NOSTR_IN)}

@@ -11,7 +11,8 @@ import { SCREENS } from "src/navigation/routes";
 import AccountCreationGroup, {
   type AccountCreationParamList,
 } from "src/navigation/AccountCreationGroup";
-import HomeTabs from "src/navigation/HomeTabs";
+import HomeTabs, { type HomeTabsParamList } from "src/navigation/HomeTabs";
+import { EditUser } from "src/screens";
 
 export type HomeTabsParams =
   | {
@@ -24,7 +25,9 @@ export type HomeTabsParams =
   | undefined;
 export type SignedParamList = {
   [SCREENS.HOME_TABS]: HomeTabsParams;
-} & AccountCreationParamList;
+  [SCREENS.EDIT_USER]: undefined;
+} & AccountCreationParamList &
+  HomeTabsParamList;
 const Stack = createNativeStackNavigator<SignedParamList>();
 
 const SignedStack: React.FC = () => {
@@ -32,22 +35,13 @@ const SignedStack: React.FC = () => {
     AuthState.selectors.selectIsAccountCreation,
   );
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerBackVisible: false,
-        headerTransparent: true,
-        title: "",
-      }}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isAccountCreation ? (
         AccountCreationGroup()
       ) : (
         <Stack.Group>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name={SCREENS.HOME_TABS}
-            component={HomeTabs}
-          />
+          <Stack.Screen name={SCREENS.HOME_TABS} component={HomeTabs} />
+          <Stack.Screen name={SCREENS.EDIT_USER} component={EditUser} />
         </Stack.Group>
       )}
     </Stack.Navigator>

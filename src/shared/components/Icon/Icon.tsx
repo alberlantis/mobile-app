@@ -13,7 +13,7 @@ import { ColorValue, StyleProp, TextStyle } from "react-native";
 import colors from "src/theme/colors";
 
 export type IconNames = {
-  AntDesign: keyof typeof Entypo.glyphMap;
+  AntDesign: keyof typeof AntDesign.glyphMap;
   Entypo: keyof typeof Entypo.glyphMap;
   Feather: keyof typeof Feather.glyphMap;
   FontAwesome: keyof typeof FontAwesome.glyphMap;

@@ -14,4 +14,5 @@ export const SCREENS = {
   COMPLETE_PROFILE: "CompleteProfile",
   RECOVERY_EMAIL: "RecoveryEmail",
   RESET_PASSWORD: "ResetPassword",
+  EDIT_USER: "EditUser",
 } as const;

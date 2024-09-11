@@ -7,6 +7,7 @@ function responsiveFontSize(size: number) {
 }
 
 export default {
+  12: responsiveFontSize(12),
   14: responsiveFontSize(14),
   16: responsiveFontSize(16),
   18: responsiveFontSize(18),

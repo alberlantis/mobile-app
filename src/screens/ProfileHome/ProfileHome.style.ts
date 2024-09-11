@@ -7,18 +7,11 @@ export default StyleSheet.create({
     backgroundColor: colors.BLACK,
     flex: 1,
   },
+  contentContainer: {
+    flexGrow: 1,
+  },
+  listFooter: { flex: 1, justifyContent: "flex-end" },
   loadingIndicator: {
-    flex: 1,
-    marginTop: 50,
-  },
-  postImage: {
-    width: "100%",
     height: "100%",
-    backgroundColor: colors.GRAY_BOLD,
-    marginHorizontal: 1,
-  },
-  postRow: {
-    flexDirection: "row",
-    marginVertical: 1,
   },
 });

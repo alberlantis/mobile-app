@@ -2,12 +2,12 @@ import React from "react";
 import { Image, View } from "react-native";
 
 import { ProfileState, useAppSelector } from "src/store";
-import { Icon } from "src/shared/components";
+import Icon from "../Icon";
 import { useImageAssets } from "src/shared/hooks";
-import s from "./ProfileAvatar.style";
+import s, { checkIconSize } from "./Avatar.style";
 import colors from "src/theme/colors";
 
-const ProfileAvatar = () => {
+const Avatar = () => {
   const { images } = useImageAssets();
   const isBusiness = useAppSelector(
     ProfileState.selectors.selectIsProfileBusiness,
@@ -24,11 +24,16 @@ const ProfileAvatar = () => {
           style={s.profilePhoto}
         />
         <View style={s.profilePhotoCheckIcon}>
-          <Icon type="Feather" size={16} name="check" color={colors.WHITE} />
+          <Icon
+            type="Feather"
+            size={checkIconSize}
+            name="check"
+            color={colors.WHITE}
+          />
         </View>
       </View>
     </View>
   );
 };
 
-export default ProfileAvatar;
+export default Avatar;

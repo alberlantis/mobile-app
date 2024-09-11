@@ -1,23 +1,22 @@
 import { StyleSheet } from "react-native";
 
+import fonts from "src/theme/fonts";
 import colors from "src/theme/colors";
 
 export default StyleSheet.create({
   container: {
     width: "100%",
-    marginVertical: 15,
-    marginLeft: 15,
+    marginLeft: "2%",
   },
   title: {
-    fontSize: 16,
+    fontSize: fonts[16],
     color: colors.WHITE,
     fontWeight: "semibold",
   },
   webpage: {
-    fontSize: 14,
+    fontSize: fonts[14],
     fontWeight: "medium",
-    marginTop: 3,
-    marginBottom: 10,
+    marginVertical: "1%",
     color: colors.BLUE_SECONDARY,
   },
   locationContainer: {
@@ -27,7 +26,7 @@ export default StyleSheet.create({
   locationName: {
     color: colors.WHITE_BOLD,
     fontWeight: "bold",
-    marginLeft: 5,
+    marginLeft: "2%",
   },
   locationType: {
     fontWeight: "regular",

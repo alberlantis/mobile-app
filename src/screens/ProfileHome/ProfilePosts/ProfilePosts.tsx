@@ -15,8 +15,8 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
   return (
     <View
       style={StyleSheet.compose(s.postRow, {
-        height: imageDimensions,
         width: imageDimensions,
+        height: imageDimensions,
       })}
     >
       {item.data.map((post, index) => (

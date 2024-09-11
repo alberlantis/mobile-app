@@ -4,6 +4,7 @@ import { View, Text, Linking } from "react-native";
 import { ProfileState, useAppSelector } from "src/store";
 import { Icon } from "src/shared/components";
 import colors from "src/theme/colors";
+import fonts from "src/theme/fonts";
 import s from "./ProfileDetails.style";
 
 const ProfileDetails = () => {
@@ -31,7 +32,7 @@ const ProfileDetails = () => {
       <View style={s.locationContainer}>
         <Icon
           type="Ionicons"
-          size={16}
+          size={fonts[16]}
           name="location-sharp"
           color={colors.WHITE_LIGHT}
         />

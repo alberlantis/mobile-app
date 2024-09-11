@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import { Separator } from "src/shared/components";
 import ProfilePortrait from "../ProfilePortrait";
@@ -9,17 +9,15 @@ import ProfileOptions from "../ProfileOptions";
 
 const ProfileHeader = () => {
   return (
-    <Fragment>
+    <>
       <ProfilePortrait />
       <ProfileInformation />
-      <Separator span={2} />
+      <Separator span={2} marginBottom="2%" marginTop="2%" />
       <ProfileActions />
-      <Separator span={2} />
       <ProfileDetails />
-      <Separator span={2} />
+      <Separator span={2} marginBottom="2%" marginTop="2%" />
       <ProfileOptions />
-      <Separator span={2} />
-    </Fragment>
+    </>
   );
 };
 

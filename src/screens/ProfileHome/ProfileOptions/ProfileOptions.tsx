@@ -26,15 +26,9 @@ const ProfileOptions = () => {
               onPress={() => setSelectedOption(option)}
               text={option}
               marginLeft={15}
-              textStyle={{
-                fontSize: 14,
-                fontWeight: "medium",
-              }}
               subfixElement={() => <ButtonOptionLabel option={option} />}
               theme={selectedOption === option ? "primary" : "disabled"}
               size="auto"
-              marginTop={15}
-              marginBottom={15}
             />
           );
         })}

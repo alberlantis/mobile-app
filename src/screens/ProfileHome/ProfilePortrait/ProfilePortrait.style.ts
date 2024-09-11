@@ -1,47 +1,51 @@
 import { StyleSheet } from "react-native";
 
+import { imageHeight } from "src/shared/components/ImagePortrait";
 import colors from "src/theme/colors";
+
+const headerHeight = imageHeight * 0.4;
+const headerButtonsSize = headerHeight * 0.75;
+
+export const iconsSize = headerButtonsSize * 0.5;
 
 export default StyleSheet.create({
   topHeaderContainer: {
     width: "100%",
-    height: 60,
     alignItems: "center",
     position: "absolute",
     zIndex: 1,
     flexDirection: "row",
+    paddingVertical: "2%",
+    height: headerHeight,
+    paddingLeft: "2%",
   },
   changeProfileButton: {
     backgroundColor: colors.BLACK_MEDIUM,
-    borderRadius: 50,
-    height: 40,
-    width: 40,
+    borderRadius: headerButtonsSize / 2,
+    height: headerButtonsSize,
+    width: headerButtonsSize,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 20,
+    marginLeft: "2%",
   },
   ownProfileButton: {
     backgroundColor: colors.BLACK_MEDIUM,
-    borderRadius: 50,
-    height: 40,
-    width: 40,
+    borderRadius: headerButtonsSize / 2,
+    height: headerButtonsSize,
+    width: headerButtonsSize,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 10,
+    marginLeft: "2%",
   },
   shareButton: {
     backgroundColor: colors.BLACK_MEDIUM,
-    borderRadius: 50,
-    height: 40,
-    width: 40,
+    borderRadius: headerButtonsSize / 2,
+    height: headerButtonsSize,
+    width: headerButtonsSize,
     justifyContent: "center",
     alignItems: "center",
     right: 0,
     position: "absolute",
-    marginRight: 20,
-  },
-  image: {
-    width: "100%",
-    height: 120,
+    marginRight: "2%",
   },
 });

@@ -1,10 +1,5 @@
 import React from "react";
-import { RouteProp } from "@react-navigation/native";
-import {
-  createBottomTabNavigator,
-  BottomTabNavigationProp,
-  BottomTabScreenProps,
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Home, ProfileHome, Posting, Notifications } from "src/screens";
 import TabIcon from "./TabIcon";
@@ -41,14 +36,5 @@ const HomeTabs = () => {
     </Tab.Navigator>
   );
 };
-
-export type HomeTabsNavigationProps<T extends keyof HomeTabsParamList> =
-  BottomTabNavigationProp<HomeTabsParamList, T>;
-export type HomeTabsRouteProps<T extends keyof HomeTabsParamList> = RouteProp<
-  HomeTabsParamList,
-  T
->;
-export type HomeTabsScreenProps<T extends keyof HomeTabsParamList> =
-  BottomTabScreenProps<HomeTabsParamList, T>;
 
 export default HomeTabs;
