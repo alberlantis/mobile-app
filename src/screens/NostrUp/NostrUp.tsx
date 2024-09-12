@@ -12,8 +12,8 @@ import {
   ScreenProgressIndicator,
   Header,
 } from "src/shared/components";
-import s, { getButtonContainer, copyIconSize } from "./NostrUp.style";
-import colors from "src/theme/colors";
+import s from "./NostrUp.style";
+import { colors, fonts } from "src/theme";
 import {
   NostrState,
   useAppDispatch,
@@ -64,7 +64,7 @@ const NostrUp: React.FC<UnsignedScreenProps<"NostrUp">> = ({ route }) => {
   };
 
   return (
-    <DefaultBackground style={s.container} blurPos="top">
+    <DefaultBackground keyboard style={s.container} blurPos="top">
       <Header />
       <View style={s.logoContainer}>
         <LogoTitle title="Nostr Sign Up" />
@@ -92,27 +92,33 @@ const NostrUp: React.FC<UnsignedScreenProps<"NostrUp">> = ({ route }) => {
               text={isCopyKey ? "Copied!" : "Copy"}
               theme="off"
               size="auto"
+              paddingVertical={8}
               textStyle={s.copyButton}
               prefixElement={() => (
                 <Icon
                   color={colors.WHITE_LIGHT}
                   type="Feather"
                   name="copy"
-                  size={copyIconSize}
+                  size={fonts[16]}
                 />
               )}
             />
           </View>
         </View>
       )}
-      <View style={getButtonContainer(showKey)}>
+      <View
+        style={{
+          ...s.buttonContainer,
+          justifyContent: showKey ? "flex-end" : "flex-start",
+        }}
+      >
         <Button
           loading={isLoading}
           onPress={showKey ? handleSignUp : handleGenerateKey}
           text={showKey ? "Next" : "Generate Key"}
           theme={!!username && !isLoading ? "primary" : "disabled"}
           size="fill"
-          marginBottom={showKey ? s.button.marginBottom : 0}
+          marginBottom={s.button.marginBottom}
         />
       </View>
       <View style={s.bottomContainer}>

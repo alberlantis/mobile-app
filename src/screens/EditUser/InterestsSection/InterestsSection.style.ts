@@ -1,13 +1,21 @@
 import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
-  container: { marginBottom: "2%", marginHorizontal: "2%" },
+  container: {
+    paddingHorizontal: normalizeSize(17),
+    paddingTop: normalizeSize(12),
+    paddingBottom: normalizeSize(16),
+    borderBottomColor: colors.GRAY,
+    borderBottomWidth: normalizeSize(1),
+  },
   innerContainer: {
     flexDirection: "row",
-    padding: 10,
-    borderRadius: 10,
+    paddingBottom: normalizeSize(8),
+    paddingTop: normalizeSize(16),
+    paddingHorizontal: normalizeSize(16),
+    borderRadius: normalizeSize(16),
     backgroundColor: colors.BLACK_2,
   },
   interestsTagPanel: {
@@ -16,11 +24,12 @@ export default StyleSheet.create({
     flexWrap: "wrap",
   },
   tag: {
-    paddingHorizontal: "4%",
+    paddingHorizontal: normalizeSize(16),
     backgroundColor: colors.GRAY_BOLD,
-    borderRadius: 15,
-    paddingVertical: "1%",
-    margin: "1%",
+    borderRadius: normalizeSize(16),
+    paddingVertical: normalizeSize(2.5),
+    marginBottom: normalizeSize(8),
+    marginRight: normalizeSize(8),
   },
   editButton: { width: "10%", alignItems: "flex-end" },
 });

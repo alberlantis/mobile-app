@@ -2,12 +2,13 @@ import React, { Fragment } from "react";
 import {
   useWindowDimensions,
   View,
-  SafeAreaView,
   StyleProp,
   ViewStyle,
+  SafeAreaView,
 } from "react-native";
 import Svg, { Defs, RadialGradient, Stop, Rect } from "react-native-svg";
 
+import KeyboardView from "../../wrappers/KeyboardView";
 import colors from "src/theme/colors";
 import { background, svgBackground } from "./DefaultBackground.style";
 
@@ -16,6 +17,7 @@ interface IDefaultBackgroundProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   blurPos?: BlurPosition;
+  keyboard?: boolean;
 }
 
 const getBlurPosition = (position: BlurPosition) => {
@@ -34,6 +36,7 @@ const DefaultBackground: React.FC<IDefaultBackgroundProps> = ({
   children,
   style,
   blurPos = "medium",
+  keyboard = false,
 }) => {
   const { width, height } = useWindowDimensions();
   const radialGradialID = "radGrad";
@@ -64,7 +67,9 @@ const DefaultBackground: React.FC<IDefaultBackgroundProps> = ({
           fill={`url(#${radialGradialID})`}
         />
       </Svg>
-      <SafeAreaView style={style}>{children}</SafeAreaView>
+      <KeyboardView scrollEnabled={keyboard}>
+        <SafeAreaView style={style}>{children}</SafeAreaView>
+      </KeyboardView>
     </Fragment>
   );
 };

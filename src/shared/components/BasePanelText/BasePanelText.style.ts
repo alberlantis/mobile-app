@@ -7,5 +7,6 @@ export default StyleSheet.create({
   text: {
     fontSize: fonts[14],
     color: colors.WHITE,
+    fontWeight: "medium",
   },
 });

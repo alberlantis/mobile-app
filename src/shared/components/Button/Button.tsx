@@ -24,20 +24,20 @@ import {
   getOutline,
   type ButtonSize,
   type ButtonTheme,
+  type ButtonDimensions,
 } from "./tools";
 import s from "./Button.style";
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 
 export interface IButtonProps {
   size?: ButtonSize;
   theme: ButtonTheme;
   text: string;
+  paddingVertical?: number;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
-  extraPaddingVertical?: number;
-  extraPaddingHorizontal?: number;
   textStyle?: TextStyle;
   loading?: boolean;
   prefixElement?(): React.ComponentElement<any, any>;
@@ -53,8 +53,7 @@ const Button: React.FC<IButtonProps> = ({
   marginBottom,
   marginLeft,
   marginRight,
-  extraPaddingVertical = 15,
-  extraPaddingHorizontal = 40,
+  paddingVertical = 11,
   textStyle,
   loading,
   subfixElement,
@@ -63,32 +62,30 @@ const Button: React.FC<IButtonProps> = ({
 }) => {
   const linearGradientID = "linGrad";
   const clipGradientID = "clipGrad";
+  const isOutline = theme.includes("outline");
   const buttonColor = getColors(theme);
-  const { width: staticWidth, height: staticHeight } = getSize(size);
-  const [dynamicSize, setDynamicSize] = useState<
-    { width: number; height: number } | undefined
-  >(undefined);
-  const buttonWidth = staticWidth || dynamicSize?.width;
-  const buttonHeight = staticHeight || dynamicSize?.height;
-  const isAutoSize = size === "auto";
-  const buttonRadius = getRadius(buttonWidth);
+  const staticWidth = getSize(size);
+  const [dynamicSize, setDynamicSize] = useState<ButtonDimensions>({
+    width: 0,
+    height: 0,
+  });
+  const buttonRadius = getRadius(dynamicSize);
   const outlineStyle = getOutline(theme, buttonRadius);
-
   const handleLayout = useCallback(
     (event: LayoutChangeEvent) => {
-      if (isAutoSize) {
-        setDynamicSize({
-          width: event.nativeEvent.layout.width + extraPaddingHorizontal,
-          height: event.nativeEvent.layout.height + extraPaddingVertical,
-        });
-      }
+      setDynamicSize({
+        width: event.nativeEvent.layout.width,
+        height: event.nativeEvent.layout.height,
+      });
     },
-    [isAutoSize, extraPaddingVertical, extraPaddingHorizontal, setDynamicSize],
+    [setDynamicSize],
   );
+  const drawSVG = !!dynamicSize.width && !!dynamicSize.height && !isOutline;
 
   return (
     <Pressable
-      style={StyleSheet.flatten([
+      onLayout={handleLayout}
+      style={[
         s.container,
         outlineStyle,
         {
@@ -96,15 +93,19 @@ const Button: React.FC<IButtonProps> = ({
           marginBottom,
           marginLeft,
           marginRight,
-          height: buttonHeight,
-          width: buttonWidth,
+          width: staticWidth,
+          paddingVertical: normalizeSize(paddingVertical),
         },
-      ])}
+      ]}
       onPress={onPress}
       testID="button-pressable-id"
     >
-      {!!buttonWidth && !!buttonHeight && (
-        <Svg width={buttonWidth} style={StyleSheet.absoluteFillObject}>
+      {drawSVG && (
+        <Svg
+          width={dynamicSize.width}
+          height={dynamicSize.height}
+          style={StyleSheet.absoluteFillObject}
+        >
           <Defs>
             <LinearGradient
               id={linearGradientID}
@@ -120,8 +121,8 @@ const Button: React.FC<IButtonProps> = ({
               <Rect
                 x="0"
                 y="0"
-                width={buttonWidth}
-                height={buttonHeight}
+                width={dynamicSize.width}
+                height={dynamicSize.height}
                 rx={buttonRadius}
                 ry={buttonRadius}
               />
@@ -130,24 +131,19 @@ const Button: React.FC<IButtonProps> = ({
           <Rect
             x="0"
             y="0%"
-            width={buttonWidth}
-            height={buttonHeight}
+            width={dynamicSize.width}
+            height={dynamicSize.height}
             clipPath={`url(#${clipGradientID})`}
             fill={`url(#${linearGradientID})`}
           />
         </Svg>
       )}
-      <View style={s.contentContainer} onLayout={handleLayout}>
+      <View style={s.contentContainer}>
         {!!prefixElement && prefixElement()}
         {loading ? (
-          <ActivityIndicator
-            color={textStyle?.color || colors.WHITE}
-            size={16}
-          />
+          <ActivityIndicator color={colors.WHITE} size={16} />
         ) : (
-          <Text style={StyleSheet.flatten([s.defaultText, textStyle])}>
-            {text}
-          </Text>
+          <Text style={[s.defaultText, textStyle]}>{text}</Text>
         )}
         {!!subfixElement && subfixElement()}
       </View>

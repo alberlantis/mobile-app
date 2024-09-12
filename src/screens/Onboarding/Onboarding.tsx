@@ -18,7 +18,7 @@ const Onboarding: React.FC<UnsignedScreenProps<"Onboarding">> = ({
       <LogoTitle title="Sign Up" />
       <Button
         theme="primary"
-        size="large"
+        size="fill"
         text="Using Email"
         marginBottom={s.emailButton.marginBottom}
         marginTop={s.emailButton.marginTop}
@@ -26,7 +26,7 @@ const Onboarding: React.FC<UnsignedScreenProps<"Onboarding">> = ({
       />
       <Button
         theme="secondary"
-        size="large"
+        size="fill"
         text="Using Nostr"
         marginBottom={s.nostrButton.marginBottom}
         onPress={() => navigation.navigate(SCREENS.NOSTR_UP)}

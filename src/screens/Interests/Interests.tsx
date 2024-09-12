@@ -23,7 +23,7 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   const isButtonEnabled = selectedOptions.length > 2;
 
   return (
-    <DefaultBackground blurPos="top" style={s.container}>
+    <DefaultBackground keyboard blurPos="top" style={s.container}>
       <Header onPress={() => dispatch(AuthState.actions.shouldLogout())} />
       <View style={s.headerContainer}>
         <Title title="Interests" />
@@ -51,8 +51,6 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
             })
           }
         />
-      </View>
-      <View style={s.bottomContainer}>
         <ScreenProgressIndicator active={2} screenName={route.name} />
       </View>
     </DefaultBackground>

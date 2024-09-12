@@ -4,8 +4,8 @@ import { type CameraCapturedPicture, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 
 import { Icon, Camera } from "src/shared/components";
-import colors from "src/theme/colors";
-import s, { cameraIconSize, userIconSize } from "./UploadAvatar.style";
+import { colors, fonts } from "src/theme";
+import s from "./UploadAvatar.style";
 
 const UploadAvatar = () => {
   const [toggleCamera, setToggleCamera] = useState(false);
@@ -74,7 +74,7 @@ const UploadAvatar = () => {
             type="AntDesign"
             name="user"
             color={colors.BLACK_LIGHT}
-            size={userIconSize}
+            size={fonts[70]}
           />
         )}
         <Pressable style={s.buttonOuterContainer} onPress={handleSelectAvatar}>
@@ -83,7 +83,7 @@ const UploadAvatar = () => {
               type="Feather"
               name="camera"
               color={colors.WHITE_BOLD}
-              size={cameraIconSize}
+              size={fonts[20]}
             />
           </View>
         </Pressable>

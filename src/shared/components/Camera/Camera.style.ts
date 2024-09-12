@@ -1,14 +1,15 @@
 import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.BLACK },
-  headerContainer: { marginHorizontal: "2%" },
+  headerContainer: { paddingHorizontal: normalizeSize(8) },
   content: {
     justifyContent: "center",
     flex: 1,
     alignItems: "center",
+    paddingHorizontal: normalizeSize(8),
   },
   imageContainer: {
     flex: 1,
@@ -26,11 +27,10 @@ export default StyleSheet.create({
     width: "100%",
     position: "absolute",
     bottom: 0,
-    marginBottom: "5%",
+    marginBottom: normalizeSize(10),
   },
   retakeIcon: {
     position: "absolute",
     right: 0,
-    marginRight: "5%",
   },
 });

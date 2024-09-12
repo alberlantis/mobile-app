@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView, Alert } from "react-native";
+import { View, Alert } from "react-native";
 
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import { BaseSection, KeyboardView } from "src/shared/wrappers";
@@ -14,6 +14,7 @@ import { colors } from "src/theme";
 import InterestsSection from "./InterestsSection";
 import { deepEqual } from "src/utils";
 import s from "./EditUser.style";
+import { normalizeSize } from "src/theme";
 
 type ProfileState = {
   username: string;
@@ -81,13 +82,9 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
 
   return (
     <KeyboardView>
-      <ScrollView style={s.container}>
+      <View style={s.container}>
         <View style={s.topHeaderContainer}>
-          <BackButton
-            containerHeight={0.08}
-            color={colors.BLACK_MEDIUM}
-            onPress={handleBackButton}
-          />
+          <BackButton color={colors.BLACK_MEDIUM} onPress={handleBackButton} />
         </View>
         <ImagePortrait />
         <View style={s.mainInfoContainer}>
@@ -99,13 +96,12 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
             />
           </View>
         </View>
-        <BaseSection
-          topSeparator
-          bottomSeparator
-          sectionTitle="About"
-          customContainer={s.aboutSection}
-        >
-          <Input onChangeText={handleInputChange("job")} value={profile.job} />
+        <BaseSection sectionTitle="About" customContainer={s.aboutSection}>
+          <Input
+            onChangeText={handleInputChange("job")}
+            marginBottom={normalizeSize(12)}
+            value={profile.job}
+          />
           <Input
             onChangeText={handleInputChange("website")}
             value={profile.website}
@@ -119,6 +115,7 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
           <Input
             onChangeText={handleInputChange("phoneNumber")}
             value={profile.phoneNumber}
+            marginBottom={normalizeSize(12)}
           />
           <Input
             onChangeText={handleInputChange("email")}
@@ -127,14 +124,14 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
         </BaseSection>
         <View style={s.buttonContainer}>
           <Button
-            marginBottom={10}
+            marginBottom={normalizeSize(17)}
             text="Save"
             theme={hasProfileChanged ? "primary" : "disabled"}
             size="fill"
             onPress={handleSaveButton}
           />
         </View>
-      </ScrollView>
+      </View>
     </KeyboardView>
   );
 };

@@ -98,18 +98,45 @@ exports[`DefaultBackground should render children with blur position at bottom o
       />
     </RNSVGGroup>
   </RNSVGSvgView>,
-  <RCTSafeAreaView
+  <View
+    onLayout={[Function]}
     style={
-      {
-        "height": 80,
-        "width": 80,
-      }
+      [
+        {
+          "backgroundColor": "#000",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
     }
   >
-    <Text>
-      Background children
-    </Text>
-  </RCTSafeAreaView>,
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flexGrow": 1,
+        }
+      }
+      scrollEnabled={false}
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <RCTSafeAreaView
+          style={
+            {
+              "height": 80,
+              "width": 80,
+            }
+          }
+        >
+          <Text>
+            Background children
+          </Text>
+        </RCTSafeAreaView>
+      </View>
+    </RCTScrollView>
+  </View>,
 ]
 `;
 
@@ -211,18 +238,45 @@ exports[`DefaultBackground should render children with blur position at center o
       />
     </RNSVGGroup>
   </RNSVGSvgView>,
-  <RCTSafeAreaView
+  <View
+    onLayout={[Function]}
     style={
-      {
-        "height": 80,
-        "width": 80,
-      }
+      [
+        {
+          "backgroundColor": "#000",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
     }
   >
-    <Text>
-      Background children
-    </Text>
-  </RCTSafeAreaView>,
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flexGrow": 1,
+        }
+      }
+      scrollEnabled={false}
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <RCTSafeAreaView
+          style={
+            {
+              "height": 80,
+              "width": 80,
+            }
+          }
+        >
+          <Text>
+            Background children
+          </Text>
+        </RCTSafeAreaView>
+      </View>
+    </RCTScrollView>
+  </View>,
 ]
 `;
 
@@ -324,17 +378,44 @@ exports[`DefaultBackground should render children with blur position at top on t
       />
     </RNSVGGroup>
   </RNSVGSvgView>,
-  <RCTSafeAreaView
+  <View
+    onLayout={[Function]}
     style={
-      {
-        "height": 80,
-        "width": 80,
-      }
+      [
+        {
+          "backgroundColor": "#000",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
     }
   >
-    <Text>
-      Background children
-    </Text>
-  </RCTSafeAreaView>,
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flexGrow": 1,
+        }
+      }
+      scrollEnabled={false}
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <RCTSafeAreaView
+          style={
+            {
+              "height": 80,
+              "width": 80,
+            }
+          }
+        >
+          <Text>
+            Background children
+          </Text>
+        </RCTSafeAreaView>
+      </View>
+    </RCTScrollView>
+  </View>,
 ]
 `;

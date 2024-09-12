@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TextInput, Text, View, StyleSheet } from "react-native";
+import { TextInput, Text, View } from "react-native";
 
 import colors from "src/theme/colors";
-import s, { getInputContainer, getInputStyle } from "./Input.style";
+import s, { getInputStyle } from "./Input.style";
 
 /**
  * @tech
@@ -20,8 +20,8 @@ interface IInputProps {
   marginTop?: number;
   type?: InputType;
   icon?: React.ComponentElement<any, any>;
-  customHeight?: number;
   multiline?: number;
+  customHeight?: number;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -33,19 +33,19 @@ const Input: React.FC<IInputProps> = ({
   marginTop,
   type,
   icon,
-  customHeight,
   multiline,
+  customHeight,
 }) => {
   const isTextArea = !!multiline;
   const hasIcon = !!icon;
   const [selection, setSelection] = useState({ start: 0, end: 0 });
 
   return (
-    <View style={StyleSheet.compose(s.container, { marginBottom, marginTop })}>
+    <View style={{ ...s.container, marginBottom, marginTop }}>
       {!!label && <Text style={s.label}>{label}</Text>}
-      <View style={getInputContainer(customHeight)}>
+      <View style={s.inputContainer}>
         <TextInput
-          style={getInputStyle(hasIcon, isTextArea)}
+          style={getInputStyle(hasIcon, isTextArea, customHeight)}
           onSelectionChange={({ nativeEvent: { selection } }) =>
             setSelection({ start: selection.start, end: selection.start })
           }

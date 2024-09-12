@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
+import { colors, fonts, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
     width: "100%",
-    marginLeft: "2%",
+    paddingHorizontal: normalizeSize(17),
+    paddingVertical: normalizeSize(12),
+    borderBottomWidth: normalizeSize(1),
+    borderBottomColor: colors.GRAY,
   },
   title: {
     fontSize: fonts[16],
@@ -16,7 +18,7 @@ export default StyleSheet.create({
   webpage: {
     fontSize: fonts[14],
     fontWeight: "medium",
-    marginVertical: "1%",
+    marginBottom: normalizeSize(12),
     color: colors.BLUE_SECONDARY,
   },
   locationContainer: {
@@ -26,7 +28,8 @@ export default StyleSheet.create({
   locationName: {
     color: colors.WHITE_BOLD,
     fontWeight: "bold",
-    marginLeft: "2%",
+    marginLeft: normalizeSize(6),
+    fontSize: fonts[12],
   },
   locationType: {
     fontWeight: "regular",

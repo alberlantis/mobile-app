@@ -12,9 +12,8 @@ import { SCREENS } from "src/navigation/routes";
 import type { SignedNavigationProps } from "src/navigation/SignedStack";
 import { ProfileState, useAppSelector } from "src/store";
 import { Icon, Avatar } from "src/shared/components";
-import s, { getEditContainer, getIconSize } from "./ProfileInformation.style";
-import colors from "src/theme/colors";
-import fonts from "src/theme/fonts";
+import s from "./ProfileInformation.style";
+import { colors, fonts, normalizeSize } from "src/theme";
 
 interface IProfileFollowersProps {
   marginRight?: number;
@@ -53,7 +52,7 @@ const ProfileInformation = () => {
     <View style={s.container} onLayout={handleContainerLayout}>
       <Avatar />
       <View style={s.innerContainer}>
-        <View style={s.profileDataContainer}>
+        <View>
           <View style={s.profileDataNameContainer}>
             <Text style={s.profileDataName}>
               {isBusiness ? "Starbucks" : "Monkey D. Luffy"}
@@ -70,19 +69,19 @@ const ProfileInformation = () => {
             <ProfileFollowers
               followCant={2100}
               followLabel="Following"
-              marginRight={10}
+              marginRight={normalizeSize(8)}
             />
             <ProfileFollowers followCant={210} followLabel="Followers" />
           </View>
         </View>
         {isOwnProfile && (
           <Pressable
-            style={getEditContainer(infoContainerHeight)}
+            style={s.editButtonContainer}
             onPress={() => navigation.navigate(SCREENS.EDIT_USER)}
           >
             <Icon
               type="Entypo"
-              size={getIconSize(infoContainerHeight)}
+              size={fonts[16]}
               name="edit"
               color={colors.WHITE}
             />

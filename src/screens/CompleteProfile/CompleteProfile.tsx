@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, KeyboardAvoidingView, Platform } from "react-native";
+import { Text, View } from "react-native";
 
 import {
   Title,
@@ -18,43 +18,30 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
   route,
 }) => {
   const dispatch = useAppDispatch();
-  const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
 
   return (
-    <DefaultBackground style={s.container}>
+    <DefaultBackground keyboard style={s.container}>
       <Header />
-      <KeyboardAvoidingView
-        style={s.keyboardContainer}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <View style={s.titleContainer}>
-          <Title title="Profile" />
-          <Text style={s.titleDescription}>
-            Now it’s time to get your profile ready.
-          </Text>
-        </View>
-        <View style={s.uploadAvataContainer}>
-          <UploadAvatar />
-        </View>
-        <View style={s.inputsContainer}>
-          <Input
-            label="Username"
-            placeholder="Enter Username"
-            value={username}
-            onChangeText={setUsername}
-          />
-          <Input
-            label="Bio"
-            placeholder="Tell us about you"
-            value={bio}
-            onChangeText={setBio}
-            customHeight={s.input.height}
-            multiline={4}
-            marginTop={s.input.marginTop}
-          />
-        </View>
-      </KeyboardAvoidingView>
+      <View style={s.titleContainer}>
+        <Title title="Profile" />
+        <Text style={s.titleDescription}>
+          Now it’s time to get your profile ready.
+        </Text>
+      </View>
+      <View style={s.uploadAvataContainer}>
+        <UploadAvatar />
+      </View>
+      <View style={s.inputsContainer}>
+        <Input
+          label="Bio"
+          placeholder="Tell us about you"
+          value={bio}
+          onChangeText={setBio}
+          customHeight={s.input.height}
+          multiline={8}
+        />
+      </View>
       <View style={s.buttonContainer}>
         <Text style={s.buttonDescriptionText}>
           You can also complete your profile later

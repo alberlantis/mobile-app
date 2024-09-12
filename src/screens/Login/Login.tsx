@@ -42,7 +42,7 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
   };
 
   return (
-    <DefaultBackground style={s.container} blurPos="top">
+    <DefaultBackground keyboard style={s.container} blurPos="top">
       <Header />
       <View style={s.logoContainer}>
         <LogoTitle title="Sign In" />
@@ -54,6 +54,7 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           label="Username"
           onChangeText={setUsername}
           value={username}
+          marginBottom={s.usernameInput.marginBottom}
         />
         <Input
           type={isSecure ? "password" : "none"}
@@ -68,6 +69,7 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
               setIsSecure={setIsSecure}
             />
           }
+          marginBottom={s.passwordInput.marginBottom}
         />
         <View style={s.forgotPassword}>
           <InteractiveText
@@ -81,6 +83,7 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
           theme={isButtonEnabled ? "primary" : "disabled"}
           size="fill"
           loading={isLoading}
+          marginBottom={s.signInButton.marginBottom}
         />
         <InteractiveText
           onPress={() => navigation.navigate(SCREENS.SIGN_UP)}
@@ -90,9 +93,8 @@ const Login: React.FC<UnsignedScreenProps<"Login">> = ({ navigation }) => {
       </View>
       <Separator
         label="or"
-        marginBottom={15}
-        marginTop={15}
-        customHeight="5%"
+        marginBottom={s.separator.marginBottom}
+        marginTop={s.separator.marginTop}
       />
       <View style={s.buttonContainer}>
         <Button

@@ -68,12 +68,14 @@ const InterestsModal: React.FC<IInterestsModalProps> = ({
           </View>
         ))}
       </ScrollView>
-      <Button
-        size="fill"
-        theme="primary"
-        onPress={handleSaveInterests}
-        text="Save"
-      />
+      <View style={s.modalSaveButton}>
+        <Button
+          size="fill"
+          theme="primary"
+          onPress={handleSaveInterests}
+          text="Save"
+        />
+      </View>
     </BottomModal>
   );
 };

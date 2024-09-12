@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-import { colors } from "src/theme";
+import { colors, normalizeSize } from "src/theme";
 
 const { height: screenHeight } = Dimensions.get("window");
 
@@ -12,17 +12,8 @@ export default StyleSheet.create({
   },
   modalContent: {
     backgroundColor: colors.BLACK_2,
-    padding: "4%",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    shadowColor: colors.BLACK,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    borderTopLeftRadius: normalizeSize(16),
+    borderTopRightRadius: normalizeSize(16),
     maxHeight: screenHeight * 0.75,
   },
 });

@@ -12,9 +12,9 @@ import {
   Button,
   Icon,
 } from "src/shared/components";
-import s, { emailIconSize } from "./RecoveryEmail.style";
-import colors from "src/theme/colors";
 import { SerializedError } from "@reduxjs/toolkit";
+import s from "./RecoveryEmail.style";
+import { colors, fonts } from "src/theme";
 
 const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
   navigation,
@@ -49,7 +49,7 @@ const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
   };
 
   return (
-    <DefaultBackground blurPos="top" style={s.container}>
+    <DefaultBackground keyboard blurPos="top" style={s.container}>
       <Header hideBackButton={isEmailSended} />
       {isEmailSended ? (
         <>
@@ -58,7 +58,7 @@ const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
               type="Fontisto"
               name="email"
               color={colors.ORANGE_PRIMARY}
-              size={emailIconSize}
+              size={fonts[28]}
             />
           </View>
           <Title title="Check your inbox" />

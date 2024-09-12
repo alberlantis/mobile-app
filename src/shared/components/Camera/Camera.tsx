@@ -5,7 +5,7 @@ import { CameraView, CameraCapturedPicture } from "expo-camera";
 import Icon from "../Icon";
 import Header from "../Header";
 import Button from "../Button";
-import colors from "src/theme/colors";
+import { colors, fonts } from "src/theme";
 import s from "./Camera.style";
 
 interface ICameraProps {
@@ -80,8 +80,9 @@ const Camera: React.FC<ICameraProps> = ({
           <View style={s.actionsContainer}>
             <Button
               size="auto"
+              paddingVertical={8}
               text={!!photo ? "Use Photo" : "Take Photo"}
-              theme="secondary"
+              theme="primary"
               onPress={!!photo ? handleUsePhoto : handleCameraPhoto}
             />
             {!!photo && (
@@ -91,6 +92,7 @@ const Camera: React.FC<ICameraProps> = ({
                 name="camera-retake-outline"
                 style={s.retakeIcon}
                 onPress={() => setPhoto(undefined)}
+                size={fonts[28]}
               />
             )}
           </View>

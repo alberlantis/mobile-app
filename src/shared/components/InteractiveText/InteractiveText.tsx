@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  ColorValue,
-  Text,
-  StyleSheet,
-  GestureResponderEvent,
-} from "react-native";
+import { ColorValue, Text, GestureResponderEvent } from "react-native";
 
-import colors from "src/theme/colors";
+import { colors } from "src/theme";
 import s from "./InteractiveText.style";
 
 interface IInteractiveTextProps {
@@ -28,16 +23,15 @@ const InteractiveText: React.FC<IInteractiveTextProps> = ({
 }) => {
   return (
     <Text
-      style={StyleSheet.compose(s.container, {
+      style={{
+        ...s.container,
         color: prefixColor,
         marginBottom,
-      })}
+      }}
       onPress={onPress}
     >
       {`${prefix} `}
-      <Text style={StyleSheet.compose(s.interactiveText, { color: color })}>
-        {text}
-      </Text>
+      <Text style={{ ...s.interactiveText, color }}>{text}</Text>
     </Text>
   );
 };

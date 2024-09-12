@@ -1,40 +1,34 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
-import fonts from "src/theme/fonts";
-
-const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
-const emailIconContainerSize = screenWidth * 0.15;
-const screenMarginSeparator = screenHeight * 0.04;
-
-export const emailIconSize = emailIconContainerSize * 0.5;
+import { colors, fonts, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginHorizontal: "2%",
+    paddingHorizontal: normalizeSize(8),
   },
   emailIconContainer: {
-    width: emailIconContainerSize,
-    height: emailIconContainerSize,
+    width: normalizeSize(64),
+    height: normalizeSize(64),
     backgroundColor: colors.BLACK_TRANSPARENT,
-    borderRadius: emailIconContainerSize / 4,
+    borderRadius: normalizeSize(16),
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: screenMarginSeparator,
+    marginBottom: normalizeSize(24),
+    marginTop: normalizeSize(54),
   },
   emailRecoveryDescription: {
     fontSize: fonts[14],
     color: colors.WHITE_BOLD,
     textAlign: "center",
     width: "75%",
-    marginVertical: screenMarginSeparator,
+    marginVertical: normalizeSize(24),
   },
   input: {
-    marginTop: screenMarginSeparator,
+    marginTop: normalizeSize(24),
   },
   button: {
-    marginTop: screenMarginSeparator,
+    marginTop: normalizeSize(24),
   },
 });

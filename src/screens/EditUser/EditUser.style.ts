@@ -1,10 +1,6 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { imageHeight } from "src/shared/components/ImagePortrait";
-import colors from "src/theme/colors";
-
-const { height: screenHeight } = Dimensions.get("window");
-const headerHeight = imageHeight * 0.4;
+import { colors, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
@@ -17,23 +13,35 @@ export default StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     flexDirection: "row",
-    paddingVertical: "2%",
-    height: headerHeight,
-    paddingLeft: "2%",
+    paddingTop: normalizeSize(17),
+    paddingHorizontal: normalizeSize(17),
   },
   mainInfoContainer: {
     width: "100%",
     flexDirection: "row",
+    paddingHorizontal: normalizeSize(17),
+    borderBottomColor: colors.GRAY,
+    borderBottomWidth: normalizeSize(1),
   },
   mainBasePanelContainer: {
-    width: "70%",
-    padding: "2%",
+    flex: 1,
+    flexGrow: 1,
+    paddingLeft: normalizeSize(16),
+    marginTop: normalizeSize(12),
+    marginBottom: normalizeSize(22),
   },
-  aboutSection: { margin: "2%" },
-  contactSection: { marginHorizontal: "2%" },
+  aboutSection: {
+    paddingVertical: normalizeSize(12),
+    paddingHorizontal: normalizeSize(17),
+    borderBottomColor: colors.GRAY,
+    borderBottomWidth: normalizeSize(1),
+  },
+  contactSection: {
+    paddingVertical: normalizeSize(12),
+    paddingHorizontal: normalizeSize(17),
+    marginBottom: normalizeSize(26),
+  },
   buttonContainer: {
-    justifyContent: "flex-end",
-    marginHorizontal: "2%",
-    height: screenHeight * 0.15,
+    paddingHorizontal: normalizeSize(17),
   },
 });

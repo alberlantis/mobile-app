@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { View } from "react-native";
 
 import { useAppDispatch, useAppSelector, AuthState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
 import type { UnsignedScreenProps } from "src/navigation/UnsignedStack";
 import {
-  Header,
   Title,
   Input,
   Button,
@@ -43,9 +43,10 @@ const ResetPassword: React.FC<UnsignedScreenProps<"ResetPassword">> = ({
   };
 
   return (
-    <DefaultBackground blurPos="top" style={s.container}>
-      <Header hideBackButton />
-      <Title title="Reset Password" />
+    <DefaultBackground keyboard blurPos="top" style={s.container}>
+      <View style={s.titleContainer}>
+        <Title title="Reset Password" />
+      </View>
       <Input
         label="Enter new Password"
         placeholder="Enter password"
@@ -60,6 +61,7 @@ const ResetPassword: React.FC<UnsignedScreenProps<"ResetPassword">> = ({
           />
         }
         marginTop={s.input.marginTop}
+        marginBottom={s.input.marginBottom}
       />
       <Input
         label="Confirm new Password"
@@ -74,7 +76,6 @@ const ResetPassword: React.FC<UnsignedScreenProps<"ResetPassword">> = ({
             setIsSecure={setConfirmPasswordSecure}
           />
         }
-        marginTop={s.input.marginTop}
       />
       <Button
         text="Confirm"

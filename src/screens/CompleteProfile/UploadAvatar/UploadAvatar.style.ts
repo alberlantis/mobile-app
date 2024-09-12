@@ -1,50 +1,43 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 
-const screenWidth = Dimensions.get("window").width;
-const containerSize = screenWidth * 0.45;
-const innerContainerSize = containerSize / 1.5;
-const buttonCameraOuterContainer = innerContainerSize / 3;
-const buttonCameraInnerContainer = buttonCameraOuterContainer / 1.3;
-
-export const cameraIconSize = buttonCameraInnerContainer * 0.5;
-export const userIconSize = innerContainerSize * 0.5;
 export default StyleSheet.create({
   container: {
-    width: containerSize,
-    height: containerSize,
-    borderRadius: screenWidth / 2,
+    width: normalizeSize(202),
+    height: normalizeSize(202),
+    borderRadius: normalizeSize(202) / 2,
     justifyContent: "center",
     alignItems: "center",
     borderColor: colors.GRAY_2,
     borderStyle: "dashed",
-    borderWidth: containerSize * 0.01,
+    borderWidth: normalizeSize(2),
   },
   innerContainer: {
-    width: innerContainerSize,
-    height: innerContainerSize,
-    borderRadius: innerContainerSize / 2,
+    width: normalizeSize(136),
+    height: normalizeSize(136),
+    borderRadius: normalizeSize(136) / 2,
     backgroundColor: colors.GRAY_2,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonOuterContainer: {
-    width: buttonCameraOuterContainer,
-    height: buttonCameraOuterContainer,
-    borderRadius: buttonCameraOuterContainer / 2,
+    width: normalizeSize(40),
+    height: normalizeSize(40),
+    borderRadius: normalizeSize(40) / 2,
     backgroundColor: colors.BLACK_LIGHT,
     position: "absolute",
-    bottom: -buttonCameraOuterContainer / 2.5,
+    bottom: "-15%",
     justifyContent: "center",
     alignItems: "center",
   },
   buttonInnerContainer: {
-    width: buttonCameraInnerContainer,
-    height: buttonCameraInnerContainer,
-    borderRadius: buttonCameraInnerContainer / 2,
+    width: normalizeSize(32),
+    height: normalizeSize(32),
+    borderRadius: normalizeSize(32) / 2,
     backgroundColor: colors.GRAY_2,
     alignItems: "center",
     justifyContent: "center",
+    padding: normalizeSize(6),
   },
 });

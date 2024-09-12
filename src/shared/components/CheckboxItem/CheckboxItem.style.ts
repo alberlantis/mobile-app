@@ -1,9 +1,6 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { colors, fonts } from "src/theme";
-
-const { width: screenWidth } = Dimensions.get("window");
-const checkboxSize = screenWidth * 0.06;
+import { colors, fonts, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
@@ -11,12 +8,12 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   square: {
-    width: checkboxSize,
-    height: checkboxSize,
-    borderRadius: checkboxSize * 0.2,
+    width: normalizeSize(20),
+    height: normalizeSize(20),
+    borderRadius: normalizeSize(4),
     justifyContent: "center",
     alignItems: "center",
-    marginRight: "2%",
+    marginRight: normalizeSize(12),
     borderColor: colors.GRAY_MEDIUM,
   },
   label: {

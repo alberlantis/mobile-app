@@ -1,37 +1,29 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 
-const { width: screenWidth } = Dimensions.get("window");
-const containerSize = screenWidth * 0.3;
-const imageSize = containerSize * 0.75;
-const checkIconContainer = imageSize * 0.25;
-
-export const checkIconSize = checkIconContainer * 0.75;
 export default StyleSheet.create({
-  container: {
-    width: containerSize,
-    alignItems: "center",
-    zIndex: 1,
-  },
   profilePhotoInnerContainer: {
-    position: "absolute",
-    top: -(imageSize / 2),
+    top: -(normalizeSize(80) / 3),
+    width: normalizeSize(80),
+    height: normalizeSize(80),
   },
   profilePhoto: {
-    width: imageSize,
-    height: imageSize,
-    borderRadius: imageSize / 2,
+    width: normalizeSize(80),
+    height: normalizeSize(80),
+    borderRadius: normalizeSize(80) / 2,
   },
   profilePhotoCheckIcon: {
     backgroundColor: colors.ORANGE_PRIMARY_DARK,
-    width: checkIconContainer,
-    height: checkIconContainer,
+    width: normalizeSize(24),
+    height: normalizeSize(24),
     position: "absolute",
-    borderRadius: checkIconContainer / 2,
+    borderRadius: normalizeSize(24) / 2,
     alignItems: "center",
     justifyContent: "center",
     bottom: 0,
     right: 0,
+    borderColor: colors.BLACK,
+    borderWidth: normalizeSize(1.4),
   },
 });

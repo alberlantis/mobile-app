@@ -1,7 +1,5 @@
-import { StyleSheet, Dimensions } from "react-native";
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-const imageSize = screenWidth * 0.2;
+import { StyleSheet } from "react-native";
+import { normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
@@ -9,8 +7,8 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: imageSize,
-    height: imageSize,
-    marginBottom: screenHeight * 0.03,
+    width: normalizeSize(80),
+    height: normalizeSize(80),
+    marginBottom: normalizeSize(16),
   },
 });

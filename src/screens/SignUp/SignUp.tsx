@@ -59,7 +59,7 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
   };
 
   return (
-    <DefaultBackground style={s.container} blurPos="top">
+    <DefaultBackground keyboard style={s.container} blurPos="top">
       <Header />
       <View style={s.logoContainer}>
         <LogoTitle title="Email Sign Up" />
@@ -71,6 +71,7 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           label="Username"
           onChangeText={setUsername}
           value={username}
+          marginBottom={s.inputs.marginBottom}
         />
         <Input
           type="emailAddress"
@@ -78,6 +79,7 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           label="Email"
           onChangeText={setEmail}
           value={email}
+          marginBottom={s.inputs.marginBottom}
         />
         <Input
           type={isSecure ? "password" : "none"}
@@ -92,12 +94,20 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
               setIsSecure={setIsSecure}
             />
           }
+          marginBottom={s.inputPassword.marginBottom}
         />
         <Input
-          type="password"
+          type={isSecure ? "password" : "none"}
           placeholder="Confirm password"
           onChangeText={setConfirmPass}
           value={confirmPass}
+          icon={
+            <EyeIcon
+              isSecure={isSecure}
+              password={password}
+              setIsSecure={setIsSecure}
+            />
+          }
         />
       </View>
       <View style={s.buttonContainer}>
@@ -113,7 +123,6 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           onPress={() => navigation.navigate(SCREENS.LOGIN)}
           prefix="Already have an account?"
           text="Sign in"
-          marginBottom={15}
         />
       </View>
       <View style={s.bottomContainer}>

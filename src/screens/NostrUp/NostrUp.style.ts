@@ -1,61 +1,57 @@
-import { StyleProp, StyleSheet, ViewStyle, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
+import { fonts, colors, normalizeSize } from "src/theme";
 
-const screenHeight = Dimensions.get("window").height;
-
-export const copyIconSize = fonts[16];
-export const getButtonContainer = (showKey: boolean): StyleProp<ViewStyle> => ({
-  alignItems: "center",
-  width: "100%",
-  height: showKey ? "17%" : "52%",
-  justifyContent: showKey ? "flex-end" : "flex-start",
-});
 export default StyleSheet.create({
   container: {
-    marginHorizontal: "2%",
     alignItems: "center",
+    paddingHorizontal: normalizeSize(8),
     flex: 1,
   },
   logoContainer: {
     alignItems: "center",
     width: "100%",
-    height: "25%",
+    marginBottom: normalizeSize(32),
   },
   inputContainer: {
     alignItems: "center",
     width: "100%",
-    height: "15%",
+    marginBottom: normalizeSize(56),
+  },
+  buttonContainer: {
+    alignItems: "center",
+    width: "100%",
   },
   privateKeyContainer: {
     alignItems: "center",
     width: "100%",
-    height: "35%",
     justifyContent: "space-around",
   },
   button: {
-    marginBottom: screenHeight * 0.02,
+    marginBottom: normalizeSize(60),
   },
   bottomContainer: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     width: "100%",
-    height: "2%",
+    paddingBottom: normalizeSize(8),
+    flexGrow: 1,
   },
   textDescription: {
     color: colors.WHITE_BOLD,
     textAlign: "center",
     fontSize: fonts[14],
+    marginBottom: normalizeSize(12),
   },
   nsecKeyContainer: {
     width: "100%",
-    height: "65%",
     backgroundColor: colors.GRAY_LIGHT,
     justifyContent: "space-around",
     alignItems: "center",
-    borderRadius: 30,
-    paddingHorizontal: "10%",
+    borderRadius: normalizeSize(16),
+    paddingVertical: normalizeSize(12),
+    paddingHorizontal: normalizeSize(16),
+    marginBottom: normalizeSize(56),
   },
   nsecTitle: {
     color: colors.WHITE,
@@ -66,6 +62,7 @@ export default StyleSheet.create({
     color: colors.WHITE_BOLD,
     textAlign: "center",
     fontSize: fonts[14],
+    marginVertical: normalizeSize(16),
   },
-  copyButton: { color: colors.WHITE_BOLD, marginLeft: 5 },
+  copyButton: { color: colors.WHITE_BOLD, marginLeft: normalizeSize(12) },
 });

@@ -6,20 +6,18 @@ import type { UnsignedGroupParamList } from "src/navigation/UnsignedStack";
 import type { SignedParamList } from "src/navigation/SignedStack";
 import type { HomeTabsParamList } from "src/navigation/HomeTabs";
 import Icon from "../Icon";
-import colors from "src/theme/colors";
-import { getIconSize, getContainer } from "./BackButton.style";
+import { colors, fonts } from "src/theme";
+import s from "./BackButton.style";
 
 type Params = UnsignedGroupParamList & SignedParamList & HomeTabsParamList;
 
 interface IBackButtonProps {
-  containerHeight: number;
   color?: ColorValue;
   onPress?(): void;
 }
 
 const BackButton: React.FC<IBackButtonProps> = ({
   onPress,
-  containerHeight,
   color = colors.BLACK,
 }) => {
   const navigation = useNavigation<NavigationProp<Params>>();
@@ -32,10 +30,10 @@ const BackButton: React.FC<IBackButtonProps> = ({
   return (
     <Pressable
       onPress={handleOnPress}
-      style={getContainer(containerHeight, color)}
+      style={{ ...s.container, backgroundColor: color }}
     >
       <Icon
-        size={getIconSize(containerHeight)}
+        size={fonts[16]}
         type="Entypo"
         name="chevron-thin-left"
         color={colors.WHITE}

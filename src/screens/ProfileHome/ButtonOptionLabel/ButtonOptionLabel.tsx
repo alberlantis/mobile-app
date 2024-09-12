@@ -3,7 +3,7 @@ import { Text, ColorValue, StyleSheet } from "react-native";
 
 import { useAppSelector, ProfileState } from "src/store";
 import s from "./ButtonOptionLabel.style";
-import colors from "src/theme/colors";
+import { colors } from "src/theme";
 
 interface IButtonOptionsLabelProps {
   option: string;

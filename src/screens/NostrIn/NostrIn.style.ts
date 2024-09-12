@@ -1,33 +1,32 @@
 import { StyleSheet } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
+import { normalizeSize, colors, fonts } from "src/theme";
 
 export default StyleSheet.create({
   container: {
-    marginHorizontal: "2%",
+    paddingHorizontal: normalizeSize(8),
     alignItems: "center",
     flex: 1,
   },
   logoContainer: {
     alignItems: "center",
     width: "100%",
-    height: "25%",
+    marginBottom: normalizeSize(24),
   },
   inputContainer: {
     alignItems: "center",
     width: "100%",
-    height: "15%",
+    marginBottom: normalizeSize(24),
   },
   buttonContainer: {
     alignItems: "center",
     width: "100%",
-    height: "54%",
     justifyContent: "flex-start",
   },
   textDescription: {
     color: colors.WHITE_BOLD,
     textAlign: "center",
     fontSize: fonts[14],
+    marginTop: normalizeSize(24),
   },
 });

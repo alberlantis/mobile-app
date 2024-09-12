@@ -1,19 +1,14 @@
-import { Dimensions, Platform } from "react-native";
-
-const screenWidth = Dimensions.get("window").width;
-function responsiveFontSize(size: number) {
-  if (Platform.OS === "ios" && Platform.isPad) return size * 1.3;
-  return (size * screenWidth) / 375;
-}
+import { normalizeSize } from "./scaling";
 
 export default {
-  12: responsiveFontSize(12),
-  14: responsiveFontSize(14),
-  16: responsiveFontSize(16),
-  18: responsiveFontSize(18),
-  20: responsiveFontSize(20),
-  22: responsiveFontSize(22),
-  24: responsiveFontSize(24),
-  26: responsiveFontSize(26),
-  28: responsiveFontSize(28),
+  12: normalizeSize(12),
+  14: normalizeSize(14),
+  16: normalizeSize(16),
+  18: normalizeSize(18),
+  20: normalizeSize(20),
+  22: normalizeSize(22),
+  24: normalizeSize(24),
+  26: normalizeSize(26),
+  28: normalizeSize(28),
+  70: normalizeSize(70),
 };

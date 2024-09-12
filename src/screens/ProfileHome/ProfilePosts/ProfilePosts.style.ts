@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   postImage: {
@@ -11,6 +11,6 @@ export default StyleSheet.create({
   },
   postRow: {
     flexDirection: "row",
-    marginBottom: 1,
+    marginBottom: normalizeSize(1.4),
   },
 });

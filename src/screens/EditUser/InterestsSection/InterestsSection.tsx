@@ -20,11 +20,7 @@ const InterestsSection: React.FC<IInterestsSectionProps> = ({
 
   return (
     <>
-      <BaseSection
-        sectionTitle="Interests"
-        bottomSeparator
-        customContainer={s.container}
-      >
+      <BaseSection sectionTitle="Interests" customContainer={s.container}>
         <View style={s.innerContainer}>
           <View style={s.interestsTagPanel}>
             {selectedInterests.map((tag, index) => (
@@ -39,7 +35,7 @@ const InterestsSection: React.FC<IInterestsSectionProps> = ({
             <Icon
               type="Entypo"
               name="edit"
-              size={fonts[20]}
+              size={fonts[16]}
               color={colors.WHITE}
             />
           </Pressable>

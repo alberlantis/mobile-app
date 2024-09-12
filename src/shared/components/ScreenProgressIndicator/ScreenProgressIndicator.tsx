@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
+import { normalizeSize } from "src/theme";
 import s from "./ScreenProgressIndicator.style";
 
 interface IScreenProgressIndicatorProps {
@@ -24,7 +25,9 @@ const ScreenProgressIndicator: React.FC<IScreenProgressIndicatorProps> = ({
         return (
           <View
             key={`${screenName}-indicator-${index}`}
-            style={StyleSheet.compose(style, { marginRight: isLast ? 0 : 5 })}
+            style={StyleSheet.compose(style, {
+              marginRight: isLast ? 0 : normalizeSize(4),
+            })}
           />
         );
       })}

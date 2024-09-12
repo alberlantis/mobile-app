@@ -39,7 +39,7 @@ const CheckboxItem: React.FC<ICheckboxItemProps> = ({
           <Icon
             name="check"
             type="Feather"
-            size={fonts[20]}
+            size={fonts[12]}
             color={colors.WHITE}
           />
         )}

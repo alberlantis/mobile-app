@@ -1,19 +1,29 @@
 import React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 
 import s from "./KeyboardView.style";
 
 interface IKeyboardViewProps {
   children: React.ReactNode;
+  scrollEnabled?: boolean;
 }
 
-const KeyboardView: React.FC<IKeyboardViewProps> = ({ children }) => {
+const KeyboardView: React.FC<IKeyboardViewProps> = ({
+  children,
+  scrollEnabled = true,
+}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={s.keyboardContainer}
     >
-      {children}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={scrollEnabled}
+        contentContainerStyle={s.contentContainer}
+      >
+        {children}
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };

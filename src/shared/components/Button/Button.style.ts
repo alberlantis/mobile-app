@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
+import { fonts, colors, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: normalizeSize(16),
   },
   contentContainer: {
     flexDirection: "row",

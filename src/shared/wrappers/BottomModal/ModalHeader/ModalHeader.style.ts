@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
 
-import { colors, fonts } from "src/theme";
+import { colors, fonts, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   modalHeader: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: "5%",
+    padding: normalizeSize(16),
+    marginBottom: normalizeSize(20),
   },
   modalHeaderLeft: { width: "20%" },
   modalHeaderTitle: { width: "60%" },
@@ -15,7 +16,7 @@ export default StyleSheet.create({
     fontWeight: "medium",
     textAlign: "center",
     color: colors.WHITE,
-    marginBottom: "2%",
+    marginBottom: normalizeSize(2),
   },
   modalSubtitle: {
     fontSize: fonts[12],
@@ -25,7 +26,10 @@ export default StyleSheet.create({
   modalHeaderRight: { width: "20%", alignItems: "flex-end" },
   modalHeaderCloseButton: {
     backgroundColor: colors.BLACK_3,
-    padding: "10%",
-    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: normalizeSize(38) / 2,
+    width: normalizeSize(38),
+    height: normalizeSize(38),
   },
 });

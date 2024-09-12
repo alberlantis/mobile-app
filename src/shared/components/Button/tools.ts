@@ -1,34 +1,19 @@
-import {
-  DimensionValue,
-  Dimensions,
-  ColorValue,
-  StyleProp,
-  ViewStyle,
-  Animated,
-} from "react-native";
+import { DimensionValue, ColorValue, StyleProp, ViewStyle } from "react-native";
 
 import colors from "src/theme/colors";
 
-export type ButtonSize = "large" | "fill" | "regular" | "auto";
+type NumberProp = string | number;
+export type ButtonSize = "fill" | "auto";
 export type ButtonTheme =
   | "primary"
   | "secondary"
   | "disabled"
   | "off"
   | "primary-outline";
-type NumberProp = string | number;
-type ButtonDimensions = {
-  width?: NumberProp & DimensionValue;
-  height: NumberProp & DimensionValue;
+export type ButtonDimensions = {
+  width: number;
+  height: number;
 };
-type RadiusValue =
-  | number
-  | "auto"
-  | `${number}%`
-  | (string & Animated.AnimatedNode)
-  | undefined;
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 export const getColors = (theme: ButtonTheme): ColorValue[] => {
   switch (theme) {
@@ -46,54 +31,31 @@ export const getColors = (theme: ButtonTheme): ColorValue[] => {
   }
 };
 
-export const getSize = (size?: ButtonSize): ButtonDimensions => {
-  const largeHeight = screenHeight * 0.07;
-  const defaultHeight = screenHeight * 0.06;
+export const getSize = (size?: ButtonSize): DimensionValue => {
   switch (size) {
-    case "regular": {
-      return {
-        width: screenWidth * 0.35,
-        height: defaultHeight,
-      };
-    }
     case "fill": {
-      return {
-        width: "100%",
-        height: largeHeight,
-      };
+      return "100%";
     }
-    case "large":
-      return {
-        width: screenWidth * 0.8,
-        height: largeHeight,
-      };
     default:
-      return {
-        width: 0,
-        height: 0,
-      };
+      return "auto";
   }
 };
 
-export const getRadius = (
-  value: (NumberProp & DimensionValue) | undefined,
-): RadiusValue => {
-  const sanitizeValue: (NumberProp & DimensionValue) | undefined =
-    typeof value === "string" ? parseInt(value, 10) : value;
-  if (!sanitizeValue) return value;
-  return sanitizeValue / (sanitizeValue * 0.05);
+export const getRadius = (dynamicSize: ButtonDimensions): NumberProp => {
+  const buttonRadiusRation = 200 / 300;
+  return buttonRadiusRation * Math.min(dynamicSize.width, dynamicSize.height);
 };
 
 export const getOutline = (
   theme: ButtonTheme,
-  radius: RadiusValue,
+  radius: NumberProp,
 ): StyleProp<ViewStyle> => {
   if (!theme.includes("outline")) return {};
   switch (theme) {
     case "primary-outline":
     default: {
       return {
-        borderRadius: (radius as number) - 5,
+        borderRadius: radius as number,
         borderColor: colors.ORANGE_PRIMARY,
         borderWidth: 1,
       };

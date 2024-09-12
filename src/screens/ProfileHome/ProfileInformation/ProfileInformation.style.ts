@@ -1,57 +1,40 @@
-import { StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
+import { fonts, colors, normalizeSize } from "src/theme";
 
-export const getEditContainer = (
-  containerHeight: number,
-): StyleProp<ViewStyle> => {
-  const editIconSize = containerHeight * 0.6;
-  return {
-    backgroundColor: colors.GRAY_BOLD,
-    width: editIconSize,
-    height: editIconSize,
-    borderRadius: editIconSize / 2,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: "2%",
-    marginTop: "2%",
-  };
-};
-export const getIconSize = (containerHeight: number): number => {
-  const editIconSize = containerHeight * 0.6;
-  return editIconSize * 0.5;
-};
 export default StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "row",
+    paddingHorizontal: normalizeSize(17),
+    borderBottomWidth: normalizeSize(1),
+    borderBottomColor: colors.GRAY,
   },
   innerContainer: {
-    width: "70%",
+    flexGrow: 1,
     justifyContent: "space-between",
     flexDirection: "row",
-  },
-  profileDataContainer: {
-    paddingVertical: "2%",
+    marginLeft: normalizeSize(16),
+    marginVertical: normalizeSize(12),
   },
   profileDataNameContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: normalizeSize(2),
   },
   profileDataName: {
     fontSize: fonts[16],
     color: colors.WHITE,
     fontWeight: "semibold",
-    marginRight: "2%",
+    marginRight: normalizeSize(8),
   },
   profileDataTitle: {
     color: colors.WHITE_BOLD,
-    marginBottom: "2%",
     fontSize: fonts[14],
   },
   followersSection: {
     flexDirection: "row",
+    marginTop: normalizeSize(8),
   },
   followersNumber: {
     color: colors.WHITE,
@@ -59,5 +42,13 @@ export default StyleSheet.create({
   },
   followersLabel: {
     color: colors.WHITE_BOLD,
+  },
+  editButtonContainer: {
+    backgroundColor: colors.GRAY_BOLD,
+    width: normalizeSize(38),
+    height: normalizeSize(38),
+    borderRadius: normalizeSize(38) / 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -1,8 +1,6 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import colors from "src/theme/colors";
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
+import { normalizeSize, colors } from "src/theme";
 
 export default StyleSheet.create({
   container: {
@@ -11,16 +9,16 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   active: {
-    width: screenWidth * 0.06,
-    height: screenHeight * 0.002,
+    width: normalizeSize(20),
+    height: normalizeSize(1),
     backgroundColor: colors.ORANGE_PRIMARY_LIGHT,
-    borderRadius: 20,
+    borderRadius: normalizeSize(200),
   },
   inactive: {
-    width: screenWidth * 0.035,
-    height: screenHeight * 0.002,
+    width: normalizeSize(12),
+    height: normalizeSize(1),
     backgroundColor: colors.WHITE,
-    borderRadius: 20,
+    borderRadius: normalizeSize(200),
     opacity: 0.5,
   },
 });

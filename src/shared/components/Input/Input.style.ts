@@ -1,41 +1,23 @@
-import {
-  StyleSheet,
-  Dimensions,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-} from "react-native";
+import { StyleSheet, StyleProp, TextStyle } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
+import { fonts, colors, normalizeSize } from "src/theme";
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-const borderRadius = screenWidth * 0.03;
+const borderRadius = normalizeSize(16);
 
 export const getInputStyle = (
   hasIcon: boolean,
   isTextArea: boolean,
+  customHeight: number | undefined,
 ): StyleProp<TextStyle> => ({
   width: hasIcon ? "90%" : "100%",
-  height: "100%",
+  height: customHeight || "100%",
   borderTopLeftRadius: borderRadius,
   borderBottomLeftRadius: borderRadius,
   borderTopRightRadius: hasIcon ? 0 : borderRadius,
   borderBottomRightRadius: hasIcon ? 0 : borderRadius,
   fontSize: fonts[16],
   fontWeight: "regular",
-  paddingHorizontal: 15,
   color: colors.WHITE,
-  paddingTop: isTextArea ? 15 : 0,
-});
-export const getInputContainer = (
-  customHeight: number | undefined,
-): StyleProp<ViewStyle> => ({
-  width: "100%",
-  height: customHeight || screenHeight * 0.06,
-  backgroundColor: colors.BLACK_INPUT,
-  borderRadius: borderRadius,
-  flexDirection: "row",
 });
 export default StyleSheet.create({
   container: {
@@ -43,16 +25,21 @@ export default StyleSheet.create({
   },
   label: {
     color: colors.WHITE,
-    paddingLeft: 15,
-    marginBottom: 10,
+    paddingLeft: normalizeSize(16),
+    marginBottom: normalizeSize(8),
     fontSize: fonts[14],
     fontWeight: "regular",
   },
   iconInput: {
     width: "10%",
-    borderTopRightRadius: borderRadius,
-    borderBottomRightRadius: borderRadius,
     alignItems: "center",
     justifyContent: "center",
+  },
+  inputContainer: {
+    width: "100%",
+    backgroundColor: colors.BLACK_INPUT,
+    borderRadius: borderRadius,
+    flexDirection: "row",
+    padding: normalizeSize(16),
   },
 });

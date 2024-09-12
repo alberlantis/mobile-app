@@ -36,7 +36,7 @@ const NostrIn = () => {
   };
 
   return (
-    <DefaultBackground style={s.container} blurPos="top">
+    <DefaultBackground keyboard style={s.container} blurPos="top">
       <Header />
       <View style={s.logoContainer}>
         <LogoTitle title="Sign In" />
@@ -53,7 +53,6 @@ const NostrIn = () => {
       <View style={s.buttonContainer}>
         <Button
           loading={isLoading}
-          marginBottom={15}
           onPress={handleLoginNostr}
           text="Sign In"
           theme={isButtonEnabled ? "primary" : "disabled"}

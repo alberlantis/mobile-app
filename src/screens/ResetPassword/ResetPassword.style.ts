@@ -1,18 +1,20 @@
-import { StyleSheet, Dimensions } from "react-native";
-
-const { height: screenHeight } = Dimensions.get("window");
-const screenMarginSeparator = screenHeight * 0.04;
+import { StyleSheet } from "react-native";
+import { normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginHorizontal: "2%",
+    paddingHorizontal: normalizeSize(8),
+  },
+  titleContainer: {
+    paddingTop: normalizeSize(54),
   },
   input: {
-    marginTop: screenMarginSeparator,
+    marginTop: normalizeSize(24),
+    marginBottom: normalizeSize(16),
   },
   button: {
-    marginTop: screenMarginSeparator,
+    marginTop: normalizeSize(24),
   },
 });

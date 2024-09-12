@@ -1,18 +1,18 @@
-import { StyleSheet, Dimensions } from "react-native";
-
-const screenHeight = Dimensions.get("window").height;
+import { StyleSheet } from "react-native";
+import { normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: normalizeSize(32),
   },
   emailButton: {
-    marginBottom: screenHeight * 0.02,
-    marginTop: screenHeight * 0.05,
+    marginBottom: normalizeSize(16),
+    marginTop: normalizeSize(32),
   },
   nostrButton: {
-    marginBottom: screenHeight * 0.05,
+    marginBottom: normalizeSize(20),
   },
 });

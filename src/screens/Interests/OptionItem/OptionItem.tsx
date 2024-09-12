@@ -2,12 +2,8 @@ import React from "react";
 import { Text, View, Pressable } from "react-native";
 
 import { Icon } from "src/shared/components";
-import colors from "src/theme/colors";
-import s, {
-  getItemTextStyle,
-  iconCheckSize,
-  getButtonContainer,
-} from "./OptionItem.style";
+import { colors, fonts } from "src/theme";
+import s, { getItemTextStyle, getButtonContainer } from "./OptionItem.style";
 
 interface IOptionItemProps {
   option: string;
@@ -32,7 +28,7 @@ const OptionItem: React.FC<IOptionItemProps> = ({
         <View style={s.selectedIcon}>
           <Icon
             type="Feather"
-            size={iconCheckSize}
+            size={fonts[18]}
             name="check"
             color={colors.WHITE}
           />

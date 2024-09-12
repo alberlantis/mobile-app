@@ -13,13 +13,9 @@ const Header: React.FC<IHeaderProps> = ({
   onPress,
   hideBackButton = false,
 }) => {
-  const headerHeight = 0.06;
-
   return (
     <View style={s.container}>
-      {!hideBackButton && (
-        <BackButton onPress={onPress} containerHeight={headerHeight} />
-      )}
+      {!hideBackButton && <BackButton onPress={onPress} />}
     </View>
   );
 };

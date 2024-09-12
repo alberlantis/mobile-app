@@ -5,6 +5,7 @@ import { useAppSelector, ProfileState } from "src/store";
 import { Button } from "src/shared/components";
 import ButtonOptionLabel from "../ButtonOptionLabel";
 import s from "./ProfileOptions.style";
+import { normalizeSize } from "src/theme";
 
 const USER_OPTIONS = ["Posts", "Info", "Chats", "Followers"];
 const BUSINESS_OPTIONS = ["Posts", "Info", "Reviews"];
@@ -19,17 +20,27 @@ const ProfileOptions = () => {
   return (
     <View style={s.container}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {options.map((option) => {
+        {options.map((option, index) => {
           return (
-            <Button
-              key={option}
-              onPress={() => setSelectedOption(option)}
-              text={option}
-              marginLeft={15}
-              subfixElement={() => <ButtonOptionLabel option={option} />}
-              theme={selectedOption === option ? "primary" : "disabled"}
-              size="auto"
-            />
+            <View
+              style={{
+                marginLeft: index === 0 ? normalizeSize(17) : 0,
+                marginRight:
+                  index === options.length - 1
+                    ? normalizeSize(17)
+                    : normalizeSize(12),
+              }}
+              key={`profile-home-carousel-${option}`}
+            >
+              <Button
+                onPress={() => setSelectedOption(option)}
+                text={option}
+                paddingVertical={5.5}
+                subfixElement={() => <ButtonOptionLabel option={option} />}
+                theme={selectedOption === option ? "primary" : "disabled"}
+                size="auto"
+              />
+            </View>
           );
         })}
       </ScrollView>

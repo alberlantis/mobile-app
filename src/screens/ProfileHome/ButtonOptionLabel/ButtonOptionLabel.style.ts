@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native";
 
+import { fonts, normalizeSize } from "src/theme";
+
 export default StyleSheet.create({
   infoLabelDefault: {
-    fontSize: 14,
+    fontSize: fonts[12],
     fontWeight: "medium",
-    marginLeft: 10,
+    marginLeft: normalizeSize(8),
   },
 });

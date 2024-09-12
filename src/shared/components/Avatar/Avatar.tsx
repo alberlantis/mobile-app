@@ -4,8 +4,8 @@ import { Image, View } from "react-native";
 import { ProfileState, useAppSelector } from "src/store";
 import Icon from "../Icon";
 import { useImageAssets } from "src/shared/hooks";
-import s, { checkIconSize } from "./Avatar.style";
-import colors from "src/theme/colors";
+import s from "./Avatar.style";
+import { colors, fonts } from "src/theme";
 
 const Avatar = () => {
   const { images } = useImageAssets();
@@ -14,23 +14,19 @@ const Avatar = () => {
   );
 
   return (
-    <View style={s.container}>
-      <View style={s.profilePhotoInnerContainer}>
-        <Image
-          resizeMode="cover"
-          source={
-            isBusiness ? images.mockBusinessAvatar : images.mockUserAvatar
-          }
-          style={s.profilePhoto}
+    <View style={s.profilePhotoInnerContainer}>
+      <Image
+        resizeMode="cover"
+        source={isBusiness ? images.mockBusinessAvatar : images.mockUserAvatar}
+        style={s.profilePhoto}
+      />
+      <View style={s.profilePhotoCheckIcon}>
+        <Icon
+          type="Feather"
+          size={fonts[16]}
+          name="check"
+          color={colors.WHITE}
         />
-        <View style={s.profilePhotoCheckIcon}>
-          <Icon
-            type="Feather"
-            size={checkIconSize}
-            name="check"
-            color={colors.WHITE}
-          />
-        </View>
       </View>
     </View>
   );

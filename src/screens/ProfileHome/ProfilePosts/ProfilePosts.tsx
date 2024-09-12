@@ -3,6 +3,7 @@ import { View, Image, useWindowDimensions, StyleSheet } from "react-native";
 
 import type { SanitizePosts } from "src/store/Profile/profile.selectors";
 import s from "./ProfilePosts.style";
+import { normalizeSize } from "src/theme";
 
 interface IListItemProps {
   item: SanitizePosts;
@@ -23,7 +24,10 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
         <Image
           key={`post-${post.id}-${index}`}
           src={post.download_url}
-          style={s.postImage}
+          style={{
+            ...s.postImage,
+            marginRight: index !== 2 ? normalizeSize(1.4) : 0,
+          }}
         />
       ))}
     </View>

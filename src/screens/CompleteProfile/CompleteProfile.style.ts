@@ -1,50 +1,40 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
-import fonts from "src/theme/fonts";
-import colors from "src/theme/colors";
-
-const screenHeight = Dimensions.get("window").height;
+import { fonts, colors, normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    marginHorizontal: "2%",
-  },
-  keyboardContainer: {
-    flex: 1,
-    alignItems: "center",
-    height: "75%",
+    paddingHorizontal: normalizeSize(8),
   },
   titleContainer: {
     width: "100%",
-    height: "15%",
     alignItems: "center",
+    marginBottom: normalizeSize(32),
   },
   titleDescription: {
     color: colors.WHITE_BOLD,
     textAlign: "center",
     fontSize: fonts[16],
-    marginTop: screenHeight * 0.01,
+    marginTop: normalizeSize(12),
   },
   uploadAvataContainer: {
     width: "100%",
-    height: "42.5%",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: normalizeSize(24),
   },
   inputsContainer: {
     width: "100%",
-    height: "42.5%",
     alignItems: "center",
+    marginBottom: normalizeSize(52),
   },
   input: {
-    marginTop: screenHeight * 0.02,
-    height: screenHeight * 0.12,
+    height: normalizeSize(170),
   },
   buttonContainer: {
     width: "100%",
-    height: "17%",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -52,16 +42,15 @@ export default StyleSheet.create({
     color: colors.WHITE_BOLD,
     textAlign: "center",
     fontSize: fonts[16],
-    marginTop: screenHeight * 0.06,
-    marginBottom: screenHeight * 0.02,
+    marginBottom: normalizeSize(16),
   },
   button: {
-    marginBottom: screenHeight * 0.02,
+    marginBottom: normalizeSize(31),
   },
   bottomContainer: {
     width: "100%",
-    height: "2%",
     justifyContent: "center",
     alignItems: "center",
+    paddingBottom: normalizeSize(8),
   },
 });

@@ -1,37 +1,42 @@
-import { StyleSheet, Dimensions } from "react-native";
-
-const screenHeight = Dimensions.get("window").height;
+import { StyleSheet } from "react-native";
+import { normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   container: {
-    marginHorizontal: "2%",
+    paddingHorizontal: normalizeSize(8),
     alignItems: "center",
     flex: 1,
   },
   logoContainer: {
     alignItems: "center",
     width: "100%",
-    height: "25%",
+    marginBottom: normalizeSize(32),
   },
   inputsContainer: {
     alignItems: "center",
-    justifyContent: "space-evenly",
     width: "100%",
-    height: "50%",
+    marginBottom: normalizeSize(24),
   },
   buttonContainer: {
     alignItems: "center",
     width: "100%",
-    height: "17%",
     justifyContent: "center",
+    marginBottom: normalizeSize(60),
   },
   button: {
-    marginBottom: screenHeight * 0.02,
+    marginBottom: normalizeSize(20),
   },
   bottomContainer: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     width: "100%",
-    height: "2%",
+    flexGrow: 1,
+    paddingBottom: normalizeSize(8),
+  },
+  inputs: {
+    marginBottom: normalizeSize(16),
+  },
+  inputPassword: {
+    marginBottom: normalizeSize(8),
   },
 });

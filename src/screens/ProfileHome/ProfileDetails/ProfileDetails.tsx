@@ -3,8 +3,7 @@ import { View, Text, Linking } from "react-native";
 
 import { ProfileState, useAppSelector } from "src/store";
 import { Icon } from "src/shared/components";
-import colors from "src/theme/colors";
-import fonts from "src/theme/fonts";
+import { colors, fonts } from "src/theme";
 import s from "./ProfileDetails.style";
 
 const ProfileDetails = () => {

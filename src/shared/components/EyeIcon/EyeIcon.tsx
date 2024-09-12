@@ -22,7 +22,7 @@ const EyeIcon: React.FC<IEyeIconProps> = ({
         type="Feather"
         name={isSecure ? "eye" : "eye-off"}
         color={!!password ? colors.WHITE : colors.WHITE_LIGHT}
-        size={fonts[24]}
+        size={fonts[20]}
       />
     </Pressable>
   );
