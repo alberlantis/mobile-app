@@ -45,7 +45,7 @@ const RecoveryEmail: React.FC<UnsignedScreenProps<"RecoveryEmail">> = ({
    */
   const handleClose = () => {
     dispatch(AuthState.actions.shouldResetInitiateResetPassword());
-    navigation.navigate(SCREENS.RESET_PASSWORD);
+    navigation.navigate(SCREENS.LOGIN);
   };
 
   return (
