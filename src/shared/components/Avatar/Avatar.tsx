@@ -1,21 +1,18 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 
 import { useAppSelector, UserState } from "src/store";
 import Icon from "../Icon";
 import s from "./Avatar.style";
 import { colors, fonts } from "src/theme";
+import RoundeImage from "../RoundImage";
 
 const Avatar = () => {
   const { avatar } = useAppSelector(UserState.selectors.selectUserHomeProfile);
 
   return (
     <View style={s.profilePhotoInnerContainer}>
-      <Image
-        resizeMode="cover"
-        source={{ uri: avatar }}
-        style={s.profilePhoto}
-      />
+      <RoundeImage size={80} image={avatar} />
       <View style={s.profilePhotoCheckIcon}>
         <Icon
           type="Feather"

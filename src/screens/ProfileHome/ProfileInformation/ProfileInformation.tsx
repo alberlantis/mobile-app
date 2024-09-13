@@ -63,7 +63,10 @@ const ProfileInformation = () => {
             />
           </View>
           <Text style={s.profileDataTitle}>@ambassador</Text>
-          <View style={s.followersSection}>
+          <Pressable
+            style={s.followersSection}
+            onPress={() => navigation.navigate(SCREENS.FOLLOWERS_AND_FOLLOWING)}
+          >
             <ProfileFollowers
               followCant={totalFollowing}
               followLabel="Following"
@@ -73,7 +76,7 @@ const ProfileInformation = () => {
               followCant={totalFollowers}
               followLabel="Followers"
             />
-          </View>
+          </Pressable>
         </View>
         {isOwnProfile && (
           <Pressable

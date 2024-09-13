@@ -1,22 +1,19 @@
-import {
-  Client,
-  func_GetNostrSigner,
-  func_GetJwt,
-} from "@satlantis/api-client";
-import { InMemoryAccountContext } from "@blowater/nostr-sdk";
+import { Client, func_GetJwt } from "@satlantis/api-client";
+import { NostrKind, Signer, Tag } from "@blowater/nostr-sdk";
 
 import { EXPO_PUBLIC_CLIENT_ENDPOINT } from "src/shared/constants/env";
+import { publishEvent, prepareEvent } from "./nostr";
 
 export class SatlantisClient {
   private static instance: SatlantisClient;
   private jwt: string = "";
-  private nostrSigner: InMemoryAccountContext | undefined;
+  private nostrSigner: Signer | undefined;
   private client: Client | undefined;
 
-  private getNostrSigner: func_GetNostrSigner = async () => {
+  private getNostrSigner = async () => {
     if (!this.nostrSigner) {
       console.error("Getting nostr signer failed: It doesn't exist");
-      return new Error("Error getting nostr signer. Reason: Doesn't exist");
+      throw new Error("Error getting nostr signer. Reason: Doesn't exist");
     }
     return this.nostrSigner;
   };
@@ -69,8 +66,15 @@ export class SatlantisClient {
     this.jwt = newJwt;
   }
 
-  public setNostrSigner(newSigner: InMemoryAccountContext | undefined) {
+  public setNostrSigner(newSigner: Signer | undefined) {
     this.nostrSigner = newSigner;
+  }
+
+  public async prepareContactEvent(tags: Tag[]) {
+    const signer = await this.getNostrSigner();
+    const newEvent = await prepareEvent(signer, NostrKind.CONTACTS, tags);
+    await publishEvent(newEvent);
+    return newEvent;
   }
 }
 

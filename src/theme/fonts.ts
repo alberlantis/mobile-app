@@ -1,6 +1,12 @@
 import { normalizeSize } from "./scaling";
 
+type FontWeight = 400 | 500 | 600 | 700;
+
 export default {
+  regular: 400 as FontWeight,
+  medium: 500 as FontWeight,
+  semiBold: 600 as FontWeight,
+  bold: 700 as FontWeight,
   12: normalizeSize(12),
   14: normalizeSize(14),
   16: normalizeSize(16),

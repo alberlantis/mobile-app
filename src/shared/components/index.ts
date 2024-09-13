@@ -16,3 +16,4 @@ export { default as ImagePortrait } from "./ImagePortrait";
 export { default as Avatar } from "./Avatar";
 export { default as BasePanelText } from "./BasePanelText";
 export { default as CheckboxItem } from "./CheckboxItem";
+export { default as RoundImage } from "./RoundImage";

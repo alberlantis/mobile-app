@@ -8,11 +8,6 @@ export default StyleSheet.create({
     width: normalizeSize(80),
     height: normalizeSize(80),
   },
-  profilePhoto: {
-    width: normalizeSize(80),
-    height: normalizeSize(80),
-    borderRadius: normalizeSize(80) / 2,
-  },
   profilePhotoCheckIcon: {
     backgroundColor: colors.ORANGE_PRIMARY_DARK,
     width: normalizeSize(24),

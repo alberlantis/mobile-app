@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { normalizeSize } from "src/theme";
+import { normalizeSize, fonts } from "src/theme";
 
 export default StyleSheet.create({
   container: {
@@ -7,5 +7,10 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: normalizeSize(8),
+  },
+  title: { fontWeight: "medium", fontSize: fonts[20] },
+  headerCenterSection: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -16,4 +16,5 @@ export const SCREENS = {
   RESET_PASSWORD: "ResetPassword",
   EDIT_USER: "EditUser",
   LOCATION: "Location",
+  FOLLOWERS_AND_FOLLOWING: "FollowersAndFollowing",
 } as const;

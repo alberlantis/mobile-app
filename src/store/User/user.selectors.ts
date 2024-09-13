@@ -31,6 +31,29 @@ export const selectUserHomeProfile = createSelector(
       avatar: account?.picture,
       website: account?.website,
       nostrUsername: account?.nip05,
+      id: account?.id,
     };
   },
+);
+export const selectUserFollowers = (store: RootState) =>
+  selectAccount(store)?.followedBy;
+export const selectUserFollowing = (store: RootState) =>
+  selectAccount(store)?.following;
+export const selectIsUserFollowingFollower = (followerId: number | undefined) =>
+  createSelector(selectAccount, (account) => {
+    if (!account || !followerId) return false;
+    return !!account.following?.find((item) => item.id === followerId);
+  });
+export const selectGetAccountLoading = (store: RootState) =>
+  selectUser(store).getAccountLoading;
+export const selectFollowUserLoading = (store: RootState) =>
+  selectUser(store).followUserLoading;
+export const selectUnfollowUserLoading = (store: RootState) =>
+  selectUser(store).unfollowUserLoading;
+export const selectUserPublicKeys = createSelector(
+  selectAccount,
+  (account) => ({
+    npub: account?.npub || "",
+    pubKey: account?.pubKey || "",
+  }),
 );

@@ -12,7 +12,7 @@ import AccountCreationGroup, {
   type AccountCreationParamList,
 } from "src/navigation/AccountCreationGroup";
 import HomeTabs, { type HomeTabsParamList } from "src/navigation/HomeTabs";
-import { EditUser } from "src/screens";
+import { EditUser, FollowersAndFollowing } from "src/screens";
 
 export type HomeTabsParams =
   | {
@@ -26,6 +26,7 @@ export type HomeTabsParams =
 export type SignedParamList = {
   [SCREENS.HOME_TABS]: HomeTabsParams;
   [SCREENS.EDIT_USER]: undefined;
+  [SCREENS.FOLLOWERS_AND_FOLLOWING]: undefined;
 } & AccountCreationParamList &
   HomeTabsParamList;
 const Stack = createNativeStackNavigator<SignedParamList>();
@@ -42,6 +43,10 @@ const SignedStack: React.FC = () => {
         <Stack.Group>
           <Stack.Screen name={SCREENS.HOME_TABS} component={HomeTabs} />
           <Stack.Screen name={SCREENS.EDIT_USER} component={EditUser} />
+          <Stack.Screen
+            name={SCREENS.FOLLOWERS_AND_FOLLOWING}
+            component={FollowersAndFollowing}
+          />
         </Stack.Group>
       )}
     </Stack.Navigator>
