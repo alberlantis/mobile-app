@@ -13,14 +13,16 @@ export const shouldLoginAccount = createAppAsyncThunk(
     {
       extra: {
         api: { AuthClient },
+        actions: { user },
       },
+      dispatch,
     },
   ) => {
     const account = await AuthClient.login(
       signUpData.username,
       signUpData.password,
     );
-    return account;
+    dispatch(user.shouldSetAccount(account));
   },
 );
 
@@ -32,10 +34,9 @@ export const shouldCreateAccount = createAppAsyncThunk(
       extra: {
         api: { AuthClient },
       },
-      dispatch,
     },
   ) => {
-    await AuthClient.createAccount(
+    return await AuthClient.createAccount(
       signUpData.email || "",
       signUpData.password,
       signUpData.username,
@@ -50,11 +51,13 @@ export const shouldLoginSigner = createAppAsyncThunk(
     {
       extra: {
         api: { AuthClient },
+        actions: { user },
       },
+      dispatch,
     },
   ) => {
     const account = await AuthClient.loginNostr(nsec);
-    return account;
+    dispatch(user.shouldSetAccount(account));
   },
 );
 

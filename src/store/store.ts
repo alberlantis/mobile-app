@@ -11,10 +11,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import createSecureStore from "redux-persist-expo-securestore";
 
 import { AuthClient, UserClient } from "src/client";
-import { reducer as nostrReducer } from "./Nostr";
-import { reducer as profileReducer } from "./Profile";
-import { reducer as authReducer } from "./Auth";
-import { reducer as userReducer } from "./User";
+import * as Nostr from "./Nostr";
+import * as Profile from "./Profile";
+import * as Auth from "./Auth";
+import * as User from "./User";
 
 type SecureReducer = ReturnType<typeof secureReducers>;
 type RegularReducer = ReturnType<typeof regularReducers>;
@@ -63,12 +63,12 @@ const asyncPersistConfig: PersistConfig<RegularReducer> = {
 };
 
 const regularReducers = combineReducers({
-  profile: profileReducer,
-  auth: authReducer,
-  user: userReducer,
+  profile: Profile.reducer,
+  auth: Auth.reducer,
+  user: User.reducer,
 });
 const secureReducers = combineReducers({
-  nostr: nostrReducer,
+  nostr: Nostr.reducer,
 });
 const regular = persistReducer<RegularReducer>(
   asyncPersistConfig,
@@ -88,6 +88,12 @@ const store = configureStore({
           api: {
             AuthClient,
             UserClient,
+          },
+          actions: {
+            auth: Auth.actions,
+            user: User.actions,
+            nostr: Nostr.actions,
+            profile: Profile.actions,
           },
         },
       },

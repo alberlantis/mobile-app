@@ -47,13 +47,11 @@ const SignUp: React.FC<UnsignedScreenProps<"SignUp">> = ({
           username,
         }),
       ).unwrap();
-      dispatch(AuthState.actions.setAccountCreation(true));
-      dispatch(
+      await dispatch(
         AuthState.thunks.shouldLoginAccount({ username, password }),
       ).unwrap();
     } catch (e) {
       const error = e as SerializedError;
-      dispatch(AuthState.actions.setAccountCreation(false));
       Alert.alert("Create Account", error.message);
     }
   };

@@ -1,24 +1,14 @@
 import React from "react";
 import { Image } from "react-native";
 
-import { ProfileState, useAppSelector } from "src/store";
-import { useImageAssets } from "src/shared/hooks";
+import { useAppSelector, UserState } from "src/store";
 import s from "./ImagePortrait.style";
 
 const ImagePortrait = () => {
-  const { images } = useImageAssets();
-  const isBusiness = useAppSelector(
-    ProfileState.selectors.selectIsProfileBusiness,
-  );
+  const { banner } = useAppSelector(UserState.selectors.selectUserHomeProfile);
 
   return (
-    <Image
-      source={
-        isBusiness ? images.mockBusinessLandscape : images.mockUserLandscape
-      }
-      style={s.image}
-      resizeMode="stretch"
-    />
+    <Image source={{ uri: banner }} style={s.image} resizeMode="stretch" />
   );
 };
 

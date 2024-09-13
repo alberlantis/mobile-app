@@ -1,22 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Interest } from "@satlantis/api-client";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Interest, Account } from "@satlantis/api-client";
 
 import { shouldFetchAllInterests } from "./user.thunks";
 
 interface UserState {
   interestsPool: Interest[];
   interestsPoolLoading: boolean;
+  account: Account | undefined;
 }
 
 const initialState: UserState = {
   interestsPool: [],
   interestsPoolLoading: false,
+  account: undefined,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    shouldSetAccount: (state, action: PayloadAction<Account>) => {
+      state.account = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(shouldFetchAllInterests.fulfilled, (state, action) => {
       state.interestsPoolLoading = false;

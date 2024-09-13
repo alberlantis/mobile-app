@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Account } from "@satlantis/api-client";
 
 import {
   shouldCreateAccount,
@@ -15,7 +14,6 @@ interface AuthState {
   loginSignerLoading: boolean;
   isLogged: boolean;
   isAccountCreation: boolean;
-  account: Account | undefined;
   isInitiateResetPasswordSuccess: boolean;
   initiateResetPasswordLoading: boolean;
   isResetPasswordSuccess: boolean;
@@ -27,7 +25,6 @@ const initialState: AuthState = {
   loginAccountLoading: false,
   loginSignerLoading: false,
   isLogged: false,
-  account: undefined,
   isAccountCreation: false,
   isInitiateResetPasswordSuccess: false,
   initiateResetPasswordLoading: false,
@@ -54,7 +51,8 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(shouldCreateAccount.fulfilled, (state) => {
+    builder.addCase(shouldCreateAccount.fulfilled, (state, action) => {
+      state.isAccountCreation = action.payload;
       state.createAccountLoading = false;
     });
     builder.addCase(shouldCreateAccount.pending, (state) => {
@@ -62,10 +60,10 @@ const authSlice = createSlice({
     });
     builder.addCase(shouldCreateAccount.rejected, (state) => {
       state.createAccountLoading = false;
+      state.isAccountCreation = false;
     });
     builder.addCase(shouldLoginAccount.fulfilled, (state, action) => {
       state.loginAccountLoading = false;
-      state.account = action.payload;
       state.isLogged = true;
     });
     builder.addCase(shouldLoginAccount.pending, (state) => {
@@ -73,12 +71,10 @@ const authSlice = createSlice({
     });
     builder.addCase(shouldLoginAccount.rejected, (state) => {
       state.loginAccountLoading = false;
-      state.account = undefined;
       state.isLogged = false;
     });
     builder.addCase(shouldLoginSigner.fulfilled, (state, action) => {
       state.loginSignerLoading = false;
-      state.account = action.payload;
       state.isLogged = true;
     });
     builder.addCase(shouldLoginSigner.pending, (state) => {
@@ -87,7 +83,6 @@ const authSlice = createSlice({
     builder.addCase(shouldLoginSigner.rejected, (state) => {
       state.loginSignerLoading = false;
       state.isLogged = false;
-      state.account = undefined;
     });
     builder.addCase(
       shouldPostInitializeResetPassword.fulfilled,
