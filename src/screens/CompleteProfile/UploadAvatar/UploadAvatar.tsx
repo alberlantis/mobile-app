@@ -7,12 +7,18 @@ import { Icon, Camera } from "src/shared/components";
 import { colors, fonts } from "src/theme";
 import s from "./UploadAvatar.style";
 
-const UploadAvatar = () => {
+export type SatlantisImage =
+  | CameraCapturedPicture
+  | ImagePicker.ImagePickerAsset
+  | undefined;
+interface IUploadAvatarProps {
+  setAvatar: React.Dispatch<React.SetStateAction<SatlantisImage>>;
+  avatar: SatlantisImage;
+}
+
+const UploadAvatar: React.FC<IUploadAvatarProps> = ({ setAvatar, avatar }) => {
   const [toggleCamera, setToggleCamera] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
-  const [avatar, setAvatar] = useState<
-    CameraCapturedPicture | ImagePicker.ImagePickerAsset | undefined
-  >();
 
   const handleImageGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({

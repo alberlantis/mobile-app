@@ -1,15 +1,16 @@
 import React from "react";
 import { Text, View, Pressable } from "react-native";
+import { Interest } from "@satlantis/api-client";
 
 import { Icon } from "src/shared/components";
 import { colors, fonts } from "src/theme";
 import s, { getItemTextStyle, getButtonContainer } from "./OptionItem.style";
 
 interface IOptionItemProps {
-  option: string;
+  option: Interest;
   isOptionSelected: boolean;
   isColumnLast: boolean;
-  handleOptionsSelection(value: string, isOptionSelected: boolean): void;
+  handleOptionsSelection(option: Interest, isOptionSelected: boolean): void;
 }
 
 const OptionItem: React.FC<IOptionItemProps> = ({
@@ -23,7 +24,7 @@ const OptionItem: React.FC<IOptionItemProps> = ({
       style={getButtonContainer(isOptionSelected, isColumnLast)}
       onPress={() => handleOptionsSelection(option, isOptionSelected)}
     >
-      <Text style={getItemTextStyle(isOptionSelected)}>{option}</Text>
+      <Text style={getItemTextStyle(isOptionSelected)}>{option.name}</Text>
       {isOptionSelected && (
         <View style={s.selectedIcon}>
           <Icon

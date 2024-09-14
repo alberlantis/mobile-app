@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Interest } from "@satlantis/api-client";
 import {
   View,
   ScrollView,
@@ -11,8 +12,8 @@ import s, { getRowContainer } from "./OptionsList.style";
 import OptionItem from "../OptionItem";
 
 interface IOptionsListProps {
-  selectedOptions: string[];
-  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedOptions: Interest[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<Interest[]>>;
 }
 
 const OptionsList: React.FC<IOptionsListProps> = ({
@@ -29,10 +30,12 @@ const OptionsList: React.FC<IOptionsListProps> = ({
     UserState.selectors.selectSanitizeInterestsPool,
   );
 
-  const handleOptionsSelection = (option: string, isSelected: boolean) => {
+  const handleOptionsSelection = (option: Interest, isSelected: boolean) => {
     setSelectedOptions((prevState) => {
       if (isSelected) {
-        return prevState.filter((selectedOption) => selectedOption !== option);
+        return prevState.filter(
+          (selectedOption) => selectedOption.id !== option.id,
+        );
       }
       return [...prevState, option];
     });
@@ -61,12 +64,14 @@ const OptionsList: React.FC<IOptionsListProps> = ({
                   key={`interests-options-${rowIndex}`}
                   style={getRowContainer(isSecondRow)}
                 >
-                  {row.map((value, colIndex) => (
+                  {row.map((option, colIndex) => (
                     <OptionItem
-                      option={value}
-                      key={`${value}-${rowIndex}`}
+                      option={option}
+                      key={`${option.id}-${rowIndex}`}
                       isColumnLast={colIndex === row.length - 1}
-                      isOptionSelected={selectedOptions.includes(value)}
+                      isOptionSelected={selectedOptions.some(
+                        (selectedOption) => selectedOption.id === option.id,
+                      )}
                       handleOptionsSelection={handleOptionsSelection}
                     />
                   ))}

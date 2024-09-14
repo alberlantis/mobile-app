@@ -24,10 +24,9 @@ import {
   getOutline,
   type ButtonSize,
   type ButtonTheme,
-  type ButtonDimensions,
 } from "./tools";
 import s from "./Button.style";
-import { colors, normalizeSize } from "src/theme";
+import { colors, normalizeSize, type DimensionSize } from "src/theme";
 
 export interface IButtonProps {
   size?: ButtonSize;
@@ -65,7 +64,7 @@ const Button: React.FC<IButtonProps> = ({
   const isOutline = theme.includes("outline");
   const buttonColor = getColors(theme);
   const staticWidth = getSize(size);
-  const [dynamicSize, setDynamicSize] = useState<ButtonDimensions>({
+  const [dynamicSize, setDynamicSize] = useState<DimensionSize>({
     width: 0,
     height: 0,
   });

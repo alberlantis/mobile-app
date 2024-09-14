@@ -1,6 +1,6 @@
 import { DimensionValue, ColorValue, StyleProp, ViewStyle } from "react-native";
 
-import colors from "src/theme/colors";
+import { type DimensionSize, colors } from "src/theme";
 
 type NumberProp = string | number;
 export type ButtonSize = "fill" | "auto";
@@ -10,10 +10,6 @@ export type ButtonTheme =
   | "disabled"
   | "off"
   | "primary-outline";
-export type ButtonDimensions = {
-  width: number;
-  height: number;
-};
 
 export const getColors = (theme: ButtonTheme): ColorValue[] => {
   switch (theme) {
@@ -41,7 +37,7 @@ export const getSize = (size?: ButtonSize): DimensionValue => {
   }
 };
 
-export const getRadius = (dynamicSize: ButtonDimensions): NumberProp => {
+export const getRadius = (dynamicSize: DimensionSize): NumberProp => {
   const buttonRadiusRation = 200 / 300;
   return buttonRadiusRation * Math.min(dynamicSize.width, dynamicSize.height);
 };

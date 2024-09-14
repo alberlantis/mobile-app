@@ -21,6 +21,7 @@ jobs:
       - name: 🏎️ Check out code
         uses: actions/checkout@v4
         with:
+          submodules: true
           persist-credentials: false # We'll re-authenticate for the commit
 
       - name: 🏗 Set up Node.js
@@ -85,6 +86,7 @@ jobs:
         with:
           ref: ${{ needs.bump-version.outputs.sha }}
           fetch-depth: 0
+          submodules: true
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
@@ -114,6 +116,7 @@ jobs:
         with:
           ref: ${{ needs.bump-version.outputs.sha }}
           fetch-depth: 0
+          submodules: true
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
@@ -143,6 +146,7 @@ jobs:
           with:
             ref: ${{ needs.bump-version.outputs.sha }}
             fetch-depth: 0
+            submodules: true
 
         - name: 🏗 Setup Node
           uses: actions/setup-node@v3
@@ -168,6 +172,8 @@ jobs:
       steps:
         - name: 🏎️ Check out code
           uses: actions/checkout@v4
+          with:
+            submodules: true
 
         - name: 🏗 Setup Node
           uses: actions/setup-node@v3

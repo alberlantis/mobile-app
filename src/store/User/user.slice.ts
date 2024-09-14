@@ -6,6 +6,7 @@ import {
   shouldPostFollowUser,
   shouldPostUnfollowUser,
   shouldFetchAccount,
+  shouldPutUpdateAccount,
 } from "./user.thunks";
 
 interface UserState {
@@ -15,6 +16,7 @@ interface UserState {
   followUserLoading: boolean;
   unfollowUserLoading: boolean;
   getAccountLoading: boolean;
+  updateAccountLoading: boolean;
 }
 
 const initialState: UserState = {
@@ -24,6 +26,7 @@ const initialState: UserState = {
   followUserLoading: false,
   unfollowUserLoading: false,
   getAccountLoading: false,
+  updateAccountLoading: false,
 };
 
 const userSlice = createSlice({
@@ -72,6 +75,15 @@ const userSlice = createSlice({
     });
     builder.addCase(shouldFetchAccount.rejected, (state) => {
       state.getAccountLoading = false;
+    });
+    builder.addCase(shouldPutUpdateAccount.fulfilled, (state) => {
+      state.updateAccountLoading = false;
+    });
+    builder.addCase(shouldPutUpdateAccount.pending, (state) => {
+      state.updateAccountLoading = true;
+    });
+    builder.addCase(shouldPutUpdateAccount.rejected, (state) => {
+      state.updateAccountLoading = false;
     });
   },
 });

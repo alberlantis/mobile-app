@@ -1,3 +1,4 @@
+import { Account } from "@satlantis/api-client/sdk";
 import { createAppAsyncThunk } from "src/store/tools";
 
 export const shouldFetchAccount = createAppAsyncThunk(
@@ -64,5 +65,39 @@ export const shouldPostUnfollowUser = createAppAsyncThunk(
   ) => {
     const response = await UserClient.postUnfollowUser(followerNpub, pubKey);
     return response;
+  },
+);
+
+type UpdateAccount = {
+  newData: Partial<Account>;
+  avatarUri: string;
+  npub: string;
+};
+export const shouldPutUpdateAccount = createAppAsyncThunk(
+  "put/updateAccount",
+  async (
+    { newData, npub, avatarUri }: UpdateAccount,
+    {
+      extra: {
+        api: { UserClient, UploadClient },
+      },
+      getState,
+      dispatch,
+    },
+  ) => {
+    const account = getState().regular.user.account;
+    if (!account) {
+      throw new Error("Error trying to reach your account data");
+    }
+    const imageUrl = await UploadClient.uploadImage(avatarUri);
+    await UserClient.postUpdateAccount(
+      {
+        ...account,
+        ...newData,
+        picture: imageUrl,
+      },
+      npub,
+    );
+    await dispatch(shouldFetchAccount(npub));
   },
 );

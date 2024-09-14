@@ -1,5 +1,6 @@
 import satlantisApi from "./satlantisApi";
 import { getContactList, getPublicKey } from "./nostr";
+import { Account } from "@satlantis/api-client/sdk";
 
 export const getAccount = async (npub: string) => {
   const client = satlantisApi.getClient();
@@ -68,6 +69,18 @@ export const postUnfollowUser = async (
       response.cause,
     );
     throw new Error(`Error Unfollowing user. Reason: ${response.message}`);
+  }
+
+  return response;
+};
+
+export const postUpdateAccount = async (account: Account, npub: string) => {
+  const client = satlantisApi.getClient();
+  const response = await client.updateAccount({ account, npub });
+
+  if (response instanceof Error) {
+    console.error(`Update account Failed: ${response.message}`, response.cause);
+    throw new Error(`Error Updating account. Reason: ${response.message}`);
   }
 
   return response;

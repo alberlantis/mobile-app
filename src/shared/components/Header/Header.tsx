@@ -3,7 +3,7 @@ import { View, Text, ColorValue, LayoutChangeEvent } from "react-native";
 
 import s from "./Header.style";
 import BackButton from "../BackButton";
-import { colors } from "src/theme";
+import { colors, type DimensionSize } from "src/theme";
 
 interface IHeaderProps {
   hideBackButton?: boolean;
@@ -20,10 +20,7 @@ const Header: React.FC<IHeaderProps> = ({
   titleColor = colors.WHITE,
   backButtonColor,
 }) => {
-  const [containerSize, setContainerSize] = useState<{
-    width: number;
-    height: number;
-  }>({
+  const [containerSize, setContainerSize] = useState<DimensionSize>({
     height: 0,
     width: 0,
   });

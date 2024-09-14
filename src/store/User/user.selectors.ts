@@ -4,7 +4,7 @@ import type { RootState } from "../tools";
 import { splitArrayIntoEqualParts } from "src/utils";
 
 const selectUser = (store: RootState) => store.regular.user;
-const selectAccount = (store: RootState) => selectUser(store).account;
+export const selectAccount = (store: RootState) => selectUser(store).account;
 
 export const selectInterestsPool = (store: RootState) =>
   selectUser(store).interestsPool;
@@ -13,8 +13,7 @@ export const selectInterestsPoolLoading = (store: RootState) =>
 export const selectSanitizeInterestsPool = createSelector(
   selectInterestsPool,
   (pool) => {
-    const options = pool.map((item) => item.name);
-    return splitArrayIntoEqualParts(options, 3);
+    return splitArrayIntoEqualParts(pool, 3);
   },
 );
 export const selectUserHomeProfile = createSelector(
@@ -57,3 +56,5 @@ export const selectUserPublicKeys = createSelector(
     pubKey: account?.pubKey || "",
   }),
 );
+export const selectUpdateAccountLoading = (store: RootState) =>
+  selectUser(store).updateAccountLoading;

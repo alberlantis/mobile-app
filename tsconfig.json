@@ -12,11 +12,16 @@
       "@jsr/std__assert": ["node_modules/@jsr/std__assert/mod.ts"],
       "@jsr/std__internal": ["node_modules/@jsr/std__internal/mod.ts"],
       "@jsr/std__datetime": ["node_modules/@jsr/std__datetime/mod.ts"],
-      "@satlantis/api-client": ["node_modules/@satlantis/api-client/sdk.ts"],
+      "@satlantis/api-client": ["api-client/sdk.ts"],
       "@jsr/blowater__nostr-sdk": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"],
       "jsr:@blowater/nostr-sdk@^0.0.16": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"]
     },
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "allowImportingTsExtensions": true
   },
+  "exclude": [
+    "api-client",
+    "node_modules"
+  ],
   "extends": "expo/tsconfig.base"
 }

@@ -44,14 +44,18 @@ const ItemCard: React.FC<IItemCardProps> = ({ item, showFollowers }) => {
           followerNpub: item.npub,
           pubKey,
         }),
-      ).then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
+      )
+        .unwrap()
+        .then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
     } else {
       dispatch(
         UserState.thunks.shouldPostFollowUser({
           followerNpub: item.npub,
           pubKey,
         }),
-      ).then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
+      )
+        .unwrap()
+        .then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
     }
   };
 

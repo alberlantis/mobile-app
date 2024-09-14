@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, Alert } from "react-native";
 
 import {
   Title,
@@ -11,14 +11,47 @@ import {
 } from "src/shared/components";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import s from "./CompleteProfile.style";
-import UploadAvatar from "./UploadAvatar";
-import { useAppDispatch, AuthState } from "src/store";
+import UploadAvatar, { type SatlantisImage } from "./UploadAvatar";
+import {
+  useAppDispatch,
+  AuthState,
+  UserState,
+  useAppSelector,
+} from "src/store";
+import { SerializedError } from "@reduxjs/toolkit";
 
 const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
   route,
 }) => {
   const dispatch = useAppDispatch();
+  const {
+    params: { selectedInterests },
+  } = route;
+  const isLoading = useAppSelector(
+    UserState.selectors.selectUpdateAccountLoading,
+  );
+  const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const [bio, setBio] = useState("");
+  const [avatar, setAvatar] = useState<SatlantisImage>();
+
+  const handleSubmit = async () => {
+    if (isLoading) return;
+    dispatch(
+      UserState.thunks.shouldPutUpdateAccount({
+        npub,
+        newData: {
+          about: bio,
+          interests: selectedInterests,
+        },
+        avatarUri: avatar?.uri || "",
+      }),
+    )
+      .unwrap()
+      .then(() => dispatch(AuthState.actions.setAccountCreation(false)))
+      .catch((e: SerializedError) => {
+        Alert.alert("Something went wrong!", e.message);
+      });
+  };
 
   return (
     <DefaultBackground keyboard style={s.container}>
@@ -30,7 +63,7 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
         </Text>
       </View>
       <View style={s.uploadAvataContainer}>
-        <UploadAvatar />
+        <UploadAvatar avatar={avatar} setAvatar={setAvatar} />
       </View>
       <View style={s.inputsContainer}>
         <Input
@@ -49,9 +82,10 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
         <Button
           size="fill"
           text="Start Exploring"
-          theme="primary"
-          onPress={() => dispatch(AuthState.actions.setAccountCreation(false))}
+          theme={isLoading ? "disabled" : "primary"}
+          onPress={handleSubmit}
           marginBottom={s.button.marginBottom}
+          loading={isLoading}
         />
       </View>
       <View style={s.bottomContainer}>

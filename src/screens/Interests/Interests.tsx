@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
+import { Interest } from "@satlantis/api-client";
 
 import { useAppDispatch, AuthState } from "src/store";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
@@ -19,7 +20,7 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   navigation,
 }) => {
   const dispatch = useAppDispatch();
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<Interest[]>([]);
   const isButtonEnabled = selectedOptions.length > 2;
 
   return (

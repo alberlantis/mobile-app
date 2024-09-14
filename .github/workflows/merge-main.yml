@@ -19,6 +19,7 @@ jobs:
         with:
             node-version: 18.x
             cache: yarn
+            submodules: true
 
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
@@ -38,6 +39,8 @@ jobs:
     steps:
       - name: 🏎️ Check out code
         uses: actions/checkout@v4
+        with:
+            submodules: true
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
@@ -63,6 +66,8 @@ jobs:
       steps:
         - name: 🏎️ Check out code
           uses: actions/checkout@v4
+          with:
+            submodules: true
 
         - name: 🏗 Setup Node
           uses: actions/setup-node@v3
