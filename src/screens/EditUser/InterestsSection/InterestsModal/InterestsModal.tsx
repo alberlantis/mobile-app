@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, ScrollView } from "react-native";
 
+import { UserState, useAppSelector, useAppDispatch } from "src/store";
 import { BottomModal } from "src/shared/wrappers";
 import { CheckboxItem, Separator, Button } from "src/shared/components";
 import s from "./InterestsModal.style";
-
-const interestsPool = [
-  "Food",
-  "Books",
-  "Photography",
-  "Human rights",
-  "Gaming",
-  "Movies",
-  "Economy",
-  "Politics",
-];
 
 interface IInterestsModalProps {
   selectedInterests: string[];
@@ -28,8 +18,11 @@ const InterestsModal: React.FC<IInterestsModalProps> = ({
   setSelectedInterests,
   setIsVisible,
 }) => {
+  const dispatch = useAppDispatch();
   const [briefSelectedTags, setBriefSelectedTags] = useState(selectedInterests);
-
+  const interestsOptions = useAppSelector(
+    UserState.selectors.selectInterestsNameWithId,
+  );
   const handleCloseModal = () => {
     setBriefSelectedTags(selectedInterests);
   };
@@ -46,6 +39,10 @@ const InterestsModal: React.FC<IInterestsModalProps> = ({
     setIsVisible(false);
   };
 
+  useEffect(() => {
+    dispatch(UserState.thunks.shouldFetchAllInterests());
+  }, [dispatch]);
+
   return (
     <BottomModal
       title="Interests"
@@ -55,13 +52,15 @@ const InterestsModal: React.FC<IInterestsModalProps> = ({
       onClose={handleCloseModal}
     >
       <ScrollView>
-        {interestsPool.map((tag, index) => (
-          <View key={`edit-user-interest-tags-modal-selection-${index}`}>
+        {interestsOptions.map((tag, index) => (
+          <View
+            key={`edit-user-interest-tags-modal-selection-${tag.id}-${index}`}
+          >
             {index !== 0 && <Separator />}
             <View style={s.modalCheckboxItemContainer}>
               <CheckboxItem
-                value={tag}
-                isSelected={selectedInterests.includes(tag)}
+                value={tag.name}
+                isSelected={selectedInterests.includes(tag.name)}
                 setValue={handleInterestsSelection}
               />
             </View>

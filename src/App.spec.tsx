@@ -18,6 +18,9 @@ jest.mock("./shared/wrappers", () => ({
   AppInitializer: ({ children }: { children: React.ReactNode }) => (
     <>{children}</>
   ),
+  SatlantisClient: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
 }));
 
 jest.mock("./store", () => ({

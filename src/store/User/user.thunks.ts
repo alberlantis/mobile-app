@@ -68,18 +68,45 @@ export const shouldPostUnfollowUser = createAppAsyncThunk(
   },
 );
 
-type UpdateAccount = {
+interface CompleteProfile extends UpdateAccount {
+  uri: string;
+}
+export const shouldUpdateCompleteProfile = createAppAsyncThunk(
+  "update/completeProfile",
+  async (
+    { uri, ...account }: CompleteProfile,
+    {
+      dispatch,
+      extra: {
+        api: { UploadClient },
+      },
+    },
+  ) => {
+    const imageUrl = await UploadClient.uploadImage(uri);
+    await dispatch(
+      shouldPutUpdateAccount({
+        newData: {
+          ...account.newData,
+          picture: imageUrl,
+        },
+        npub: account.npub,
+      }),
+    );
+  },
+);
+
+interface UpdateAccount {
   newData: Partial<Account>;
-  avatarUri: string;
   npub: string;
-};
+}
+
 export const shouldPutUpdateAccount = createAppAsyncThunk(
   "put/updateAccount",
   async (
-    { newData, npub, avatarUri }: UpdateAccount,
+    { newData, npub }: UpdateAccount,
     {
       extra: {
-        api: { UserClient, UploadClient },
+        api: { UserClient },
       },
       getState,
       dispatch,
@@ -89,15 +116,32 @@ export const shouldPutUpdateAccount = createAppAsyncThunk(
     if (!account) {
       throw new Error("Error trying to reach your account data");
     }
-    const imageUrl = await UploadClient.uploadImage(avatarUri);
     await UserClient.postUpdateAccount(
       {
         ...account,
         ...newData,
-        picture: imageUrl,
       },
       npub,
     );
     await dispatch(shouldFetchAccount(npub));
+  },
+);
+
+type FollowPubKeys = {
+  pubKey: string;
+  pubkeys: string[];
+};
+export const shouldPostFollowPubKeys = createAppAsyncThunk(
+  "post/followPubKeys",
+  async (
+    { pubKey, pubkeys }: FollowPubKeys,
+    {
+      extra: {
+        api: { UserClient },
+      },
+    },
+  ) => {
+    const response = await UserClient.postFollowPubKeys(pubKey, pubkeys);
+    return response;
   },
 );

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
-import { Interest } from "@satlantis/api-client";
 
-import { useAppDispatch, AuthState } from "src/store";
+import {
+  useAppDispatch,
+  AuthState,
+  useAppSelector,
+  UserState,
+} from "src/store";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import {
   DefaultBackground,
@@ -14,18 +18,44 @@ import {
 import s from "./Interests.style";
 import { SCREENS } from "src/navigation/routes";
 import OptionsList from "./OptionsList";
+import type { InterestsOption } from "./OptionItem";
 
 const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   route,
   navigation,
 }) => {
   const dispatch = useAppDispatch();
-  const [selectedOptions, setSelectedOptions] = useState<Interest[]>([]);
-  const isButtonEnabled = selectedOptions.length > 2;
+  const [selectedOptions, setSelectedOptions] = useState<InterestsOption[]>([]);
+  const isLoading = useAppSelector(
+    UserState.selectors.selectFollowPubKeysLoading,
+  );
+  const isButtonEnabled = !isLoading && selectedOptions.length > 2;
+  const allInterests = useAppSelector(UserState.selectors.selectInterestsMap);
+  const { pubKey } = useAppSelector(UserState.selectors.selectUserPublicKeys);
+  const handleSubmitButton = () => {
+    if (!isButtonEnabled) return;
+    const pubkeysToFollow = selectedOptions.reduce<string[]>((acc, option) => {
+      const pubkeys = allInterests.get(option.name);
+      if (!pubkeys) return acc;
+      return [...acc, ...pubkeys];
+    }, []);
+    dispatch(
+      UserState.thunks.shouldPostFollowPubKeys({
+        pubKey,
+        pubkeys: pubkeysToFollow,
+      }),
+    )
+      .unwrap()
+      .then(() => {
+        navigation.navigate(SCREENS.COMPLETE_PROFILE, {
+          selectedInterests: selectedOptions.map((item) => item.name),
+        });
+      });
+  };
 
   return (
     <DefaultBackground keyboard blurPos="top" style={s.container}>
-      <Header onPress={() => dispatch(AuthState.actions.shouldLogout())} />
+      <Header onPress={() => dispatch(AuthState.thunks.shouldLogout())} />
       <View style={s.headerContainer}>
         <Title title="Interests" />
         <Text style={s.textDescription}>
@@ -45,12 +75,8 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
           text="Submit"
           theme={isButtonEnabled ? "primary" : "disabled"}
           marginBottom={s.buttomMargin.marginBottom}
-          onPress={() =>
-            isButtonEnabled &&
-            navigation.navigate(SCREENS.COMPLETE_PROFILE, {
-              selectedInterests: selectedOptions,
-            })
-          }
+          onPress={handleSubmitButton}
+          loading={isLoading}
         />
         <ScreenProgressIndicator active={2} screenName={route.name} />
       </View>

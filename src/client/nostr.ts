@@ -26,10 +26,8 @@ function getRelayConnection() {
   return relay;
 }
 
-export async function getContactList(npub: string) {
+export async function getContactList(pubkey: PublicKey) {
   const relay = getRelayConnection();
-  const pubkey = getPublicKey(npub, "string");
-
   const event = await relay.getReplaceableEvent(pubkey, NostrKind.CONTACTS);
   await relay.close();
 
@@ -47,7 +45,7 @@ export async function getContactList(npub: string) {
 
 type PublicKeyType = "string" | "bench32" | "hex";
 export function getPublicKey(key: string, from: PublicKeyType) {
-  let pubKey: Error | PublicKey | "";
+  let pubKey: Error | PublicKey | undefined;
   switch (from) {
     case "hex": {
       pubKey = PublicKey.FromHex(key);
@@ -62,7 +60,7 @@ export function getPublicKey(key: string, from: PublicKeyType) {
       break;
     }
     default: {
-      pubKey = "";
+      pubKey = undefined;
     }
   }
   if (!pubKey) {

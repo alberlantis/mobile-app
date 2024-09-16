@@ -7,6 +7,8 @@ import {
   shouldPostUnfollowUser,
   shouldFetchAccount,
   shouldPutUpdateAccount,
+  shouldPostFollowPubKeys,
+  shouldUpdateCompleteProfile,
 } from "./user.thunks";
 
 interface UserState {
@@ -17,6 +19,8 @@ interface UserState {
   unfollowUserLoading: boolean;
   getAccountLoading: boolean;
   updateAccountLoading: boolean;
+  followPubKeysLoading: boolean;
+  updateCompleteProfileLoading: boolean;
 }
 
 const initialState: UserState = {
@@ -27,12 +31,17 @@ const initialState: UserState = {
   unfollowUserLoading: false,
   getAccountLoading: false,
   updateAccountLoading: false,
+  followPubKeysLoading: false,
+  updateCompleteProfileLoading: false,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    logout: (state) => {
+      state.account = undefined;
+    },
     shouldSetAccount: (state, action: PayloadAction<Account>) => {
       state.account = action.payload;
     },
@@ -84,6 +93,24 @@ const userSlice = createSlice({
     });
     builder.addCase(shouldPutUpdateAccount.rejected, (state) => {
       state.updateAccountLoading = false;
+    });
+    builder.addCase(shouldPostFollowPubKeys.fulfilled, (state) => {
+      state.followPubKeysLoading = false;
+    });
+    builder.addCase(shouldPostFollowPubKeys.pending, (state) => {
+      state.followPubKeysLoading = true;
+    });
+    builder.addCase(shouldPostFollowPubKeys.rejected, (state) => {
+      state.followPubKeysLoading = false;
+    });
+    builder.addCase(shouldUpdateCompleteProfile.fulfilled, (state) => {
+      state.updateCompleteProfileLoading = false;
+    });
+    builder.addCase(shouldUpdateCompleteProfile.pending, (state) => {
+      state.updateCompleteProfileLoading = true;
+    });
+    builder.addCase(shouldUpdateCompleteProfile.rejected, (state) => {
+      state.updateCompleteProfileLoading = false;
     });
   },
 });

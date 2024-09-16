@@ -1,16 +1,22 @@
 import React from "react";
 import { Text, View, Pressable } from "react-native";
-import { Interest } from "@satlantis/api-client";
 
 import { Icon } from "src/shared/components";
 import { colors, fonts } from "src/theme";
 import s, { getItemTextStyle, getButtonContainer } from "./OptionItem.style";
 
+export type InterestsOption = {
+  name: string;
+  id: number;
+};
 interface IOptionItemProps {
-  option: Interest;
+  option: InterestsOption;
   isOptionSelected: boolean;
   isColumnLast: boolean;
-  handleOptionsSelection(option: Interest, isOptionSelected: boolean): void;
+  handleOptionsSelection(
+    option: InterestsOption,
+    isOptionSelected: boolean,
+  ): void;
 }
 
 const OptionItem: React.FC<IOptionItemProps> = ({

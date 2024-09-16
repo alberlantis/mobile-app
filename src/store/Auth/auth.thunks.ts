@@ -13,16 +13,17 @@ export const shouldLoginAccount = createAppAsyncThunk(
     {
       extra: {
         api: { AuthClient },
-        actions: { user },
+        actions: { user, nostr },
       },
       dispatch,
     },
   ) => {
-    const account = await AuthClient.login(
+    const response = await AuthClient.login(
       signUpData.username,
       signUpData.password,
     );
-    dispatch(user.shouldSetAccount(account));
+    dispatch(user.shouldSetAccount(response.account));
+    dispatch(nostr.shouldUpdateToken(response.token));
   },
 );
 
@@ -51,13 +52,14 @@ export const shouldLoginSigner = createAppAsyncThunk(
     {
       extra: {
         api: { AuthClient },
-        actions: { user },
+        actions: { user, nostr },
       },
       dispatch,
     },
   ) => {
-    const account = await AuthClient.loginNostr(nsec);
-    dispatch(user.shouldSetAccount(account));
+    const response = await AuthClient.loginNostr(nsec);
+    dispatch(user.shouldSetAccount(response.account));
+    dispatch(nostr.shouldUpdateToken(response.token));
   },
 );
 
@@ -90,5 +92,24 @@ export const shouldPostResetPassword = createAppAsyncThunk(
     const isResetPasswordSuccessfull =
       await AuthClient.postResetPassword(password);
     return isResetPasswordSuccessfull;
+  },
+);
+
+export const shouldLogout = createAppAsyncThunk(
+  "post/logout",
+  (
+    ...[
+      ,
+      {
+        dispatch,
+        extra: {
+          actions: { auth, nostr, user },
+        },
+      },
+    ]
+  ) => {
+    dispatch(auth.logout());
+    dispatch(nostr.logout());
+    dispatch(user.logout());
   },
 );

@@ -38,9 +38,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "husky",
+    "clean:submodules": "git submodule update --init --recursive && cd api-client",
     "clean:modules": "rm -rf node_modules && yarn --clear-cache",
     "clean:watchman": "watchman watch-del-all",
-    "clean:install": "yarn clean:modules && yarn clean:watchman",
+    "clean:install": "yarn clean:modules && yarn clean:submodules && yarn clean:watchman",
     "bump:package:patch": "yarn version --no-git-tag-version --patch",
     "bump:package:minor": "yarn version --no-git-tag-version --minor",
     "bump:package:major": "yarn version --no-git-tag-version --major",
@@ -104,6 +105,7 @@
     "react-redux": "^9.1.2",
     "redux-persist": "^6.0.0",
     "redux-persist-expo-securestore": "^2.0.0",
-    "text-encoding-polyfill": "^0.6.7"
+    "text-encoding-polyfill": "^0.6.7",
+    "core-js": "^3.38.1"
   }
 }

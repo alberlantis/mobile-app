@@ -40,7 +40,7 @@ const securePersistConfig: PersistConfig<SecureReducer> = {
   stateReconciler: autoMergeLevel2,
   transforms: [
     createWhitelistTransform({
-      nostr: ["privateKey"],
+      nostr: ["privateKey", "token"],
     }),
   ],
 };
@@ -58,8 +58,12 @@ const regularStorage = {
 const asyncPersistConfig: PersistConfig<RegularReducer> = {
   storage: regularStorage,
   key: "async",
-  whitelist: [],
   stateReconciler: autoMergeLevel2,
+  transforms: [
+    createWhitelistTransform({
+      auth: ["isLogged"],
+    }),
+  ],
 };
 
 const regularReducers = combineReducers({

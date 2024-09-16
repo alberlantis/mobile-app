@@ -17,18 +17,15 @@ const InterestsSection: React.FC<IInterestsSectionProps> = ({
   setSelectedInterests,
 }) => {
   const [showModal, setShowModal] = useState(false);
-
   return (
     <>
       <BaseSection sectionTitle="Interests" customContainer={s.container}>
         <View style={s.innerContainer}>
           <View style={s.interestsTagPanel}>
             {selectedInterests.map((tag, index) => (
-              <BasePanelText
-                key={`edit-user-interest-tags-${index}`}
-                text={tag}
-                customContainer={s.tag}
-              />
+              <View key={`edit-user-interest-tags-${index}`}>
+                <BasePanelText text={tag} customContainer={s.tag} />
+              </View>
             ))}
           </View>
           <Pressable style={s.editButton} onPress={() => setShowModal(true)}>

@@ -12,8 +12,7 @@ export default StyleSheet.create({
   },
   innerContainer: {
     flexDirection: "row",
-    paddingBottom: normalizeSize(8),
-    paddingTop: normalizeSize(16),
+    paddingVertical: normalizeSize(16),
     paddingHorizontal: normalizeSize(16),
     borderRadius: normalizeSize(16),
     backgroundColor: colors.BLACK_2,
@@ -28,8 +27,8 @@ export default StyleSheet.create({
     backgroundColor: colors.GRAY_BOLD,
     borderRadius: normalizeSize(16),
     paddingVertical: normalizeSize(2.5),
-    marginBottom: normalizeSize(8),
     marginRight: normalizeSize(8),
+    marginTop: normalizeSize(8),
   },
   editButton: { width: "10%", alignItems: "flex-end" },
 });

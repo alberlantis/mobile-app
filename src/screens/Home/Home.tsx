@@ -1,8 +1,19 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, Button } from "react-native";
+
+import { useAppDispatch, AuthState } from "src/store";
 
 const Home = () => {
-  return <Text>Home Screen</Text>;
+  const dispatch = useAppDispatch();
+  return (
+    <>
+      <Text>Home Screen</Text>
+      <Button
+        title="Logout"
+        onPress={() => dispatch(AuthState.thunks.shouldLogout())}
+      />
+    </>
+  );
 };
 
 export default Home;

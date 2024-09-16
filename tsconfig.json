@@ -5,6 +5,7 @@
     "paths": {     
       "@src": ["./src/*"],
       "@assets": ["./assets/*"],
+      "@polyfills": ["./polyfills"],
       "@blowater/nostr-sdk": ["node_modules/@blowater/nostr-sdk/nostr.ts"],
       "@jsr/std__encoding": ["node_modules/@jsr/std__encoding/mod.ts"],
       "@jsr/blowater__collections": ["node_modules/@jsr/blowater__collections/mod.ts"],

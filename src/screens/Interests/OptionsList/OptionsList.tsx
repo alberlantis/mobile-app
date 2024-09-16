@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Interest } from "@satlantis/api-client";
 import {
   View,
   ScrollView,
@@ -9,11 +8,11 @@ import {
 
 import { useAppDispatch, useAppSelector, UserState } from "src/store";
 import s, { getRowContainer } from "./OptionsList.style";
-import OptionItem from "../OptionItem";
+import OptionItem, { InterestsOption } from "../OptionItem";
 
 interface IOptionsListProps {
-  selectedOptions: Interest[];
-  setSelectedOptions: React.Dispatch<React.SetStateAction<Interest[]>>;
+  selectedOptions: InterestsOption[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<InterestsOption[]>>;
 }
 
 const OptionsList: React.FC<IOptionsListProps> = ({
@@ -30,7 +29,10 @@ const OptionsList: React.FC<IOptionsListProps> = ({
     UserState.selectors.selectSanitizeInterestsPool,
   );
 
-  const handleOptionsSelection = (option: Interest, isSelected: boolean) => {
+  const handleOptionsSelection = (
+    option: InterestsOption,
+    isSelected: boolean,
+  ) => {
     setSelectedOptions((prevState) => {
       if (isSelected) {
         return prevState.filter(

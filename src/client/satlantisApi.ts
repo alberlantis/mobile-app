@@ -10,18 +10,18 @@ export class SatlantisClient {
   private nostrSigner: Signer | undefined;
   private client: Client | undefined;
 
-  private getNostrSigner = async () => {
+  private async getNostrSigner() {
     if (!this.nostrSigner) {
       console.error("Getting nostr signer failed: It doesn't exist");
       throw new Error("Error getting nostr signer. Reason: Doesn't exist");
     }
     return this.nostrSigner;
-  };
+  }
 
-  private initClient(baseUrl: string): void {
+  public initClient(): void {
     if (!this.client) {
       const newClient = Client.New({
-        baseURL: new URL(baseUrl),
+        baseURL: new URL(EXPO_PUBLIC_CLIENT_ENDPOINT || ""),
         getJwt: this.getJwt.bind(this),
         getNostrSigner: this.getNostrSigner.bind(this),
       });
@@ -40,10 +40,9 @@ export class SatlantisClient {
     }
   }
 
-  public static getInstance(baseUrl: string): SatlantisClient {
+  public static getInstance(): SatlantisClient {
     if (!SatlantisClient.instance) {
       SatlantisClient.instance = new SatlantisClient();
-      SatlantisClient.instance.initClient(baseUrl);
     }
     return SatlantisClient.instance;
   }
@@ -78,7 +77,6 @@ export class SatlantisClient {
   }
 }
 
-const satlantisApi = SatlantisClient.getInstance(
-  EXPO_PUBLIC_CLIENT_ENDPOINT || "",
-);
-export default satlantisApi;
+const satlantisClient = SatlantisClient.getInstance();
+
+export default satlantisClient;

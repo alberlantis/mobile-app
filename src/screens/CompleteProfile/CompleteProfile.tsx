@@ -28,7 +28,7 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
     params: { selectedInterests },
   } = route;
   const isLoading = useAppSelector(
-    UserState.selectors.selectUpdateAccountLoading,
+    UserState.selectors.selectUpdateCompleteProfileLoading,
   );
   const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const [bio, setBio] = useState("");
@@ -37,13 +37,13 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
   const handleSubmit = async () => {
     if (isLoading) return;
     dispatch(
-      UserState.thunks.shouldPutUpdateAccount({
+      UserState.thunks.shouldUpdateCompleteProfile({
         npub,
         newData: {
           about: bio,
           interests: selectedInterests,
         },
-        avatarUri: avatar?.uri || "",
+        uri: avatar?.uri || "",
       }),
     )
       .unwrap()
