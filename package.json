@@ -1,6 +1,6 @@
 {
   "name": "satlantis",
-  "version": "0.15.2",
+  "version": "0.16.0",
   "main": "index.ts",
   "license": "UNLICENSED",
   "repository": "git@github.com:satlantis-dev/mobile-app.git",
@@ -86,6 +86,7 @@
     "@react-navigation/native-stack": "^6.11.0",
     "@reduxjs/toolkit": "^2.2.7",
     "@satlantis/api-client": "file:./api-client",
+    "core-js": "^3.38.1",
     "expo": "~51.0.31",
     "expo-application": "~5.9.1",
     "expo-asset": "~10.0.10",
@@ -105,7 +106,6 @@
     "react-redux": "^9.1.2",
     "redux-persist": "^6.0.0",
     "redux-persist-expo-securestore": "^2.0.0",
-    "text-encoding-polyfill": "^0.6.7",
-    "core-js": "^3.38.1"
+    "text-encoding-polyfill": "^0.6.7"
   }
 }
