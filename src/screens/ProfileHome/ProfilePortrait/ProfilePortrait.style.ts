@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { colors, normalizeSize } from "src/theme";
+import { normalizeSize } from "src/theme";
 
 export default StyleSheet.create({
   topHeaderContainer: {
@@ -12,12 +12,6 @@ export default StyleSheet.create({
     paddingLeft: normalizeSize(17),
   },
   shareButton: {
-    backgroundColor: colors.BLACK_MEDIUM,
-    borderRadius: normalizeSize(38) / 2,
-    height: normalizeSize(38),
-    width: normalizeSize(38),
-    justifyContent: "center",
-    alignItems: "center",
     right: 0,
     position: "absolute",
     marginRight: normalizeSize(17),

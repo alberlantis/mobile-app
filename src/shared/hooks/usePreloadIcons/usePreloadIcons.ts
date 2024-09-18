@@ -9,6 +9,8 @@ import {
   Fontisto,
   Octicons,
   SimpleLineIcons,
+  MaterialIcons,
+  FontAwesome6,
 } from "@expo/vector-icons";
 
 const usePreloadIcons = () => {
@@ -24,6 +26,8 @@ const usePreloadIcons = () => {
       ...Fontisto.font,
       ...Octicons.font,
       ...SimpleLineIcons.font,
+      ...MaterialIcons.font,
+      ...FontAwesome6.font,
     });
   };
 

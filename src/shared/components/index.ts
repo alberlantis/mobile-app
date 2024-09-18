@@ -17,3 +17,6 @@ export { default as Avatar } from "./Avatar";
 export { default as BasePanelText } from "./BasePanelText";
 export { default as CheckboxItem } from "./CheckboxItem";
 export { default as RoundImage } from "./RoundImage";
+export { default as ShareButton } from "./ShareButton";
+export { default as ActionMenu } from "./ActionMenu";
+export { default as ExpandableText } from "./ExpandableText";

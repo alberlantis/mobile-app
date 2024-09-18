@@ -17,4 +17,5 @@ export const SCREENS = {
   EDIT_USER: "EditUser",
   LOCATION: "Location",
   FOLLOWERS_AND_FOLLOWING: "FollowersAndFollowing",
+  VIEW_POST: "ViewPost",
 } as const;

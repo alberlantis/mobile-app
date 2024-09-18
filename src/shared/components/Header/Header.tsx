@@ -3,6 +3,7 @@ import { View, Text, ColorValue, LayoutChangeEvent } from "react-native";
 
 import s from "./Header.style";
 import BackButton from "../BackButton";
+import ShareButton from "../ShareButton";
 import { colors, type DimensionSize } from "src/theme";
 
 interface IHeaderProps {
@@ -11,6 +12,8 @@ interface IHeaderProps {
   onPress?(): void;
   titleColor?: ColorValue;
   backButtonColor?: ColorValue;
+  shareButtonColor?: ColorValue;
+  showSharedButton?: boolean;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -19,6 +22,8 @@ const Header: React.FC<IHeaderProps> = ({
   title,
   titleColor = colors.WHITE,
   backButtonColor,
+  showSharedButton = false,
+  shareButtonColor,
 }) => {
   const [containerSize, setContainerSize] = useState<DimensionSize>({
     height: 0,
@@ -43,6 +48,11 @@ const Header: React.FC<IHeaderProps> = ({
         {!!title && (
           <Text style={{ ...s.title, color: titleColor }}>{title}</Text>
         )}
+      </View>
+      <View
+        style={{ ...s.headerRightSection, width: containerSize.width * 0.2 }}
+      >
+        {showSharedButton && <ShareButton color={shareButtonColor} />}
       </View>
     </View>
   );

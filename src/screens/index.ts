@@ -15,3 +15,4 @@ export { default as ResetPassword } from "./ResetPassword";
 export { default as EditUser } from "./EditUser";
 export { default as Location } from "./Location";
 export { default as FollowersAndFollowing } from "./FollowersAndFollowing";
+export { default as ViewPost } from "./ViewPost";

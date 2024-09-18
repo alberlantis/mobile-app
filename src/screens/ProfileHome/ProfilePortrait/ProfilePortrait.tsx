@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
-import { View, Pressable } from "react-native";
+import { View } from "react-native";
 
 import { ProfileState, useAppSelector } from "src/store";
-import { Icon, BackButton, ImagePortrait } from "src/shared/components";
-import { colors, fonts } from "src/theme";
+import { BackButton, ImagePortrait, ShareButton } from "src/shared/components";
+import { colors } from "src/theme";
 import s from "./ProfilePortrait.style";
 
 const ProfilePortrait = () => {
@@ -15,14 +15,9 @@ const ProfilePortrait = () => {
     <Fragment>
       <View style={s.topHeaderContainer}>
         {isOwnProfile && <BackButton color={colors.BLACK_MEDIUM} />}
-        <Pressable style={s.shareButton}>
-          <Icon
-            type="Entypo"
-            size={fonts[20]}
-            name="share-alternative"
-            color={colors.WHITE}
-          />
-        </Pressable>
+        <View style={s.shareButton}>
+          <ShareButton />
+        </View>
       </View>
       <ImagePortrait />
     </Fragment>
