@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { TextInput, Text, View } from "react-native";
+import {
+  TextInput,
+  Text,
+  View,
+  ColorValue,
+  LayoutChangeEvent,
+} from "react-native";
 
-import colors from "src/theme/colors";
+import { colors, normalizeSize } from "src/theme";
 import s, { getInputStyle } from "./Input.style";
 
 /**
@@ -9,7 +15,12 @@ import s, { getInputStyle } from "./Input.style";
  *
  * Unit-Test
  */
-type InputType = "username" | "password" | "emailAddress" | "none";
+type InputType =
+  | "username"
+  | "password"
+  | "emailAddress"
+  | "none"
+  | "text-area";
 
 interface IInputProps {
   label?: string;
@@ -20,8 +31,12 @@ interface IInputProps {
   marginTop?: number;
   type?: InputType;
   icon?: React.ComponentElement<any, any>;
-  multiline?: number;
+  multiline?: boolean;
+  numOfLines?: number;
   customHeight?: number;
+  backColor?: ColorValue;
+  paddingVertical?: number;
+  paddingHorizontal?: number;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -33,19 +48,47 @@ const Input: React.FC<IInputProps> = ({
   marginTop,
   type,
   icon,
-  multiline,
+  multiline = false,
   customHeight,
+  paddingVertical = 16,
+  paddingHorizontal = 16,
+  numOfLines = 1,
+  backColor = colors.BLACK_INPUT,
 }) => {
-  const isTextArea = !!multiline;
+  const isTextArea = type === "text-area";
   const hasIcon = !!icon;
   const [selection, setSelection] = useState({ start: 0, end: 0 });
+  const [iconWidth, setIconWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const customWidth =
+    containerWidth - iconWidth - normalizeSize(paddingHorizontal) * 2;
+  const handleIconLayout = (e: LayoutChangeEvent) => {
+    if (!!iconWidth) return;
+    setIconWidth(e.nativeEvent.layout.width);
+  };
+  const handleContainerLayout = (e: LayoutChangeEvent) => {
+    if (!!containerWidth) return;
+    setContainerWidth(e.nativeEvent.layout.width);
+  };
 
   return (
-    <View style={{ ...s.container, marginBottom, marginTop }}>
+    <View
+      onLayout={handleContainerLayout}
+      style={{ ...s.container, marginBottom, marginTop }}
+    >
       {!!label && <Text style={s.label}>{label}</Text>}
-      <View style={s.inputContainer}>
+      <View
+        style={[
+          s.inputContainer,
+          {
+            backgroundColor: backColor,
+            paddingVertical: normalizeSize(paddingVertical),
+            paddingHorizontal: normalizeSize(paddingHorizontal),
+          },
+        ]}
+      >
         <TextInput
-          style={getInputStyle(hasIcon, isTextArea, customHeight)}
+          style={getInputStyle(hasIcon, customHeight, multiline, customWidth)}
           onSelectionChange={({ nativeEvent: { selection } }) =>
             setSelection({ start: selection.start, end: selection.start })
           }
@@ -59,13 +102,16 @@ const Input: React.FC<IInputProps> = ({
           underlineColorAndroid={colors.TRANSPARENT}
           value={value}
           onChangeText={onChangeText}
-          textContentType={type}
           secureTextEntry={type === "password"}
-          numberOfLines={multiline}
-          multiline={isTextArea}
+          numberOfLines={numOfLines}
+          multiline={multiline}
           textAlignVertical={isTextArea ? "top" : "center"}
         />
-        {hasIcon && <View style={s.iconInput}>{icon}</View>}
+        {hasIcon && (
+          <View onLayout={handleIconLayout} style={s.iconInput}>
+            {icon}
+          </View>
+        )}
       </View>
     </View>
   );

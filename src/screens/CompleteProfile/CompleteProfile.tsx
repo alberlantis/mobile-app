@@ -72,7 +72,9 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
           value={bio}
           onChangeText={setBio}
           customHeight={s.input.height}
-          multiline={8}
+          type="text-area"
+          multiline
+          numOfLines={8}
         />
       </View>
       <View style={s.buttonContainer}>

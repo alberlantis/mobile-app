@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { View } from "react-native";
 
 import { ProfileState, useAppSelector } from "src/store";
-import { BackButton, ImagePortrait, ShareButton } from "src/shared/components";
 import { colors } from "src/theme";
+import { ImagePortrait, Header } from "src/shared/components";
 import s from "./ProfilePortrait.style";
 
 const ProfilePortrait = () => {
@@ -14,10 +14,12 @@ const ProfilePortrait = () => {
   return (
     <Fragment>
       <View style={s.topHeaderContainer}>
-        {isOwnProfile && <BackButton color={colors.BLACK_MEDIUM} />}
-        <View style={s.shareButton}>
-          <ShareButton />
-        </View>
+        <Header
+          hideBackButton={!isOwnProfile}
+          backButtonColor={colors.BLACK_MEDIUM}
+          showSharedButton
+          shareValue="https://profile.info.com"
+        />
       </View>
       <ImagePortrait />
     </Fragment>

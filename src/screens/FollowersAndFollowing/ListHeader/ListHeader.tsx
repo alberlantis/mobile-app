@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
+import { useAppSelector, UserState } from "src/store";
 import { Header, Button } from "src/shared/components";
 import { colors } from "src/theme";
 import s from "./ListHeader.style";
@@ -17,10 +18,13 @@ const ListHeader: React.FC<IListHeaderProps> = ({
   totalFollowings,
   setShowFollowers,
 }) => {
+  const { displayName } = useAppSelector(
+    UserState.selectors.selectUserHomeProfile,
+  );
   return (
     <View>
       <View style={s.headerContainer}>
-        <Header title="Turbo Normie" backButtonColor={colors.GRAY_BOLD} />
+        <Header title={displayName} backButtonColor={colors.GRAY_BOLD} />
       </View>
       <View style={s.buttonsContainer}>
         <View style={s.followersButtonContainer}>

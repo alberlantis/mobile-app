@@ -14,6 +14,7 @@ interface IHeaderProps {
   backButtonColor?: ColorValue;
   shareButtonColor?: ColorValue;
   showSharedButton?: boolean;
+  shareValue?: string;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -24,6 +25,7 @@ const Header: React.FC<IHeaderProps> = ({
   backButtonColor,
   showSharedButton = false,
   shareButtonColor,
+  shareValue = "",
 }) => {
   const [containerSize, setContainerSize] = useState<DimensionSize>({
     height: 0,
@@ -52,7 +54,9 @@ const Header: React.FC<IHeaderProps> = ({
       <View
         style={{ ...s.headerRightSection, width: containerSize.width * 0.2 }}
       >
-        {showSharedButton && <ShareButton color={shareButtonColor} />}
+        {showSharedButton && (
+          <ShareButton color={shareButtonColor} share={shareValue} />
+        )}
       </View>
     </View>
   );

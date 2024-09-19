@@ -12,7 +12,6 @@ export default StyleSheet.create({
   headerCenterSection: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "blue",
   },
   headerRightSection: {
     alignItems: "flex-end",

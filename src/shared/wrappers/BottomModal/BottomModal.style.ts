@@ -15,5 +15,6 @@ export default StyleSheet.create({
     borderTopLeftRadius: normalizeSize(16),
     borderTopRightRadius: normalizeSize(16),
     maxHeight: screenHeight * 0.75,
+    flex: 1,
   },
 });

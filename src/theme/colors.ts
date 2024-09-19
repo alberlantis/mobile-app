@@ -1,5 +1,6 @@
 export default {
   BLACK: "#000",
+  BLACK_DARK: "#171717",
   BLACK_INPUT: "#28292A",
   BLACK_MEDIUM: "rgba(0, 0, 0, 0.5)",
   BLACK_LIGHT: "#1C1C1C",
@@ -9,6 +10,7 @@ export default {
   BLACK_4: "#252525",
   BLACK_4_OPACITY_A: "rgba(46, 46, 46, 0.8)",
   BLACK_5: "#3D3D3D",
+  BLACK_6: "#2E2E2E",
   WHITE: "#FFF",
   WHITE_BOLD: "rgba(255, 255, 255, 0.66)",
   WHITE_LIGHT: "rgba(255, 255, 255, 0.33)",
@@ -22,6 +24,7 @@ export default {
   ORANGE_PRIMARY_DARK: "#FF7849",
   ORANGE_PRIMARY: "#FF7D47",
   ORANGE_PRIMARY_LIGHT: "#FF8D3B",
+  ORANGE_SEND_BUTTON: "#FF832A",
   RED_PRIMARY: "#FF3B3B",
   BLUE_PRIMARY: "#5466D8",
   BLUE_SECONDARY: "#307DF0",

@@ -6,19 +6,24 @@ const borderRadius = normalizeSize(16);
 
 export const getInputStyle = (
   hasIcon: boolean,
-  isTextArea: boolean,
   customHeight: number | undefined,
-): StyleProp<TextStyle> => ({
-  width: hasIcon ? "90%" : "100%",
-  height: customHeight || "100%",
-  borderTopLeftRadius: borderRadius,
-  borderBottomLeftRadius: borderRadius,
-  borderTopRightRadius: hasIcon ? 0 : borderRadius,
-  borderBottomRightRadius: hasIcon ? 0 : borderRadius,
-  fontSize: fonts[16],
-  fontWeight: "regular",
-  color: colors.WHITE,
-});
+  multiline: boolean,
+  customWidth: number,
+): StyleProp<TextStyle> => {
+  console.log("customHeight", customHeight);
+  return {
+    width: hasIcon ? customWidth : "100%",
+    maxHeight: customHeight || "100%",
+    borderTopLeftRadius: borderRadius,
+    borderBottomLeftRadius: borderRadius,
+    borderTopRightRadius: hasIcon ? 0 : borderRadius,
+    borderBottomRightRadius: hasIcon ? 0 : borderRadius,
+    fontSize: fonts[16],
+    fontWeight: "regular",
+    color: colors.WHITE,
+    paddingVertical: multiline ? 8 : 0,
+  };
+};
 export default StyleSheet.create({
   container: {
     width: "100%",
@@ -31,15 +36,13 @@ export default StyleSheet.create({
     fontWeight: "regular",
   },
   iconInput: {
-    width: "10%",
     alignItems: "center",
     justifyContent: "center",
   },
   inputContainer: {
     width: "100%",
-    backgroundColor: colors.BLACK_INPUT,
     borderRadius: borderRadius,
     flexDirection: "row",
-    padding: normalizeSize(16),
+    justifyContent: "space-between",
   },
 });

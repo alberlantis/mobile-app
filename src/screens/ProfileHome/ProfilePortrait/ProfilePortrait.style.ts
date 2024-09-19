@@ -8,8 +8,7 @@ export default StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     flexDirection: "row",
-    paddingTop: normalizeSize(13),
-    paddingLeft: normalizeSize(17),
+    paddingHorizontal: normalizeSize(17),
   },
   shareButton: {
     right: 0,

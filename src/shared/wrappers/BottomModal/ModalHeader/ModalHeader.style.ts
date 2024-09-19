@@ -8,6 +8,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: normalizeSize(16),
     marginBottom: normalizeSize(20),
+    borderBottomColor: colors.BLACK_6,
+    borderBottomWidth: normalizeSize(1),
   },
   modalHeaderLeft: { width: "20%" },
   modalHeaderTitle: { width: "60%" },

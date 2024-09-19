@@ -2,9 +2,8 @@ import React from "react";
 import { Text, View, StyleProp, ViewStyle } from "react-native";
 
 import { colors, normalizeSize } from "src/theme";
-import { Icon } from "src/shared/components";
 import s from "./PostActionItem.style";
-import { IconName, IconType } from "src/shared/components/Icon";
+import Icon, { IconName, IconType } from "src/shared/components/Icon";
 
 interface IPostActionProps {
   setIconAction?(): void;

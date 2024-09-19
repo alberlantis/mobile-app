@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { FlatList } from "react-native";
 
 import { useAppSelector, UserState } from "src/store";
+import { FollowList } from "src/shared/components";
 import ListHeader from "./ListHeader";
-import ItemCard from "./ItemCard";
-import s from "./FollowersAndFollowing.style";
 
 const FollowersAndFollowing = () => {
   const [showFollowers, setShowFollowers] = useState(true);
@@ -14,20 +12,12 @@ const FollowersAndFollowing = () => {
     useAppSelector(UserState.selectors.selectUserFollowers) || [];
 
   return (
-    <FlatList
-      style={s.container}
+    <FollowList
+      data={showFollowers ? followers : followings}
       keyExtractor={(item, index) =>
         `${showFollowers ? "followers" : "following"}-list-${item.id}-${index}`
       }
-      data={showFollowers ? followers : followings}
-      renderItem={({ item, index }) => (
-        <ItemCard
-          key={`${showFollowers ? "followers" : "following"}-list-${item.id}-${index}`}
-          item={item}
-          showFollowers={showFollowers}
-        />
-      )}
-      ListHeaderComponent={() => (
+      listHeader={() => (
         <ListHeader
           showFollowers={showFollowers}
           setShowFollowers={setShowFollowers}

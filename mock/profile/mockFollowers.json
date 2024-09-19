@@ -1,42 +1,67 @@
 [
-  {
-     "name":"Satina",
-     "job":"Freedom Community builder",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"Full | Mid-tempo funk groove with flute, trombone & crazy horn breaks",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"Freedom Community builder",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"The superpower of streaming, has returned 72% from Oct 28 jasjdkaljdkasld",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"Freedom Community builder",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"Freedom Community builder",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"Freedom Community builder",
-     "totalFollowers":"200 followers"
-  },
-  {
-     "name":"Satina",
-     "job":"Freedom Community builder",
-     "totalFollowers":"200 followers"
-  }
-]
+   {
+      "displayName":"Reflection",
+      "about":"Freedom Community builder",
+      "totalFollowers":"200 followers",
+      "id": "1",
+      "picture": "",
+      "chatMemberships": true,
+      "followedBy": []
+   },
+   {
+      "displayName":"SolarChill",
+      "about":"Benjamin is a UX design specialist with a focus on user",
+      "totalFollowers":"200 followers",
+      "id": "2",
+      "chatMemberships": true,
+      "followedBy": []
+   },
+   {
+      "displayName":"SolarChill",
+      "about":"Benjamin is a UX design specialist with a focus on user",
+      "totalFollowers":"200 followers",
+      "id": "3",
+      "chatMemberships": false,
+      "followedBy": []
+   },
+   {
+      "displayName":"Reflection",
+      "about":"Benjamin is a UX design specialist with a focus on user",
+      "totalFollowers":"200 followers",
+      "id": "4",
+      "chatMemberships": false,
+      "followedBy": []
+   },
+   {
+      "displayName":"SolarChill",
+      "about":"Freedom Community builder",
+      "totalFollowers":"200 followers",
+      "id": "5",
+      "chatMemberships": true,
+      "followedBy": []
+   },
+   {
+      "displayName":"Reflection",
+      "about":"Benjamin is a UX design specialist with a focus on user",
+      "totalFollowers":"200 followers",
+      "id": "6",
+      "chatMemberships": false,
+      "followedBy": []
+   },
+   {
+      "displayName":"SolarChill",
+      "about":"Benjamin is a UX design specialist with a focus on user",
+      "totalFollowers":"200 followers",
+      "id": "7",
+      "chatMemberships": true,
+      "followedBy": []
+   },
+   {
+      "displayName":"Reflection",
+      "about":"Freedom Community builder",
+      "totalFollowers":"200 followers",
+      "id": "8",
+      "chatMemberships": false,
+      "followedBy": []
+   }
+ ]
