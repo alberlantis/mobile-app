@@ -1,12 +1,12 @@
 import { InMemoryAccountContext } from "@blowater/nostr-sdk";
 import { getPubkeyByNip05 } from "@satlantis/api-client";
-import { setNostrSigner, satlantisClient, setJWT } from "./satlantisApi";
 
 import { EXPO_PUBLIC_DOMAIN } from "src/shared/constants/env";
+import satlantisClient from "./satlantisApi";
 
 export const generateNewNostrSigner = () => {
   const newSigner = InMemoryAccountContext.Generate();
-  setNostrSigner(newSigner);
+  satlantisClient.setNostrSigner(newSigner);
   return newSigner;
 };
 
@@ -31,7 +31,8 @@ export const getIsUserAvailability = async (userName: string) => {
 };
 
 export const login = async (username: string, password: string) => {
-  const response = await satlantisClient.login({
+  const client = satlantisClient.getClient();
+  const response = await client.login({
     password,
     username,
   });
@@ -48,7 +49,7 @@ export const login = async (username: string, password: string) => {
     );
   }
 
-  setJWT(response.token);
+  satlantisClient.setJwt(response.token);
   return {
     account: response.account,
     token: response.token,
@@ -56,6 +57,7 @@ export const login = async (username: string, password: string) => {
 };
 
 export const loginNostr = async (nsec: string) => {
+  const client = satlantisClient.getClient();
   const signer = InMemoryAccountContext.FromString(nsec);
   if (signer instanceof Error) {
     console.error(`Retrieve signer failed: ${signer.message}`, signer.cause);
@@ -64,7 +66,7 @@ export const loginNostr = async (nsec: string) => {
     );
   }
 
-  const response = await satlantisClient.loginNostr(signer);
+  const response = await client.loginNostr(signer);
   if (response instanceof Error) {
     console.error(`Login nostr failed: ${response.message}`, response.cause);
     throw new Error(
@@ -72,8 +74,8 @@ export const loginNostr = async (nsec: string) => {
     );
   }
 
-  setNostrSigner(signer);
-  setJWT(response.token);
+  satlantisClient.setNostrSigner(signer);
+  satlantisClient.setJwt(response.token);
   return {
     account: response.account,
     token: response.token,
@@ -85,7 +87,8 @@ export const createAccount = async (
   password: string,
   username: string,
 ) => {
-  const response = await satlantisClient.createAccount({
+  const client = satlantisClient.getClient();
+  const response = await client.createAccount({
     email,
     password,
     username,
@@ -106,7 +109,8 @@ export const createAccount = async (
 };
 
 export const postInitializeResetPassword = async (username: string) => {
-  const response = await satlantisClient.initiatePasswordReset({ username });
+  const client = satlantisClient.getClient();
+  const response = await client.initiatePasswordReset({ username });
   if (response instanceof Error) {
     console.error(
       `Initiate password reset failed: ${response.message}`,
@@ -121,11 +125,9 @@ export const postInitializeResetPassword = async (username: string) => {
 };
 
 export const postResetPassword = async (password: string) => {
+  const client = satlantisClient.getClient();
   const token = satlantisClient.getJwt();
-  // todo:
-  //  this is not how reset password works
-  //  we don't have any specific flow for mobile to reset password
-  const response = await satlantisClient.resetPassword({
+  const response = await client.resetPassword({
     password,
     token,
   });

@@ -1,45 +1,82 @@
-import { Client } from "@satlantis/api-client";
+import { Client, func_GetJwt } from "@satlantis/api-client";
 import { NostrKind, Signer, Tag } from "@blowater/nostr-sdk";
 
-import {
-  EXPO_PUBLIC_CLIENT_ENDPOINT,
-  EXPO_PUBLIC_SATLANTIS_RELAY,
-} from "src/shared/constants/env";
+import { EXPO_PUBLIC_CLIENT_ENDPOINT } from "src/shared/constants/env";
 import { publishEvent, prepareEvent } from "./nostr";
 
-let _jwt: string = "";
-export function setJWT(jwt: string) {
-  _jwt = jwt;
-}
+export class SatlantisClient {
+  private static instance: SatlantisClient;
+  private jwt: string = "";
+  private nostrSigner: Signer | undefined;
+  private client: Client | undefined;
 
-let _signer: Signer | undefined;
-export function setNostrSigner(signer: Signer) {
-  _signer = signer;
-}
-
-const _satlantisClient = Client.New({
-  baseURL: EXPO_PUBLIC_CLIENT_ENDPOINT || "",
-  relay_url: EXPO_PUBLIC_SATLANTIS_RELAY || "",
-  getJwt: () => {
-    return _jwt;
-  },
-  getNostrSigner: async () => {
-    if (_signer == undefined) {
-      return new Error("not signed in");
+  private async getNostrSigner() {
+    if (!this.nostrSigner) {
+      console.error("Getting nostr signer failed: It doesn't exist");
+      throw new Error("Error getting nostr signer. Reason: Doesn't exist");
     }
-    return _signer;
-  },
-});
-if (_satlantisClient instanceof Error) {
-  throw _satlantisClient;
-}
-export const satlantisClient = _satlantisClient;
-
-export async function prepareContactEvent(tags: Tag[]) {
-  if (_signer == undefined) {
-    return new Error("not signed in");
+    return this.nostrSigner;
   }
-  const newEvent = await prepareEvent(_signer, NostrKind.CONTACTS, tags);
-  await publishEvent(newEvent);
-  return newEvent;
+
+  public initClient(): void {
+    if (!this.client) {
+      const newClient = Client.New({
+        baseURL: new URL(EXPO_PUBLIC_CLIENT_ENDPOINT || ""),
+        getJwt: this.getJwt.bind(this),
+        getNostrSigner: this.getNostrSigner.bind(this),
+      });
+
+      if (newClient instanceof Error) {
+        console.error(
+          `Create client failed: ${newClient.message}`,
+          newClient.cause,
+        );
+        throw new Error(
+          `Failed to create new api client. Reason: ${newClient.message}`,
+        );
+      }
+
+      this.client = newClient;
+    }
+  }
+
+  public static getInstance(): SatlantisClient {
+    if (!SatlantisClient.instance) {
+      SatlantisClient.instance = new SatlantisClient();
+    }
+    return SatlantisClient.instance;
+  }
+
+  public getClient() {
+    if (!this.client) {
+      console.error("Getting client api failed: It's not initialized");
+      throw new Error(
+        "API client is not initialized. Call getInstance with a valid baseUrl first.",
+      );
+    }
+    return this.client;
+  }
+
+  public getJwt: func_GetJwt = () => {
+    return this.jwt;
+  };
+
+  public setJwt(newJwt: string) {
+    this.jwt = newJwt;
+  }
+
+  public setNostrSigner(newSigner: Signer | undefined) {
+    this.nostrSigner = newSigner;
+  }
+
+  public async prepareContactEvent(tags: Tag[]) {
+    const signer = await this.getNostrSigner();
+    const newEvent = await prepareEvent(signer, NostrKind.CONTACTS, tags);
+    await publishEvent(newEvent);
+    return newEvent;
+  }
 }
+
+const satlantisClient = SatlantisClient.getInstance();
+
+export default satlantisClient;

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 
 import { useAppSelector, NostrState } from "src/store";
-import { setJWT } from "src/client/satlantisApi";
+import satlantisClient from "src/client/satlantisApi";
+
 interface ISatlantisClient {
   children: React.ReactNode;
 }
@@ -9,7 +10,8 @@ interface ISatlantisClient {
 const SatlantisClient: React.FC<ISatlantisClient> = ({ children }) => {
   const token = useAppSelector(NostrState.selectors.selectToken);
   useEffect(() => {
-    setJWT(token);
+    satlantisClient.setJwt(token);
+    satlantisClient.initClient();
   }, [token]);
 
   return children;

@@ -1,4 +1,4 @@
-import { Account } from "@satlantis/api-client";
+import { Account } from "@satlantis/api-client/sdk";
 import { createAppAsyncThunk } from "src/store/tools";
 
 export const shouldFetchAccount = createAppAsyncThunk(
