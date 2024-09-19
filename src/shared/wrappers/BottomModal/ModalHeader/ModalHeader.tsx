@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 
 import { colors, fonts } from "src/theme";
-import { Icon } from "src/shared/components";
+import Icon from "src/shared/components/Icon";
 import s from "./ModalHeader.style";
 
 interface IModalHeaderProps {

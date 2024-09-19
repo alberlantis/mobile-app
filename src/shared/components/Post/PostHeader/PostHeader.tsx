@@ -4,7 +4,9 @@ import { useRoute } from "@react-navigation/native";
 
 import { useAppSelector, UserState } from "src/store";
 import { colors, fonts } from "src/theme";
-import { RoundImage, Icon, ActionMenu } from "src/shared/components";
+import RoundImage from "src/shared/components/RoundImage";
+import Icon from "src/shared/components/Icon";
+import ActionMenu from "src/shared/components/ActionMenu";
 import usePostMenuOptions from "./usePostMenuOptions";
 import s from "./PostHeader.style";
 

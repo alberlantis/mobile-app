@@ -3,10 +3,10 @@ import { View } from "react-native";
 
 import comments from "mock/profile/mockCommentsList.json";
 import { colors, normalizeSize } from "src/theme";
-import Icon from "../../../Icon";
-import CommentList from "../../../CommentList";
-import Input from "../../../Input";
-import { BottomModal } from "src/shared/wrappers";
+import Icon from "src/shared/components/Icon";
+import CommentList from "src/shared/components/CommentList";
+import Input from "src/shared/components/Input";
+import BottomModal from "src/shared/wrappers/BottomModal";
 import s from "./CommentsModal.style";
 
 interface ICommentsModalProps {

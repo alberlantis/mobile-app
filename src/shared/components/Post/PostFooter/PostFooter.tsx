@@ -2,9 +2,9 @@ import React, { Fragment, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 
 import { colors, normalizeSize } from "src/theme";
-import RoundImage from "../../RoundImage";
-import ExpandableText from "../../ExpandableText";
-import Icon from "../../Icon";
+import RoundImage from "src/shared/components/RoundImage";
+import ExpandableText from "src/shared/components/ExpandableText";
+import Icon from "src/shared/components/Icon";
 import { useImageAssets } from "src/shared/hooks";
 import s from "./PostFooter.style";
 import { description } from "./mockData";

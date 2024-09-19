@@ -2,8 +2,8 @@ import React from "react";
 import { View } from "react-native";
 
 import followers from "mock/profile/mockFollowers.json";
-import FollowList from "../../../FollowList";
-import { BottomModal } from "src/shared/wrappers";
+import FollowList from "src/shared/components/FollowList";
+import BottomModal from "src/shared/wrappers/BottomModal";
 import s from "./LikesModal.style";
 
 interface ILikesModalProps {

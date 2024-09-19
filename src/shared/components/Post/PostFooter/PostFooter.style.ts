@@ -27,6 +27,7 @@ export default StyleSheet.create({
   addCommentContainer: {
     flexDirection: "row",
     paddingTop: normalizeSize(8),
+    alignItems: "center",
   },
   addCommentPlaceholder: {
     color: colors.WHITE_BOLD,

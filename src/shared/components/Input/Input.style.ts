@@ -10,7 +10,6 @@ export const getInputStyle = (
   multiline: boolean,
   customWidth: number,
 ): StyleProp<TextStyle> => {
-  console.log("customHeight", customHeight);
   return {
     width: hasIcon ? customWidth : "100%",
     maxHeight: customHeight || "100%",
@@ -21,7 +20,7 @@ export const getInputStyle = (
     fontSize: fonts[16],
     fontWeight: "regular",
     color: colors.WHITE,
-    paddingVertical: multiline ? 8 : 0,
+    paddingVertical: multiline ? normalizeSize(8) : 0,
   };
 };
 export default StyleSheet.create({
