@@ -21,3 +21,6 @@ ios/
 
 # General
 eas.json
+
+# yarn
+.yarn

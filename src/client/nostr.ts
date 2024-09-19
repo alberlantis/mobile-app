@@ -43,47 +43,6 @@ export async function getContactList(pubkey: PublicKey) {
   return event;
 }
 
-type PublicKeyType = "string" | "bench32" | "hex";
-export function getPublicKey(key: string, from: PublicKeyType) {
-  let pubKey: Error | PublicKey | undefined;
-  switch (from) {
-    case "hex": {
-      pubKey = PublicKey.FromHex(key);
-      break;
-    }
-    case "bench32": {
-      pubKey = PublicKey.FromBech32(key);
-      break;
-    }
-    case "string": {
-      pubKey = PublicKey.FromString(key);
-      break;
-    }
-    default: {
-      pubKey = undefined;
-    }
-  }
-  if (!pubKey) {
-    console.error(
-      "Getting PublicKey failed: No correct convertion type was given",
-    );
-    throw new Error(
-      `Failed to get PublicKey: No correct convertion type was given`,
-    );
-  }
-
-  if (pubKey instanceof Error) {
-    console.error(
-      `Getting PublicKey from pubKey failed: ${pubKey.message}`,
-      pubKey.cause,
-    );
-    throw new Error(
-      `Failed to get PublicKey from pubKey, Reason: ${pubKey.message}`,
-    );
-  }
-  return pubKey;
-}
-
 export async function prepareEvent<T extends NostrKind>(
   signer: Signer,
   kind: T,

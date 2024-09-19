@@ -1,10 +1,9 @@
-import satlantisClient from "./satlantisApi";
+import { satlantisClient } from "./satlantisApi";
 import { HTML_METHOD, getHeaders } from "./tools";
 import { EXPO_PUBLIC_VITE_AWS_CDN } from "src/shared/constants/env";
 
 async function getPresignedUrl(filename: string) {
-  const client = satlantisClient.getClient();
-  const response = await client.presign({ filename });
+  const response = await satlantisClient.presign({ filename });
   if (response instanceof Error) {
     console.error(`Presigned url Failed: ${response.message}`, response.cause);
     throw new Error(`Error Presigning url. Reason: ${response.message}`);
