@@ -31,7 +31,6 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   );
   const isButtonEnabled = !isLoading && selectedOptions.length > 2;
   const allInterests = useAppSelector(UserState.selectors.selectInterestsMap);
-  const { pubKey } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const handleSubmitButton = () => {
     if (!isButtonEnabled) return;
     const pubkeysToFollow = selectedOptions.reduce<string[]>((acc, option) => {
@@ -39,12 +38,7 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
       if (!pubkeys) return acc;
       return [...acc, ...pubkeys];
     }, []);
-    dispatch(
-      UserState.thunks.shouldPostFollowPubKeys({
-        pubKey,
-        pubkeys: pubkeysToFollow,
-      }),
-    )
+    dispatch(UserState.thunks.shouldPostFollowPubKeys(pubkeysToFollow))
       .unwrap()
       .then(() => {
         navigation.navigate(SCREENS.COMPLETE_PROFILE, {

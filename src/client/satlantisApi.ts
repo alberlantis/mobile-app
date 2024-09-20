@@ -1,19 +1,18 @@
 import { Client } from "@satlantis/api-client";
-import { NostrKind, Signer, Tag } from "@blowater/nostr-sdk";
+import { Encrypter, Signer } from "@blowater/nostr-sdk";
 
 import {
   EXPO_PUBLIC_CLIENT_ENDPOINT,
   EXPO_PUBLIC_SATLANTIS_RELAY,
 } from "src/shared/constants/env";
-import { publishEvent, prepareEvent } from "./nostr";
 
 let _jwt: string = "";
 export function setJWT(jwt: string) {
   _jwt = jwt;
 }
 
-let _signer: Signer | undefined;
-export function setNostrSigner(signer: Signer) {
+let _signer: (Signer & Encrypter) | undefined;
+export function setNostrSigner(signer: Signer & Encrypter) {
   _signer = signer;
 }
 
@@ -34,12 +33,3 @@ if (_satlantisClient instanceof Error) {
   throw _satlantisClient;
 }
 export const satlantisClient = _satlantisClient;
-
-export async function prepareContactEvent(tags: Tag[]) {
-  if (!_signer) {
-    return new Error("not signed in");
-  }
-  const newEvent = await prepareEvent(_signer, NostrKind.CONTACTS, tags);
-  await publishEvent(newEvent);
-  return newEvent;
-}

@@ -10,7 +10,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import createSecureStore from "redux-persist-expo-securestore";
 
-import { AuthClient, UserClient, UploadClient } from "src/client";
+import { UploadClient } from "src/client";
 import * as Nostr from "./Nostr";
 import * as Profile from "./Profile";
 import * as Auth from "./Auth";
@@ -90,8 +90,6 @@ const store = configureStore({
       thunk: {
         extraArgument: {
           api: {
-            AuthClient,
-            UserClient,
             UploadClient,
           },
           actions: {

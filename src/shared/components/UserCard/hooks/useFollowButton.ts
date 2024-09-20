@@ -5,9 +5,7 @@ const useFollowButton = (userId: number, itemNpub: string) => {
   const isBeingFollow = useAppSelector(
     UserState.selectors.selectIsUserFollowingFollower(userId),
   );
-  const { pubKey, npub } = useAppSelector(
-    UserState.selectors.selectUserPublicKeys,
-  );
+  const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const isFollowUserLoading = useAppSelector(
     UserState.selectors.selectFollowUserLoading,
   );
@@ -23,21 +21,11 @@ const useFollowButton = (userId: number, itemNpub: string) => {
   const handleFollowButton = () => {
     if (isLoading) return;
     if (isBeingFollow) {
-      dispatch(
-        UserState.thunks.shouldPostUnfollowUser({
-          followerNpub: itemNpub,
-          pubKey,
-        }),
-      )
+      dispatch(UserState.thunks.shouldPostUnfollowUser(itemNpub))
         .unwrap()
         .then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
     } else {
-      dispatch(
-        UserState.thunks.shouldPostFollowUser({
-          followerNpub: itemNpub,
-          pubKey,
-        }),
-      )
+      dispatch(UserState.thunks.shouldPostFollowUser(itemNpub))
         .unwrap()
         .then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
     }

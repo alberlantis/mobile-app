@@ -1,69 +1,50 @@
+import { PublicKey } from "@blowater/nostr-sdk/nostr";
 import { Account } from "@satlantis/api-client";
+import { satlantisClient } from "src/client/satlantisApi";
 import { createAppAsyncThunk } from "src/store/tools";
 
 export const shouldFetchAccount = createAppAsyncThunk(
   "get/account",
-  async (
-    npub: string,
-    {
-      extra: {
-        api: { UserClient },
-      },
-    },
-  ) => {
-    const account = UserClient.getAccount(npub);
+  async (npub: string) => {
+    const account = await satlantisClient.getAccount({ npub });
+    if (account instanceof Error) {
+      throw account;
+    }
     return account;
   },
 );
 
 export const shouldFetchAllInterests = createAppAsyncThunk(
   "get/interestsPool",
-  async (
-    ...[
-      ,
-      {
-        extra: {
-          api: { UserClient },
-        },
-      },
-    ]
-  ) => {
-    const interestsPool = await UserClient.getInterestsPool();
+  async () => {
+    const interestsPool = await satlantisClient.getInterests();
+    if (interestsPool instanceof Error) {
+      throw interestsPool;
+    }
     return interestsPool;
   },
 );
 
-type FollowingIdentifiers = {
-  followerNpub: string;
-  pubKey: string;
-};
-
 export const shouldPostFollowUser = createAppAsyncThunk(
   "post/followUser",
-  async (
-    { pubKey, followerNpub }: FollowingIdentifiers,
-    {
-      extra: {
-        api: { UserClient },
-      },
-    },
-  ) => {
-    const response = await UserClient.postFollowUser(followerNpub, pubKey);
+  async (itemNpub: string) => {
+    const pubkeyToFollow = PublicKey.FromString(itemNpub);
+    if (pubkeyToFollow instanceof Error) {
+      throw pubkeyToFollow;
+    }
+    const response = await satlantisClient.followPubkeys([pubkeyToFollow]);
     return response;
   },
 );
 
 export const shouldPostUnfollowUser = createAppAsyncThunk(
   "post/unfollowUser",
-  async (
-    { pubKey, followerNpub }: FollowingIdentifiers,
-    {
-      extra: {
-        api: { UserClient },
-      },
-    },
-  ) => {
-    const response = await UserClient.postUnfollowUser(followerNpub, pubKey);
+  async (pubKey: string) => {
+    const pubkeyToUnfollow = PublicKey.FromString(pubKey);
+    if (pubkeyToUnfollow instanceof Error) {
+      throw pubkeyToUnfollow;
+    }
+    const response = await satlantisClient.unfollowPubkey(pubkeyToUnfollow);
     return response;
   },
 );
@@ -102,46 +83,33 @@ interface UpdateAccount {
 
 export const shouldPutUpdateAccount = createAppAsyncThunk(
   "put/updateAccount",
-  async (
-    { newData, npub }: UpdateAccount,
-    {
-      extra: {
-        api: { UserClient },
-      },
-      getState,
-      dispatch,
-    },
-  ) => {
+  async ({ newData, npub }: UpdateAccount, { getState, dispatch }) => {
     const account = getState().regular.user.account;
     if (!account) {
       throw new Error("Error trying to reach your account data");
     }
-    await UserClient.postUpdateAccount(
-      {
-        ...account,
-        ...newData,
-      },
-      npub,
-    );
+    const res = await satlantisClient.updateAccount({
+      npub: account.npub,
+      account: newData,
+    });
+    if (res instanceof Error) {
+      throw res;
+    }
     await dispatch(shouldFetchAccount(npub));
   },
 );
 
-type FollowPubKeys = {
-  pubKey: string;
-  pubkeys: string[];
-};
 export const shouldPostFollowPubKeys = createAppAsyncThunk(
   "post/followPubKeys",
-  async (
-    { pubKey, pubkeys }: FollowPubKeys,
-    {
-      extra: {
-        api: { UserClient },
-      },
-    },
-  ) => {
-    const response = await UserClient.postFollowPubKeys(pubKey, pubkeys);
+  async (pubkeys: string[]) => {
+    const validPubkeys = pubkeys.map((pub) => {
+      const validKey = PublicKey.FromString(pub);
+      if (validKey instanceof Error) {
+        throw validKey;
+      }
+      return validKey;
+    });
+    const response = await satlantisClient.followPubkeys(validPubkeys);
     return response;
   },
 );
