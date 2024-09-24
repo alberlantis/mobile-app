@@ -3,9 +3,10 @@ import {
   Modal,
   Animated,
   useWindowDimensions,
-  View,
   Pressable,
   StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 import s from "./BottomModal.style";
@@ -56,7 +57,10 @@ const BottomModal: React.FC<IBottomModalProps> = ({
       animationType="none"
       onRequestClose={closeModal}
     >
-      <View style={s.modalOverlay}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={s.modalOverlay}
+      >
         <Pressable style={StyleSheet.absoluteFill} onPress={closeModal} />
         <Animated.View
           style={[s.modalContent, { transform: [{ translateY: slideAnim }] }]}
@@ -68,7 +72,7 @@ const BottomModal: React.FC<IBottomModalProps> = ({
           />
           {children}
         </Animated.View>
-      </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };

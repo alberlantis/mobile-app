@@ -24,6 +24,9 @@ const nostrSlice = createSlice({
     shouldUpdateToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
+    shouldUpdatePrivateKey: (state, action: PayloadAction<string>) => {
+      state.privateKey = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(shouldGenerateSigner.fulfilled, (state, action) => {

@@ -1,10 +1,23 @@
+import * as Clipboard from "expo-clipboard";
+import { useRoute } from "@react-navigation/native";
+
+import { SignedRouteProps } from "src/navigation/SignedStack";
+import { useAppSelector, PostsState } from "src/store";
 import type { ActionMenuOptions } from "src/shared/components/ActionMenu";
+import type { PostsScreens } from "../Post";
 
 const usePostMenuOptions = () => {
+  const route = useRoute<SignedRouteProps<PostsScreens>>();
+  const { postId } = route.params;
+  const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
+
   const MenuOptions: ActionMenuOptions[] = [
     {
       text: "Copy post link",
-      onPress: () => {},
+      onPress: async () => {
+        if (!post) return;
+        await Clipboard.setStringAsync(post.url);
+      },
       icon: {
         type: "Feather",
         name: "link",
@@ -12,7 +25,10 @@ const usePostMenuOptions = () => {
     },
     {
       text: "Copy post text",
-      onPress: () => {},
+      onPress: async () => {
+        if (!post) return;
+        await Clipboard.setStringAsync(post.description);
+      },
       icon: {
         type: "AntDesign",
         name: "filetext1",
@@ -20,7 +36,10 @@ const usePostMenuOptions = () => {
     },
     {
       text: "Copy post ID",
-      onPress: () => {},
+      onPress: async () => {
+        if (!post) return;
+        await Clipboard.setStringAsync(post.id.toString());
+      },
       icon: {
         type: "MaterialIcons",
         name: "width-wide",
@@ -28,7 +47,10 @@ const usePostMenuOptions = () => {
     },
     {
       text: "Copy raw data",
-      onPress: () => {},
+      onPress: async () => {
+        if (!post) return;
+        await Clipboard.setStringAsync(post.event.content);
+      },
       icon: {
         type: "Feather",
         name: "database",
@@ -36,7 +58,10 @@ const usePostMenuOptions = () => {
     },
     {
       text: "Copy user npub",
-      onPress: () => {},
+      onPress: async () => {
+        if (!post) return;
+        await Clipboard.setStringAsync(post.account.npub);
+      },
       icon: {
         type: "FontAwesome6",
         name: "users-rectangle",
@@ -44,7 +69,10 @@ const usePostMenuOptions = () => {
     },
     {
       text: "Hide Post",
-      onPress: () => {},
+      onPress: () => {
+        // questions: (can we hide a post?)... i saw on web you are deleting, but is not the same
+        // from albert: the concept of "hiding" is not cleared discussed with Product and Backend yet.
+      },
       primary: true,
       icon: {
         type: "Feather",

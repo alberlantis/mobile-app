@@ -33,7 +33,7 @@ const ExpandableText: React.FC<IExpandableTextProps> = ({
   };
   const handleTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
     const { lines } = e.nativeEvent;
-    if (lines.length >= numOfLines) {
+    if (lines.length > numOfLines) {
       setShouldShowMore(true);
     }
   };

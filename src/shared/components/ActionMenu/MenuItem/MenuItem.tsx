@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, Pressable } from "react-native";
 
 import { colors, normalizeSize } from "src/theme";
 import Icon, { IconName, IconType } from "../../Icon";
@@ -24,7 +24,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({
   onPress,
   type,
 }) => (
-  <TouchableOpacity
+  <Pressable
     onPress={onPress}
     style={[
       s.menuItem,
@@ -42,7 +42,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({
     <Text style={[s.menuText, primary && { color: colors.RED_PRIMARY }]}>
       {text}
     </Text>
-  </TouchableOpacity>
+  </Pressable>
 );
 
 export default MenuItem;

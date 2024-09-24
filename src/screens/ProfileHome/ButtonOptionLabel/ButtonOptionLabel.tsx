@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, ColorValue, StyleSheet } from "react-native";
 
-import { useAppSelector, ProfileState } from "src/store";
+import { useAppSelector, UserState, PostsState } from "src/store";
 import s from "./ButtonOptionLabel.style";
 import { colors } from "src/theme";
 
@@ -10,12 +10,11 @@ interface IButtonOptionsLabelProps {
 }
 
 const ButtonOptionLabel: React.FC<IButtonOptionsLabelProps> = ({ option }) => {
-  const isBusiness = useAppSelector(
-    ProfileState.selectors.selectIsProfileBusiness,
+  const { isBusiness } = useAppSelector(
+    UserState.selectors.selectUserHomeProfile,
   );
-  const postsLength = useAppSelector(
-    ProfileState.selectors.selectProfilePosts,
-  ).length;
+  const postsLength = (useAppSelector(PostsState.selectors.selectPosts) || [])
+    .length;
 
   let buttonLabel: string = "";
   let buttonColor: ColorValue = colors.WHITE_BOLD;

@@ -9,18 +9,20 @@ import s from "./LikesModal.style";
 interface ILikesModalProps {
   isVisible: boolean;
   setModalVisible(value: boolean): void;
+  totalLikes: string;
 }
 
 const LikesModal: React.FC<ILikesModalProps> = ({
   isVisible,
   setModalVisible,
+  totalLikes,
 }) => {
   return (
     <BottomModal
       isVisible={isVisible}
       setModalVisible={setModalVisible}
       title="Likes"
-      subtitle="200 Likes"
+      subtitle={`${totalLikes} Likes`}
     >
       <View style={s.modalContentContainer}>
         <FollowList

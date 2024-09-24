@@ -23,4 +23,6 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  usersTagsListContainer: { flex: 1, backgroundColor: colors.TRANSPARENT },
+  loadingContainer: { justifyContent: "center", flex: 1 },
 });

@@ -5,6 +5,7 @@ import { useAppDispatch, AuthState } from "src/store";
 
 const Home = () => {
   const dispatch = useAppDispatch();
+
   return (
     <>
       <Text>Home Screen</Text>

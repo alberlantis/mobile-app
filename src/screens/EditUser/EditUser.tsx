@@ -34,7 +34,6 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
   const isLoading = useAppSelector(
     UserState.selectors.selectUpdateAccountLoading,
   );
-  const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const initialState: ProfileState = useMemo(
     () => ({
       displayName: userAccount.displayName,
@@ -95,12 +94,7 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
 
   const handleSaveButton = () => {
     if (!isButtonEnabled) return;
-    dispatch(
-      UserState.thunks.shouldPutUpdateAccount({
-        npub,
-        newData: profile,
-      }),
-    )
+    dispatch(UserState.thunks.shouldPutUpdateAccount(profile))
       .unwrap()
       .then(navigation.goBack)
       .catch((e: SerializedError) => {

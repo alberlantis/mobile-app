@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { PostsState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
 import type { SignedNavigationProps } from "src/navigation/SignedStack";
-import type { SanitizePosts } from "src/store/Profile/profile.selectors";
 import s from "./ProfilePosts.style";
 import { normalizeSize } from "src/theme";
 
 interface IListItemProps {
-  item: SanitizePosts;
+  item: PostsState.selectors.Posts[];
   index: number;
 }
 
@@ -30,23 +30,22 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
         height: imageDimensions,
       })}
     >
-      {item.data.map((post, index) => (
+      {item.map((post, index) => (
         <Pressable
           key={`post-${post.id}-${index}`}
-          onPress={() => navigation.navigate(SCREENS.VIEW_POST)}
+          onPress={() =>
+            navigation.navigate(SCREENS.VIEW_POST, { postId: post.id })
+          }
           style={{
             ...s.postImageContainer,
             marginRight: index !== 2 ? normalizeSize(1.4) : 0,
           }}
         >
-          <Image src={post.download_url} style={s.postImage} />
+          <Image src={post.imageUrl} style={s.postImage} />
         </Pressable>
       ))}
     </View>
   );
 };
 
-export default memo(
-  ProfilePosts,
-  (prevProps, nextProps) => prevProps.item.id !== nextProps.item.id,
-);
+export default memo(ProfilePosts);

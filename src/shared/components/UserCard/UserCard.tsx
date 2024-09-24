@@ -11,7 +11,7 @@ import s from "./UserCard.style";
 import { useFollowButton } from "./hooks";
 
 interface IUserCardProps {
-  showFollowers: boolean;
+  showFollowers?: boolean;
   isFollowItem?: boolean;
   pictureSize: number;
   item: Account;
@@ -38,7 +38,7 @@ const UserCard: React.FC<IUserCardProps> = ({
         <RoundImage image={item.picture} size={pictureSize} />
         <View style={s.informationContainer}>
           <View style={s.nameContainer}>
-            <Text style={s.name}>{item.displayName}</Text>
+            <Text style={s.name}>{item.name}</Text>
             {!!item.chatMemberships && (
               <Icon
                 type="MaterialCommunityIcons"
@@ -48,10 +48,14 @@ const UserCard: React.FC<IUserCardProps> = ({
               />
             )}
           </View>
-          <Text style={s.job} numberOfLines={2}>
-            {item.about}
+          {item.about && (
+            <Text style={s.job} numberOfLines={2}>
+              {item.about}
+            </Text>
+          )}
+          <Text style={s.totalFollowers}>
+            {item.followedBy?.length || 0} Followers
           </Text>
-          <Text style={s.totalFollowers}>{item.followedBy?.length}</Text>
         </View>
       </View>
       {isFollowItem && (

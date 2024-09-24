@@ -15,7 +15,8 @@
       "@jsr/std__datetime": ["node_modules/@jsr/std__datetime/mod.ts"],
       "@satlantis/api-client": ["api-client/sdk.ts"],
       "@jsr/blowater__nostr-sdk": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"],
-      "jsr:@blowater/nostr-sdk@^0.0.16": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"]
+      "jsr:@blowater/nostr-sdk@^0.0.16": ["node_modules/@jsr/blowater__nostr-sdk/nostr.ts"],
+      "@std/random": ["node_modules/@std/random/mod.ts"]
     },
     "useUnknownInCatchVariables": false,
     "allowImportingTsExtensions": true

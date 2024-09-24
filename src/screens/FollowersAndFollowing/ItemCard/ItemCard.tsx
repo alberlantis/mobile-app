@@ -16,7 +16,6 @@ const ItemCard: React.FC<IItemCardProps> = ({ item, showFollowers }) => {
   const isBeingFollow = useAppSelector(
     UserState.selectors.selectIsUserFollowingFollower(item.id),
   );
-  const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const isFollowUserLoading = useAppSelector(
     UserState.selectors.selectFollowUserLoading,
   );
@@ -39,11 +38,11 @@ const ItemCard: React.FC<IItemCardProps> = ({ item, showFollowers }) => {
     if (isBeingFollow) {
       dispatch(UserState.thunks.shouldPostUnfollowUser(item.npub))
         .unwrap()
-        .then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
+        .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
     } else {
       dispatch(UserState.thunks.shouldPostFollowUser(item.npub))
         .unwrap()
-        .then(() => dispatch(UserState.thunks.shouldFetchAccount(npub)));
+        .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
     }
   };
 

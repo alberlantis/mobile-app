@@ -1224,10 +1224,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@blowater/nostr-sdk@npm:@jsr/blowater__nostr-sdk@^0.1.2":
-  version "0.1.2"
-  resolved "https://npm.jsr.io/~/11/@jsr/blowater__nostr-sdk/0.1.2.tgz#0740EAB95278042EFF6D6D0BCDE00F3D17B30700"
-  integrity sha512-K9SZYQNH/JxJe0RxALugC/OwitcPHYjuD8DOGw9zUsdVfVApU6znatWDtlruYv3Va/wAB/QufuCcrFOjA55wmQ==
+"@blowater/nostr-sdk@npm:@jsr/blowater__nostr-sdk@^0.1.3":
+  version "0.1.3"
+  resolved "https://npm.jsr.io/~/11/@jsr/blowater__nostr-sdk/0.1.3.tgz#8D36DF26C55685E6BDAF8D8DEA5A028B4CD7F456"
+  integrity sha512-EUSR3E+A2HyNuzruTitOQPXyVWIgJdQTthZ4HdZVzIGMgIZbg9jUNiisp5S+TaAuNx35Rw5pj4wDIi3ASN8bFA==
   dependencies:
     "@jsr/blowater__collections" "^0.0.0-rc1"
     "@jsr/blowater__csp" "1.0.0"
@@ -1380,7 +1380,28 @@
     node-forge "^1.2.1"
     nullthrows "^1.1.1"
 
-"@expo/config-plugins@8.0.8", "@expo/config-plugins@~8.0.0-beta.0", "@expo/config-plugins@~8.0.8":
+"@expo/config-plugins@8.0.9":
+  version "8.0.9"
+  resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-8.0.9.tgz#c3b05dbed0c690a4912c1b9f4420f2c6ad4b00cc"
+  integrity sha512-dNCG45C7BbDPV9MdWvCbsFtJtVn4w/TJbb5b7Yr6FA8HYIlaaVM0wqUMzTPmGj54iYXw8X/Vge8uCPxg7RWgeA==
+  dependencies:
+    "@expo/config-types" "^51.0.0-unreleased"
+    "@expo/json-file" "~8.3.0"
+    "@expo/plist" "^0.1.0"
+    "@expo/sdk-runtime-versions" "^1.0.0"
+    chalk "^4.1.2"
+    debug "^4.3.1"
+    find-up "~5.0.0"
+    getenv "^1.0.0"
+    glob "7.1.6"
+    resolve-from "^5.0.0"
+    semver "^7.5.4"
+    slash "^3.0.0"
+    slugify "^1.6.6"
+    xcode "^3.0.1"
+    xml2js "0.6.0"
+
+"@expo/config-plugins@~8.0.0-beta.0", "@expo/config-plugins@~8.0.8":
   version "8.0.8"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-8.0.8.tgz#294a71905a498ea02c8b79bea950b5e37ab5d748"
   integrity sha512-Fvu6IO13EUw0R9WeqxUO37FkM62YJBNcZb9DyJAOgMz7Ez/vaKQGEjKt9cwT+Q6uirtCATMgaq6VWAW7YW8xXw==
@@ -1609,7 +1630,7 @@
   dependencies:
     cross-spawn "^7.0.3"
 
-"@expo/vector-icons@^14.0.0":
+"@expo/vector-icons@^14.0.3":
   version "14.0.3"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-14.0.3.tgz#2e095118dadc0dac80a230bfa659949776b16d74"
   integrity sha512-UJAKOXPPi6ez/1QZfoFVopCH3+c12Sw+T+IIVkvONCEN7zjN1fLxxWHkZ7Spz4WO5EH2ObtaJfCe/k4rw+ftxA==
@@ -2564,6 +2585,11 @@
   integrity sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==
   dependencies:
     "@sinonjs/commons" "^3.0.0"
+
+"@std/random@npm:@jsr/std__random":
+  version "0.1.0"
+  resolved "https://npm.jsr.io/~/11/@jsr/std__random/0.1.0.tgz#87A8BDF018C45D86F8A021C87104B10987C5AC22"
+  integrity sha512-gt+pI83ha04zLv2+5kSf/i6uPT4c8QEwscpATrYe2IKfOkCVpL++NrFcH7pWHc0vgm2fDGC8aY6OI2Mz7tEHhQ==
 
 "@testing-library/react-native@^12.5.2":
   version "12.7.2"
@@ -4857,10 +4883,10 @@ expo-updates-interface@~0.16.2:
   resolved "https://registry.yarnpkg.com/expo-updates-interface/-/expo-updates-interface-0.16.2.tgz#ad1ac2ca8ee5a8cc84052ea3c18a11da64da569b"
   integrity sha512-929XBU70q5ELxkKADj1xL0UIm3HvhYhNAOZv5DSk7rrKvLo7QDdPyl+JVnwZm9LrkNbH4wuE2rLoKu1KMgZ+9A==
 
-expo-updates@~0.25.24:
-  version "0.25.24"
-  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.25.24.tgz#db460af1f6e2125f33fc505440ad6251b07bf1ef"
-  integrity sha512-juqdOUvaMfu6zeUg3fTk6ciLw4QK+0HXNR0+X41BVOFilNmlTFQZ6LyRGJAZJP7HQs2bHR5d/btAXkejtIqVXw==
+expo-updates@~0.25.25:
+  version "0.25.25"
+  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.25.25.tgz#1fe382b4ca06a2a723cbf6be6dfe78a04ef8580c"
+  integrity sha512-Z9sCf6w3876JLlj6DGRsXFI/NnRhXM0gfXT2dusniagt4qvwThGKxS/zEcpo9JUyO411yVL/XGv411Czeaw9xA==
   dependencies:
     "@expo/code-signing-certificates" "0.0.5"
     "@expo/config" "~9.0.0-beta.0"
@@ -4878,17 +4904,17 @@ expo-updates@~0.25.24:
     ignore "^5.3.1"
     resolve-from "^5.0.0"
 
-expo@~51.0.31:
-  version "51.0.32"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-51.0.32.tgz#2e6068f33cb6a361a3aa35e03bf6d5ce21a4ee2d"
-  integrity sha512-6GEhYvHRnyS/6BytQagGkClsaqbuwAtlN3A6oDfnNMRKLmz6NE/r+Rjg9zbQgUO6zigqb60Yj5lAX32DmixRDw==
+expo@~51.0.34:
+  version "51.0.34"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-51.0.34.tgz#7b5c47f6bb4402e7f781f03918274b4194391706"
+  integrity sha512-l2oi+hIj/ph3qGcvM54Nyd2uF3Zq5caVmSg7AXfBUgtvcdv5Pj1EI/2xCXP9tfMNQo351CWyOwBkTGjv+GdrLg==
   dependencies:
     "@babel/runtime" "^7.20.0"
     "@expo/cli" "0.18.29"
     "@expo/config" "9.0.3"
-    "@expo/config-plugins" "8.0.8"
+    "@expo/config-plugins" "8.0.9"
     "@expo/metro-config" "0.18.11"
-    "@expo/vector-icons" "^14.0.0"
+    "@expo/vector-icons" "^14.0.3"
     babel-preset-expo "~11.0.14"
     expo-asset "~10.0.10"
     expo-file-system "~17.0.1"
@@ -8018,6 +8044,13 @@ redux-persist-expo-securestore@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/redux-persist-expo-securestore/-/redux-persist-expo-securestore-2.0.0.tgz#990d8c007c39a9a624b6311d09952b6b221a548e"
   integrity sha512-swD6sC6QCCHyKBV0hFQIBEiO8ph2Nc6Bs96hZ7Qq5iciO/Mk2T6ZDRR8e23jWDjGK5I8uCr4in7ZVb+RPbENQA==
+
+redux-persist-transform-filter@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/redux-persist-transform-filter/-/redux-persist-transform-filter-0.0.22.tgz#181480570a43b5061389991fc43ca52c6d114318"
+  integrity sha512-XtGN7UQ8w7b3qaxQfdYY1UmuYULqIIemD47IWxIyM8AOF48I6C74m9XxA7gQoC2nIi+rz4URi9Mye4fIbHhZPQ==
+  dependencies:
+    lodash "^4.17.21"
 
 redux-persist@^6.0.0:
   version "6.0.0"

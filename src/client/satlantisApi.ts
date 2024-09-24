@@ -6,6 +6,7 @@ import {
   EXPO_PUBLIC_SATLANTIS_RELAY,
 } from "src/shared/constants/env";
 
+// todo: questions for albert (i think i am losing the token auth after user open the app again as login)
 let _jwt: string = "";
 export function setJWT(jwt: string) {
   _jwt = jwt;

@@ -2,25 +2,31 @@ import React from "react";
 import { View, Text } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
-import { useAppSelector, UserState } from "src/store";
+import { SignedRouteProps } from "src/navigation/SignedStack";
+import { timeSince } from "src/utils";
+import { useAppSelector, PostsState } from "src/store";
 import { colors, fonts } from "src/theme";
 import RoundImage from "src/shared/components/RoundImage";
 import Icon from "src/shared/components/Icon";
 import ActionMenu from "src/shared/components/ActionMenu";
 import usePostMenuOptions from "./usePostMenuOptions";
 import s from "./PostHeader.style";
+import type { PostsScreens } from "../Post";
 
-const PostHeader = () => {
-  const route = useRoute();
-  const { avatar } = useAppSelector(UserState.selectors.selectUserHomeProfile);
+const PostHeader: React.FC = () => {
+  const route = useRoute<SignedRouteProps<PostsScreens>>();
+  const { postId } = route.params;
+  const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
   const menuOptions = usePostMenuOptions();
+
+  if (!post) return null;
 
   return (
     <View style={s.headerProfileInfoContainer}>
       <View style={s.avatarNameContainer}>
-        <RoundImage image={avatar} size={38} />
-        <Text style={s.nameText}>Satina</Text>
-        <Text style={s.timePost}>2h</Text>
+        <RoundImage image={post.account.picture} size={38} />
+        <Text style={s.nameText}>{post.account.name}</Text>
+        <Text style={s.timePost}>{timeSince(post.createdAt)}</Text>
       </View>
       <View style={s.locationMenuButtonContainer}>
         <Icon

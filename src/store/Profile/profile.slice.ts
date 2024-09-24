@@ -1,44 +1,30 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import type { ImagePool } from "mock/profile/image-pool-client";
-import { shouldFetchProfilePosts } from "./profile.thunks";
-
-type ProfileType = "user" | "business"; // @tech only for test
+import { shouldFetchProfile } from "./profile.thunks";
 interface ProfileState {
-  postsLoading: boolean;
-  posts: ImagePool[];
-  profileType: ProfileType; // @tech only for test
-  isOwnProfile: boolean; // @tech only for test
+  profile: undefined;
+  profileLoading: boolean;
 }
 
 const initialState: ProfileState = {
-  postsLoading: false,
-  posts: [],
-  profileType: "user", // @tech only for test
-  isOwnProfile: true, // @tech only for test
+  profile: undefined,
+  profileLoading: false,
 };
 
 const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {
-    shouldChangeProfile: (state, action: PayloadAction<ProfileType>) => {
-      state.profileType = action.payload;
-    }, // @tech only for test
-    shouldToggleOwnProfile: (state, action: PayloadAction<boolean>) => {
-      state.isOwnProfile = action.payload;
-    }, // @tech only for test
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(shouldFetchProfilePosts.fulfilled, (state, action) => {
-      state.postsLoading = false;
-      state.posts = [...state.posts, ...action.payload];
+    builder.addCase(shouldFetchProfile.fulfilled, (state) => {
+      state.profileLoading = false;
+      state.profile = undefined;
     });
-    builder.addCase(shouldFetchProfilePosts.pending, (state, action) => {
-      state.postsLoading = true;
+    builder.addCase(shouldFetchProfile.pending, (state) => {
+      state.profileLoading = true;
     });
-    builder.addCase(shouldFetchProfilePosts.rejected, (state, action) => {
-      state.postsLoading = false;
+    builder.addCase(shouldFetchProfile.rejected, (state) => {
+      state.profileLoading = false;
     });
   },
 });

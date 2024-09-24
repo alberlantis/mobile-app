@@ -1,58 +1,83 @@
 import React, { Fragment, useState } from "react";
 import { View, Text, Pressable } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
+import {
+  useAppSelector,
+  PostsState,
+  UserState,
+  useAppDispatch,
+} from "src/store";
+import { SignedRouteProps } from "src/navigation/SignedStack";
 import { colors, normalizeSize } from "src/theme";
-import RoundImage from "src/shared/components/RoundImage";
 import ExpandableText from "src/shared/components/ExpandableText";
 import Icon from "src/shared/components/Icon";
-import { useImageAssets } from "src/shared/hooks";
 import s from "./PostFooter.style";
-import { description } from "./mockData";
 import PostActionItem from "./PostActionItem";
 import LikesModal from "./LikesModal";
 import CommentsModal from "./CommentsModal";
+import type { PostsScreens } from "../Post";
+import LikesText from "./LikesText";
 
 const PostFooter = () => {
-  const [like, setLike] = useState(false);
+  const dispatch = useAppDispatch();
+  const account = useAppSelector(UserState.selectors.selectAccount);
   const [showLikesModal, setShowLikesModal] = useState(false);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
-  const { images } = useImageAssets();
   const openCommentsModal = () => {
     setShowCommentsModal(true);
   };
+  const route = useRoute<SignedRouteProps<PostsScreens>>();
+  const { postId } = route.params;
+  const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
+  const isPostLoading = useAppSelector(PostsState.selectors.selectPostsLoading);
+  const isPostLikeLoading = useAppSelector(
+    PostsState.selectors.selectLikingPostLoading,
+  );
+  const isLoading = isPostLikeLoading || isPostLoading;
+  const [totalLikes, setTotalLikes] = useState(post!.reactions.length || 0);
+  const isUserLikePost = useAppSelector(
+    PostsState.selectors.selectIsUserLikePost(account?.id, postId),
+  );
+  const [like, setLike] = useState(isUserLikePost);
+
+  const handleLikePost = () => {
+    if (isLoading || !post || isUserLikePost) return;
+    dispatch(PostsState.thunks.shouldLikePosts(post))
+      .unwrap()
+      .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
+    setLike(!like);
+    setTotalLikes(totalLikes + 1);
+  };
+
+  if (!post) return null;
 
   return (
     <Fragment>
       <View style={s.postDescriptionContainer}>
-        <ExpandableText text={description} numOfLines={6} />
+        <ExpandableText text={post.description} numOfLines={6} />
         <View style={s.postActionsContainer}>
           <PostActionItem
             icon={{
               type: "FontAwesome",
               name: like ? "heart" : "heart-o",
             }}
-            setIconAction={() => setLike(!like)}
+            setIconAction={handleLikePost}
             setTextAction={() => setShowLikesModal(true)}
-            text="201"
+            text={totalLikes.toString()}
           />
           <PostActionItem
             icon={{
               type: "FontAwesome",
-              name: "comment-o",
+              name: !!post.descendants.length ? "comment" : "comment-o",
             }}
-            text="201"
+            text={post.descendants.length.toString()}
             style={s.commentAction}
             setIconAction={openCommentsModal}
             setTextAction={openCommentsModal}
           />
         </View>
-        <View style={s.postFollowersLikeContainer}>
-          <RoundImage image={images.mockUserAvatar} size={18} />
-          <Text style={s.postFollowersLikesText}>
-            Liked by <Text style={s.lastFollowerName}>Jefferson</Text> and 8
-            others you know
-          </Text>
-        </View>
+        <LikesText totalLikes={totalLikes} reactions={post.reactions} />
         <Pressable
           onPress={() => setShowCommentsModal(true)}
           style={s.addCommentContainer}
@@ -69,10 +94,12 @@ const PostFooter = () => {
       <LikesModal
         isVisible={showLikesModal}
         setModalVisible={setShowLikesModal}
+        totalLikes={totalLikes.toString()}
       />
       <CommentsModal
         isVisible={showCommentsModal}
         setModalVisible={setShowCommentsModal}
+        post={post}
       />
     </Fragment>
   );

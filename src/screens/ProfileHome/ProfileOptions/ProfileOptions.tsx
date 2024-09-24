@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 
-import { useAppSelector, ProfileState } from "src/store";
+import { useAppSelector, UserState } from "src/store";
 import { Button } from "src/shared/components";
 import ButtonOptionLabel from "../ButtonOptionLabel";
 import s from "./ProfileOptions.style";
@@ -11,8 +11,8 @@ const USER_OPTIONS = ["Posts", "Info", "Chats", "Followers"];
 const BUSINESS_OPTIONS = ["Posts", "Info", "Reviews"];
 
 const ProfileOptions = () => {
-  const isBusiness = useAppSelector(
-    ProfileState.selectors.selectIsProfileBusiness,
+  const { isBusiness } = useAppSelector(
+    UserState.selectors.selectUserHomeProfile,
   );
   const options = isBusiness ? BUSINESS_OPTIONS : USER_OPTIONS;
   const [selectedOption, setSelectedOption] = useState(options[0]);

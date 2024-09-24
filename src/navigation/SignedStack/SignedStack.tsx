@@ -27,7 +27,7 @@ export type SignedParamList = {
   [SCREENS.HOME_TABS]: HomeTabsParams;
   [SCREENS.EDIT_USER]: undefined;
   [SCREENS.FOLLOWERS_AND_FOLLOWING]: undefined;
-  [SCREENS.VIEW_POST]: undefined;
+  [SCREENS.VIEW_POST]: { postId: number };
 } & AccountCreationParamList &
   HomeTabsParamList;
 const Stack = createNativeStackNavigator<SignedParamList>();

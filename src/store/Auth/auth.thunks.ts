@@ -87,6 +87,7 @@ export const shouldLoginSigner = createAppAsyncThunk(
     setNostrSigner(signer);
     setJWT(response.token);
     dispatch(user.shouldSetAccount(response.account));
+    dispatch(nostr.shouldUpdatePrivateKey(nsec));
     dispatch(nostr.shouldUpdateToken(response.token));
   },
 );

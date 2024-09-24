@@ -9,6 +9,7 @@ export const getInputStyle = (
   customHeight: number | undefined,
   multiline: boolean,
   customWidth: number,
+  useTag: boolean,
 ): StyleProp<TextStyle> => {
   return {
     width: hasIcon ? customWidth : "100%",
@@ -19,10 +20,29 @@ export const getInputStyle = (
     borderBottomRightRadius: hasIcon ? 0 : borderRadius,
     fontSize: fonts[16],
     fontWeight: "regular",
-    color: colors.WHITE,
-    paddingVertical: multiline ? normalizeSize(8) : 0,
+    color: useTag ? colors.TRANSPARENT : colors.WHITE,
+    position: useTag ? "absolute" : "relative",
+    zIndex: useTag ? 1 : 0,
+    alignSelf: "center",
+    marginLeft: useTag ? normalizeSize(16) : 0,
+    paddingVertical: multiline && !useTag ? normalizeSize(8) : 0,
   };
 };
+
+export const getCustomTextStyle = (
+  hasIcon: boolean,
+  hasValue: boolean,
+  customWidth: number,
+): StyleProp<TextStyle> => ({
+  width: hasIcon ? customWidth : "100%",
+  alignItems: "center",
+  textAlignVertical: "center",
+  justifyContent: "center",
+  color: hasValue ? colors.WHITE : colors.WHITE_LIGHT,
+  fontSize: fonts[16],
+  fontWeight: "regular",
+});
+
 export default StyleSheet.create({
   container: {
     width: "100%",
@@ -43,5 +63,6 @@ export default StyleSheet.create({
     borderRadius: borderRadius,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
 });

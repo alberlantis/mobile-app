@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { colors, normalizeSize } from "src/theme";
-import s, { getInputStyle } from "./Input.style";
+import s, { getInputStyle, getCustomTextStyle } from "./Input.style";
 
 /**
  * @tech
@@ -37,6 +37,7 @@ interface IInputProps {
   backColor?: ColorValue;
   paddingVertical?: number;
   paddingHorizontal?: number;
+  tags?: string[];
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -54,10 +55,10 @@ const Input: React.FC<IInputProps> = ({
   paddingHorizontal = 16,
   numOfLines = 1,
   backColor = colors.BLACK_INPUT,
+  tags = [],
 }) => {
   const isTextArea = type === "text-area";
   const hasIcon = !!icon;
-  const [selection, setSelection] = useState({ start: 0, end: 0 });
   const [iconWidth, setIconWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
   const customWidth =
@@ -69,6 +70,29 @@ const Input: React.FC<IInputProps> = ({
   const handleContainerLayout = (e: LayoutChangeEvent) => {
     if (!!containerWidth) return;
     setContainerWidth(e.nativeEvent.layout.width);
+  };
+  const renderFormattedText = (text: string) => {
+    if (!text) return null;
+    const parts = text.split(/(@\S*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith("@")) {
+        const tagMatch = !!tags.find((tag) =>
+          tag.toLowerCase().startsWith(part.substring(1).toLowerCase()),
+        );
+        if (tagMatch) {
+          return (
+            <Text key={index} style={{ color: colors.ORANGE_PRIMARY_LIGHT }}>
+              {part}
+            </Text>
+          );
+        }
+      }
+      return (
+        <Text key={index} style={{ color: colors.WHITE }}>
+          {part}
+        </Text>
+      );
+    });
   };
 
   return (
@@ -88,17 +112,19 @@ const Input: React.FC<IInputProps> = ({
         ]}
       >
         <TextInput
-          style={getInputStyle(hasIcon, customHeight, multiline, customWidth)}
-          onSelectionChange={({ nativeEvent: { selection } }) =>
-            setSelection({ start: selection.start, end: selection.start })
-          }
+          style={getInputStyle(
+            hasIcon,
+            customHeight,
+            multiline,
+            customWidth,
+            !!tags.length,
+          )}
           autoCorrect={false}
           autoCapitalize="none"
           autoComplete="off"
           spellCheck={false}
-          placeholder={placeholder}
+          placeholder={!!tags.length ? "" : placeholder}
           placeholderTextColor={colors.WHITE_LIGHT}
-          selection={selection}
           underlineColorAndroid={colors.TRANSPARENT}
           value={value}
           onChangeText={onChangeText}
@@ -107,6 +133,11 @@ const Input: React.FC<IInputProps> = ({
           multiline={multiline}
           textAlignVertical={isTextArea ? "top" : "center"}
         />
+        {!!tags.length && (
+          <Text style={getCustomTextStyle(hasIcon, !!value, customWidth)}>
+            {renderFormattedText(value) || placeholder}
+          </Text>
+        )}
         {hasIcon && (
           <View onLayout={handleIconLayout} style={s.iconInput}>
             {icon}

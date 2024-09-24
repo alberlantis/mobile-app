@@ -2,49 +2,33 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
-  createTransform,
   type PersistConfig,
-  type Transform,
 } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import createSecureStore from "redux-persist-expo-securestore";
+import createFilter from "redux-persist-transform-filter";
 
-import { UploadClient } from "src/client";
 import * as Nostr from "./Nostr";
 import * as Profile from "./Profile";
 import * as Auth from "./Auth";
 import * as User from "./User";
+import * as Posts from "./Posts";
 
 type SecureReducer = ReturnType<typeof secureReducers>;
 type RegularReducer = ReturnType<typeof regularReducers>;
 
-const createWhitelistTransform = (listMap: any): Transform<any, any> => {
-  const serializeStorage = (state: any, key: any) => {
-    const keysToPersist = listMap[key];
-    if (!keysToPersist || !keysToPersist.length) return state;
-    return keysToPersist.reduce((acc: any, stateKey: any) => {
-      acc[stateKey] = (state as any)[stateKey];
-      return acc;
-    }, {} as any);
-  };
-  return createTransform(serializeStorage, serializeStorage, {
-    whitelist: Object.keys(listMap),
-  });
-};
-
+const nostrFilter = createFilter("nostr", ["privateKey", "token"]);
 const secureStorage = createSecureStore();
 const securePersistConfig: PersistConfig<SecureReducer> = {
   key: "secure",
   storage: secureStorage,
   stateReconciler: autoMergeLevel2,
-  transforms: [
-    createWhitelistTransform({
-      nostr: ["privateKey", "token"],
-    }),
-  ],
+  transforms: [nostrFilter],
 };
 
+const authFilter = createFilter("auth", ["isLogged"]);
+const userFilter = createFilter("user", ["account"]);
 const regularStorage = {
   ...AsyncStorage,
   getItem: async (key: string) => {
@@ -59,17 +43,14 @@ const asyncPersistConfig: PersistConfig<RegularReducer> = {
   storage: regularStorage,
   key: "async",
   stateReconciler: autoMergeLevel2,
-  transforms: [
-    createWhitelistTransform({
-      auth: ["isLogged"],
-    }),
-  ],
+  transforms: [authFilter, userFilter],
 };
 
 const regularReducers = combineReducers({
   profile: Profile.reducer,
   auth: Auth.reducer,
   user: User.reducer,
+  posts: Posts.reducer,
 });
 const secureReducers = combineReducers({
   nostr: Nostr.reducer,
@@ -89,14 +70,12 @@ const store = configureStore({
     const middlewares = getDefaultMiddleware({
       thunk: {
         extraArgument: {
-          api: {
-            UploadClient,
-          },
           actions: {
             auth: Auth.actions,
             user: User.actions,
             nostr: Nostr.actions,
             profile: Profile.actions,
+            posts: Posts.actions,
           },
         },
       },

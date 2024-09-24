@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { SCREENS } from "src/navigation/routes";
 import type { SignedNavigationProps } from "src/navigation/SignedStack";
-import { ProfileState, useAppSelector, UserState } from "src/store";
+import { useAppSelector, UserState } from "src/store";
 import { Icon, Avatar } from "src/shared/components";
 import s from "./ProfileInformation.style";
 import { colors, fonts, normalizeSize } from "src/theme";
@@ -39,9 +39,8 @@ const ProfileInformation = () => {
   );
   const navigation = useNavigation<SignedNavigationProps<"ProfileHome">>();
   const [infoContainerHeight, setInfoContainerHeight] = useState(0);
-  const isOwnProfile = useAppSelector(
-    ProfileState.selectors.selectIsOwnProfile,
-  );
+  const isOwnProfile = true; // will be recieved an accountId from route and equal to own account id
+
   const handleContainerLayout = (e: LayoutChangeEvent) => {
     const newHeight = e.nativeEvent?.layout.height;
     if (infoContainerHeight === newHeight) return;

@@ -30,7 +30,6 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
   const isLoading = useAppSelector(
     UserState.selectors.selectUpdateCompleteProfileLoading,
   );
-  const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState<SatlantisImage>();
 
@@ -38,7 +37,6 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
     if (isLoading) return;
     dispatch(
       UserState.thunks.shouldUpdateCompleteProfile({
-        npub,
         newData: {
           about: bio,
           interests: selectedInterests,

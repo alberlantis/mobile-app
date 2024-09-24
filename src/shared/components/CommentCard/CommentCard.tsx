@@ -1,32 +1,51 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
+import type { Note } from "@satlantis/api-client";
 
-import comments from "mock/profile/mockCommentsList.json";
 import Icon from "../Icon";
-import { useImageAssets } from "src/shared/hooks";
 import RoundImage from "../RoundImage";
 import { colors, normalizeSize } from "src/theme";
 import s from "./CommentCard.style";
 import { timeSince } from "src/utils";
 
-export type CommentItem = (typeof comments)[0];
+const renderFormattedText = (value: string) => {
+  const parts = value.split(/(@\S*)/g);
+  return parts.map((part, index) => {
+    return (
+      <Text
+        key={index}
+        style={{
+          color: part.startsWith("@")
+            ? colors.ORANGE_PRIMARY_LIGHT
+            : colors.WHITE,
+        }}
+      >
+        {part}
+      </Text>
+    );
+  });
+};
+
 interface ICommentCardProps {
   pictureSize: number;
-  item: CommentItem;
+  item: Note;
 }
 const CommentCard: React.FC<ICommentCardProps> = ({ item, pictureSize }) => {
-  const { images } = useImageAssets();
+  const handleReply = () => {
+    // todo: questions for albert (Replies to comments, are this implemented on the back?)
+  };
+
   return (
     <View style={s.container}>
       <View style={s.innerContainer}>
-        <RoundImage image={images.mockUserAvatar} size={pictureSize} />
+        <RoundImage image={item.account.picture} size={pictureSize} />
         <View style={s.informationContainer}>
           <View style={s.nameContainer}>
-            <Text style={s.name}>{item.name}</Text>
+            <Text style={s.name}>{item.account.name}</Text>
             <Text style={s.createAt}>{timeSince(item.createdAt)}</Text>
           </View>
-          <Text style={s.comment}>{item.comment}</Text>
-          <View style={s.replyButton}>
+          <Text style={s.comment}>{renderFormattedText(item.content)}</Text>
+          <Pressable onPress={handleReply} style={s.replyButton}>
             <Icon
               type="FontAwesome6"
               name="comments"
@@ -34,9 +53,9 @@ const CommentCard: React.FC<ICommentCardProps> = ({ item, pictureSize }) => {
               color={colors.GRAY_3}
             />
             <Text style={s.reply}>Reply</Text>
-          </View>
-          {!!item.replies.length &&
-            item.replies.map((reply, index) => (
+          </Pressable>
+          {!!item.descendants?.length &&
+            item.descendants.map((reply, index) => (
               <View
                 key={`reply-of-${item.id}-${reply.id}-${index}`}
                 style={s.replyContainer}

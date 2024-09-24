@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { UploadClient } from "src/client";
 import * as Nostr from "./Nostr";
 import * as Profile from "./Profile";
 import * as Auth from "./Auth";
 import * as User from "./User";
+import * as Posts from "./Posts";
 
 import { store } from "./store";
 
@@ -18,14 +18,12 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   state: RootState;
   dispatch: AppDispatch;
   extra: {
-    api: {
-      UploadClient: typeof UploadClient;
-    };
     actions: {
       auth: typeof Auth.actions;
       user: typeof User.actions;
       nostr: typeof Nostr.actions;
       profile: typeof Profile.actions;
+      posts: typeof Posts.actions;
     };
   };
 }>();

@@ -5,11 +5,13 @@ import { createAppAsyncThunk } from "src/store/tools";
 
 export const shouldFetchAccount = createAppAsyncThunk(
   "get/account",
-  async (npub: string) => {
+  async (...[, { getState }]) => {
+    const npub = getState().regular.user.account?.npub || "";
     const account = await satlantisClient.getAccount({ npub });
     if (account instanceof Error) {
       throw account;
     }
+
     return account;
   },
 );
@@ -49,53 +51,44 @@ export const shouldPostUnfollowUser = createAppAsyncThunk(
   },
 );
 
-interface CompleteProfile extends UpdateAccount {
+type CompleteProfile = {
   uri: string;
-}
+  newData: Partial<Account>;
+};
 export const shouldUpdateCompleteProfile = createAppAsyncThunk(
   "update/completeProfile",
-  async (
-    { uri, ...account }: CompleteProfile,
-    {
-      dispatch,
-      extra: {
-        api: { UploadClient },
-      },
-    },
-  ) => {
-    const imageUrl = await UploadClient.uploadImage(uri);
+  async ({ uri, newData }: CompleteProfile, { dispatch }) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const filename = uri.split("/").pop() || "";
+    const file = new File([blob], filename, { type: blob.type });
+    const imageUrl = await satlantisClient.uploadFile({ file });
+    if (imageUrl instanceof Error) {
+      throw imageUrl;
+    }
     await dispatch(
       shouldPutUpdateAccount({
-        newData: {
-          ...account.newData,
-          picture: imageUrl,
-        },
-        npub: account.npub,
+        ...newData,
+        picture: imageUrl.toString(),
       }),
     );
   },
 );
 
-interface UpdateAccount {
-  newData: Partial<Account>;
-  npub: string;
-}
-
 export const shouldPutUpdateAccount = createAppAsyncThunk(
   "put/updateAccount",
-  async ({ newData, npub }: UpdateAccount, { getState, dispatch }) => {
+  async (newData: Partial<Account>, { getState, dispatch }) => {
     const account = getState().regular.user.account;
     if (!account) {
       throw new Error("Error trying to reach your account data");
     }
-    const res = await satlantisClient.updateAccount({
-      npub: account.npub,
-      account: newData,
+    const res = await satlantisClient.updateMyProfile({
+      ...newData,
     });
     if (res instanceof Error) {
       throw res;
     }
-    await dispatch(shouldFetchAccount(npub));
+    await dispatch(shouldFetchAccount());
   },
 );
 

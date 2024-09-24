@@ -1,14 +1,15 @@
 import React from "react";
 import { FlatList, StyleProp, ViewStyle, View } from "react-native";
+import type { Note } from "@satlantis/api-client";
 
-import CommentCard, { CommentItem } from "../CommentCard";
+import CommentCard from "../CommentCard";
 import s from "./CommentList.style";
 
 interface ICommentListProps {
   listHeader?(): React.JSX.Element;
   style?: StyleProp<ViewStyle>;
-  data: CommentItem[];
-  keyExtractor(item: CommentItem, index: number): string;
+  data: Note[];
+  keyExtractor(item: Note, index: number): string;
 }
 
 const CommentList: React.FC<ICommentListProps> = ({

@@ -1,4 +1,4 @@
-function timeSince(dateString: string): string {
+function timeSince(dateString: Date): string {
   const now = new Date();
   const createdAt = new Date(dateString);
   const seconds = Math.floor((now.getTime() - createdAt.getTime()) / 1000);

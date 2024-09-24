@@ -1,12 +1,19 @@
 import React from "react";
 import { View } from "react-native";
 
+import { SignedScreenProps } from "src/navigation/SignedStack";
+import { useAppSelector, PostsState } from "src/store";
 import { colors } from "src/theme";
 import { Header, Post } from "src/shared/components";
 import { KeyboardView } from "src/shared/wrappers";
 import s from "./ViewPost.style";
 
-const ViewPost = () => {
+const ViewPost: React.FC<SignedScreenProps<"ViewPost">> = ({ route }) => {
+  const { postId } = route.params;
+  const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
+
+  if (!post) return null;
+
   return (
     <KeyboardView>
       <View style={s.container}>
@@ -15,7 +22,7 @@ const ViewPost = () => {
             backButtonColor={colors.GRAY_BOLD}
             showSharedButton
             shareButtonColor={colors.GRAY_BOLD}
-            shareValue="https://profile.info.com"
+            shareValue={post.url}
           />
         </View>
         <Post />

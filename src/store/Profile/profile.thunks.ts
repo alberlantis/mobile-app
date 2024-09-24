@@ -1,14 +1,21 @@
+import { PublicKey } from "@blowater/nostr-sdk";
+
 import { createAppAsyncThunk } from "src/store/tools";
+import { satlantisClient } from "src/client/satlantisApi";
 
-import { fetchImages } from "mock/profile/image-pool-client";
-
-export const shouldFetchProfilePosts = createAppAsyncThunk(
-  "get/posts",
-  async (page: number) => {
-    try {
-      return await fetchImages(page);
-    } catch (e) {
-      throw e;
+export const shouldFetchProfile = createAppAsyncThunk(
+  "get/profile",
+  async (pubkey: string) => {
+    const publicKey = PublicKey.FromHex(pubkey);
+    if (publicKey instanceof Error) {
+      throw publicKey;
     }
+
+    const response = await satlantisClient.getUserProfile(publicKey);
+    if (response instanceof Error) {
+      throw response;
+    }
+
+    return response;
   },
 );

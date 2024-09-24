@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
-import { ProfileState, useAppSelector } from "src/store";
 import { Button, Icon } from "src/shared/components";
 import s from "./ProfileActions.style";
 import { fonts, colors } from "src/theme";
 
 const ProfileActions = () => {
   const [toggleFollow, setToggleFollow] = useState(false);
-  const isOwnProfile = useAppSelector(
-    ProfileState.selectors.selectIsOwnProfile,
-  );
+  const isOwnProfile = true; // will be recieved an accountId from route and equal to own account id
 
   const followIcon = () => (
     <Icon
