@@ -34,7 +34,7 @@ const ProfileFollowers: React.FC<IProfileFollowersProps> = ({
 };
 
 const ProfileInformation = () => {
-  const { displayName, totalFollowers, totalFollowing } = useAppSelector(
+  const { name, totalFollowers, totalFollowing } = useAppSelector(
     UserState.selectors.selectUserHomeProfile,
   );
   const navigation = useNavigation<SignedNavigationProps<"ProfileHome">>();
@@ -53,7 +53,7 @@ const ProfileInformation = () => {
       <View style={s.innerContainer}>
         <View>
           <View style={s.profileDataNameContainer}>
-            <Text style={s.profileDataName}>{displayName}</Text>
+            <Text style={s.profileDataName}>{name}</Text>
             <Icon
               type="MaterialCommunityIcons"
               size={fonts[18]}

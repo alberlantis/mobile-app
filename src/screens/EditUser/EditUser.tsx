@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { View, Alert } from "react-native";
+import { Account } from "@satlantis/api-client";
 
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import { BaseSection, KeyboardView } from "src/shared/wrappers";
@@ -18,52 +19,32 @@ import { normalizeSize } from "src/theme";
 import { useAppSelector, UserState, useAppDispatch } from "src/store";
 import { SerializedError } from "@reduxjs/toolkit";
 
-type ProfileState = {
-  displayName: string;
-  about: string;
-  website: string;
-  phoneNumber: string;
-  email: string;
-  interests: string[];
-  [key: string]: string | string[];
-};
-
 const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const userAccount = useAppSelector(UserState.selectors.selectUserHomeProfile);
   const isLoading = useAppSelector(
     UserState.selectors.selectUpdateAccountLoading,
   );
-  const initialState: ProfileState = useMemo(
-    () => ({
-      displayName: userAccount.displayName,
-      about: userAccount.about,
-      website: userAccount.website,
-      phoneNumber: userAccount.phoneNumber,
-      email: userAccount.email,
-      interests: userAccount.interests as string[],
-    }),
-    [
-      userAccount.displayName,
-      userAccount.about,
-      userAccount.website,
-      userAccount.phoneNumber,
-      userAccount.email,
-      userAccount.interests,
-    ],
-  );
-  const [profile, setProfile] = useState<ProfileState>(initialState);
+  const initialState: Partial<Account> = {
+    name: userAccount.name,
+    about: userAccount.about,
+    website: userAccount.website,
+    phone: userAccount.phone,
+    email: userAccount.email,
+    interests: userAccount.interests,
+  };
+  const [profile, setProfile] = useState<Partial<Account>>(initialState);
   const hasProfileChanged = Object.keys(userAccount).some(
     (key) =>
       !deepEqual(
-        profile[key as keyof ProfileState],
-        initialState[key as keyof ProfileState],
+        profile[key as keyof Partial<Account>],
+        initialState[key as keyof Partial<Account>],
       ),
   );
   const isButtonEnabled = hasProfileChanged && !isLoading;
 
   const handleInputChange =
-    (key: keyof ProfileState) => (value: string | string[]) => {
+    (key: keyof Partial<Account>) => (value: string | string[]) => {
       setProfile({
         ...profile,
         [key]: value,
@@ -113,8 +94,8 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
           <Avatar />
           <View style={s.mainBasePanelContainer}>
             <Input
-              value={profile.displayName}
-              onChangeText={handleInputChange("displayName")}
+              value={profile.name || ""}
+              onChangeText={handleInputChange("name")}
               placeholder="Name"
             />
           </View>
@@ -123,29 +104,29 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
           <Input
             onChangeText={handleInputChange("about")}
             marginBottom={normalizeSize(12)}
-            value={profile.about}
+            value={profile.about || ""}
             placeholder="About"
           />
           <Input
             onChangeText={handleInputChange("website")}
-            value={profile.website}
+            value={profile.website || ""}
             placeholder="Website"
           />
         </BaseSection>
         <InterestsSection
-          selectedInterests={profile.interests}
+          selectedInterests={(profile.interests as string[]) || []}
           setSelectedInterests={handleInputChange("interests")}
         />
         <BaseSection sectionTitle="Contact" customContainer={s.contactSection}>
           <Input
-            onChangeText={handleInputChange("phoneNumber")}
-            value={profile.phoneNumber}
+            onChangeText={handleInputChange("phone")}
+            value={profile.phone || ""}
             marginBottom={normalizeSize(12)}
             placeholder="Phone number"
           />
           <Input
             onChangeText={handleInputChange("email")}
-            value={profile.email}
+            value={profile.email || ""}
             placeholder="Email address"
           />
         </BaseSection>

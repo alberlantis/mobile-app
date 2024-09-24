@@ -18,13 +18,11 @@ const ListHeader: React.FC<IListHeaderProps> = ({
   totalFollowings,
   setShowFollowers,
 }) => {
-  const { displayName } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile,
-  );
+  const { name } = useAppSelector(UserState.selectors.selectUserHomeProfile);
   return (
     <View>
       <View style={s.headerContainer}>
-        <Header title={displayName} backButtonColor={colors.GRAY_BOLD} />
+        <Header title={name} backButtonColor={colors.GRAY_BOLD} />
       </View>
       <View style={s.buttonsContainer}>
         <View style={s.followersButtonContainer}>

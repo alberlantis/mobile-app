@@ -82,9 +82,7 @@ export const shouldPutUpdateAccount = createAppAsyncThunk(
     if (!account) {
       throw new Error("Error trying to reach your account data");
     }
-    const res = await satlantisClient.updateMyProfile({
-      ...newData,
-    });
+    const res = await satlantisClient.updateMyProfile({ ...newData });
     if (res instanceof Error) {
       throw res;
     }

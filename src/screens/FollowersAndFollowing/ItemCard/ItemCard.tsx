@@ -52,7 +52,7 @@ const ItemCard: React.FC<IItemCardProps> = ({ item, showFollowers }) => {
         <RoundImage image={item.picture} size={32} />
         <View style={s.informationContainer}>
           <View style={s.nameContainer}>
-            <Text style={s.name}>{item.displayName}</Text>
+            <Text style={s.name}>{item.name}</Text>
             {!!item.chatMemberships && (
               <Icon
                 type="MaterialCommunityIcons"

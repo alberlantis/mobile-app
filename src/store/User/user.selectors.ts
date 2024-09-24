@@ -48,7 +48,7 @@ export const selectUserHomeProfile = createSelector(
   (account) => {
     return {
       banner: account?.banner || "",
-      displayName: account?.name || "",
+      name: account?.name || "",
       email: account?.email || "",
       totalFollowers: account?.followedBy?.length || 0,
       totalFollowing: account?.following?.length || 0,
@@ -59,7 +59,7 @@ export const selectUserHomeProfile = createSelector(
       nostrUsername: account?.nip05,
       id: account?.id,
       about: account?.about || "",
-      phoneNumber: account?.phone || "",
+      phone: account?.phone || "",
       interests: !!account && !!account.interests ? account.interests : [],
     };
   },
