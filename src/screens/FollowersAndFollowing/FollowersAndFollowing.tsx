@@ -9,7 +9,7 @@ const FollowersAndFollowing = () => {
   const followers =
     useAppSelector(UserState.selectors.selectUserFollowers) || [];
   const followings =
-    useAppSelector(UserState.selectors.selectUserFollowers) || [];
+    useAppSelector(UserState.selectors.selectUserFollowing) || [];
 
   return (
     <FollowList

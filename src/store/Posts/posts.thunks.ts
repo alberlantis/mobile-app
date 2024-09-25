@@ -126,7 +126,7 @@ export const shouldPublishReply = createAppAsyncThunk(
       throw event;
     }
 
-    const response = await satlantisClient.postNote({
+    const response = await satlantisClient._postNote({
       event,
       noteType: post.type,
       parentId: post.id,

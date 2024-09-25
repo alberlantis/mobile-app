@@ -34,6 +34,7 @@ const ProfileHome = () => {
   // todo: questions for albert (i need to filter the notes that ar the actual Posts, for those who are only comments or replies)
   useEffect(() => {
     dispatch(PostsState.thunks.shouldFetchPosts({ npub, page: 1 }));
+    dispatch(UserState.thunks.shouldFetchAccount());
   }, [dispatch, npub]);
 
   return (

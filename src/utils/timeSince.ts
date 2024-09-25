@@ -1,6 +1,6 @@
-function timeSince(dateString: Date): string {
+function timeSince(timestamp: number): string {
   const now = new Date();
-  const createdAt = new Date(dateString);
+  const createdAt = new Date(timestamp);
   const seconds = Math.floor((now.getTime() - createdAt.getTime()) / 1000);
   const intervals = {
     year: 31536000, // 60 * 60 * 24 * 365
