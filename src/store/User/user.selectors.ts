@@ -4,8 +4,12 @@ import type { RootState } from "../tools";
 import { splitArrayIntoEqualParts } from "src/utils";
 
 const selectUser = (store: RootState) => store.regular.user;
-export const selectAccount = (store: RootState) => selectUser(store).account;
-
+export const selectOtherUserAccount = (store: RootState) =>
+  selectUser(store).otherUserAccount;
+export const selectMyAccount = (store: RootState) => selectUser(store).account;
+export const selectAccount = (isOwnAccount: boolean) => (store: RootState) => {
+  return isOwnAccount ? selectMyAccount(store) : selectOtherUserAccount(store);
+};
 export const selectInterestsPool = (store: RootState) =>
   selectUser(store).interestsPool;
 export const selectInterestsMap = createSelector(
@@ -43,9 +47,8 @@ export const selectSanitizeInterestsPool = createSelector(
     return splitArrayIntoEqualParts(pool, 3);
   },
 );
-export const selectUserHomeProfile = createSelector(
-  selectAccount,
-  (account) => {
+export const selectUserHomeProfile = (isOwnAccount: boolean) =>
+  createSelector(selectAccount(isOwnAccount), (account) => {
     return {
       banner: account?.banner || "",
       name: account?.name || "",
@@ -62,14 +65,15 @@ export const selectUserHomeProfile = createSelector(
       phone: account?.phone || "",
       interests: !!account && !!account.interests ? account.interests : [],
     };
-  },
-);
-export const selectUserFollowers = (store: RootState) =>
-  selectAccount(store)?.followedBy;
-export const selectUserFollowing = (store: RootState) =>
-  selectAccount(store)?.following;
+  });
+export const selectUserFollowers =
+  (isOwnAccount: boolean) => (store: RootState) =>
+    selectAccount(isOwnAccount)(store)?.followedBy;
+export const selectUserFollowing =
+  (isOwnAccount: boolean) => (store: RootState) =>
+    selectAccount(isOwnAccount)(store)?.following;
 export const selectIsUserFollowingFollower = (followerId: number | undefined) =>
-  createSelector(selectAccount, (account) => {
+  createSelector(selectMyAccount, (account) => {
     if (!account || !followerId) return false;
     return !!account.following?.find((item) => item.id === followerId);
   });
@@ -80,7 +84,7 @@ export const selectFollowUserLoading = (store: RootState) =>
 export const selectUnfollowUserLoading = (store: RootState) =>
   selectUser(store).unfollowUserLoading;
 export const selectUserPublicKeys = createSelector(
-  selectAccount,
+  selectMyAccount,
   (account) => ({
     npub: account?.npub || "",
     pubKey: account?.pubKey || "",

@@ -5,14 +5,26 @@ import { createAppAsyncThunk } from "src/store/tools";
 
 export const shouldFetchAccount = createAppAsyncThunk(
   "get/account",
-  async (...[, { getState }]) => {
+  async (
+    profileNpub: string | undefined,
+    {
+      getState,
+      dispatch,
+      extra: {
+        actions: { user },
+      },
+    },
+  ) => {
     const npub = getState().regular.user.account?.npub || "";
-    const account = await satlantisClient.getAccount({ npub });
+    const account = await satlantisClient.getAccount({
+      npub: profileNpub || npub,
+    });
     if (account instanceof Error) {
       throw account;
     }
 
-    return account;
+    if (!!profileNpub) dispatch(user.shouldSetOtherUserAccount(account));
+    else dispatch(user.shouldSetAccount(account));
   },
 );
 

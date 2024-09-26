@@ -1,6 +1,9 @@
 import React from "react";
 import { View } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
+import type { SignedRouteProps } from "src/navigation/SignedStack";
+import { SCREENS } from "src/navigation/routes";
 import { useAppSelector, UserState } from "src/store";
 import { Header, Button } from "src/shared/components";
 import { colors } from "src/theme";
@@ -18,7 +21,11 @@ const ListHeader: React.FC<IListHeaderProps> = ({
   totalFollowings,
   setShowFollowers,
 }) => {
-  const { name } = useAppSelector(UserState.selectors.selectUserHomeProfile);
+  const route =
+    useRoute<SignedRouteProps<typeof SCREENS.FOLLOWERS_AND_FOLLOWING>>();
+  const { name } = useAppSelector(
+    UserState.selectors.selectUserHomeProfile(route.params.isOwnProfile),
+  );
   return (
     <View>
       <View style={s.headerContainer}>

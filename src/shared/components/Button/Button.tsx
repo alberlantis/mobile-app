@@ -100,11 +100,7 @@ const Button: React.FC<IButtonProps> = ({
       testID="button-pressable-id"
     >
       {drawSVG && (
-        <Svg
-          width={dynamicSize.width}
-          height={dynamicSize.height}
-          style={StyleSheet.absoluteFillObject}
-        >
+        <Svg width={dynamicSize.width} style={StyleSheet.absoluteFillObject}>
           <Defs>
             <LinearGradient
               id={linearGradientID}

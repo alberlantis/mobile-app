@@ -21,14 +21,14 @@ import LikesText from "./LikesText";
 
 const PostFooter = () => {
   const dispatch = useAppDispatch();
-  const account = useAppSelector(UserState.selectors.selectAccount);
+  const route = useRoute<SignedRouteProps<PostsScreens>>();
+  const { postId } = route.params;
+  const account = useAppSelector(UserState.selectors.selectMyAccount);
   const [showLikesModal, setShowLikesModal] = useState(false);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
   const openCommentsModal = () => {
     setShowCommentsModal(true);
   };
-  const route = useRoute<SignedRouteProps<PostsScreens>>();
-  const { postId } = route.params;
   const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
   const isPostLoading = useAppSelector(PostsState.selectors.selectPostsLoading);
   const isPostLikeLoading = useAppSelector(

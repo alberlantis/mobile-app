@@ -9,8 +9,10 @@ interface IFollowListProps {
   showFollowers?: boolean;
   listHeader?(): React.JSX.Element;
   style?: StyleProp<ViewStyle>;
+  isFollowItem?: boolean;
   data: Account[];
   keyExtractor(item: Account, index: number): string;
+  onPress(item: Account): void;
 }
 
 const FollowList: React.FC<IFollowListProps> = ({
@@ -19,6 +21,8 @@ const FollowList: React.FC<IFollowListProps> = ({
   keyExtractor,
   style = s.container,
   data,
+  isFollowItem = true,
+  onPress,
 }) => {
   return (
     <FlatList
@@ -29,8 +33,9 @@ const FollowList: React.FC<IFollowListProps> = ({
         <UserCard
           item={item}
           showFollowers={showFollowers}
-          isFollowItem
+          isFollowItem={isFollowItem}
           pictureSize={32}
+          onPress={onPress}
         />
       )}
       ListHeaderComponent={listHeader}

@@ -15,6 +15,7 @@ interface UserState {
   interestsPool: Interest[];
   interestsPoolLoading: boolean;
   account: Account | undefined;
+  otherUserAccount: Account | undefined;
   followUserLoading: boolean;
   unfollowUserLoading: boolean;
   getAccountLoading: boolean;
@@ -33,6 +34,7 @@ const initialState: UserState = {
   updateAccountLoading: false,
   followPubKeysLoading: false,
   updateCompleteProfileLoading: false,
+  otherUserAccount: undefined,
 };
 
 const userSlice = createSlice({
@@ -41,9 +43,13 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.account = undefined;
+      state.otherUserAccount = undefined;
     },
     shouldSetAccount: (state, action: PayloadAction<Account>) => {
       state.account = action.payload;
+    },
+    shouldSetOtherUserAccount: (state, action: PayloadAction<Account>) => {
+      state.otherUserAccount = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -75,9 +81,8 @@ const userSlice = createSlice({
     builder.addCase(shouldPostUnfollowUser.rejected, (state) => {
       state.unfollowUserLoading = false;
     });
-    builder.addCase(shouldFetchAccount.fulfilled, (state, action) => {
+    builder.addCase(shouldFetchAccount.fulfilled, (state) => {
       state.getAccountLoading = false;
-      state.account = action.payload;
     });
     builder.addCase(shouldFetchAccount.pending, (state) => {
       state.getAccountLoading = true;

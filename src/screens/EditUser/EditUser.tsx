@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Alert } from "react-native";
 import { Account } from "@satlantis/api-client";
 
+import { SCREENS } from "src/navigation/routes";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import { BaseSection, KeyboardView } from "src/shared/wrappers";
 import {
@@ -19,9 +20,13 @@ import { normalizeSize } from "src/theme";
 import { useAppSelector, UserState, useAppDispatch } from "src/store";
 import { SerializedError } from "@reduxjs/toolkit";
 
-const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
+const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
+  navigation,
+}) => {
   const dispatch = useAppDispatch();
-  const userAccount = useAppSelector(UserState.selectors.selectUserHomeProfile);
+  const userAccount = useAppSelector(
+    UserState.selectors.selectUserHomeProfile(true),
+  );
   const isLoading = useAppSelector(
     UserState.selectors.selectUpdateAccountLoading,
   );
@@ -89,9 +94,9 @@ const EditUser: React.FC<SignedScreenProps<"EditUser">> = ({ navigation }) => {
         <View style={s.topHeaderContainer}>
           <BackButton color={colors.BLACK_MEDIUM} onPress={handleBackButton} />
         </View>
-        <ImagePortrait />
+        <ImagePortrait isOwnProfile />
         <View style={s.mainInfoContainer}>
-          <Avatar />
+          <Avatar isOwnProfile />
           <View style={s.mainBasePanelContainer}>
             <Input
               value={profile.name || ""}

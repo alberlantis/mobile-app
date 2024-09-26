@@ -6,14 +6,18 @@ import {
   LayoutChangeEvent,
   Pressable,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { SCREENS } from "src/navigation/routes";
-import type { SignedNavigationProps } from "src/navigation/SignedStack";
+import type {
+  SignedNavigationProps,
+  SignedRouteProps,
+} from "src/navigation/SignedStack";
 import { useAppSelector, UserState } from "src/store";
 import { Icon, Avatar } from "src/shared/components";
 import s from "./ProfileInformation.style";
 import { colors, fonts, normalizeSize } from "src/theme";
+import type { ProfileHomeRoutes } from "../ProfileHome";
 
 interface IProfileFollowersProps {
   marginRight?: number;
@@ -34,12 +38,13 @@ const ProfileFollowers: React.FC<IProfileFollowersProps> = ({
 };
 
 const ProfileInformation = () => {
+  const route = useRoute<SignedRouteProps<ProfileHomeRoutes>>();
+  const isOwnProfile = route.name === SCREENS.PROFILE_HOME;
   const { name, totalFollowers, totalFollowing } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile,
+    UserState.selectors.selectUserHomeProfile(isOwnProfile),
   );
-  const navigation = useNavigation<SignedNavigationProps<"ProfileHome">>();
+  const navigation = useNavigation<SignedNavigationProps<ProfileHomeRoutes>>();
   const [infoContainerHeight, setInfoContainerHeight] = useState(0);
-  const isOwnProfile = true; // will be recieved an accountId from route and equal to own account id
 
   const handleContainerLayout = (e: LayoutChangeEvent) => {
     const newHeight = e.nativeEvent?.layout.height;
@@ -49,7 +54,7 @@ const ProfileInformation = () => {
 
   return (
     <View style={s.container} onLayout={handleContainerLayout}>
-      <Avatar />
+      <Avatar isOwnProfile={isOwnProfile} />
       <View style={s.innerContainer}>
         <View>
           <View style={s.profileDataNameContainer}>
@@ -61,10 +66,12 @@ const ProfileInformation = () => {
               color={colors.ORANGE_PRIMARY}
             />
           </View>
-          <Text style={s.profileDataTitle}>@ambassador</Text>
+          {/* <Text style={s.profileDataTitle}>@ambassador</Text> */}
           <Pressable
             style={s.followersSection}
-            onPress={() => navigation.navigate(SCREENS.FOLLOWERS_AND_FOLLOWING)}
+            onPress={() =>
+              navigation.push(SCREENS.FOLLOWERS_AND_FOLLOWING, { isOwnProfile })
+            }
           >
             <ProfileFollowers
               followCant={totalFollowing}

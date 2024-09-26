@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { View, Pressable, ActivityIndicator, FlatList } from "react-native";
+import { View, Pressable, ActivityIndicator } from "react-native";
 
 import {
   useAppDispatch,
@@ -10,7 +10,7 @@ import {
 import { colors, normalizeSize } from "src/theme";
 import Icon from "src/shared/components/Icon";
 import CommentList from "src/shared/components/CommentList";
-import UserCard from "src/shared/components/UserCard";
+import FollowList from "src/shared/components/FollowList";
 import Input from "src/shared/components/Input";
 import BottomModal from "src/shared/wrappers/BottomModal";
 import s from "./CommentsModal.style";
@@ -27,8 +27,12 @@ const CommentsModal: React.FC<ICommentsModalProps> = ({
   post,
 }) => {
   const dispatch = useAppDispatch();
-  const followers = useAppSelector(UserState.selectors.selectUserFollowers);
-  const followings = useAppSelector(UserState.selectors.selectUserFollowing);
+  const followers = useAppSelector(
+    UserState.selectors.selectUserFollowers(true),
+  );
+  const followings = useAppSelector(
+    UserState.selectors.selectUserFollowing(true),
+  );
   const initialUserTagListState = [...(followers || []), ...(followings || [])];
   const [usersTagList, setUsersTagList] = useState(initialUserTagListState);
   const [comment, setComment] = useState("");
@@ -61,7 +65,7 @@ const CommentsModal: React.FC<ICommentsModalProps> = ({
 
     const atMatches = text.match(/@\S*$/);
     if (!!atMatches) {
-      const afterAt = atMatches[0].substring(1); // Texto después del arroba
+      const afterAt = atMatches[0].substring(1);
 
       if (afterAt.length === 0) {
         setUsersTagList(initialUserTagListState);
@@ -100,17 +104,14 @@ const CommentsModal: React.FC<ICommentsModalProps> = ({
         ) : (
           <Fragment>
             {isTag ? (
-              <FlatList
-                style={s.usersTagsListContainer}
+              <FollowList
                 keyExtractor={(item, index) =>
                   `view-post-user-tags-list-${item.id}-${index}`
                 }
                 data={usersTagList}
-                renderItem={({ item }) => (
-                  <Pressable onPress={() => handleTagPress(item.name || "")}>
-                    <UserCard item={item} pictureSize={32} />
-                  </Pressable>
-                )}
+                onPress={(item) => handleTagPress(item.name || "")}
+                style={s.usersTagsListContainer}
+                isFollowItem={false}
               />
             ) : (
               <CommentList

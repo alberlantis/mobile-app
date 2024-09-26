@@ -7,11 +7,15 @@ import { colors } from "src/theme";
 
 interface IButtonOptionsLabelProps {
   option: string;
+  isOwnProfile: boolean;
 }
 
-const ButtonOptionLabel: React.FC<IButtonOptionsLabelProps> = ({ option }) => {
+const ButtonOptionLabel: React.FC<IButtonOptionsLabelProps> = ({
+  option,
+  isOwnProfile,
+}) => {
   const { isBusiness } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile,
+    UserState.selectors.selectUserHomeProfile(isOwnProfile),
   );
   const postsLength = (useAppSelector(PostsState.selectors.selectPosts) || [])
     .length;

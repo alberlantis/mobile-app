@@ -7,8 +7,14 @@ import s from "./Avatar.style";
 import { colors, fonts } from "src/theme";
 import RoundeImage from "../RoundImage";
 
-const Avatar = () => {
-  const { avatar } = useAppSelector(UserState.selectors.selectUserHomeProfile);
+interface IAvatarProps {
+  isOwnProfile: boolean;
+}
+
+const Avatar: React.FC<IAvatarProps> = ({ isOwnProfile }) => {
+  const { avatar } = useAppSelector(
+    UserState.selectors.selectUserHomeProfile(isOwnProfile),
+  );
 
   return (
     <View style={s.profilePhotoInnerContainer}>

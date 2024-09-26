@@ -5,6 +5,7 @@ export const SCREENS = {
   ONBOARDING: "Onboarding",
   POSTING: "Posting",
   PROFILE_HOME: "ProfileHome",
+  OTHER_PROFILE: "OtherProfile",
   SPLASH: "Splash",
   SIGN_UP: "SignUp",
   NOSTR_UP: "NostrUp",

@@ -1,6 +1,14 @@
-import React, { useCallback, useEffect, useMemo } from "react";
-import { ListRenderItemInfo, FlatList, ActivityIndicator } from "react-native";
+import React, { useCallback, useMemo } from "react";
+import {
+  ListRenderItemInfo,
+  FlatList,
+  ActivityIndicator,
+  View,
+} from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
+import { SignedScreenProps } from "src/navigation/SignedStack";
+import { SCREENS } from "src/navigation/routes";
 import {
   useAppSelector,
   useAppDispatch,
@@ -11,11 +19,22 @@ import s from "./ProfileHome.style";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
 
-const ProfileHome = () => {
+export type ProfileHomeRoutes =
+  | typeof SCREENS.PROFILE_HOME
+  | typeof SCREENS.OTHER_PROFILE;
+
+const ProfileHome: React.FC<SignedScreenProps<ProfileHomeRoutes>> = ({
+  route,
+}) => {
   const dispatch = useAppDispatch();
   const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const posts = useAppSelector(PostsState.selectors.selectSanitizePosts) || [];
-  const isLoading = useAppSelector(PostsState.selectors.selectPostsLoading);
+  const isPostLoading = useAppSelector(PostsState.selectors.selectPostsLoading);
+  const isAccountLoading = useAppSelector(
+    UserState.selectors.selectGetAccountLoading,
+  );
+  const profileNpub = route.params?.profileNpub;
+  const isLoading = isPostLoading || isAccountLoading;
 
   const handleRenderItem = useCallback(
     ({ item, index }: ListRenderItemInfo<PostsState.selectors.Posts[]>) => (
@@ -25,17 +44,31 @@ const ProfileHome = () => {
   );
   const handleRenderLoading = useMemo(
     () =>
-      isLoading ? (
+      isPostLoading ? (
         <ActivityIndicator size="large" style={s.loadingIndicator} />
       ) : null,
-    [isLoading],
+    [isPostLoading],
   );
 
-  // todo: questions for albert (i need to filter the notes that ar the actual Posts, for those who are only comments or replies)
-  useEffect(() => {
-    dispatch(PostsState.thunks.shouldFetchPosts({ npub, page: 1 }));
-    dispatch(UserState.thunks.shouldFetchAccount());
-  }, [dispatch, npub]);
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(
+        PostsState.thunks.shouldFetchPosts({
+          npub: profileNpub || npub,
+          page: 1,
+        }),
+      );
+      dispatch(UserState.thunks.shouldFetchAccount(profileNpub));
+    }, [dispatch, npub, profileNpub]),
+  );
+
+  if (isLoading) {
+    return (
+      <View style={s.loadingContainer}>
+        <ActivityIndicator size="small" />
+      </View>
+    );
+  }
 
   return (
     <FlatList

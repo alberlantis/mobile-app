@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { Account } from "@satlantis/api-client";
 
 import { useAppSelector, UserState } from "src/store";
@@ -15,12 +15,14 @@ interface IUserCardProps {
   isFollowItem?: boolean;
   pictureSize: number;
   item: Account;
+  onPress(item: Account): void;
 }
 const UserCard: React.FC<IUserCardProps> = ({
   item,
   showFollowers,
   pictureSize,
   isFollowItem = false,
+  onPress,
 }) => {
   const { isLoading, handleFollowButton } = useFollowButton(item.id, item.npub);
   const isBeingFollow = useAppSelector(
@@ -34,7 +36,7 @@ const UserCard: React.FC<IUserCardProps> = ({
 
   return (
     <View style={s.container}>
-      <View style={s.innerContainer}>
+      <Pressable style={s.innerContainer} onPress={() => onPress(item)}>
         <RoundImage image={item.picture} size={pictureSize} />
         <View style={s.informationContainer}>
           <View style={s.nameContainer}>
@@ -57,12 +59,12 @@ const UserCard: React.FC<IUserCardProps> = ({
             {item.followedBy?.length || 0} Followers
           </Text>
         </View>
-      </View>
+      </Pressable>
       {isFollowItem && (
         <Button
           size="auto"
           text={showFollowers && !isBeingFollow ? "Follow" : "Unfollow"}
-          onPress={handleFollowButton}
+          onPress={() => handleFollowButton(item.id)}
           theme={buttonTheme}
           paddingVertical={7}
           textStyle={s.buttonText}

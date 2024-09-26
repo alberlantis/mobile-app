@@ -7,6 +7,12 @@ export default StyleSheet.create({
     backgroundColor: colors.BLACK,
     flex: 1,
   },
+  loadingContainer: {
+    backgroundColor: colors.BLACK,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   contentContainer: {
     flexGrow: 1,
   },

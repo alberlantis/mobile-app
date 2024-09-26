@@ -1,13 +1,21 @@
 import React from "react";
 import { View, Text, Linking, Alert } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
+import type { SignedRouteProps } from "src/navigation/SignedStack";
+import { SCREENS } from "src/navigation/routes";
+import type { ProfileHomeRoutes } from "../ProfileHome";
 import { useAppSelector, UserState } from "src/store";
 import { Icon } from "src/shared/components";
 import { colors, fonts } from "src/theme";
 import s from "./ProfileDetails.style";
 
 const ProfileDetails = () => {
-  const { website } = useAppSelector(UserState.selectors.selectUserHomeProfile);
+  const route = useRoute<SignedRouteProps<ProfileHomeRoutes>>();
+  const isOwnProfile = route.name === SCREENS.PROFILE_HOME;
+  const { website, about } = useAppSelector(
+    UserState.selectors.selectUserHomeProfile(isOwnProfile),
+  );
   const handleOpenWebsite = async () => {
     try {
       if (!website) throw new Error("no website was given");
@@ -20,7 +28,7 @@ const ProfileDetails = () => {
 
   return (
     <View style={s.container}>
-      <Text style={s.title}>Freedom Community builder</Text>
+      <Text style={s.title}>{about}</Text>
       <Text style={s.webpage} onPress={handleOpenWebsite}>
         {website}
       </Text>

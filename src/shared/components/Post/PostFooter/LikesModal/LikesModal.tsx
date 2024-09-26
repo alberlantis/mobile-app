@@ -31,6 +31,7 @@ const LikesModal: React.FC<ILikesModalProps> = ({
           }
           data={followers as any}
           style={s.modalListContainer}
+          onPress={() => {}}
         />
       </View>
     </BottomModal>

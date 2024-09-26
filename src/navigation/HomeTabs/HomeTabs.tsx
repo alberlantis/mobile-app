@@ -37,7 +37,10 @@ const HomeTabs = () => {
       <Tab.Screen name={SCREENS.LOCATION} component={Location} />
       <Tab.Screen name={SCREENS.POSTING} component={Posting} />
       <Tab.Screen name={SCREENS.NOTIFICATIONS} component={Notifications} />
-      <Tab.Screen name={SCREENS.PROFILE_HOME} component={ProfileHome} />
+      <Tab.Screen
+        name={SCREENS.PROFILE_HOME}
+        component={ProfileHome as React.FC}
+      />
     </Tab.Navigator>
   );
 };

@@ -16,13 +16,14 @@ const RoundImage: React.FC<IRoundImageProps> = ({ size, image }) => {
   const { images } = useImageAssets();
   return (
     <Image
+      width={normalizeSize(size)}
+      height={normalizeSize(size)}
       resizeMode="cover"
       source={getSanitizeImage(image || images.logo)}
       style={{
         width: normalizeSize(size),
         height: normalizeSize(size),
         borderRadius: normalizeSize(size) / 2,
-        backgroundColor: "red",
       }}
     />
   );

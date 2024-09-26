@@ -1,7 +1,10 @@
+import { useState } from "react";
+
 import { useAppSelector, UserState, useAppDispatch } from "src/store";
 
 const useFollowButton = (userId: number, itemNpub: string) => {
   const dispatch = useAppDispatch();
+  const [userPressed, setUserPressed] = useState<number | undefined>();
   const isBeingFollow = useAppSelector(
     UserState.selectors.selectIsUserFollowingFollower(userId),
   );
@@ -15,10 +18,12 @@ const useFollowButton = (userId: number, itemNpub: string) => {
     UserState.selectors.selectGetAccountLoading,
   );
   const isLoading =
-    isFollowUserLoading || isRefreshingAccount || isUnfollowUserLoading;
+    (isFollowUserLoading || isRefreshingAccount || isUnfollowUserLoading) &&
+    userPressed === userId;
 
-  const handleFollowButton = () => {
-    if (isLoading) return;
+  const handleFollowButton = (userPressedId: number) => {
+    setUserPressed(userPressedId);
+    if (isLoading && userPressedId === userId) return;
     if (isBeingFollow) {
       dispatch(UserState.thunks.shouldPostUnfollowUser(itemNpub))
         .unwrap()
