@@ -1,4 +1,4 @@
-import React, { useMemo, memo } from "react";
+import React, { useMemo } from "react";
 import {
   View,
   Image,
@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { useImageAssets } from "src/shared/hooks";
 import { PostsState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
 import type { SignedNavigationProps } from "src/navigation/SignedStack";
@@ -23,6 +24,8 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
   const navigation = useNavigation<SignedNavigationProps<"ProfileHome">>();
   const { width } = useWindowDimensions();
   const imageDimensions = useMemo(() => width / 3, [width]);
+  const { images } = useImageAssets();
+
   return (
     <View
       style={StyleSheet.compose(s.postRow, {
@@ -41,11 +44,19 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
             marginRight: index !== 2 ? normalizeSize(1.4) : 0,
           }}
         >
-          <Image src={post.imageUrl} style={s.postImage} />
+          <Image
+            height={imageDimensions}
+            width={imageDimensions}
+            src={post.imageUrl}
+            style={s.postImage}
+            resizeMode="cover"
+            resizeMethod="scale"
+            defaultSource={images.splash}
+          />
         </Pressable>
       ))}
     </View>
   );
 };
 
-export default memo(ProfilePosts);
+export default ProfilePosts;

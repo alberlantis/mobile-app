@@ -36,10 +36,20 @@ export const selectSinglePost = (postId: number) =>
     return posts.find((post) => post.id === postId);
   });
 
-export const selectSanitizePosts = createSelector(selectPosts, (posts) => {
-  const sanitizePosts = splitArrayBySize(posts, 3);
-  return sanitizePosts;
+export const selectFilteredPosts = createSelector(selectPosts, (posts) => {
+  return posts.filter((post) => {
+    const tags: string[] = JSON.parse(post.tags);
+    if (!tags) return true;
+    return tags.every((tag) => tag[0] !== "e");
+  });
 });
+export const selectSanitizePosts = createSelector(
+  selectFilteredPosts,
+  (posts) => {
+    const sanitizePosts = splitArrayBySize(posts, 3);
+    return sanitizePosts;
+  },
+);
 export const selectPostLoading = (store: RootState) =>
   selectPostsState(store).postLoading;
 export const selectPublishReplyLoading = (store: RootState) =>

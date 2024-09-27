@@ -1,6 +1,7 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image } from "react-native";
 
+import { useImageAssets } from "src/shared/hooks";
 import { useAppSelector, UserState } from "src/store";
 import s from "./ImagePortrait.style";
 
@@ -12,11 +13,16 @@ const ImagePortrait: React.FC<IImagePortraitProps> = ({ isOwnProfile }) => {
   const { banner } = useAppSelector(
     UserState.selectors.selectUserHomeProfile(isOwnProfile),
   );
+  const { images } = useImageAssets();
 
-  return !!banner ? (
-    <Image source={{ uri: banner }} style={s.image} resizeMode="stretch" />
-  ) : (
-    <View style={s.image} />
+  return (
+    <Image
+      defaultSource={images.splash}
+      resizeMethod="scale"
+      source={banner ? { uri: banner } : undefined}
+      style={s.image}
+      resizeMode="cover"
+    />
   );
 };
 

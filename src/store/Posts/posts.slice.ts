@@ -31,11 +31,14 @@ const postsSlice = createSlice({
     logout: (state) => {
       state.posts = [];
     },
+    shouldClearPosts: (state) => {
+      state.posts = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(shouldFetchPosts.fulfilled, (state, action) => {
       state.postsLoading = false;
-      state.posts = action.payload;
+      state.posts = [...state.posts, ...action.payload];
     });
     builder.addCase(shouldFetchPosts.pending, (state) => {
       state.postsLoading = true;

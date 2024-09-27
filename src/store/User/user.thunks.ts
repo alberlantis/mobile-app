@@ -15,10 +15,8 @@ export const shouldFetchAccount = createAppAsyncThunk(
       },
     },
   ) => {
-    const npub = getState().regular.user.account?.npub || "";
-    const account = await satlantisClient.getAccount({
-      npub: profileNpub || npub,
-    });
+    const npub = profileNpub || getState().regular.user.account?.npub || "";
+    const account = await satlantisClient.getAccount({ npub });
     if (account instanceof Error) {
       throw account;
     }

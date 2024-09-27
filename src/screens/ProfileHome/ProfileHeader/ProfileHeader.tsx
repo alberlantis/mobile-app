@@ -6,7 +6,7 @@ import ProfileActions from "../ProfileActions";
 import ProfileDetails from "../ProfileDetails";
 import ProfileOptions from "../ProfileOptions";
 
-const ProfileHeader = () => {
+const ProfileHeader: React.FC = () => {
   return (
     <>
       <ProfilePortrait />

@@ -11,8 +11,8 @@ import ButtonOptionLabel from "../ButtonOptionLabel";
 import s from "./ProfileOptions.style";
 import { normalizeSize } from "src/theme";
 
-const USER_OPTIONS = ["Posts", "Info", "Chats", "Followers"];
-const BUSINESS_OPTIONS = ["Posts", "Info", "Reviews"];
+const USER_OPTIONS = ["Posts" /**, "Info", "Chats", "Followers"*/];
+const BUSINESS_OPTIONS = ["Posts" /**, "Info", "Reviews"*/];
 
 const ProfileOptions = () => {
   const route = useRoute<SignedRouteProps<ProfileHomeRoutes>>();

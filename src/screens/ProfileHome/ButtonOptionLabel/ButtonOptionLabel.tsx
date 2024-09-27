@@ -17,8 +17,9 @@ const ButtonOptionLabel: React.FC<IButtonOptionsLabelProps> = ({
   const { isBusiness } = useAppSelector(
     UserState.selectors.selectUserHomeProfile(isOwnProfile),
   );
-  const postsLength = (useAppSelector(PostsState.selectors.selectPosts) || [])
-    .length;
+  const postsLength = (
+    useAppSelector(PostsState.selectors.selectFilteredPosts) || []
+  ).length;
 
   let buttonLabel: string = "";
   let buttonColor: ColorValue = colors.WHITE_BOLD;

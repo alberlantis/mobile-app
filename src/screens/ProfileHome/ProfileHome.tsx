@@ -1,10 +1,5 @@
-import React, { useCallback, useMemo } from "react";
-import {
-  ListRenderItemInfo,
-  FlatList,
-  ActivityIndicator,
-  View,
-} from "react-native";
+import React, { useCallback, useMemo, useState } from "react";
+import { ListRenderItemInfo, FlatList, ActivityIndicator } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import { SignedScreenProps } from "src/navigation/SignedStack";
@@ -30,11 +25,8 @@ const ProfileHome: React.FC<SignedScreenProps<ProfileHomeRoutes>> = ({
   const { npub } = useAppSelector(UserState.selectors.selectUserPublicKeys);
   const posts = useAppSelector(PostsState.selectors.selectSanitizePosts) || [];
   const isPostLoading = useAppSelector(PostsState.selectors.selectPostsLoading);
-  const isAccountLoading = useAppSelector(
-    UserState.selectors.selectGetAccountLoading,
-  );
   const profileNpub = route.params?.profileNpub;
-  const isLoading = isPostLoading || isAccountLoading;
+  const [page, setPage] = useState<number>(0);
 
   const handleRenderItem = useCallback(
     ({ item, index }: ListRenderItemInfo<PostsState.selectors.Posts[]>) => (
@@ -43,32 +35,36 @@ const ProfileHome: React.FC<SignedScreenProps<ProfileHomeRoutes>> = ({
     [],
   );
   const handleRenderLoading = useMemo(
-    () =>
-      isPostLoading ? (
-        <ActivityIndicator size="large" style={s.loadingIndicator} />
-      ) : null,
+    () => (isPostLoading ? <ActivityIndicator size="small" /> : null),
     [isPostLoading],
   );
 
+  const handleOnEndReached = () => {
+    if (!isPostLoading) {
+      const nextPage = page + 1;
+      dispatch(
+        PostsState.thunks.shouldFetchPosts({
+          npub: profileNpub || npub,
+          page: nextPage,
+        }),
+      );
+      setPage(nextPage);
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
+      dispatch(PostsState.actions.shouldClearPosts());
+      dispatch(UserState.thunks.shouldFetchAccount(profileNpub));
       dispatch(
         PostsState.thunks.shouldFetchPosts({
           npub: profileNpub || npub,
           page: 1,
         }),
       );
-      dispatch(UserState.thunks.shouldFetchAccount(profileNpub));
-    }, [dispatch, npub, profileNpub]),
+      setPage(1);
+    }, [dispatch, setPage, npub, profileNpub]),
   );
-
-  if (isLoading) {
-    return (
-      <View style={s.loadingContainer}>
-        <ActivityIndicator size="small" />
-      </View>
-    );
-  }
 
   return (
     <FlatList
@@ -77,10 +73,11 @@ const ProfileHome: React.FC<SignedScreenProps<ProfileHomeRoutes>> = ({
       ListHeaderComponent={ProfileHeader}
       ListFooterComponent={handleRenderLoading}
       renderItem={handleRenderItem}
+      onEndReached={handleOnEndReached}
+      onEndReachedThreshold={0.5}
       showsVerticalScrollIndicator={false}
       style={s.container}
       contentContainerStyle={s.contentContainer}
-      ListFooterComponentStyle={s.listFooter}
     />
   );
 };
