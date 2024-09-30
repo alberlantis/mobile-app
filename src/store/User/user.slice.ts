@@ -9,6 +9,8 @@ import {
   shouldPutUpdateAccount,
   shouldPostFollowPubKeys,
   shouldUpdateCompleteProfile,
+  shouldGetMyInterests,
+  shouldUpdateMyInterests,
 } from "./user.thunks";
 
 interface UserState {
@@ -22,6 +24,9 @@ interface UserState {
   updateAccountLoading: boolean;
   followPubKeysLoading: boolean;
   updateCompleteProfileLoading: boolean;
+  myInterests: string[];
+  myInterestsLoading: boolean;
+  updatingMyInterests: boolean;
 }
 
 const initialState: UserState = {
@@ -35,6 +40,9 @@ const initialState: UserState = {
   followPubKeysLoading: false,
   updateCompleteProfileLoading: false,
   otherUserAccount: undefined,
+  myInterests: [],
+  myInterestsLoading: false,
+  updatingMyInterests: false,
 };
 
 const userSlice = createSlice({
@@ -44,6 +52,7 @@ const userSlice = createSlice({
     logout: (state) => {
       state.account = undefined;
       state.otherUserAccount = undefined;
+      state.myInterests = [];
     },
     shouldSetAccount: (state, action: PayloadAction<Account>) => {
       state.account = action.payload;
@@ -116,6 +125,25 @@ const userSlice = createSlice({
     });
     builder.addCase(shouldUpdateCompleteProfile.rejected, (state) => {
       state.updateCompleteProfileLoading = false;
+    });
+    builder.addCase(shouldGetMyInterests.fulfilled, (state, action) => {
+      state.myInterestsLoading = false;
+      state.myInterests = action.payload;
+    });
+    builder.addCase(shouldGetMyInterests.pending, (state) => {
+      state.myInterestsLoading = true;
+    });
+    builder.addCase(shouldGetMyInterests.rejected, (state) => {
+      state.myInterestsLoading = false;
+    });
+    builder.addCase(shouldUpdateMyInterests.fulfilled, (state, action) => {
+      state.updatingMyInterests = false;
+    });
+    builder.addCase(shouldUpdateMyInterests.pending, (state) => {
+      state.updatingMyInterests = true;
+    });
+    builder.addCase(shouldUpdateMyInterests.rejected, (state) => {
+      state.updatingMyInterests = false;
     });
   },
 });

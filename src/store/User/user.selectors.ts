@@ -10,6 +10,13 @@ export const selectMyAccount = (store: RootState) => selectUser(store).account;
 export const selectAccount = (isOwnAccount: boolean) => (store: RootState) => {
   return isOwnAccount ? selectMyAccount(store) : selectOtherUserAccount(store);
 };
+
+export const selectMyInterests = (store: RootState) =>
+  selectUser(store).myInterests;
+export const selectMyInterestsLoading = (store: RootState) =>
+  selectUser(store).myInterestsLoading;
+export const selectUpdatingMyInterestsLoading = (store: RootState) =>
+  selectUser(store).updatingMyInterests;
 export const selectInterestsPool = (store: RootState) =>
   selectUser(store).interestsPool;
 export const selectInterestsMap = createSelector(

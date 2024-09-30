@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { View, Alert } from "react-native";
-import { Account } from "@satlantis/api-client";
 
 import { SCREENS } from "src/navigation/routes";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
@@ -27,29 +26,39 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
   const userAccount = useAppSelector(
     UserState.selectors.selectUserHomeProfile(true),
   );
-  const isLoading = useAppSelector(
+  const isUpdatingMyInterests = useAppSelector(
+    UserState.selectors.selectUpdatingMyInterestsLoading,
+  );
+  const myInterests = useAppSelector(UserState.selectors.selectMyInterests);
+  const accountLoading = useAppSelector(
     UserState.selectors.selectUpdateAccountLoading,
   );
-  const initialState: Partial<Account> = {
-    name: userAccount.name,
-    about: userAccount.about,
-    website: userAccount.website,
-    phone: userAccount.phone,
-    email: userAccount.email,
-    interests: userAccount.interests,
-  };
-  const [profile, setProfile] = useState<Partial<Account>>(initialState);
+  const [isUserEditing, setUserEditing] = useState(false);
+  const initialState = useMemo(
+    () => ({
+      name: userAccount.name,
+      about: userAccount.about,
+      website: userAccount.website,
+      phone: userAccount.phone,
+      email: userAccount.email,
+      interests: myInterests,
+    }),
+    [userAccount, myInterests],
+  );
+  const [profile, setProfile] = useState(initialState);
   const hasProfileChanged = Object.keys(userAccount).some(
     (key) =>
       !deepEqual(
-        profile[key as keyof Partial<Account>],
-        initialState[key as keyof Partial<Account>],
+        profile[key as keyof typeof initialState],
+        initialState[key as keyof typeof initialState],
       ),
   );
+  const isLoading = accountLoading || isUpdatingMyInterests;
   const isButtonEnabled = hasProfileChanged && !isLoading;
 
   const handleInputChange =
-    (key: keyof Partial<Account>) => (value: string | string[]) => {
+    (key: keyof typeof initialState) => (value: string | string[]) => {
+      setUserEditing(true);
       setProfile({
         ...profile,
         [key]: value,
@@ -78,15 +87,38 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
     );
   };
 
-  const handleSaveButton = () => {
+  const handleSaveButton = async () => {
     if (!isButtonEnabled) return;
-    dispatch(UserState.thunks.shouldPutUpdateAccount(profile))
-      .unwrap()
-      .then(navigation.goBack)
-      .catch((e: SerializedError) => {
-        Alert.alert("Something went wrong!", e.message);
-      });
+    try {
+      await Promise.all([
+        dispatch(UserState.thunks.shouldUpdateMyInterests(profile.interests)),
+        dispatch(
+          UserState.thunks.shouldPutUpdateAccount({
+            name: profile.name,
+            about: profile.about,
+            website: profile.website,
+            phone: profile.phone,
+            email: profile.email,
+            interests: profile.interests,
+          }),
+        ),
+      ]);
+      navigation.goBack();
+    } catch (e) {
+      const error: SerializedError = e;
+      Alert.alert("Something went wrong!", error.message);
+    }
   };
+
+  useEffect(() => {
+    dispatch(UserState.thunks.shouldGetMyInterests());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (hasProfileChanged && !isUserEditing) {
+      setProfile(initialState);
+    }
+  }, [initialState, hasProfileChanged, isUserEditing]);
 
   return (
     <KeyboardView>
@@ -119,7 +151,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
           />
         </BaseSection>
         <InterestsSection
-          selectedInterests={(profile.interests as string[]) || []}
+          selectedInterests={profile.interests}
           setSelectedInterests={handleInputChange("interests")}
         />
         <BaseSection sectionTitle="Contact" customContainer={s.contactSection}>

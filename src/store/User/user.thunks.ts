@@ -1,7 +1,13 @@
-import { PublicKey } from "@blowater/nostr-sdk/nostr";
+import {
+  PublicKey,
+  prepareNostrEvent,
+  NostrKind,
+  SingleRelayConnection,
+} from "@blowater/nostr-sdk/nostr";
 import { Account } from "@satlantis/api-client";
 import { satlantisClient } from "src/client/satlantisApi";
 import { createAppAsyncThunk } from "src/store/tools";
+import { EXPO_PUBLIC_SATLANTIS_RELAY } from "src/shared/constants/env";
 
 export const shouldFetchAccount = createAppAsyncThunk(
   "get/account",
@@ -23,6 +29,53 @@ export const shouldFetchAccount = createAppAsyncThunk(
 
     if (!!profileNpub) dispatch(user.shouldSetOtherUserAccount(account));
     else dispatch(user.shouldSetAccount(account));
+  },
+);
+
+export const shouldGetMyInterests = createAppAsyncThunk(
+  "get/myInterests",
+  async (_, { getState }) => {
+    const npub = getState().regular.user.account?.npub || "";
+    const pubkey = PublicKey.FromBech32(npub);
+    if (pubkey instanceof Error) {
+      throw pubkey;
+    }
+
+    const interests = await satlantisClient.getInterestsOf(pubkey);
+    if (interests instanceof Error) {
+      throw interests;
+    }
+    return interests.interests;
+  },
+);
+
+export const shouldUpdateMyInterests = createAppAsyncThunk(
+  "post/myInterests",
+  async (interests: string[], { dispatch }) => {
+    const signer = await satlantisClient.getNostrSigner();
+    if (signer instanceof Error) {
+      throw signer;
+    }
+
+    const event = await prepareNostrEvent(signer, {
+      kind: NostrKind.Interests,
+      tags: interests.map((i) => ["t", i]),
+      content: "",
+    });
+    if (event instanceof Error) {
+      throw event;
+    }
+
+    const relay = SingleRelayConnection.New(EXPO_PUBLIC_SATLANTIS_RELAY);
+    if (relay instanceof Error) {
+      throw relay;
+    }
+    const err = await relay.sendEvent(event);
+    await relay.close();
+    if (err instanceof Error) {
+      throw err;
+    }
+    dispatch(shouldGetMyInterests());
   },
 );
 
