@@ -24,9 +24,6 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
   route,
 }) => {
   const dispatch = useAppDispatch();
-  const {
-    params: { selectedInterests },
-  } = route;
   const isLoading = useAppSelector(
     UserState.selectors.selectUpdateCompleteProfileLoading,
   );
@@ -39,7 +36,6 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
       UserState.thunks.shouldUpdateCompleteProfile({
         newData: {
           about: bio,
-          interests: selectedInterests,
         },
         uri: avatar?.uri || "",
       }),

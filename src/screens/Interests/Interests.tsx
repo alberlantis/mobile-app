@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 
 import {
   useAppDispatch,
@@ -19,6 +19,7 @@ import s from "./Interests.style";
 import { SCREENS } from "src/navigation/routes";
 import OptionsList from "./OptionsList";
 import type { InterestsOption } from "./OptionItem";
+import { SerializedError } from "@reduxjs/toolkit";
 
 const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   route,
@@ -31,20 +32,30 @@ const Interests: React.FC<SignedScreenProps<"Interests">> = ({
   );
   const isButtonEnabled = !isLoading && selectedOptions.length > 2;
   const allInterests = useAppSelector(UserState.selectors.selectInterestsMap);
-  const handleSubmitButton = () => {
+  const handleSubmitButton = async () => {
     if (!isButtonEnabled) return;
     const pubkeysToFollow = selectedOptions.reduce<string[]>((acc, option) => {
       const pubkeys = allInterests.get(option.name);
       if (!pubkeys) return acc;
       return [...acc, ...pubkeys];
     }, []);
-    dispatch(UserState.thunks.shouldPostFollowPubKeys(pubkeysToFollow))
-      .unwrap()
-      .then(() => {
-        navigation.navigate(SCREENS.COMPLETE_PROFILE, {
-          selectedInterests: selectedOptions.map((item) => item.name),
-        });
-      });
+    try {
+      await Promise.all([
+        dispatch(UserState.thunks.shouldPostFollowPubKeys(pubkeysToFollow)),
+        dispatch(
+          UserState.thunks.shouldUpdateMyInterests(
+            selectedOptions.map((option) => option.name),
+          ),
+        ),
+      ]);
+      navigation.navigate(SCREENS.COMPLETE_PROFILE);
+    } catch (e) {
+      const error: SerializedError = e;
+      Alert.alert(
+        "Something happend",
+        `Error trying to update interests: ${error.message}`,
+      );
+    }
   };
 
   return (

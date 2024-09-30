@@ -14,6 +14,7 @@ import {
 } from "@expo/vector-icons";
 import { ColorValue, StyleProp, TextStyle } from "react-native";
 
+import s from "./Icon.style";
 import colors from "src/theme/colors";
 
 export type IconNames = {
@@ -73,7 +74,7 @@ const Icon = <T extends keyof IconNames>({
       name={name}
       size={size}
       color={color}
-      style={style}
+      style={[s.container, style]}
     />
   );
 };
