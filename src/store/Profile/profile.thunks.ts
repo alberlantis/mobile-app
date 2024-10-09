@@ -8,14 +8,28 @@ export const shouldFetchProfile = createAppAsyncThunk(
   async (pubkey: string) => {
     const publicKey = PublicKey.FromHex(pubkey);
     if (publicKey instanceof Error) {
-      throw publicKey;
+      throw new Error(`Invalid key: ${pubkey}: ${publicKey.cause}`);
+    }
+    const profile = await satlantisClient.getUserProfile(publicKey);
+    if (profile instanceof Error) {
+      throw profile;
     }
 
-    const response = await satlantisClient.getUserProfile(publicKey);
-    if (response instanceof Error) {
-      throw response;
+    const followedBy = await profile.getFollowedBy();
+    if (followedBy instanceof Error) {
+      throw followedBy;
     }
 
-    return response;
+    const followings = await profile.getFollowing();
+    if (followings instanceof Error) {
+      throw followings;
+    }
+
+    const roles = await profile.getAccountPlaceRoles();
+    if (roles instanceof Error) {
+      throw roles;
+    }
+
+    return { profile, followedBy, followings, roles };
   },
 );

@@ -1,26 +1,18 @@
 import React from "react";
 import { Text, ColorValue, StyleSheet } from "react-native";
 
-import { useAppSelector, UserState, PostsState } from "src/store";
 import s from "./ButtonOptionLabel.style";
 import { colors } from "src/theme";
 
 interface IButtonOptionsLabelProps {
   option: string;
-  isOwnProfile: boolean;
+  isBusiness: boolean;
 }
 
 const ButtonOptionLabel: React.FC<IButtonOptionsLabelProps> = ({
   option,
-  isOwnProfile,
+  isBusiness,
 }) => {
-  const { isBusiness } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile(isOwnProfile),
-  );
-  const postsLength = (
-    useAppSelector(PostsState.selectors.selectFilteredPosts) || []
-  ).length;
-
   let buttonLabel: string = "";
   let buttonColor: ColorValue = colors.WHITE_BOLD;
   switch (option) {
@@ -35,9 +27,6 @@ const ButtonOptionLabel: React.FC<IButtonOptionsLabelProps> = ({
       buttonLabel = "4.7";
       break;
     }
-    case "Posts":
-      buttonLabel = postsLength.toString();
-      break;
     default:
       buttonLabel = "";
       buttonColor = colors.WHITE_BOLD;

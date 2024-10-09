@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { Note, Reaction } from "@satlantis/api-client";
 
 import {
   useAppSelector,
@@ -8,7 +8,6 @@ import {
   UserState,
   useAppDispatch,
 } from "src/store";
-import { SignedRouteProps } from "src/navigation/SignedStack";
 import { colors, normalizeSize } from "src/theme";
 import ExpandableText from "src/shared/components/ExpandableText";
 import Icon from "src/shared/components/Icon";
@@ -16,46 +15,73 @@ import s from "./PostFooter.style";
 import PostActionItem from "./PostActionItem";
 import LikesModal from "./LikesModal";
 import CommentsModal from "./CommentsModal";
-import type { PostsScreens } from "../Post";
-import LikesText from "./LikesText";
+// import LikesText from "./LikesText";
 
-const PostFooter = () => {
+interface IPostFooterProps {
+  reactions: Reaction[];
+  postId: number;
+  pubkey: string;
+  postKind: number;
+  nostrId: string;
+  description: string;
+  descendants: Note[];
+  rawContent: string;
+  postType: number;
+  postTags: string;
+  createdAt: string;
+  postSig: string;
+}
+
+const PostFooter: React.FC<IPostFooterProps> = ({
+  reactions,
+  postId,
+  pubkey,
+  postKind,
+  nostrId,
+  description,
+  descendants,
+  rawContent,
+  postType,
+  postTags,
+  createdAt,
+  postSig,
+}) => {
   const dispatch = useAppDispatch();
-  const route = useRoute<SignedRouteProps<PostsScreens>>();
-  const { postId } = route.params;
-  const account = useAppSelector(UserState.selectors.selectMyAccount);
   const [showLikesModal, setShowLikesModal] = useState(false);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
   const openCommentsModal = () => {
     setShowCommentsModal(true);
   };
-  const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
-  const isPostLoading = useAppSelector(PostsState.selectors.selectPostsLoading);
+  const { id } = useAppSelector(UserState.selectors.selectMyAccount) || {};
   const isPostLikeLoading = useAppSelector(
     PostsState.selectors.selectLikingPostLoading,
   );
-  const isLoading = isPostLikeLoading || isPostLoading;
-  const [totalLikes, setTotalLikes] = useState(post!.reactions.length || 0);
-  const isUserLikePost = useAppSelector(
-    PostsState.selectors.selectIsUserLikePost(account?.id, postId),
+  const [totalLikes, setTotalLikes] = useState(reactions.length);
+  const isUserLikePost = reactions.some(
+    (reaction) => reaction.accountId === id,
   );
   const [like, setLike] = useState(isUserLikePost);
 
   const handleLikePost = () => {
-    if (isLoading || !post || isUserLikePost) return;
-    dispatch(PostsState.thunks.shouldLikePosts(post))
+    if (isPostLikeLoading || isUserLikePost) return;
+    dispatch(
+      PostsState.thunks.shouldLikePosts({
+        postId,
+        pubkey,
+        postKind,
+        nostrId,
+      }),
+    )
       .unwrap()
-      .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
+      .then(() => dispatch(UserState.thunks.shouldFetchMyProfile()));
     setLike(!like);
     setTotalLikes(totalLikes + 1);
   };
 
-  if (!post) return null;
-
   return (
     <Fragment>
       <View style={s.postDescriptionContainer}>
-        <ExpandableText text={post.description} numOfLines={6} />
+        <ExpandableText text={description} numOfLines={6} />
         <View style={s.postActionsContainer}>
           <PostActionItem
             icon={{
@@ -65,19 +91,23 @@ const PostFooter = () => {
             setIconAction={handleLikePost}
             setTextAction={() => setShowLikesModal(true)}
             text={totalLikes.toString()}
+            color={like ? colors.ORANGE_PRIMARY_LIGHT : colors.GRAY_3}
           />
           <PostActionItem
             icon={{
               type: "FontAwesome",
-              name: !!post.descendants.length ? "comment" : "comment-o",
+              name: !!descendants.length ? "comment" : "comment-o",
             }}
-            text={post.descendants.length.toString()}
+            text={descendants.length.toString()}
             style={s.commentAction}
             setIconAction={openCommentsModal}
             setTextAction={openCommentsModal}
+            color={
+              !!descendants.length ? colors.ORANGE_PRIMARY_LIGHT : colors.GRAY_3
+            }
           />
         </View>
-        <LikesText totalLikes={totalLikes} reactions={post.reactions} />
+        {/* <LikesText totalLikes={totalLikes} reactions={reactions} /> */}
         <Pressable
           onPress={() => setShowCommentsModal(true)}
           style={s.addCommentContainer}
@@ -99,7 +129,16 @@ const PostFooter = () => {
       <CommentsModal
         isVisible={showCommentsModal}
         setModalVisible={setShowCommentsModal}
-        post={post}
+        content={rawContent}
+        createdAt={createdAt}
+        nostrId={nostrId}
+        kind={postKind}
+        pubkey={pubkey}
+        sig={postSig}
+        id={postId}
+        type={postType}
+        eventTags={JSON.parse(postTags)}
+        descendants={descendants}
       />
     </Fragment>
   );

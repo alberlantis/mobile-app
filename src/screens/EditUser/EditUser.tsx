@@ -11,6 +11,7 @@ import {
   Input,
   Button,
 } from "src/shared/components";
+import { useFetchProfileInterests } from "src/shared/hooks";
 import { colors } from "src/theme";
 import InterestsSection from "./InterestsSection";
 import { deepEqual } from "src/utils";
@@ -23,37 +24,48 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
   navigation,
 }) => {
   const dispatch = useAppDispatch();
-  const userAccount = useAppSelector(
-    UserState.selectors.selectUserHomeProfile(true),
+  const myProfile = useAppSelector(UserState.selectors.selectMyProfile);
+  const { interests: myInterests, loading: interestsLoading } =
+    useFetchProfileInterests(myProfile);
+  const isMyProfileLoading = useAppSelector(
+    UserState.selectors.selectUpdateMyProfileLoading,
   );
-  const isUpdatingMyInterests = useAppSelector(
-    UserState.selectors.selectUpdatingMyInterestsLoading,
+  const isInterestsUpdateLoading = useAppSelector(
+    UserState.selectors.selectUpdateInterestsLoading,
   );
-  const myInterests = useAppSelector(UserState.selectors.selectMyInterests);
-  const accountLoading = useAppSelector(
-    UserState.selectors.selectUpdateAccountLoading,
-  );
-  const [isUserEditing, setUserEditing] = useState(false);
   const initialState = useMemo(
     () => ({
-      name: userAccount.name,
-      about: userAccount.about,
-      website: userAccount.website,
-      phone: userAccount.phone,
-      email: userAccount.email,
+      name: myProfile?.metaData.name,
+      about: myProfile?.metaData.about,
+      website: myProfile?.metaData.website,
+      //@ts-ignore ALBERT: please add phone to metadata
+      phone: myProfile?.metaData.phone,
+      //@ts-ignore ALBERT: please add email to metadata
+      email: myProfile?.metaData.email,
       interests: myInterests,
     }),
-    [userAccount, myInterests],
+    [
+      myProfile?.metaData.name,
+      myProfile?.metaData.about,
+      myProfile?.metaData.website,
+      //@ts-ignore ALBERT: please add phone to metadata
+      myProfile?.metaData.phone,
+      //@ts-ignore ALBERT: please add email to metadata
+      myProfile?.metaData.email,
+      myInterests,
+    ],
   );
   const [profile, setProfile] = useState(initialState);
-  const hasProfileChanged = Object.keys(userAccount).some(
+  const [isUserEditing, setUserEditing] = useState(false);
+
+  const hasProfileChanged = Object.keys(initialState).some(
     (key) =>
       !deepEqual(
         profile[key as keyof typeof initialState],
         initialState[key as keyof typeof initialState],
       ),
   );
-  const isLoading = accountLoading || isUpdatingMyInterests;
+  const isLoading = isMyProfileLoading || isInterestsUpdateLoading;
   const isButtonEnabled = hasProfileChanged && !isLoading;
 
   const handleInputChange =
@@ -90,29 +102,14 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
   const handleSaveButton = async () => {
     if (!isButtonEnabled) return;
     try {
-      await Promise.all([
-        dispatch(UserState.thunks.shouldUpdateMyInterests(profile.interests)),
-        dispatch(
-          UserState.thunks.shouldPutUpdateAccount({
-            name: profile.name,
-            about: profile.about,
-            website: profile.website,
-            phone: profile.phone,
-            email: profile.email,
-            interests: profile.interests,
-          }),
-        ),
-      ]);
+      await dispatch(UserState.thunks.shouldUpdateInterests(profile.interests));
+      await dispatch(UserState.thunks.shouldUpdateMyProfile(profile));
       navigation.goBack();
     } catch (e) {
       const error: SerializedError = e;
       Alert.alert("Something went wrong!", error.message);
     }
   };
-
-  useEffect(() => {
-    dispatch(UserState.thunks.shouldGetMyInterests());
-  }, [dispatch]);
 
   useEffect(() => {
     if (hasProfileChanged && !isUserEditing) {
@@ -126,9 +123,9 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
         <View style={s.topHeaderContainer}>
           <BackButton color={colors.BLACK_MEDIUM} onPress={handleBackButton} />
         </View>
-        <ImagePortrait isOwnProfile />
+        <ImagePortrait banner={myProfile?.metaData.banner || ""} />
         <View style={s.mainInfoContainer}>
-          <Avatar isOwnProfile />
+          <Avatar picture={myProfile?.metaData.picture || ""} />
           <View style={s.mainBasePanelContainer}>
             <Input
               value={profile.name || ""}
@@ -153,6 +150,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
         <InterestsSection
           selectedInterests={profile.interests}
           setSelectedInterests={handleInputChange("interests")}
+          isLoading={interestsLoading}
         />
         <BaseSection sectionTitle="Contact" customContainer={s.contactSection}>
           <Input

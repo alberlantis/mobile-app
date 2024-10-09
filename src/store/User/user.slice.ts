@@ -1,48 +1,51 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Interest, Account } from "@satlantis/api-client";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  Interest,
+  UserResolver,
+  AccountPlaceRole,
+  Account,
+} from "@satlantis/api-client";
 
 import {
   shouldFetchAllInterests,
   shouldPostFollowUser,
   shouldPostUnfollowUser,
-  shouldFetchAccount,
-  shouldPutUpdateAccount,
-  shouldPostFollowPubKeys,
+  shouldFetchMyProfile,
+  shouldUpdateInterests,
+  shouldUpdateMyProfile,
   shouldUpdateCompleteProfile,
-  shouldGetMyInterests,
-  shouldUpdateMyInterests,
 } from "./user.thunks";
 
 interface UserState {
   interestsPool: Interest[];
   interestsPoolLoading: boolean;
-  account: Account | undefined;
-  otherUserAccount: Account | undefined;
   followUserLoading: boolean;
   unfollowUserLoading: boolean;
-  getAccountLoading: boolean;
-  updateAccountLoading: boolean;
-  followPubKeysLoading: boolean;
+  updateMyProfileLoading: boolean;
   updateCompleteProfileLoading: boolean;
-  myInterests: string[];
-  myInterestsLoading: boolean;
-  updatingMyInterests: boolean;
+  updateInterestsLoading: boolean;
+  myProfile: UserResolver | undefined;
+  followings: UserResolver[];
+  followedBy: UserResolver[];
+  myProfileLoading: boolean;
+  myRoles: AccountPlaceRole[];
+  myAccount: Account | undefined;
 }
 
 const initialState: UserState = {
   interestsPool: [],
   interestsPoolLoading: false,
-  account: undefined,
+  updateInterestsLoading: false,
   followUserLoading: false,
   unfollowUserLoading: false,
-  getAccountLoading: false,
-  updateAccountLoading: false,
-  followPubKeysLoading: false,
+  updateMyProfileLoading: false,
   updateCompleteProfileLoading: false,
-  otherUserAccount: undefined,
-  myInterests: [],
-  myInterestsLoading: false,
-  updatingMyInterests: false,
+  myProfileLoading: false,
+  myProfile: undefined,
+  followings: [],
+  followedBy: [],
+  myRoles: [],
+  myAccount: undefined,
 };
 
 const userSlice = createSlice({
@@ -50,18 +53,29 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.account = undefined;
-      state.otherUserAccount = undefined;
-      state.myInterests = [];
-    },
-    shouldSetAccount: (state, action: PayloadAction<Account>) => {
-      state.account = action.payload;
-    },
-    shouldSetOtherUserAccount: (state, action: PayloadAction<Account>) => {
-      state.otherUserAccount = action.payload;
+      state.myProfile = undefined;
+      state.interestsPool = [];
+      state.followings = [];
+      state.followedBy = [];
+      state.myRoles = [];
+      state.myAccount = undefined;
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(shouldFetchMyProfile.fulfilled, (state, action) => {
+      state.myProfile = action.payload.myProfile;
+      state.followings = action.payload.followings;
+      state.followedBy = action.payload.followedBy;
+      state.myRoles = action.payload.myRoles;
+      state.myProfileLoading = false;
+      state.myAccount = action.payload.myAccount;
+    });
+    builder.addCase(shouldFetchMyProfile.pending, (state) => {
+      state.myProfileLoading = true;
+    });
+    builder.addCase(shouldFetchMyProfile.rejected, (state) => {
+      state.myProfileLoading = false;
+    });
     builder.addCase(shouldFetchAllInterests.fulfilled, (state, action) => {
       state.interestsPoolLoading = false;
       state.interestsPool = action.payload;
@@ -71,6 +85,33 @@ const userSlice = createSlice({
     });
     builder.addCase(shouldFetchAllInterests.rejected, (state) => {
       state.interestsPoolLoading = false;
+    });
+    builder.addCase(shouldUpdateInterests.fulfilled, (state) => {
+      state.updateInterestsLoading = false;
+    });
+    builder.addCase(shouldUpdateInterests.pending, (state) => {
+      state.updateInterestsLoading = true;
+    });
+    builder.addCase(shouldUpdateInterests.rejected, (state) => {
+      state.updateInterestsLoading = false;
+    });
+    builder.addCase(shouldUpdateMyProfile.fulfilled, (state) => {
+      state.updateMyProfileLoading = false;
+    });
+    builder.addCase(shouldUpdateMyProfile.pending, (state) => {
+      state.updateMyProfileLoading = true;
+    });
+    builder.addCase(shouldUpdateMyProfile.rejected, (state) => {
+      state.updateMyProfileLoading = false;
+    });
+    builder.addCase(shouldUpdateCompleteProfile.fulfilled, (state) => {
+      state.updateCompleteProfileLoading = false;
+    });
+    builder.addCase(shouldUpdateCompleteProfile.pending, (state) => {
+      state.updateCompleteProfileLoading = true;
+    });
+    builder.addCase(shouldUpdateCompleteProfile.rejected, (state) => {
+      state.updateCompleteProfileLoading = false;
     });
     builder.addCase(shouldPostFollowUser.fulfilled, (state) => {
       state.followUserLoading = false;
@@ -89,61 +130,6 @@ const userSlice = createSlice({
     });
     builder.addCase(shouldPostUnfollowUser.rejected, (state) => {
       state.unfollowUserLoading = false;
-    });
-    builder.addCase(shouldFetchAccount.fulfilled, (state) => {
-      state.getAccountLoading = false;
-    });
-    builder.addCase(shouldFetchAccount.pending, (state) => {
-      state.getAccountLoading = true;
-    });
-    builder.addCase(shouldFetchAccount.rejected, (state) => {
-      state.getAccountLoading = false;
-    });
-    builder.addCase(shouldPutUpdateAccount.fulfilled, (state) => {
-      state.updateAccountLoading = false;
-    });
-    builder.addCase(shouldPutUpdateAccount.pending, (state) => {
-      state.updateAccountLoading = true;
-    });
-    builder.addCase(shouldPutUpdateAccount.rejected, (state) => {
-      state.updateAccountLoading = false;
-    });
-    builder.addCase(shouldPostFollowPubKeys.fulfilled, (state) => {
-      state.followPubKeysLoading = false;
-    });
-    builder.addCase(shouldPostFollowPubKeys.pending, (state) => {
-      state.followPubKeysLoading = true;
-    });
-    builder.addCase(shouldPostFollowPubKeys.rejected, (state) => {
-      state.followPubKeysLoading = false;
-    });
-    builder.addCase(shouldUpdateCompleteProfile.fulfilled, (state) => {
-      state.updateCompleteProfileLoading = false;
-    });
-    builder.addCase(shouldUpdateCompleteProfile.pending, (state) => {
-      state.updateCompleteProfileLoading = true;
-    });
-    builder.addCase(shouldUpdateCompleteProfile.rejected, (state) => {
-      state.updateCompleteProfileLoading = false;
-    });
-    builder.addCase(shouldGetMyInterests.fulfilled, (state, action) => {
-      state.myInterestsLoading = false;
-      state.myInterests = action.payload;
-    });
-    builder.addCase(shouldGetMyInterests.pending, (state) => {
-      state.myInterestsLoading = true;
-    });
-    builder.addCase(shouldGetMyInterests.rejected, (state) => {
-      state.myInterestsLoading = false;
-    });
-    builder.addCase(shouldUpdateMyInterests.fulfilled, (state, action) => {
-      state.updatingMyInterests = false;
-    });
-    builder.addCase(shouldUpdateMyInterests.pending, (state) => {
-      state.updatingMyInterests = true;
-    });
-    builder.addCase(shouldUpdateMyInterests.rejected, (state) => {
-      state.updatingMyInterests = false;
     });
   },
 });

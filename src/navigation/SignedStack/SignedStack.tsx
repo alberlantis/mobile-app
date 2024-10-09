@@ -16,7 +16,7 @@ import {
   EditUser,
   FollowersAndFollowing,
   ViewPost,
-  ProfileHome,
+  OtherProfile,
 } from "src/screens";
 
 export type HomeTabsParams =
@@ -31,9 +31,9 @@ export type HomeTabsParams =
 export type SignedParamList = {
   [SCREENS.HOME_TABS]: HomeTabsParams;
   [SCREENS.EDIT_USER]: undefined;
-  [SCREENS.FOLLOWERS_AND_FOLLOWING]: { isOwnProfile: boolean };
+  [SCREENS.FOLLOWERS_AND_FOLLOWING]: undefined;
   [SCREENS.VIEW_POST]: { postId: number };
-  [SCREENS.OTHER_PROFILE]: { profileNpub: string };
+  [SCREENS.OTHER_PROFILE]: { profilePubkey: string; userId: number };
 } & AccountCreationParamList &
   HomeTabsParamList;
 const Stack = createNativeStackNavigator<SignedParamList>();
@@ -49,7 +49,7 @@ const SignedStack: React.FC = () => {
       ) : (
         <Stack.Group>
           <Stack.Screen name={SCREENS.HOME_TABS} component={HomeTabs} />
-          <Stack.Screen name={SCREENS.OTHER_PROFILE} component={ProfileHome} />
+          <Stack.Screen name={SCREENS.OTHER_PROFILE} component={OtherProfile} />
           <Stack.Screen name={SCREENS.EDIT_USER} component={EditUser} />
           <Stack.Screen
             name={SCREENS.FOLLOWERS_AND_FOLLOWING}

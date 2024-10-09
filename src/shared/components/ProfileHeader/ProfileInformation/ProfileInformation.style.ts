@@ -31,6 +31,7 @@ export default StyleSheet.create({
   profileDataTitle: {
     color: colors.WHITE_BOLD,
     fontSize: fonts[14],
+    width: normalizeSize(200),
   },
   followersSection: {
     flexDirection: "row",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Pressable } from "react-native";
+import { View, Pressable, ActivityIndicator } from "react-native";
 
 import { BaseSection } from "src/shared/wrappers";
 import { Icon, BasePanelText } from "src/shared/components";
@@ -9,11 +9,13 @@ import InterestsModal from "./InterestsModal";
 
 interface IInterestsSectionProps {
   selectedInterests: string[];
+  isLoading: boolean;
   setSelectedInterests(value: string[]): void;
 }
 
 const InterestsSection: React.FC<IInterestsSectionProps> = ({
   selectedInterests,
+  isLoading,
   setSelectedInterests,
 }) => {
   const [showModal, setShowModal] = useState(false);
@@ -22,11 +24,17 @@ const InterestsSection: React.FC<IInterestsSectionProps> = ({
       <BaseSection sectionTitle="Interests" customContainer={s.container}>
         <View style={s.innerContainer}>
           <View style={s.interestsTagPanel}>
-            {selectedInterests.map((tag, index) => (
-              <View key={`edit-user-interest-tags-${index}`}>
-                <BasePanelText text={tag} customContainer={s.tag} />
+            {isLoading ? (
+              <View style={s.loadingContainer}>
+                <ActivityIndicator />
               </View>
-            ))}
+            ) : (
+              selectedInterests.map((tag, index) => (
+                <View key={`edit-user-interest-tags-${index}`}>
+                  <BasePanelText text={tag} customContainer={s.tag} />
+                </View>
+              ))
+            )}
           </View>
           <Pressable style={s.editButton} onPress={() => setShowModal(true)}>
             <Icon

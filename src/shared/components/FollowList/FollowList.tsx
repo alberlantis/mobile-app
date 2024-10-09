@@ -10,9 +10,9 @@ interface IFollowListProps {
   listHeader?(): React.JSX.Element;
   style?: StyleProp<ViewStyle>;
   isFollowItem?: boolean;
-  data: Account[];
-  keyExtractor(item: Account, index: number): string;
-  onPress(item: Account): void;
+  data: Partial<Account>[];
+  keyExtractor(item: Partial<Account>, index: number): string;
+  onPress(item: Partial<Account>): void;
 }
 
 const FollowList: React.FC<IFollowListProps> = ({

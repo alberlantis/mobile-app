@@ -31,4 +31,7 @@ export default StyleSheet.create({
     marginTop: normalizeSize(8),
   },
   editButton: { width: "10%", alignItems: "flex-end" },
+  loadingContainer: {
+    flex: 1,
+  },
 });

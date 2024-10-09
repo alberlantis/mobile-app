@@ -2,17 +2,13 @@ import React from "react";
 import { Image } from "react-native";
 
 import { useImageAssets } from "src/shared/hooks";
-import { useAppSelector, UserState } from "src/store";
 import s from "./ImagePortrait.style";
 
 interface IImagePortraitProps {
-  isOwnProfile: boolean;
+  banner: string;
 }
 
-const ImagePortrait: React.FC<IImagePortraitProps> = ({ isOwnProfile }) => {
-  const { banner } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile(isOwnProfile),
-  );
+const ImagePortrait: React.FC<IImagePortraitProps> = ({ banner }) => {
   const { images } = useImageAssets();
 
   return (

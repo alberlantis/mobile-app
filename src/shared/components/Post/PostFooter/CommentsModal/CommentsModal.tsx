@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { View, Pressable, ActivityIndicator } from "react-native";
+import type { NostrEventTag, Note } from "@satlantis/api-client";
 
 import {
   useAppDispatch,
@@ -18,21 +19,36 @@ import s from "./CommentsModal.style";
 interface ICommentsModalProps {
   isVisible: boolean;
   setModalVisible(value: boolean): void;
-  post: PostsState.selectors.Posts;
+  eventTags: NostrEventTag[];
+  content: string;
+  createdAt: string;
+  nostrId: string;
+  kind: number;
+  pubkey: string;
+  sig: string;
+  id: number;
+  type: PostsState.thunks.NoteType;
+  descendants: Note[];
 }
 
 const CommentsModal: React.FC<ICommentsModalProps> = ({
   isVisible,
   setModalVisible,
-  post,
+  eventTags,
+  content,
+  createdAt,
+  nostrId,
+  kind,
+  pubkey,
+  sig,
+  id,
+  type,
+  descendants,
 }) => {
   const dispatch = useAppDispatch();
-  const followers = useAppSelector(
-    UserState.selectors.selectUserFollowers(true),
-  );
-  const followings = useAppSelector(
-    UserState.selectors.selectUserFollowing(true),
-  );
+  const account = useAppSelector(UserState.selectors.selectMyAccount);
+  const followers = account?.followedBy || [];
+  const followings = account?.following || [];
   const initialUserTagListState = [...(followers || []), ...(followings || [])];
   const [usersTagList, setUsersTagList] = useState(initialUserTagListState);
   const [comment, setComment] = useState("");
@@ -46,15 +62,21 @@ const CommentsModal: React.FC<ICommentsModalProps> = ({
     .map((userTag) => userTag.name || "")
     .filter(Boolean);
 
-  if (!post) return null;
-
   const handlePublishReply = () => {
     if (isLoading) return;
 
     dispatch(
       PostsState.thunks.shouldPublishReply({
-        post,
+        eventTags,
+        content,
+        createdAt,
+        nostrId,
+        kind,
+        pubkey,
+        sig,
         comment,
+        id,
+        type,
       }),
     );
     setComment("");
@@ -94,7 +116,7 @@ const CommentsModal: React.FC<ICommentsModalProps> = ({
       isVisible={isVisible}
       setModalVisible={setModalVisible}
       title="Comments"
-      subtitle={`${post.descendants?.length} Comments`}
+      subtitle={`${descendants?.length} Comments`}
     >
       <View style={s.modalContentContainer}>
         {isLoading ? (
@@ -118,7 +140,7 @@ const CommentsModal: React.FC<ICommentsModalProps> = ({
                 keyExtractor={(item, index) =>
                   `view-post-comments-list-${item.id}-${index}`
                 }
-                data={post.descendants}
+                data={descendants}
                 style={s.modalListContainer}
               />
             )}

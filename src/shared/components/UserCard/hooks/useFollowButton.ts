@@ -2,36 +2,38 @@ import { useState } from "react";
 
 import { useAppSelector, UserState, useAppDispatch } from "src/store";
 
-const useFollowButton = (userId: number, itemNpub: string) => {
+const useFollowButton = (userId: number) => {
   const dispatch = useAppDispatch();
   const [userPressed, setUserPressed] = useState<number | undefined>();
-  const isBeingFollow = useAppSelector(
-    UserState.selectors.selectIsUserFollowingFollower(userId),
-  );
   const isFollowUserLoading = useAppSelector(
     UserState.selectors.selectFollowUserLoading,
   );
   const isUnfollowUserLoading = useAppSelector(
     UserState.selectors.selectUnfollowUserLoading,
   );
-  const isRefreshingAccount = useAppSelector(
-    UserState.selectors.selectGetAccountLoading,
+  const isFetchProfileLoading = useAppSelector(
+    UserState.selectors.selectMyProfileLoading,
   );
+
   const isLoading =
-    (isFollowUserLoading || isRefreshingAccount || isUnfollowUserLoading) &&
+    (isFollowUserLoading || isUnfollowUserLoading || isFetchProfileLoading) &&
     userPressed === userId;
 
-  const handleFollowButton = (userPressedId: number) => {
+  const handleFollowButton = (
+    userPressedId: number,
+    isBeingFollow: boolean,
+    itemPubkey: string,
+  ) => {
     setUserPressed(userPressedId);
-    if (isLoading && userPressedId === userId) return;
+    if (isLoading) return;
     if (isBeingFollow) {
-      dispatch(UserState.thunks.shouldPostUnfollowUser(itemNpub))
+      dispatch(UserState.thunks.shouldPostUnfollowUser(itemPubkey))
         .unwrap()
-        .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
+        .then(() => dispatch(UserState.thunks.shouldFetchMyProfile()));
     } else {
-      dispatch(UserState.thunks.shouldPostFollowUser(itemNpub))
+      dispatch(UserState.thunks.shouldPostFollowUser(itemPubkey))
         .unwrap()
-        .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
+        .then(() => dispatch(UserState.thunks.shouldFetchMyProfile()));
     }
   };
 

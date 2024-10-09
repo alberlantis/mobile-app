@@ -8,15 +8,14 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { useImageAssets } from "src/shared/hooks";
-import { PostsState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
+import { useImageAssets, type Post } from "src/shared/hooks";
 import type { SignedNavigationProps } from "src/navigation/SignedStack";
 import s from "./ProfilePosts.style";
 import { normalizeSize } from "src/theme";
 
 interface IListItemProps {
-  item: PostsState.selectors.Posts[];
+  item: Post[];
   index: number;
 }
 
@@ -37,7 +36,9 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
         <Pressable
           key={`post-${post.id}-${index}`}
           onPress={() =>
-            navigation.navigate(SCREENS.VIEW_POST, { postId: post.id })
+            navigation.navigate(SCREENS.VIEW_POST, {
+              postId: post.id as number,
+            })
           }
           style={{
             ...s.postImageContainer,
@@ -47,7 +48,7 @@ const ProfilePosts: React.FC<IListItemProps> = ({ item }) => {
           <Image
             height={imageDimensions}
             width={imageDimensions}
-            src={post.imageUrl}
+            src={post.image}
             style={s.postImage}
             resizeMode="cover"
             resizeMethod="scale"

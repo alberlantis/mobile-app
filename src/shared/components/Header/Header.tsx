@@ -4,6 +4,7 @@ import { View, Text, ColorValue, LayoutChangeEvent } from "react-native";
 import s from "./Header.style";
 import BackButton from "../BackButton";
 import ShareButton from "../ShareButton";
+import ActionMenu, { type ActionMenuOptions } from "../ActionMenu";
 import { colors, type DimensionSize } from "src/theme";
 
 interface IHeaderProps {
@@ -13,8 +14,12 @@ interface IHeaderProps {
   titleColor?: ColorValue;
   backButtonColor?: ColorValue;
   shareButtonColor?: ColorValue;
+  actionMenuButtonColor?: ColorValue;
   showSharedButton?: boolean;
+  showActionMenuButton?: boolean;
   shareValue?: string;
+  actionMenuOptions?: ActionMenuOptions[];
+  screenName?: string;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -24,8 +29,12 @@ const Header: React.FC<IHeaderProps> = ({
   titleColor = colors.WHITE,
   backButtonColor,
   showSharedButton = false,
-  shareButtonColor,
+  showActionMenuButton = false,
+  shareButtonColor = colors.BLACK_MEDIUM,
+  actionMenuButtonColor = colors.BLACK_MEDIUM,
   shareValue = "",
+  actionMenuOptions = [],
+  screenName = "",
 }) => {
   const [containerSize, setContainerSize] = useState<DimensionSize>({
     height: 0,
@@ -56,6 +65,16 @@ const Header: React.FC<IHeaderProps> = ({
       >
         {showSharedButton && (
           <ShareButton color={shareButtonColor} share={shareValue} />
+        )}
+        {showActionMenuButton && (
+          <View
+            style={[
+              s.actionMenuContainer,
+              { backgroundColor: actionMenuButtonColor },
+            ]}
+          >
+            <ActionMenu screen={screenName} options={actionMenuOptions} />
+          </View>
         )}
       </View>
     </View>

@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text } from "react-native";
 import type { Note } from "@satlantis/api-client";
 
-import Icon from "../Icon";
+// import Icon from "../Icon";
 import RoundImage from "../RoundImage";
-import { colors, normalizeSize } from "src/theme";
+import { colors } from "src/theme";
 import s from "./CommentCard.style";
 import { timeSince } from "src/utils";
 
@@ -31,9 +31,9 @@ interface ICommentCardProps {
   item: Note;
 }
 const CommentCard: React.FC<ICommentCardProps> = ({ item, pictureSize }) => {
-  const handleReply = () => {
-    // todo: questions for albert (Replies to comments, are this implemented on the back?)
-  };
+  // const handleReply = () => {
+  //   // todo: questions for albert (Replies to comments, are this implemented on the back?)
+  // };
 
   return (
     <View style={s.container}>
@@ -45,7 +45,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({ item, pictureSize }) => {
             <Text style={s.createAt}>{timeSince(item.createdAt)}</Text>
           </View>
           <Text style={s.comment}>{renderFormattedText(item.content)}</Text>
-          <Pressable onPress={handleReply} style={s.replyButton}>
+          {/* <Pressable onPress={handleReply} style={s.replyButton}>
             <Icon
               type="FontAwesome6"
               name="comments"
@@ -62,7 +62,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({ item, pictureSize }) => {
               >
                 <CommentCard item={reply} pictureSize={18} />
               </View>
-            ))}
+            ))} */}
         </View>
       </View>
     </View>

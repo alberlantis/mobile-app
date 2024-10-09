@@ -51,8 +51,8 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(shouldCreateAccount.fulfilled, (state, action) => {
-      state.isAccountCreation = action.payload;
+    builder.addCase(shouldCreateAccount.fulfilled, (state) => {
+      state.isAccountCreation = true;
       state.createAccountLoading = false;
     });
     builder.addCase(shouldCreateAccount.pending, (state) => {
@@ -62,7 +62,7 @@ const authSlice = createSlice({
       state.createAccountLoading = false;
       state.isAccountCreation = false;
     });
-    builder.addCase(shouldLoginAccount.fulfilled, (state, action) => {
+    builder.addCase(shouldLoginAccount.fulfilled, (state) => {
       state.loginAccountLoading = false;
       state.isLogged = true;
     });
@@ -73,7 +73,7 @@ const authSlice = createSlice({
       state.loginAccountLoading = false;
       state.isLogged = false;
     });
-    builder.addCase(shouldLoginSigner.fulfilled, (state, action) => {
+    builder.addCase(shouldLoginSigner.fulfilled, (state) => {
       state.loginSignerLoading = false;
       state.isLogged = true;
     });

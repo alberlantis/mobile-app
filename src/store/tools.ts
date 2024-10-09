@@ -19,11 +19,14 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   dispatch: AppDispatch;
   extra: {
     actions: {
-      auth: typeof Auth.actions;
-      user: typeof User.actions;
-      nostr: typeof Nostr.actions;
-      profile: typeof Profile.actions;
-      posts: typeof Posts.actions;
+      auth: { thunks: typeof Auth.thunks; actions: typeof Auth.actions };
+      user: { thunks: typeof User.thunks; actions: typeof User.actions };
+      nostr: { thunks: typeof Nostr.thunks; actions: typeof Nostr.actions };
+      profile: {
+        thunks: typeof Profile.thunks;
+        actions: typeof Profile.actions;
+      };
+      posts: { thunks: typeof Posts.thunks; actions: typeof Posts.actions };
     };
   };
 }>();

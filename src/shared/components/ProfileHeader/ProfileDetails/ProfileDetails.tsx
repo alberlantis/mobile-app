@@ -1,21 +1,16 @@
 import React from "react";
 import { View, Text, Linking, Alert } from "react-native";
-import { useRoute } from "@react-navigation/native";
 
-import type { SignedRouteProps } from "src/navigation/SignedStack";
-import { SCREENS } from "src/navigation/routes";
-import type { ProfileHomeRoutes } from "../ProfileHome";
-import { useAppSelector, UserState } from "src/store";
-import { Icon } from "src/shared/components";
+import Icon from "src/shared/components/Icon";
 import { colors, fonts } from "src/theme";
 import s from "./ProfileDetails.style";
 
-const ProfileDetails = () => {
-  const route = useRoute<SignedRouteProps<ProfileHomeRoutes>>();
-  const isOwnProfile = route.name === SCREENS.PROFILE_HOME;
-  const { website, about } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile(isOwnProfile),
-  );
+interface IProfileDetailsProps {
+  website: string;
+  about: string;
+}
+
+const ProfileDetails: React.FC<IProfileDetailsProps> = ({ website, about }) => {
   const handleOpenWebsite = async () => {
     try {
       if (!website) throw new Error("no website was given");

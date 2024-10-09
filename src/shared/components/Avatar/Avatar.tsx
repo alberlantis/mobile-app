@@ -1,24 +1,19 @@
 import React from "react";
 import { View } from "react-native";
 
-import { useAppSelector, UserState } from "src/store";
 import Icon from "../Icon";
 import s from "./Avatar.style";
 import { colors, fonts } from "src/theme";
 import RoundeImage from "../RoundImage";
 
 interface IAvatarProps {
-  isOwnProfile: boolean;
+  picture: string;
 }
 
-const Avatar: React.FC<IAvatarProps> = ({ isOwnProfile }) => {
-  const { avatar } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile(isOwnProfile),
-  );
-
+const Avatar: React.FC<IAvatarProps> = ({ picture }) => {
   return (
     <View style={s.profilePhotoInnerContainer}>
-      <RoundeImage size={80} image={avatar} />
+      <RoundeImage size={80} image={picture} />
       <View style={s.profilePhotoCheckIcon}>
         <Icon
           type="Feather"

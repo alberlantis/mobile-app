@@ -10,10 +10,4 @@ export default StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: normalizeSize(17),
   },
-  shareButton: {
-    right: 0,
-    position: "absolute",
-    marginRight: normalizeSize(17),
-    marginTop: normalizeSize(13),
-  },
 });

@@ -6,23 +6,15 @@ import {
   setJWT,
   setNostrSigner,
 } from "src/client/satlantisApi";
-interface SignUp {
-  email?: string;
+
+interface SignIn {
   password: string;
   username: string;
 }
 
 export const shouldLoginAccount = createAppAsyncThunk(
   "post/loginAccount",
-  async (
-    signUpData: SignUp,
-    {
-      extra: {
-        actions: { user, nostr },
-      },
-      dispatch,
-    },
-  ) => {
+  async (signUpData: SignIn, { dispatch }) => {
     const response = await satlantisClient.login({
       password: signUpData.username,
       username: signUpData.password,
@@ -36,17 +28,22 @@ export const shouldLoginAccount = createAppAsyncThunk(
     if (!response) {
       throw new Error("Account doesnt exist");
     }
-    setJWT(response.token);
-    dispatch(user.shouldSetAccount(response.account));
-    dispatch(nostr.shouldUpdateToken(response.token));
+
+    dispatch(shouldLogin(response.token));
   },
 );
+
+interface SignUp {
+  email: string;
+  password: string;
+  username: string;
+}
 
 export const shouldCreateAccount = createAppAsyncThunk(
   "post/createAccount",
   async (signUpData: SignUp) => {
     const response = await satlantisClient.createAccount({
-      email: signUpData.email || "",
+      email: signUpData.email,
       password: signUpData.password,
       username: signUpData.username,
     });
@@ -70,7 +67,7 @@ export const shouldLoginSigner = createAppAsyncThunk(
     nsec: string,
     {
       extra: {
-        actions: { user, nostr },
+        actions: { nostr },
       },
       dispatch,
     },
@@ -85,10 +82,8 @@ export const shouldLoginSigner = createAppAsyncThunk(
       throw response;
     }
     setNostrSigner(signer);
-    setJWT(response.token);
-    dispatch(user.shouldSetAccount(response.account));
-    dispatch(nostr.shouldUpdatePrivateKey(nsec));
-    dispatch(nostr.shouldUpdateToken(response.token));
+    dispatch(nostr.actions.shouldUpdatePrivateKey(nsec));
+    dispatch(shouldLogin(response.token));
   },
 );
 
@@ -126,13 +121,32 @@ export const shouldLogout = createAppAsyncThunk(
       {
         dispatch,
         extra: {
-          actions: { auth, nostr, user },
+          actions: { auth, nostr, user, profile /**posts*/ },
         },
       },
     ]
   ) => {
-    dispatch(auth.logout());
-    dispatch(nostr.logout());
-    dispatch(user.logout());
+    dispatch(auth.actions.logout());
+    dispatch(nostr.actions.logout());
+    dispatch(user.actions.logout());
+    // dispatch(posts.actions.logout());
+    dispatch(profile.actions.logout());
+  },
+);
+
+export const shouldLogin = createAppAsyncThunk(
+  "post/login",
+  async (
+    token: string,
+    {
+      dispatch,
+      extra: {
+        actions: { nostr, user },
+      },
+    },
+  ) => {
+    setJWT(token);
+    dispatch(nostr.actions.shouldUpdateToken(token));
+    dispatch(user.thunks.shouldFetchMyProfile());
   },
 );

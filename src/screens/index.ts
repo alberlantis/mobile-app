@@ -16,3 +16,4 @@ export { default as EditUser } from "./EditUser";
 export { default as Location } from "./Location";
 export { default as FollowersAndFollowing } from "./FollowersAndFollowing";
 export { default as ViewPost } from "./ViewPost";
+export { default as OtherProfile } from "./OtherProfile";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleProp, ViewStyle } from "react-native";
+import { Text, View, StyleProp, ViewStyle, ColorValue } from "react-native";
 
 import { colors, normalizeSize } from "src/theme";
 import s from "./PostActionItem.style";
@@ -14,6 +14,7 @@ interface IPostActionProps {
   };
   text: string;
   style?: StyleProp<ViewStyle>;
+  color?: ColorValue;
 }
 
 const PostActionItem: React.FC<IPostActionProps> = ({
@@ -22,6 +23,7 @@ const PostActionItem: React.FC<IPostActionProps> = ({
   icon,
   text,
   style,
+  color = colors.GRAY_3,
 }) => {
   return (
     <View style={[s.container, style]}>
@@ -29,7 +31,7 @@ const PostActionItem: React.FC<IPostActionProps> = ({
         type={icon.type}
         name={icon.name}
         size={normalizeSize(16)}
-        color={colors.GRAY_3}
+        color={color}
         onPress={setIconAction}
       />
       <Text onPress={setTextAction} style={s.text}>

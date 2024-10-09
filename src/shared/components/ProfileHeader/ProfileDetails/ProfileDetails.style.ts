@@ -13,13 +13,13 @@ export default StyleSheet.create({
   title: {
     fontSize: fonts[16],
     color: colors.WHITE,
-    fontWeight: "semibold",
+    fontWeight: fonts.medium,
   },
   webpage: {
     fontSize: fonts[14],
     fontWeight: "medium",
     marginBottom: normalizeSize(12),
-    color: colors.BLUE_SECONDARY,
+    color: colors.ORANGE_PRIMARY_LIGHT,
   },
   locationContainer: {
     flexDirection: "row",
@@ -27,7 +27,7 @@ export default StyleSheet.create({
   },
   locationName: {
     color: colors.WHITE_BOLD,
-    fontWeight: "bold",
+    fontWeight: "regular",
     marginLeft: normalizeSize(6),
     fontSize: fonts[12],
   },

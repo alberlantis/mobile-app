@@ -1,10 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { useRoute } from "@react-navigation/native";
 
-import type { SignedRouteProps } from "src/navigation/SignedStack";
-import { SCREENS } from "src/navigation/routes";
-import { useAppSelector, UserState } from "src/store";
 import { Header, Button } from "src/shared/components";
 import { colors } from "src/theme";
 import s from "./ListHeader.style";
@@ -12,6 +8,7 @@ import s from "./ListHeader.style";
 interface IListHeaderProps {
   setShowFollowers: React.Dispatch<React.SetStateAction<boolean>>;
   showFollowers: boolean;
+  name: string;
   totalFollowers: number;
   totalFollowings: number;
 }
@@ -19,13 +16,9 @@ const ListHeader: React.FC<IListHeaderProps> = ({
   showFollowers,
   totalFollowers,
   totalFollowings,
+  name,
   setShowFollowers,
 }) => {
-  const route =
-    useRoute<SignedRouteProps<typeof SCREENS.FOLLOWERS_AND_FOLLOWING>>();
-  const { name } = useAppSelector(
-    UserState.selectors.selectUserHomeProfile(route.params.isOwnProfile),
-  );
   return (
     <View>
       <View style={s.headerContainer}>

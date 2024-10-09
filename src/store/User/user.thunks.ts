@@ -1,81 +1,47 @@
-import {
-  PublicKey,
-  prepareNostrEvent,
-  NostrKind,
-  SingleRelayConnection,
-} from "@blowater/nostr-sdk/nostr";
-import { Account } from "@satlantis/api-client";
+import { PublicKey } from "@blowater/nostr-sdk/nostr";
+import { Kind0MetaData } from "@satlantis/api-client";
 import { satlantisClient } from "src/client/satlantisApi";
+import { uploadFile } from "src/client/nostr";
 import { createAppAsyncThunk } from "src/store/tools";
-import { EXPO_PUBLIC_SATLANTIS_RELAY } from "src/shared/constants/env";
 
-export const shouldFetchAccount = createAppAsyncThunk(
-  "get/account",
+export const shouldFetchMyProfile = createAppAsyncThunk(
+  "get/myProfile",
   async (
-    profileNpub: string | undefined,
+    _,
     {
-      getState,
       dispatch,
       extra: {
-        actions: { user },
+        actions: { nostr },
       },
     },
   ) => {
-    const npub = profileNpub || getState().regular.user.account?.npub || "";
-    const account = await satlantisClient.getAccount({ npub });
-    if (account instanceof Error) {
-      throw account;
+    const myProfile = await satlantisClient.getMyProfile();
+    if (myProfile instanceof Error) {
+      dispatch(nostr.actions.shouldSetTokenExpired());
+      throw myProfile;
     }
 
-    if (!!profileNpub) dispatch(user.shouldSetOtherUserAccount(account));
-    else dispatch(user.shouldSetAccount(account));
-  },
-);
-
-export const shouldGetMyInterests = createAppAsyncThunk(
-  "get/myInterests",
-  async (_, { getState }) => {
-    const npub = getState().regular.user.account?.npub || "";
-    const pubkey = PublicKey.FromBech32(npub);
-    if (pubkey instanceof Error) {
-      throw pubkey;
+    const followedBy = await myProfile.getFollowedBy();
+    if (followedBy instanceof Error) {
+      throw followedBy;
     }
 
-    const interests = await satlantisClient.getInterestsOf(pubkey);
-    if (interests instanceof Error) {
-      throw interests;
-    }
-    return interests.interests;
-  },
-);
-
-export const shouldUpdateMyInterests = createAppAsyncThunk(
-  "post/myInterests",
-  async (interests: string[], { dispatch }) => {
-    const signer = await satlantisClient.getNostrSigner();
-    if (signer instanceof Error) {
-      throw signer;
+    const followings = await myProfile.getFollowing();
+    if (followings instanceof Error) {
+      throw followings;
     }
 
-    const event = await prepareNostrEvent(signer, {
-      kind: NostrKind.Interests,
-      tags: interests.map((i) => ["t", i]),
-      content: "",
-    });
-    if (event instanceof Error) {
-      throw event;
+    const myRoles = await myProfile.getAccountPlaceRoles();
+    if (myRoles instanceof Error) {
+      throw myRoles;
     }
 
-    const relay = SingleRelayConnection.New(EXPO_PUBLIC_SATLANTIS_RELAY);
-    if (relay instanceof Error) {
-      throw relay;
+    const myAccount = await myProfile.getAccount();
+    if (myAccount instanceof Error) {
+      throw myAccount;
     }
-    const err = await relay.sendEvent(event);
-    await relay.close();
-    if (err instanceof Error) {
-      throw err;
-    }
-    dispatch(shouldGetMyInterests());
+
+    return { myProfile, followedBy, followings, myRoles, myAccount };
   },
 );
 
@@ -90,80 +56,77 @@ export const shouldFetchAllInterests = createAppAsyncThunk(
   },
 );
 
-export const shouldPostFollowUser = createAppAsyncThunk(
-  "post/followUser",
-  async (itemNpub: string) => {
-    const pubkeyToFollow = PublicKey.FromString(itemNpub);
-    if (pubkeyToFollow instanceof Error) {
-      throw pubkeyToFollow;
+export const shouldUpdateInterests = createAppAsyncThunk(
+  "post/updateInterests",
+  async (interests: string[]) => {
+    const response = await satlantisClient.updateMyInterests(interests);
+    if (response instanceof Error) {
+      throw response;
     }
-    const response = await satlantisClient.followPubkeys([pubkeyToFollow]);
-    return response;
-  },
-);
-
-export const shouldPostUnfollowUser = createAppAsyncThunk(
-  "post/unfollowUser",
-  async (pubKey: string) => {
-    const pubkeyToUnfollow = PublicKey.FromString(pubKey);
-    if (pubkeyToUnfollow instanceof Error) {
-      throw pubkeyToUnfollow;
-    }
-    const response = await satlantisClient.unfollowPubkey(pubkeyToUnfollow);
-    return response;
   },
 );
 
 type CompleteProfile = {
   uri: string;
-  newData: Partial<Account>;
+  about: string;
 };
 export const shouldUpdateCompleteProfile = createAppAsyncThunk(
   "update/completeProfile",
-  async ({ uri, newData }: CompleteProfile, { dispatch }) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    const filename = uri.split("/").pop() || "";
-    const file = new File([blob], filename, { type: blob.type });
-    const imageUrl = await satlantisClient.uploadFile({ file });
-    if (imageUrl instanceof Error) {
-      throw imageUrl;
-    }
+  async ({ uri, about }: CompleteProfile, { dispatch }) => {
+    let imageUrl: URL | undefined;
+    if (!!uri) imageUrl = await uploadFile(uri);
+
     await dispatch(
-      shouldPutUpdateAccount({
-        ...newData,
-        picture: imageUrl.toString(),
+      shouldUpdateMyProfile({
+        about,
+        picture: imageUrl?.toString(),
       }),
     );
   },
 );
 
-export const shouldPutUpdateAccount = createAppAsyncThunk(
-  "put/updateAccount",
-  async (newData: Partial<Account>, { getState, dispatch }) => {
-    const account = getState().regular.user.account;
-    if (!account) {
-      throw new Error("Error trying to reach your account data");
-    }
-    const res = await satlantisClient.updateMyProfile({ ...newData });
+export const shouldUpdateMyProfile = createAppAsyncThunk(
+  "put/updateMyProfile",
+  async (newData: Partial<Kind0MetaData>, { dispatch, getState }) => {
+    const profileData = getState().user.myProfile?.metaData;
+    const res = await satlantisClient.updateMyProfile({
+      ...profileData,
+      ...newData,
+    });
     if (res instanceof Error) {
       throw res;
     }
-    await dispatch(shouldFetchAccount());
+
+    dispatch(shouldFetchMyProfile());
   },
 );
 
-export const shouldPostFollowPubKeys = createAppAsyncThunk(
-  "post/followPubKeys",
-  async (pubkeys: string[]) => {
-    const validPubkeys = pubkeys.map((pub) => {
-      const validKey = PublicKey.FromString(pub);
-      if (validKey instanceof Error) {
-        throw validKey;
-      }
-      return validKey;
-    });
-    const response = await satlantisClient.followPubkeys(validPubkeys);
-    return response;
+export const shouldPostFollowUser = createAppAsyncThunk(
+  "post/followUser",
+  async (pubkey: string, { dispatch }) => {
+    const publicKey = PublicKey.FromHex(pubkey);
+    if (publicKey instanceof Error) {
+      throw new Error(`Invalid key: ${pubkey}: ${publicKey.cause}`);
+    }
+    const response = await satlantisClient.followPubkeys([publicKey]);
+    if (response instanceof Error) {
+      throw response;
+    }
+    if (response) await dispatch(shouldFetchMyProfile());
+  },
+);
+
+export const shouldPostUnfollowUser = createAppAsyncThunk(
+  "post/unfollowUser",
+  async (pubkey: string, { dispatch }) => {
+    const publicKey = PublicKey.FromHex(pubkey);
+    if (publicKey instanceof Error) {
+      throw new Error(`Invalid key: ${pubkey}: ${publicKey.cause}`);
+    }
+    const response = await satlantisClient.unfollowPubkey(publicKey);
+    if (response instanceof Error) {
+      throw response;
+    }
+    if (response) await dispatch(shouldFetchMyProfile());
   },
 );

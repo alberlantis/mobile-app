@@ -1,42 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 import { SCREENS } from "src/navigation/routes";
 import { SignedScreenProps } from "src/navigation/SignedStack";
-import { useAppSelector, UserState } from "src/store";
 import { FollowList } from "src/shared/components";
 import ListHeader from "./ListHeader";
+import { useAppSelector, UserState } from "src/store";
 
 const FollowersAndFollowing: React.FC<
   SignedScreenProps<typeof SCREENS.FOLLOWERS_AND_FOLLOWING>
-> = ({ route, navigation }) => {
+> = ({ navigation }) => {
   const [showFollowers, setShowFollowers] = useState(true);
-  const followers =
-    useAppSelector(
-      UserState.selectors.selectUserFollowers(route.params.isOwnProfile),
-    ) || [];
-  const followings =
-    useAppSelector(
-      UserState.selectors.selectUserFollowing(route.params.isOwnProfile),
-    ) || [];
+  const account = useAppSelector(UserState.selectors.selectMyAccount);
+  const followers = useMemo(() => account?.followedBy || [], [account]);
+  const followings = useMemo(() => account?.following || [], [account]);
 
   return (
     <FollowList
       data={showFollowers ? followers : followings}
       keyExtractor={(item, index) =>
-        `${showFollowers ? "followers" : "following"}-list-${item.id}-${index}`
+        `${showFollowers ? "followers" : "following"}-list-${item?.id}-${index}`
       }
       listHeader={() => (
         <ListHeader
+          name={account?.name || ""}
           showFollowers={showFollowers}
           setShowFollowers={setShowFollowers}
-          totalFollowers={followers.length}
-          totalFollowings={followings.length}
+          totalFollowers={account?.followedBy.length || 0}
+          totalFollowings={account?.following.length || 0}
         />
       )}
       onPress={(item) =>
-        navigation.push(SCREENS.OTHER_PROFILE, { profileNpub: item.npub })
+        navigation.push(SCREENS.OTHER_PROFILE, {
+          profilePubkey: item.pubKey || "",
+          userId: item.id || NaN,
+        })
       }
-      isFollowItem={route.params.isOwnProfile}
+      isFollowItem
+      showFollowers={showFollowers}
     />
   );
 };

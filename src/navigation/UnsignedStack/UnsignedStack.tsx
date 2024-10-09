@@ -25,11 +25,8 @@ const Stack = createNativeStackNavigator<UnsignedGroupParamList>();
 
 const UnsignedStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName={IS_EXPO_GO ? SCREENS.SPLASH : SCREENS.ONBOARDING}
-    >
-      <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {IS_EXPO_GO && <Stack.Screen name={SCREENS.SPLASH} component={Splash} />}
       <Stack.Screen name={SCREENS.ONBOARDING} component={Onboarding} />
       {LoginGroup()}
       {SignUpGroup()}

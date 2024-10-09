@@ -6,12 +6,14 @@ interface NostrState {
   privateKey: string | undefined;
   generateSignerLoading: boolean;
   token: string;
+  isTokenExpired: boolean;
 }
 
 const initialState: NostrState = {
   privateKey: undefined,
   generateSignerLoading: false,
   token: "",
+  isTokenExpired: false,
 };
 
 const nostrSlice = createSlice({
@@ -20,12 +22,16 @@ const nostrSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.token = "";
+      state.isTokenExpired = false;
     },
     shouldUpdateToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
     shouldUpdatePrivateKey: (state, action: PayloadAction<string>) => {
       state.privateKey = action.payload;
+    },
+    shouldSetTokenExpired: (state) => {
+      state.isTokenExpired = true;
     },
   },
   extraReducers: (builder) => {

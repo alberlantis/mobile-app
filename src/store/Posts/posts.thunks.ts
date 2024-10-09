@@ -1,11 +1,11 @@
 import { NostrKind, prepareNostrEvent } from "@blowater/nostr-sdk/nostr";
+import type { NostrEventTag } from "@satlantis/api-client";
 
 import { getReplyTags } from "src/client/nostr";
 import { createAppAsyncThunk } from "src/store/tools";
 import { satlantisClient } from "src/client/satlantisApi";
-import type { Posts } from "./posts.selectors";
 
-enum NoteType {
+export enum NoteType {
   BASIC = 1,
   REVIEW,
   GALLERY,
@@ -20,32 +20,20 @@ enum NoteType {
   MEDIA,
 }
 
-type GetPosts = {
-  npub: string;
-  page: number;
-  limit?: number;
+type LikePost = {
+  postId: number;
+  pubkey: string;
+  postKind: number;
+  nostrId: string;
 };
-
-export const shouldFetchPosts = createAppAsyncThunk(
-  "get/posts",
-  async ({ npub, page, limit = 12 }: GetPosts) => {
-    const response = await satlantisClient.getNotes({
-      npub,
-      page,
-      limit,
-    });
-    if (response instanceof Error) {
-      throw response;
-    }
-
-    return response;
-  },
-);
 
 export const shouldLikePosts = createAppAsyncThunk(
   "post/likePosts",
-  async (post: Posts, { getState }) => {
-    const account = getState().regular.user.account;
+  async (
+    { postId, pubkey, postKind, nostrId }: LikePost,
+    { getState, dispatch },
+  ) => {
+    const account = getState().user.myAccount;
     if (!account || !account.id) return;
     const signer = await satlantisClient.getNostrSigner();
     if (signer instanceof Error) {
@@ -55,9 +43,9 @@ export const shouldLikePosts = createAppAsyncThunk(
     const event = await prepareNostrEvent(signer, {
       kind: NostrKind.REACTION,
       tags: [
-        ["e", post.event.nostrId],
-        ["p", post.event.pubkey],
-        ["k", String(post.event.kind)],
+        ["e", nostrId],
+        ["p", pubkey],
+        ["k", String(postKind)],
       ],
       content: "+",
     });
@@ -68,15 +56,16 @@ export const shouldLikePosts = createAppAsyncThunk(
     const response = await satlantisClient.postReaction({
       accountId: account.id,
       event,
-      parentId: post.id,
+      parentId: postId,
       chatNoteId: 0,
-      noteId: post.id,
+      noteId: postId,
       noteType: NoteType.REACTION,
     });
     if (response instanceof Error) {
       throw response;
     }
 
+    await dispatch(shouldFetchPost(postId));
     return response;
   },
 );
@@ -92,31 +81,54 @@ export const shouldFetchPost = createAppAsyncThunk(
       throw new Error("Note was not found");
     }
 
-    const updatedPost = {
-      ...response.itself,
-      descendants: response.descendants.sort(
-        (a, b) => b.event.createdAt - a.event.createdAt,
-      ),
-    };
-
-    return updatedPost;
+    return response;
   },
 );
 
 type PublishReply = {
-  post: Posts;
   comment: string;
+  eventTags: NostrEventTag[];
+  content: string;
+  createdAt: string;
+  nostrId: string;
+  kind: number;
+  pubkey: string;
+  sig: string;
+  id: number;
+  type: NoteType;
 };
 
 export const shouldPublishReply = createAppAsyncThunk(
   "post/publishReply",
-  async ({ post, comment }: PublishReply, { dispatch }) => {
+  async (
+    {
+      eventTags,
+      content,
+      createdAt,
+      nostrId,
+      kind,
+      pubkey,
+      sig,
+      comment,
+      id,
+      type,
+    }: PublishReply,
+    { dispatch },
+  ) => {
     const signer = await satlantisClient.getNostrSigner();
     if (signer instanceof Error) {
       throw signer;
     }
 
-    const tags = getReplyTags(post);
+    const tags = getReplyTags({
+      eventTags,
+      content,
+      createdAt,
+      nostrId,
+      kind,
+      pubkey,
+      sig,
+    });
     const event = await prepareNostrEvent(signer, {
       kind: NostrKind.TEXT_NOTE,
       tags,
@@ -128,14 +140,14 @@ export const shouldPublishReply = createAppAsyncThunk(
 
     const response = await satlantisClient._postNote({
       event,
-      noteType: post.type,
-      parentId: post.id,
+      noteType: type,
+      parentId: id,
     });
     if (response instanceof Error) {
       throw response;
     }
 
-    await dispatch(shouldFetchPost(post.id));
+    await dispatch(shouldFetchPost(id));
     return response;
   },
 );

@@ -43,6 +43,10 @@ const InterestsModal: React.FC<IInterestsModalProps> = ({
     dispatch(UserState.thunks.shouldFetchAllInterests());
   }, [dispatch]);
 
+  useEffect(() => {
+    setBriefSelectedTags(selectedInterests);
+  }, [selectedInterests, setBriefSelectedTags]);
+
   return (
     <BottomModal
       title="Interests"

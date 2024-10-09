@@ -11,4 +11,10 @@ export default StyleSheet.create({
     paddingHorizontal: normalizeSize(16),
     marginBottom: normalizeSize(8),
   },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: colors.BLACK,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

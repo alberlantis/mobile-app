@@ -9,6 +9,7 @@ import {
   Input,
   DefaultBackground,
 } from "src/shared/components";
+import { SCREENS } from "src/navigation/routes";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import s from "./CompleteProfile.style";
 import UploadAvatar, { type SatlantisImage } from "./UploadAvatar";
@@ -20,9 +21,9 @@ import {
 } from "src/store";
 import { SerializedError } from "@reduxjs/toolkit";
 
-const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
-  route,
-}) => {
+const CompleteProfile: React.FC<
+  SignedScreenProps<typeof SCREENS.COMPLETE_PROFILE>
+> = ({ route }) => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(
     UserState.selectors.selectUpdateCompleteProfileLoading,
@@ -34,9 +35,7 @@ const CompleteProfile: React.FC<SignedScreenProps<"CompleteProfile">> = ({
     if (isLoading) return;
     dispatch(
       UserState.thunks.shouldUpdateCompleteProfile({
-        newData: {
-          about: bio,
-        },
+        about: bio,
         uri: avatar?.uri || "",
       }),
     )

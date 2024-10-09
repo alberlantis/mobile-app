@@ -33,6 +33,7 @@ export interface IButtonProps {
   theme: ButtonTheme;
   text: string;
   paddingVertical?: number;
+  paddingHorizontal?: number;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
@@ -52,7 +53,8 @@ const Button: React.FC<IButtonProps> = ({
   marginBottom,
   marginLeft,
   marginRight,
-  paddingVertical = 11,
+  paddingVertical = 12,
+  paddingHorizontal = 16,
   textStyle,
   loading,
   subfixElement,
@@ -94,6 +96,7 @@ const Button: React.FC<IButtonProps> = ({
           marginRight,
           width: staticWidth,
           paddingVertical: normalizeSize(paddingVertical),
+          paddingHorizontal: normalizeSize(paddingHorizontal),
         },
       ]}
       onPress={onPress}

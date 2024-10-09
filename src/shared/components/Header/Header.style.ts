@@ -14,6 +14,16 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   headerRightSection: {
-    alignItems: "flex-end",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  actionMenuContainer: {
+    borderRadius: normalizeSize(38) / 2,
+    height: normalizeSize(38),
+    width: normalizeSize(38),
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: normalizeSize(8),
   },
 });

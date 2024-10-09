@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { View, Text, Pressable } from "react-native";
 import { Account } from "@satlantis/api-client";
 
@@ -14,8 +14,8 @@ interface IUserCardProps {
   showFollowers?: boolean;
   isFollowItem?: boolean;
   pictureSize: number;
-  item: Account;
-  onPress(item: Account): void;
+  item: Partial<Account>;
+  onPress(item: Partial<Account>): void;
 }
 const UserCard: React.FC<IUserCardProps> = ({
   item,
@@ -24,10 +24,10 @@ const UserCard: React.FC<IUserCardProps> = ({
   isFollowItem = false,
   onPress,
 }) => {
-  const { isLoading, handleFollowButton } = useFollowButton(item.id, item.npub);
   const isBeingFollow = useAppSelector(
-    UserState.selectors.selectIsUserFollowingFollower(item.id),
+    UserState.selectors.selectIsUserFollowingFollower(item?.id),
   );
+  const { isLoading, handleFollowButton } = useFollowButton(item?.id || NaN);
   const buttonTheme = isLoading
     ? "disabled"
     : showFollowers && !isBeingFollow
@@ -41,16 +41,14 @@ const UserCard: React.FC<IUserCardProps> = ({
         <View style={s.informationContainer}>
           <View style={s.nameContainer}>
             <Text style={s.name}>{item.name}</Text>
-            {!!item.chatMemberships && (
-              <Icon
-                type="MaterialCommunityIcons"
-                size={fonts[16]}
-                name="crown"
-                color={colors.ORANGE_PRIMARY}
-              />
-            )}
+            <Icon
+              type="MaterialCommunityIcons"
+              size={fonts[16]}
+              name="crown"
+              color={colors.ORANGE_PRIMARY}
+            />
           </View>
-          {item.about && (
+          {!!item.about && (
             <Text style={s.job} numberOfLines={2}>
               {item.about}
             </Text>
@@ -64,7 +62,13 @@ const UserCard: React.FC<IUserCardProps> = ({
         <Button
           size="auto"
           text={showFollowers && !isBeingFollow ? "Follow" : "Unfollow"}
-          onPress={() => handleFollowButton(item.id)}
+          onPress={() =>
+            handleFollowButton(
+              item?.id || NaN,
+              isBeingFollow,
+              item.pubKey || "",
+            )
+          }
           theme={buttonTheme}
           paddingVertical={7}
           textStyle={s.buttonText}
@@ -75,4 +79,4 @@ const UserCard: React.FC<IUserCardProps> = ({
   );
 };
 
-export default UserCard;
+export default memo(UserCard);

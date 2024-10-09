@@ -1,53 +1,46 @@
 import React from "react";
 import { View } from "react-native";
-import { useRoute } from "@react-navigation/native";
 
 import { UserState, useAppDispatch, useAppSelector } from "src/store";
-import { SCREENS } from "src/navigation/routes";
-import type { SignedRouteProps } from "src/navigation/SignedStack";
-import type { ProfileHomeRoutes } from "src/screens/ProfileHome/ProfileHome";
-import { Button, Icon } from "src/shared/components";
+import Button from "src/shared/components/Button";
+import Icon from "src/shared/components/Icon";
 import s from "./ProfileActions.style";
 import { fonts, colors } from "src/theme";
 
-const ProfileActions: React.FC = () => {
+interface IProfileActionsProps {
+  isOwnProfile: boolean;
+  pubkey: string;
+  userId: number;
+}
+
+const ProfileActions: React.FC<IProfileActionsProps> = ({
+  isOwnProfile,
+  pubkey,
+  userId,
+}) => {
   const dispatch = useAppDispatch();
-  const route = useRoute<SignedRouteProps<ProfileHomeRoutes>>();
-  const isOwnProfile = route.name === SCREENS.PROFILE_HOME;
-  const profileAccount = useAppSelector(
-    UserState.selectors.selectOtherUserAccount,
-  );
   const isBeingFollow = useAppSelector(
-    UserState.selectors.selectIsUserFollowingFollower(profileAccount?.id),
+    UserState.selectors.selectIsUserFollowingFollower(userId),
   );
+
   const isFollowUserLoading = useAppSelector(
     UserState.selectors.selectFollowUserLoading,
   );
   const isUnfollowUserLoading = useAppSelector(
     UserState.selectors.selectUnfollowUserLoading,
   );
-  const isRefreshingAccount = useAppSelector(
-    UserState.selectors.selectGetAccountLoading,
-  );
-  const isLoading =
-    isFollowUserLoading || isRefreshingAccount || isUnfollowUserLoading;
+  const isLoading = isFollowUserLoading || isUnfollowUserLoading;
 
   const handleFollowButton = () => {
     if (isLoading) return;
     if (isBeingFollow) {
-      dispatch(
-        UserState.thunks.shouldPostUnfollowUser(
-          route.params?.profileNpub || "",
-        ),
-      )
+      dispatch(UserState.thunks.shouldPostUnfollowUser(pubkey))
         .unwrap()
-        .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
+        .then(() => dispatch(UserState.thunks.shouldFetchMyProfile()));
     } else {
-      dispatch(
-        UserState.thunks.shouldPostFollowUser(route.params?.profileNpub || ""),
-      )
+      dispatch(UserState.thunks.shouldPostFollowUser(pubkey))
         .unwrap()
-        .then(() => dispatch(UserState.thunks.shouldFetchAccount()));
+        .then(() => dispatch(UserState.thunks.shouldFetchMyProfile()));
     }
   };
   const followIcon = () => (

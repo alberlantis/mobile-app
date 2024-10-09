@@ -25,3 +25,5 @@ export { default as UserCard } from "./UserCard";
 export { default as CommentCard } from "./CommentCard";
 export { default as CommentList } from "./CommentList";
 export { default as Post } from "./Post";
+export { default as ProfileHeader } from "./ProfileHeader";
+export { default as ProfilePosts } from "./ProfilePosts";

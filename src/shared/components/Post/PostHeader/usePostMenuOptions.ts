@@ -1,22 +1,26 @@
 import * as Clipboard from "expo-clipboard";
-import { useRoute } from "@react-navigation/native";
 
-import { SignedRouteProps } from "src/navigation/SignedStack";
-import { useAppSelector, PostsState } from "src/store";
 import type { ActionMenuOptions } from "src/shared/components/ActionMenu";
-import type { PostsScreens } from "../Post";
+type PostMenuOptions = {
+  url: string;
+  description: string;
+  id: number;
+  rawContent: string;
+  accountNpub: string;
+};
 
-const usePostMenuOptions = () => {
-  const route = useRoute<SignedRouteProps<PostsScreens>>();
-  const { postId } = route.params;
-  const post = useAppSelector(PostsState.selectors.selectSinglePost(postId));
-
+const usePostMenuOptions = ({
+  url,
+  description,
+  id,
+  rawContent,
+  accountNpub,
+}: PostMenuOptions) => {
   const MenuOptions: ActionMenuOptions[] = [
     {
       text: "Copy post link",
       onPress: async () => {
-        if (!post) return;
-        await Clipboard.setStringAsync(post.url);
+        await Clipboard.setStringAsync(url);
       },
       icon: {
         type: "Feather",
@@ -26,8 +30,7 @@ const usePostMenuOptions = () => {
     {
       text: "Copy post text",
       onPress: async () => {
-        if (!post) return;
-        await Clipboard.setStringAsync(post.description);
+        await Clipboard.setStringAsync(description);
       },
       icon: {
         type: "AntDesign",
@@ -37,8 +40,7 @@ const usePostMenuOptions = () => {
     {
       text: "Copy post ID",
       onPress: async () => {
-        if (!post) return;
-        await Clipboard.setStringAsync(post.id.toString());
+        await Clipboard.setStringAsync(id.toString());
       },
       icon: {
         type: "MaterialIcons",
@@ -48,8 +50,7 @@ const usePostMenuOptions = () => {
     {
       text: "Copy raw data",
       onPress: async () => {
-        if (!post) return;
-        await Clipboard.setStringAsync(post.event.content);
+        await Clipboard.setStringAsync(rawContent);
       },
       icon: {
         type: "Feather",
@@ -59,8 +60,7 @@ const usePostMenuOptions = () => {
     {
       text: "Copy user npub",
       onPress: async () => {
-        if (!post) return;
-        await Clipboard.setStringAsync(post.account.npub);
+        await Clipboard.setStringAsync(accountNpub);
       },
       icon: {
         type: "FontAwesome6",

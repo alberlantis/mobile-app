@@ -11,7 +11,9 @@ export const shouldGenerateSigner = createAppAsyncThunk(
     if (isAvailable instanceof Error) {
       throw isAvailable;
     }
-    if (!isAvailable) return;
+    if (!isAvailable) {
+      throw new Error("username already exists");
+    }
     const signer = InMemoryAccountContext.Generate();
     setNostrSigner(signer);
     return signer.privateKey.hex;

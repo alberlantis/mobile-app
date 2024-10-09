@@ -1,6 +1,6 @@
 import type { RootState } from "../tools";
 
-const selectAuth = (store: RootState) => store.regular.auth;
+const selectAuth = (store: RootState) => store.auth;
 export const selectIsCreateAccountLoading = (store: RootState) =>
   selectAuth(store).createAccountLoading;
 export const selectIsLoginAccountLoading = (store: RootState) =>
