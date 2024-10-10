@@ -26,12 +26,4 @@ export default StyleSheet.create({
     color: colors.WHITE_BOLD,
   },
   modalHeaderRight: { width: "20%", alignItems: "flex-end" },
-  modalHeaderCloseButton: {
-    backgroundColor: colors.BLACK_3,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: normalizeSize(38) / 2,
-    width: normalizeSize(38),
-    height: normalizeSize(38),
-  },
 });

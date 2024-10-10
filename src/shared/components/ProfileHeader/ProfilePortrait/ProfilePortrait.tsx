@@ -6,6 +6,7 @@ import { useAppSelector, NostrState } from "src/store";
 import { colors } from "src/theme";
 import Header from "src/shared/components/Header";
 import ImagePortrait from "src/shared/components/ImagePortrait";
+import { useImageAssets } from "src/shared/hooks";
 import { EXPO_PUBLIC_DOMAIN } from "src/shared/constants/env";
 import type { ActionMenuOptions } from "src/shared/components/ActionMenu";
 import s from "./ProfilePortrait.style";
@@ -21,6 +22,7 @@ const ProfilePortrait: React.FC<IProfilePortraitProps> = ({
   npub,
   banner,
 }) => {
+  const { images } = useImageAssets();
   const nsec = useAppSelector(NostrState.selectors.selectPrivateKey);
   const actionMenuOptions: ActionMenuOptions[] = [
     {
@@ -59,7 +61,10 @@ const ProfilePortrait: React.FC<IProfilePortraitProps> = ({
           actionMenuOptions={actionMenuOptions}
         />
       </View>
-      <ImagePortrait banner={banner} />
+      <ImagePortrait
+        defaultBanner={images.logo}
+        imageBanner={{ uri: banner }}
+      />
     </View>
   );
 };

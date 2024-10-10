@@ -12,6 +12,7 @@ import * as Profile from "./Profile";
 import * as Auth from "./Auth";
 import * as User from "./User";
 import * as Posts from "./Posts";
+import * as Locations from "./Locations";
 
 type RegularReducer = ReturnType<typeof regularReducers>;
 
@@ -37,6 +38,7 @@ const regularReducers = combineReducers({
   auth: Auth.reducer,
   user: User.reducer,
   posts: Posts.reducer,
+  locations: Locations.reducer,
   nostr: Nostr.reducer,
 });
 
@@ -52,6 +54,7 @@ const store = configureStore({
             nostr: { thunks: Nostr.thunks, actions: Nostr.actions },
             profile: { thunks: Profile.thunks, actions: Profile.actions },
             posts: { thunks: Posts.thunks, actions: Posts.actions },
+            locations: { thunks: Locations.thunks, actions: Locations.actions },
           },
         },
       },

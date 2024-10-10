@@ -9,10 +9,17 @@ export type ButtonTheme =
   | "secondary"
   | "disabled"
   | "off"
-  | "primary-outline";
+  | "primary-outline"
+  | "off-secondary"
+  | "off-outline"
+  | "green";
 
 export const getColors = (theme: ButtonTheme): ColorValue[] => {
   switch (theme) {
+    case "off-secondary":
+      return [colors.BLACK_3, colors.BLACK_3];
+    case "off-outline":
+      return [colors.TRANSPARENT, colors.TRANSPARENT];
     case "secondary":
       return [colors.BLUE_PRIMARY, colors.BLUE_PRIMARY];
     case "disabled":
@@ -21,6 +28,8 @@ export const getColors = (theme: ButtonTheme): ColorValue[] => {
       return [colors.WHITE_GRAY, colors.WHITE_GRAY];
     case "primary-outline":
       return [colors.TRANSPARENT, colors.TRANSPARENT];
+    case "green":
+      return [colors.GREEN, colors.GREEN_2];
     case "primary":
     default:
       return [colors.ORANGE_PRIMARY_DARK, colors.ORANGE_PRIMARY_LIGHT];
@@ -38,7 +47,7 @@ export const getSize = (size?: ButtonSize): DimensionValue => {
 };
 
 export const getRadius = (dynamicSize: DimensionSize): NumberProp => {
-  const buttonRadiusRation = 200 / 300;
+  const buttonRadiusRation = 1 / 2;
   return buttonRadiusRation * Math.min(dynamicSize.width, dynamicSize.height);
 };
 
@@ -47,14 +56,18 @@ export const getOutline = (
   radius: NumberProp,
 ): StyleProp<ViewStyle> => {
   if (!theme.includes("outline")) return {};
+  let borderColor: ColorValue;
   switch (theme) {
+    case "off-outline":
+      borderColor = colors.GRAY_4;
+      break;
     case "primary-outline":
-    default: {
-      return {
-        borderRadius: radius as number,
-        borderColor: colors.ORANGE_PRIMARY,
-        borderWidth: 1,
-      };
-    }
+    default:
+      borderColor = colors.ORANGE_PRIMARY;
   }
+  return {
+    borderRadius: radius as number,
+    borderColor,
+    borderWidth: 1,
+  };
 };

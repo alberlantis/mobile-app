@@ -9,15 +9,18 @@ import {
   Fontisto,
   Octicons,
   SimpleLineIcons,
-  MaterialIcons,
   FontAwesome6,
+  FontAwesome5,
+  MaterialIcons,
 } from "@expo/vector-icons";
 import { ColorValue, StyleProp, TextStyle } from "react-native";
+import { SatlantisIcons } from "src/shared/hooks/usePreloadIcons";
 
 import s from "./Icon.style";
 import colors from "src/theme/colors";
 
 export type IconNames = {
+  FontAwesome5: keyof typeof FontAwesome5.glyphMap;
   SimpleLineIcons: keyof typeof SimpleLineIcons.glyphMap;
   Octicons: keyof typeof Octicons.glyphMap;
   AntDesign: keyof typeof AntDesign.glyphMap;
@@ -29,6 +32,7 @@ export type IconNames = {
   Fontisto: keyof typeof Fontisto.glyphMap;
   MaterialIcons: keyof typeof MaterialIcons.glyphMap;
   FontAwesome6: keyof typeof FontAwesome6.glyphMap;
+  SatlantisIcons: keyof typeof SatlantisIcons.glyphMap;
 };
 
 interface IBaseIconProps {
@@ -66,6 +70,8 @@ const Icon = <T extends keyof IconNames>({
     SimpleLineIcons,
     MaterialIcons,
     FontAwesome6,
+    FontAwesome5,
+    SatlantisIcons,
   };
   const IconComponent = iconMap[type] as React.ComponentType<any>;
   return (

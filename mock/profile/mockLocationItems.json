@@ -1,0 +1,32 @@
+[
+  {
+     "name":"Brazilian Steak House",
+     "type":"Restaurant",
+     "description":"Today: 9AM - 5PM"
+  },
+  {
+     "name":"Starbucks",
+     "type":"Coffee, Bar, Cowork",
+     "description":"Today: 9AM - 5PM"
+  },
+  {
+    "name":"Brazilian Steak House",
+    "type":"Restaurant",
+    "description":"Today: 9AM - 5PM"
+  },
+  {
+      "name":"Starbucks",
+      "type":"Coffee, Bar, Cowork",
+      "description":"Today: 9AM - 5PM"
+  },
+  {
+    "name":"Brazilian Steak House",
+    "type":"Restaurant",
+    "description":"Today: 9AM - 5PM"
+  },
+  {
+      "name":"Starbucks",
+      "type":"Coffee, Bar, Cowork",
+      "description":"Today: 9AM - 5PM"
+  }
+]

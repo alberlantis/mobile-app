@@ -11,12 +11,11 @@ import {
   Input,
   Button,
 } from "src/shared/components";
-import { useFetchProfileInterests } from "src/shared/hooks";
-import { colors } from "src/theme";
+import { useFetchProfileInterests, useImageAssets } from "src/shared/hooks";
 import InterestsSection from "./InterestsSection";
 import { deepEqual } from "src/utils";
 import s from "./EditUser.style";
-import { normalizeSize } from "src/theme";
+import { normalizeSize, colors } from "src/theme";
 import { useAppSelector, UserState, useAppDispatch } from "src/store";
 import { SerializedError } from "@reduxjs/toolkit";
 
@@ -30,6 +29,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
   const isMyProfileLoading = useAppSelector(
     UserState.selectors.selectUpdateMyProfileLoading,
   );
+  const { images } = useImageAssets();
   const isInterestsUpdateLoading = useAppSelector(
     UserState.selectors.selectUpdateInterestsLoading,
   );
@@ -38,9 +38,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
       name: myProfile?.metaData.name,
       about: myProfile?.metaData.about,
       website: myProfile?.metaData.website,
-      //@ts-ignore ALBERT: please add phone to metadata
       phone: myProfile?.metaData.phone,
-      //@ts-ignore ALBERT: please add email to metadata
       email: myProfile?.metaData.email,
       interests: myInterests,
     }),
@@ -48,9 +46,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
       myProfile?.metaData.name,
       myProfile?.metaData.about,
       myProfile?.metaData.website,
-      //@ts-ignore ALBERT: please add phone to metadata
       myProfile?.metaData.phone,
-      //@ts-ignore ALBERT: please add email to metadata
       myProfile?.metaData.email,
       myInterests,
     ],
@@ -123,7 +119,10 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
         <View style={s.topHeaderContainer}>
           <BackButton color={colors.BLACK_MEDIUM} onPress={handleBackButton} />
         </View>
-        <ImagePortrait banner={myProfile?.metaData.banner || ""} />
+        <ImagePortrait
+          defaultBanner={images.logo}
+          imageBanner={{ uri: myProfile?.metaData.banner }}
+        />
         <View style={s.mainInfoContainer}>
           <Avatar picture={myProfile?.metaData.picture || ""} />
           <View style={s.mainBasePanelContainer}>

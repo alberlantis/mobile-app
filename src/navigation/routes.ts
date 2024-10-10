@@ -19,4 +19,5 @@ export const SCREENS = {
   LOCATION: "Location",
   FOLLOWERS_AND_FOLLOWING: "FollowersAndFollowing",
   VIEW_POST: "ViewPost",
+  LOCATION_DETAILS: "LocationDetails",
 } as const;

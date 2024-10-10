@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text } from "react-native";
 
-import { colors, fonts } from "src/theme";
-import Icon from "src/shared/components/Icon";
+import ExitButton from "src/shared/components/ExitButton";
 import s from "./ModalHeader.style";
 
 interface IModalHeaderProps {
@@ -24,14 +23,7 @@ const ModalHeader: React.FC<IModalHeaderProps> = ({
         {subtitle && <Text style={s.modalSubtitle}>{subtitle}</Text>}
       </View>
       <View style={s.modalHeaderRight}>
-        <Pressable onPress={closeModal} style={s.modalHeaderCloseButton}>
-          <Icon
-            type="AntDesign"
-            name="close"
-            size={fonts[18]}
-            color={colors.WHITE}
-          />
-        </Pressable>
+        <ExitButton iconSize={18} onPress={closeModal} size={38} />
       </View>
     </View>
   );

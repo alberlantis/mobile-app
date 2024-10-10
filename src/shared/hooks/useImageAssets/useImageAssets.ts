@@ -9,6 +9,8 @@ const useImageAssets = () => {
     mockUserAvatar: require("mock/profile/avatar-user.png"),
     mockBusinessAvatar: require("mock/profile/avatar-business.png"),
     mockPost: require("mock/profile/post-mock.png"),
+    cityDefault: require("assets/images/city-default.png"),
+    noLocationsFound: require("assets/images/no-locations-found.png"),
   };
 
   const preloadImagesAssets = async () => {

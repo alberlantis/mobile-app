@@ -53,7 +53,7 @@ const TabIcon: React.FC<ITabIconProps> = ({ route, focused = false }) => {
     <View style={s.container}>
       <Icon
         type={icon.type}
-        color={focused ? colors.WHITE : colors.WHITE_LIGHT}
+        color={focused ? colors.ORANGE_PRIMARY : colors.WHITE}
         name={icon.name}
         size={fonts[28]}
       />

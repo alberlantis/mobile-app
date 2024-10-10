@@ -34,11 +34,19 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       package: process.env.EXPO_PUBLIC_APP_IDENTIFIER,
       versionCode: isNaN(Number(process.env.EXPO_PUBLIC_BUILD_VERSION)) ?
         config.android?.versionCode :
-        Number(process.env.EXPO_PUBLIC_BUILD_VERSION)
+        Number(process.env.EXPO_PUBLIC_BUILD_VERSION),
+      permissions: [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
     },
     ios: {
       bundleIdentifier: process.env.EXPO_PUBLIC_APP_IDENTIFIER,
-      buildNumber: process.env.EXPO_PUBLIC_BUILD_VERSION
+      buildNumber: process.env.EXPO_PUBLIC_BUILD_VERSION,
+      infoPlist: {
+        NSLocationWhenInUseUsageDescription: "The app needs access to your location while using the application.",
+        NSLocationAlwaysUsageDescription: "The app needs access to your location in the background."
+      }
     },
     extra: {
       eas: {
@@ -60,6 +68,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         {
           photosPermission: "Allow $(PRODUCT_NAME) to access your photos.",
           isAccessMediaLocationEnabled: true
+        }
+      ],
+      [
+        "expo-location",
+        {
+          locationAlwaysAndWhenInUsePermission: "Allow the app to access your location at all times.",
+          locationAlwaysPermission: "Allow the app to access your location even when not in use.",
+          locationWhenInUsePermission: "Allow the app to access your location while using the app."
         }
       ]
     ]

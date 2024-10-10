@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 
 import Icon from "../Icon";
@@ -16,10 +16,7 @@ const CheckboxItem: React.FC<ICheckboxItemProps> = ({
   setValue,
   isSelected = false,
 }) => {
-  const [isChecked, setIsChecked] = useState(isSelected);
-
   const toggleCheck = () => {
-    setIsChecked(!isChecked);
     setValue(value);
   };
 
@@ -30,12 +27,12 @@ const CheckboxItem: React.FC<ICheckboxItemProps> = ({
         style={[
           s.square,
           {
-            backgroundColor: isChecked ? colors.ORANGE_PRIMARY : "transparent",
-            borderWidth: isChecked ? 0 : 1,
+            backgroundColor: isSelected ? colors.ORANGE_PRIMARY : "transparent",
+            borderWidth: isSelected ? 0 : 1,
           },
         ]}
       >
-        {isChecked && (
+        {isSelected && (
           <Icon
             name="check"
             type="Feather"

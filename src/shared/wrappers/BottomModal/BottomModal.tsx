@@ -19,6 +19,7 @@ interface IBottomModalProps {
   subtitle?: string;
   children: React.ReactNode;
   onClose?(): void;
+  maxHeightScale?: number;
 }
 
 const BottomModal: React.FC<IBottomModalProps> = ({
@@ -28,6 +29,7 @@ const BottomModal: React.FC<IBottomModalProps> = ({
   setModalVisible,
   onClose,
   children,
+  maxHeightScale = 0.75,
 }) => {
   const { height: screenHeight } = useWindowDimensions();
   const { current: slideAnim } = useRef(new Animated.Value(screenHeight));
@@ -63,7 +65,13 @@ const BottomModal: React.FC<IBottomModalProps> = ({
       >
         <Pressable style={StyleSheet.absoluteFill} onPress={closeModal} />
         <Animated.View
-          style={[s.modalContent, { transform: [{ translateY: slideAnim }] }]}
+          style={[
+            s.modalContent,
+            {
+              maxHeight: screenHeight * maxHeightScale,
+              transform: [{ translateY: slideAnim }],
+            },
+          ]}
         >
           <ModalHeader
             closeModal={closeModal}

@@ -9,7 +9,7 @@ export const EXPO_PUBLIC_APP_IDENTIFIER =
   process.env.EXPO_PUBLIC_APP_IDENTIFIER;
 export const EXPO_PUBLIC_DOMAIN = process.env.EXPO_PUBLIC_DOMAIN || "";
 export const EXPO_PUBLIC_CLIENT_ENDPOINT =
-  process.env.EXPO_PUBLIC_CLIENT_ENDPOINT;
+  process.env.EXPO_PUBLIC_CLIENT_ENDPOINT || "";
 export const EXPO_PUBLIC_SATLANTIS_RELAY =
   process.env.EXPO_PUBLIC_SATLANTIS_RELAY || "";
 export const EXPO_PUBLIC_VITE_AWS_CDN = process.env.EXPO_PUBLIC_VITE_AWS_CDN;

@@ -1,4 +1,6 @@
 import * as Font from "expo-font";
+
+import satlantisFullGlyphMap from "assets/fonts/config.json";
 import {
   Entypo,
   Feather,
@@ -11,7 +13,21 @@ import {
   SimpleLineIcons,
   MaterialIcons,
   FontAwesome6,
+  FontAwesome5,
+  createIconSet,
 } from "@expo/vector-icons";
+import { GlyphMap } from "@expo/vector-icons/build/createIconSet";
+
+const satlantisGlyphMap = satlantisFullGlyphMap.glyphs.reduce((acc, glyph) => {
+  acc[glyph.css] = glyph.code;
+  return acc;
+}, {} as GlyphMap<string>);
+
+export const SatlantisIcons = createIconSet(
+  satlantisGlyphMap,
+  "satlantisIcons",
+  require("assets/fonts/satlantis-icons.ttf"),
+);
 
 const usePreloadIcons = () => {
   const preloadIcons = async () => {
@@ -28,6 +44,8 @@ const usePreloadIcons = () => {
       ...SimpleLineIcons.font,
       ...MaterialIcons.font,
       ...FontAwesome6.font,
+      ...FontAwesome5.font,
+      ...SatlantisIcons.font,
     });
   };
 

@@ -27,3 +27,5 @@ export { default as CommentList } from "./CommentList";
 export { default as Post } from "./Post";
 export { default as ProfileHeader } from "./ProfileHeader";
 export { default as ProfilePosts } from "./ProfilePosts";
+export { default as ExitButton } from "./ExitButton";
+export { default as LabelCheck } from "./LabelCheck";

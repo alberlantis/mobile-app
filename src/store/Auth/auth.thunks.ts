@@ -121,7 +121,7 @@ export const shouldLogout = createAppAsyncThunk(
       {
         dispatch,
         extra: {
-          actions: { auth, nostr, user, profile /**posts*/ },
+          actions: { auth, nostr, user, locations, posts, profile },
         },
       },
     ]
@@ -129,7 +129,8 @@ export const shouldLogout = createAppAsyncThunk(
     dispatch(auth.actions.logout());
     dispatch(nostr.actions.logout());
     dispatch(user.actions.logout());
-    // dispatch(posts.actions.logout());
+    dispatch(posts.actions.logout());
+    dispatch(locations.actions.logout());
     dispatch(profile.actions.logout());
   },
 );

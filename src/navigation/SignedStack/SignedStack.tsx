@@ -6,6 +6,7 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 
+import type { LocationTabData } from "src/screens/Location/hooks";
 import { useAppSelector, AuthState } from "src/store";
 import { SCREENS } from "src/navigation/routes";
 import AccountCreationGroup, {
@@ -17,6 +18,7 @@ import {
   FollowersAndFollowing,
   ViewPost,
   OtherProfile,
+  LocationDetails,
 } from "src/screens";
 
 export type HomeTabsParams =
@@ -34,6 +36,7 @@ export type SignedParamList = {
   [SCREENS.FOLLOWERS_AND_FOLLOWING]: undefined;
   [SCREENS.VIEW_POST]: { postId: number };
   [SCREENS.OTHER_PROFILE]: { profilePubkey: string; userId: number };
+  [SCREENS.LOCATION_DETAILS]: { location: LocationTabData };
 } & AccountCreationParamList &
   HomeTabsParamList;
 const Stack = createNativeStackNavigator<SignedParamList>();
@@ -56,6 +59,10 @@ const SignedStack: React.FC = () => {
             component={FollowersAndFollowing}
           />
           <Stack.Screen name={SCREENS.VIEW_POST} component={ViewPost} />
+          <Stack.Screen
+            name={SCREENS.LOCATION_DETAILS}
+            component={LocationDetails}
+          />
         </Stack.Group>
       )}
     </Stack.Navigator>

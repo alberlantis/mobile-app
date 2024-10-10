@@ -5,6 +5,7 @@ import * as Profile from "./Profile";
 import * as Auth from "./Auth";
 import * as User from "./User";
 import * as Posts from "./Posts";
+import * as Locations from "./Locations";
 
 import { store } from "./store";
 
@@ -27,6 +28,10 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
         actions: typeof Profile.actions;
       };
       posts: { thunks: typeof Posts.thunks; actions: typeof Posts.actions };
+      locations: {
+        thunks: typeof Locations.thunks;
+        actions: typeof Locations.actions;
+      };
     };
   };
 }>();

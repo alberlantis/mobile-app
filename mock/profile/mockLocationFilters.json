@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Coffee",
+    "icon": {
+      "type": "FontAwesome",
+      "name": "coffee"
+    }
+  },
+  {
+    "name": "Restaurant",
+    "icon": {
+      "type": "MaterialCommunityIcons",
+      "name": "silverware-fork-knife"
+    }
+  },
+  {
+    "name": "Cowork",
+    "icon": {
+      "type": "FontAwesome",
+      "name": "desktop"
+    }
+  },
+  {
+    "name": "Bakery",
+    "icon": {
+      "type": "MaterialCommunityIcons",
+      "name": "bread-slice-outline"
+    }
+  },
+  {
+    "name": "Take out",
+    "icon": {
+      "type": "MaterialIcons",
+      "name": "backpack"
+    }
+  },
+  {
+    "name": "Apparel",
+    "icon": {
+      "type": "FontAwesome5",
+      "name": "tshirt"
+    }
+  }
+]

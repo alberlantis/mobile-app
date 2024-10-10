@@ -1,21 +1,22 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, ImageURISource, ImageSourcePropType } from "react-native";
 
-import { useImageAssets } from "src/shared/hooks";
 import s from "./ImagePortrait.style";
 
 interface IImagePortraitProps {
-  banner: string;
+  imageBanner: ImageSourcePropType;
+  defaultBanner: ImageURISource;
 }
 
-const ImagePortrait: React.FC<IImagePortraitProps> = ({ banner }) => {
-  const { images } = useImageAssets();
-
+const ImagePortrait: React.FC<IImagePortraitProps> = ({
+  defaultBanner,
+  imageBanner,
+}) => {
   return (
     <Image
-      defaultSource={images.splash}
+      defaultSource={defaultBanner}
       resizeMethod="scale"
-      source={banner ? { uri: banner } : undefined}
+      source={imageBanner}
       style={s.image}
       resizeMode="cover"
     />
