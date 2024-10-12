@@ -64,7 +64,7 @@ const InterestsModal: React.FC<IInterestsModalProps> = ({
             <View style={s.modalCheckboxItemContainer}>
               <CheckboxItem
                 value={tag.name}
-                isSelected={selectedInterests.includes(tag.name)}
+                isSelected={briefSelectedTags.includes(tag.name)}
                 setValue={handleInterestsSelection}
               />
             </View>

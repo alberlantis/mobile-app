@@ -45,8 +45,6 @@ export const selectUpdateInterestsLoading = (store: RootState) =>
   selectUser(store).updateInterestsLoading;
 export const selectUpdateMyProfileLoading = (store: RootState) =>
   selectUser(store).updateMyProfileLoading;
-export const selectUpdateCompleteProfileLoading = (store: RootState) =>
-  selectUser(store).updateCompleteProfileLoading;
 
 export const selectIsUserFollowingFollower = (
   followingId: number | undefined,

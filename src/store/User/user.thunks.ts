@@ -66,33 +66,20 @@ export const shouldUpdateInterests = createAppAsyncThunk(
   },
 );
 
-type CompleteProfile = {
-  uri: string;
-  about: string;
-};
-export const shouldUpdateCompleteProfile = createAppAsyncThunk(
-  "update/completeProfile",
-  async ({ uri, about }: CompleteProfile, { dispatch }) => {
-    let imageUrl: URL | undefined;
-    if (!!uri) imageUrl = await uploadFile(uri);
-
-    await dispatch(
-      shouldUpdateMyProfile({
-        about,
-        picture: imageUrl?.toString(),
-      }),
-    );
-  },
-);
-
 export const shouldUpdateMyProfile = createAppAsyncThunk(
   "put/updateMyProfile",
   async (newData: Partial<Kind0MetaData>, { dispatch, getState }) => {
     const profileData = getState().user.myProfile?.metaData;
-    const res = await satlantisClient.updateMyProfile({
+    const newProfileData = {
       ...profileData,
       ...newData,
-    });
+    };
+    let imageUrl: URL | undefined;
+    if (!!newData.picture) {
+      imageUrl = await uploadFile(newData.picture);
+      newProfileData.picture = imageUrl.toString();
+    }
+    const res = await satlantisClient.updateMyProfile(newProfileData);
     if (res instanceof Error) {
       throw res;
     }

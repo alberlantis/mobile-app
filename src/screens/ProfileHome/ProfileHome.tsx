@@ -52,7 +52,7 @@ const ProfileHome: React.FC<
   return (
     <FlatList
       data={sanitizePosts}
-      keyExtractor={(item, index) => `${item[index].id}-row-${index}`}
+      keyExtractor={(item, index) => `${item[index]?.id}-row-${index}`}
       ListHeaderComponent={renderProfileHeader}
       renderItem={renderItem}
       showsVerticalScrollIndicator={false}

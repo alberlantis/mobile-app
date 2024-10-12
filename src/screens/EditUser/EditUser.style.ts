@@ -39,9 +39,9 @@ export default StyleSheet.create({
   contactSection: {
     paddingVertical: normalizeSize(12),
     paddingHorizontal: normalizeSize(17),
-    marginBottom: normalizeSize(26),
   },
   buttonContainer: {
     paddingHorizontal: normalizeSize(17),
+    marginTop: normalizeSize(26),
   },
 });

@@ -13,7 +13,6 @@ import {
   shouldFetchMyProfile,
   shouldUpdateInterests,
   shouldUpdateMyProfile,
-  shouldUpdateCompleteProfile,
 } from "./user.thunks";
 
 interface UserState {
@@ -22,7 +21,6 @@ interface UserState {
   followUserLoading: boolean;
   unfollowUserLoading: boolean;
   updateMyProfileLoading: boolean;
-  updateCompleteProfileLoading: boolean;
   updateInterestsLoading: boolean;
   myProfile: UserResolver | undefined;
   followings: UserResolver[];
@@ -39,7 +37,6 @@ const initialState: UserState = {
   followUserLoading: false,
   unfollowUserLoading: false,
   updateMyProfileLoading: false,
-  updateCompleteProfileLoading: false,
   myProfileLoading: false,
   myProfile: undefined,
   followings: [],
@@ -103,15 +100,6 @@ const userSlice = createSlice({
     });
     builder.addCase(shouldUpdateMyProfile.rejected, (state) => {
       state.updateMyProfileLoading = false;
-    });
-    builder.addCase(shouldUpdateCompleteProfile.fulfilled, (state) => {
-      state.updateCompleteProfileLoading = false;
-    });
-    builder.addCase(shouldUpdateCompleteProfile.pending, (state) => {
-      state.updateCompleteProfileLoading = true;
-    });
-    builder.addCase(shouldUpdateCompleteProfile.rejected, (state) => {
-      state.updateCompleteProfileLoading = false;
     });
     builder.addCase(shouldPostFollowUser.fulfilled, (state) => {
       state.followUserLoading = false;

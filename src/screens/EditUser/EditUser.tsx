@@ -40,6 +40,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
       website: myProfile?.metaData.website,
       phone: myProfile?.metaData.phone,
       email: myProfile?.metaData.email,
+      picture: myProfile?.metaData.picture,
       interests: myInterests,
     }),
     [
@@ -48,6 +49,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
       myProfile?.metaData.website,
       myProfile?.metaData.phone,
       myProfile?.metaData.email,
+      myProfile?.metaData.picture,
       myInterests,
     ],
   );
@@ -65,7 +67,8 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
   const isButtonEnabled = hasProfileChanged && !isLoading;
 
   const handleInputChange =
-    (key: keyof typeof initialState) => (value: string | string[]) => {
+    (key: keyof typeof initialState) =>
+    (value: string | string[] | undefined) => {
       setUserEditing(true);
       setProfile({
         ...profile,
@@ -124,7 +127,11 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
           imageBanner={{ uri: myProfile?.metaData.banner }}
         />
         <View style={s.mainInfoContainer}>
-          <Avatar picture={myProfile?.metaData.picture || ""} />
+          <Avatar
+            setPhoto={(value) => handleInputChange("picture")(value?.uri)}
+            editAvatar
+            picture={profile.picture || ""}
+          />
           <View style={s.mainBasePanelContainer}>
             <Input
               value={profile.name || ""}
@@ -151,7 +158,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
           setSelectedInterests={handleInputChange("interests")}
           isLoading={interestsLoading}
         />
-        <BaseSection sectionTitle="Contact" customContainer={s.contactSection}>
+        {/* <BaseSection sectionTitle="Contact" customContainer={s.contactSection}>
           <Input
             onChangeText={handleInputChange("phone")}
             value={profile.phone || ""}
@@ -163,7 +170,7 @@ const EditUser: React.FC<SignedScreenProps<typeof SCREENS.EDIT_USER>> = ({
             value={profile.email || ""}
             placeholder="Email address"
           />
-        </BaseSection>
+        </BaseSection> */}
         <View style={s.buttonContainer}>
           <Button
             marginBottom={normalizeSize(17)}

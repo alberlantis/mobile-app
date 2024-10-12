@@ -1,17 +1,16 @@
 import React, { useRef, useState } from "react";
 import { SafeAreaView, View, Alert, Modal, Image } from "react-native";
-import { CameraView, CameraCapturedPicture } from "expo-camera";
+import { CameraView } from "expo-camera";
 
 import Icon from "../Icon";
 import Header from "../Header";
 import Button from "../Button";
 import { colors, fonts } from "src/theme";
 import s from "./Camera.style";
+import type { SatlantisImage } from "src/shared/hooks/useUpdatePhoto";
 
 interface ICameraProps {
-  savePhoto: React.Dispatch<
-    React.SetStateAction<CameraCapturedPicture | undefined>
-  >;
+  savePhoto(value: SatlantisImage): void;
   setToggleCamera: React.Dispatch<React.SetStateAction<boolean>>;
   toggleCamera: boolean;
 }
@@ -21,7 +20,7 @@ const Camera: React.FC<ICameraProps> = ({
   setToggleCamera,
   savePhoto,
 }) => {
-  const [photo, setPhoto] = useState<CameraCapturedPicture | undefined>();
+  const [photo, setPhoto] = useState<SatlantisImage>();
   const cameraRef = useRef<CameraView>(null);
   const handleGoBack = () => {
     if (!photo) {

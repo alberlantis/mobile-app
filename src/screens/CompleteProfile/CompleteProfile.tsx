@@ -12,7 +12,8 @@ import {
 import { SCREENS } from "src/navigation/routes";
 import type { SignedScreenProps } from "src/navigation/SignedStack";
 import s from "./CompleteProfile.style";
-import UploadAvatar, { type SatlantisImage } from "./UploadAvatar";
+import UploadAvatar from "./UploadAvatar";
+import type { SatlantisImage } from "src/shared/hooks";
 import {
   useAppDispatch,
   AuthState,
@@ -25,18 +26,16 @@ const CompleteProfile: React.FC<
   SignedScreenProps<typeof SCREENS.COMPLETE_PROFILE>
 > = ({ route }) => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(
-    UserState.selectors.selectUpdateCompleteProfileLoading,
-  );
+  const isLoading = useAppSelector(UserState.selectors.selectMyProfileLoading);
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState<SatlantisImage>();
 
   const handleSubmit = async () => {
     if (isLoading) return;
     dispatch(
-      UserState.thunks.shouldUpdateCompleteProfile({
+      UserState.thunks.shouldUpdateMyProfile({
         about: bio,
-        uri: avatar?.uri || "",
+        picture: avatar?.uri || "",
       }),
     )
       .unwrap()
